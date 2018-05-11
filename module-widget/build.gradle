@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':module-resource')
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.design
+    implementation rootProject.ext.dependencies.cardview
+
+    // 主题切换
+    api(rootProject.ext.dependencies.skin, {
+        exclude group: 'com.android.support'
+    })
+    // 主题切换-design package
+    api(rootProject.ext.dependencies.skinDesign, {
+        exclude group: 'com.android.support'
+    })
+    // RAE-扩展的TAB_LAYOUT
+    api(rootProject.ext.dependencies.raeDesignExt, {
+        exclude group: 'com.android.support'
+    })
+    // 下拉刷新
+    api(rootProject.ext.dependencies.ptr, {
+        exclude group: 'com.android.support'
+    })
+    // 上拉加载RecyclerView
+    api(rootProject.ext.dependencies.recyclerView, {
+        exclude group: 'com.android.support'
+    })
+    // 圆形头像
+    api(rootProject.ext.dependencies.roundedImage, {
+        exclude group: 'com.android.support'
+    })
+}

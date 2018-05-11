@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--3ba7ee-->
+    <color name="colorPrimary">#3ba7ee</color>
+    <color name="colorPrimaryDark">#3ba7ee</color>
+    <color name="colorPrimaryBlack">#409DDB</color>
+    <color name="colorAccent">#1783CB</color>
+
+    <color name="colorHintPrimary">#EEEEEE</color>
+    <color name="buttonColorPrimary">#3ba7ee</color>
+    <color name="transparent">#00000000</color>
+    <color name="navBar">@color/white</color>
+    <color name="dividerPrimary">#b2b2b2</color>
+    <color name="dividerColor">#dedede</color>
+    <color name="ph1">#2d2d2d</color>
+    <color name="ph2">#595959</color>
+    <color name="moment_author">#576b95</color>
+    <color name="ph3">#929292</color>
+    <color name="ph4">#999999</color>
+    <color name="default_background">#f9f9f9</color>
+    <color name="background_divider">#f8f8f8</color>
+    <color name="colorToastPrimary">#daedfa</color>
+    <color name="commentAvatarColor">#6293b3</color>
+    <color name="blog_item_pressed">#F0F0F0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="statusBarColor">@color/white</color>
+    <color name="red">#F00000</color>
+    <color name="badge_color">#fec63d</color>
+    <color name="homeTabTextColor">#aaaaaa</color>
+    <color name="homeTabSelectedTextColor">#2d2d2d</color>
+    <color name="bloggerStatusBarColor">#303135</color>
+    <color name="color_login_reg">#3ba7ee</color>
+    <color name="color_image_selection_post">#3ba7ee</color>
+    <color name="blogger_image_alpha_color">#4C000000</color>
+</resources>

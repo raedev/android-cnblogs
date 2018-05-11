@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--夜间模式降低图片透明度-->
+    <integer name="imageAlpha_night">70</integer>
+</resources>

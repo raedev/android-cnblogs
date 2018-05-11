@@ -1,2 +1,3 @@
 # android-cnblogs
-the cnblogs website android application. https://www.cnblogs.com
+the android application of the cnblogs website. https://www.cnblogs.com
+

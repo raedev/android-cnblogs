@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="PlaceholderView">
+        <attr name="mode">
+            <enum name="empty" value="0" />
+            <enum name="loading" value="1" />
+        </attr>
+
+        <attr name="empty_icon" format="reference" />
+        <attr name="app_background" format="color|reference" />
+        <attr name="empty_message" format="reference|string" />
+        <attr name="loading_message" format="reference|string" />
+    </declare-styleable>
+
+    <declare-styleable name="RaeViewPager">
+        <attr name="pageMode">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

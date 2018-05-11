@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RaeSkinImageView">
+        <!--夜间模式颜色-->
+        <attr name="nightColor" format="color|reference" />
+    </declare-styleable>
+    <declare-styleable name="DesignTabLayout">
+        <attr name="tabIndicatorWidth" format="dimension" />
+    </declare-styleable>
+</resources>

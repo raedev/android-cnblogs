@@ -1,0 +1,130 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="actionBarDivider">@color/transparent</item>
+        <item name="actionBarStyle">@style/AppActionBar</item>
+        <item name="toolbarNavigationButtonStyle">@style/AppToolbarNavigationButtonStyle</item>
+        <!--<item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>-->
+        <item name="buttonStyle">@style/AppButton</item>
+        <item name="editTextStyle">@style/AppEditTextStyle</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowAnimationStyle">@style/AppAnimation</item>-->
+        <item name="android:windowBackground">@color/default_background</item>
+        <item name="android:textColorPrimary">@color/ph1</item>
+    </style>
+
+
+    <style name="AppTheme.Dark"></style>
+
+    <style name="AppEditTextStyle" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:textColorHint">@color/colorHintPrimary</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.FullScreen">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Translucent" parent="AppTheme.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppButton" parent="@style/Widget.AppCompat.Button.Borderless"></style>
+
+    <style name="AppActionBar" parent="Base.Widget.AppCompat.ActionBar.Solid">
+
+    </style>
+
+    <style name="AppToolbarNavigationButtonStyle" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="background">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.AppCompat.Medium.Inverse">
+        <item name="android:textSize">16sp</item>
+        <!--兼容夜间模式-->
+        <item name="android:textColor">@color/text_color_default_tab</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DiscoverTabTextAppearance" parent="TextAppearance.AppCompat.Medium.Inverse">
+        <item name="android:textSize">16sp</item>
+        <!--兼容夜间模式-->
+        <item name="android:textColor">@color/text_color_default_tab</item>
+    </style>
+
+    <style name="SlideDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
+    </style>
+
+    <style name="SlideDialog.Comment">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="AppAnimation" parent="Animation.AppCompat.DropDownUp">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="SlideAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="ShareIcon">
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginBottom">22dp</item>
+        <item name="android:drawablePadding">7dp</item>
+        <item name="android:textColor">@color/ph1</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:textSize">@dimen/h3</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="progress_bar_web" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_web_view</item>
+        <item name="android:minHeight">2dp</item>
+    </style>
+
+    <style name="ItemStyle">
+        <item name="android:background">@drawable/public_divider_while_primary</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:drawableRight">@drawable/default_right_arrow</item>
+    </style>
+
+
+    <style name="ItemTitleStyle">
+        <item name="android:textColor">#3b424c</item>
+        <item name="android:textSize">@dimen/h1</item>
+        <item name="android:drawableRight">@drawable/default_right_arrow</item>
+    </style>
+
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_bar_loading</item>
+        <item name="android:indeterminateDuration">800</item>
+    </style>
+
+</resources>
