@@ -1,6 +1,13 @@
 package com.rae.cnblogs.basic;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
+import com.rae.cnblogs.basic.rx.LifecycleProvider;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * MVP Presenter
@@ -55,5 +62,19 @@ public abstract class BasicPresenter<V extends IPresenterView> implements IPrese
             throw new NullPointerException("object is null ");
         }
         return object;
+    }
+
+
+    protected <T> Observable<T> createObservable(Observable<T> observable) {
+        observable = observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+        return mLifecycleProvider.with(observable);
+    }
+
+    @NonNull
+    @Override
+    public LifecycleProvider getLifecycleProvider() {
+        return mLifecycleProvider;
     }
 }

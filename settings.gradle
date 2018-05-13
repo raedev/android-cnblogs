@@ -1,0 +1,4 @@
+include ':module-sdk', ':module-resource', ':module-basic', ':module-home', ':module-widget', ':module-middleware'
+if (!IsModule.toBoolean()) {
+    include ':app'
+}

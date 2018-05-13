@@ -18,14 +18,18 @@ android {
 
 }
 
-dependencies {
+/* 基础模块尽量少依赖其他项目，造成不必要的耦合 */
 
-    /* 基础模块尽量少依赖其他项目，造成不必要的耦合 */
+dependencies {
+    annotationProcessor rootProject.ext.annotationProcessors.glide
 
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.butterknife
     implementation rootProject.ext.dependencies.rxlifecycle
     implementation rootProject.ext.dependencies.multidex
+    implementation rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.umengCommon
+    implementation rootProject.ext.dependencies.umengAnalytics
 
     api(rootProject.ext.dependencies.arouter, {
         exclude group: 'com.android.support'

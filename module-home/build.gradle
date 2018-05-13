@@ -40,7 +40,7 @@ dependencies {
     implementation project(':module-basic')
     implementation project(':module-widget')
     implementation project(':module-sdk')
-    implementation project(':module-env')
+    implementation project(':module-middleware')
 
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.butterknife

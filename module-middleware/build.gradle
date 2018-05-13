@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+/*
+* 这个模块用于解耦逻辑跟资源类文件依赖太紧密的问题
+* 比如：基础模块如果太依赖其他项目（Widget\Resource）的话
+* 很难再移植到其他项目区，多一个中间层模块，各自管理自己的职责。
+* */
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation rootProject.ext.dependencies.appcompat
+    implementation project(':module-basic')
+    implementation project(':module-resource')
+    implementation project(':module-widget')
+    implementation project(':module-sdk')
+}

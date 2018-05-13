@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.env">
-
-    <application android:name=".CnblogsApplication" />
-
-</manifest>

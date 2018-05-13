@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-cnblogs.iml" filepath="$PROJECT_DIR$/android-cnblogs.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-basic/module-basic.iml" filepath="$PROJECT_DIR$/module-basic/module-basic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module-env/module-env.iml" filepath="$PROJECT_DIR$/module-env/module-env.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-home/module-home.iml" filepath="$PROJECT_DIR$/module-home/module-home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-middleware/module-middleware.iml" filepath="$PROJECT_DIR$/module-middleware/module-middleware.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-resource/module-resource.iml" filepath="$PROJECT_DIR$/module-resource/module-resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-sdk/module-sdk.iml" filepath="$PROJECT_DIR$/module-sdk/module-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-widget/module-widget.iml" filepath="$PROJECT_DIR$/module-widget/module-widget.iml" />

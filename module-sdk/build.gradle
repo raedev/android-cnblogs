@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+// greenDAO 数据库插件
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        testApplicationId "com.rae.cnblogs.sdk.test"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "API_LOG_DEBUG", "true"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            buildConfigField "boolean", "API_LOG_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    greendao {
+        schemaVersion 1
+//        daoPackage 'com.rae.cnblogs.sdk.db.gen'
+//        targetGenDir 'src/main/java'
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.github.raee:runit:1.0.0'
+    testImplementation 'junit:junit:4.12'
+
+    implementation rootProject.ext.dependencies.annotations
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.raeOkhttpExt
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies.greendao
+
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.jsoup
+    api rootProject.ext.dependencies.retrofitRxAdapter
+    api rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.bugly
+    api(rootProject.ext.dependencies.raeSession, {
+        exclude group: 'com.android.support'
+    })
+}
+

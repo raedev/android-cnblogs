@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        applicationId "com.rae.cnblogs"
+        versionCode 8
+        versionName "1.1.5"
+        multiDexEnabled true
+        ndk {
+            // 兼容ebView问题
+            abiFilters "armeabi"
+            abiFilters "x86"
+            abiFilters "armeabi-v7a"
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "2g"
+        preDexLibraries = false
+    }
+    signingConfigs {
+        release {
+            keyAlias 'com.rae.cnblogs'
+            storeFile file(rootProject.ext.account.storeFile)
+            keyPassword rootProject.ext.account.keyPassword
+            storePassword rootProject.ext.account.storePassword
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies.appcompat
+    // 模块化
+    if (!IsModule.toBoolean()) {
+        implementation project(':module-resource')
+        implementation project(':module-env')
+        implementation project(':module-home')
+    }
+}
