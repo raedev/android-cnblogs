@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.rae.cnblogs.widget.PlaceholderView
+        android:id="@+id/placeholder_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--内容区域-->
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/web_action_bar_height" />
+    </com.rae.cnblogs.widget.PlaceholderView>
+
+    <!--夜间模式遮罩层-->
+    <View
+        android:id="@+id/view_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90000000"
+        android:visibility="gone" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab_channel_background">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            style="@style/AppToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_height">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_web_title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:singleLine="true"
+                    android:text="@string/loading"
+                    android:textColor="@color/ph1"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/img_action_bar_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_margin"
+                    android:src="@drawable/ic_action_bar_more" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+    </FrameLayout>
+
+</RelativeLayout>

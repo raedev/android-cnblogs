@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="22dp">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:id="@+id/tv_share_qq"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_qq"
+                    android:text="@string/qq" />
+
+                <TextView
+                    android:id="@+id/tv_share_qzone"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_qzone"
+                    android:text="@string/qzone" />
+
+                <TextView
+                    android:id="@+id/tv_share_wechat"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_wechat"
+                    android:text="@string/wechat" />
+
+                <TextView
+                    android:id="@+id/tv_share_wechat_sns"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_wechat_sns"
+                    android:text="@string/wechat_sns" />
+
+
+                <TextView
+                    android:id="@+id/tv_share_sina"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_sina"
+                    android:text="@string/sina" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginRight="22dp"
+            android:background="@color/dividerColor" />
+
+
+        <HorizontalScrollView
+            android:id="@+id/hl_ext_action_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_share_source"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_text"
+                    android:text="@string/view_source" />
+
+                <TextView
+                    android:id="@+id/tv_share_night"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_night"
+                    android:text="@string/night_mode" />
+
+                <TextView
+                    android:id="@+id/tv_share_font"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/text_allshare_font"
+                    android:text="@string/font_setting" />
+
+                <TextView
+                    android:id="@+id/tv_share_browser"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_browser"
+                    android:text="@string/open_browser" />
+
+                <TextView
+                    android:id="@+id/tv_share_link"
+                    style="@style/ShareIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_share_link"
+                    android:text="@string/copy_link" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_share_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:background="@drawable/bg_button_while"
+        android:text="@string/cancel"
+        android:textColor="@color/ph1"
+        android:textSize="@dimen/h1"
+        android:textStyle="bold" />
+</LinearLayout>

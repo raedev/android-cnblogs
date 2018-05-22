@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/default_margin"
+    android:paddingLeft="@dimen/default_margin"
+    android:paddingRight="@dimen/default_margin"
+    android:paddingTop="8dp">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/AppButton"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:gravity="start|center"
+            android:paddingLeft="6dp"
+            android:text="@string/cancel"
+            android:textColor="@color/ph3"
+            android:textSize="@dimen/h2" />
+
+        <Button
+            android:id="@+id/btn_send_comment"
+            style="@style/AppButton"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:gravity="center|end"
+            android:text="@string/send"
+            android:textColor="@color/ph1"
+            android:textSize="@dimen/h2" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_content_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_top"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/et_edit_comment_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_divider"
+            android:gravity="left|top"
+            android:hint="@string/edit_comment_hint"
+            android:maxLength="300"
+            android:minHeight="80dp"
+            android:padding="6dp"
+            android:textColor="@color/ph2"
+            android:textColorHint="@color/ph3"
+            android:textSize="@dimen/h2" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_top"
+            android:layout_marginTop="12dp">
+
+            <CheckBox
+                android:id="@+id/cb_ref_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/abc_checked"
+                android:checked="true"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="@string/reference_comment"
+                android:textColor="@color/ph2" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_comment_loading"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_below="@+id/rl_top"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress_bar_loading"
+            android:indeterminateDuration="1000" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>博文</title>
+    <link type="text/css" rel="stylesheet" href="css/shCore.css"/>
+    <link rel="stylesheet" type="text/css" href="css/blog-common.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
+    <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" id="CodeStyle"/>
+    <link rel="stylesheet" type="text/css" href="css/rae-common.css">
+    <!--主题-->
+    <link rel="stylesheet" type="text/css" href="css/{{theme}}" id="RaeStyle">
+    <link rel="stylesheet" type="text/css"
+          href="http://www.raeblog.com/cnblogs/Content/app/rae-ext.css"/>
+    <!--     <link type="text/css" rel="stylesheet" href="css/shThemeRDark.css"  />
+        <link rel="stylesheet" type="text/css" href="css/rae-night.css" /> -->
+
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/highlight.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/highlighter/shCore.js"></script>
+    <script type="text/javascript" src="js/highlighter/shAutoloader.js"></script>
+    <script src="js/clipboard.min.js" type="text/javascript"></script>
+    <script src="js/encode.js" type="text/javascript"></script>
+    <script src="js/blog-common.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/rae.js" type="text/javascript"></script>
+    <script src="http://www.raeblog.com/cnblogs/Content/app/rae-ext.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+    // //  测试
+    // var app={
+    // 	isNightMode:function(){
+    // 		return false;
+    // 	},
+    // 	getBlog:function(){
+    // 		var obj = {
+    // 			title:"测试标题",
+    // 			postDate:"刚刚",
+    // 			author:"陈睿",
+    // 			avatar:"https://pic.cnblogs.com/face/35695/20140318223943.png",
+    // 			blogApp:"RAE",
+    // 			blogType:"BLOG"
+    // 		};
+
+    // 		return JSON.stringify(obj);
+    // 	}
+
+    // };
+
+    // 渲染数学公式
+    var cb_enable_mathjax=true;
+    var width = 0;
+    	// 加载主题
+    	function loadTheme(isNightMode){
+    		if(typeof(app) !="object"){
+    			return;
+    		}
+    		if(typeof(isNightMode) == "undefined"){
+		    	isNightMode = app.isNightMode(); // 是否为夜间模式
+		    }
+		    if(isNightMode){
+		    	$("#RaeStyle").attr("href","css/rae-night.css");
+		    	$("#CodeStyle").attr("href","css/shThemeRDark.css");
+		    }else{
+		    	$("#RaeStyle").attr("href","css/rae.css");
+		    	$("#CodeStyle").attr("href","css/shCoreDefault.css");
+		    }
+		}
+		// 先加载主题
+		loadTheme();
+		function path() {
+			var args = arguments,
+			result = [];
+			for (var i = 0; i < args.length; i++)
+				result.push(args[i].replace('$', 'js/highlighter/'));
+			return result
+		}
+		$(document).ready(function(){
+			width = $("body").width();
+			load();
+			SyntaxHighlighter.autoloader.apply(null, path(
+				'applescript            $shBrushAppleScript.js',
+				'actionscript3 as3      $shBrushAS3.js',
+				'bash shell properties  $shBrushBash.js',
+				'coldfusion cf          $shBrushColdFusion.js',
+				'cpp c                  $shBrushCpp.js',
+				'c# c-sharp csharp      $shBrushCSharp.js',
+				'css                    $shBrushCss.js',
+				'delphi pascal          $shBrushDelphi.js',
+				'diff patch pas         $shBrushDiff.js',
+				'erl erlang             $shBrushErlang.js',
+				'groovy                 $shBrushGroovy.js',
+				'java                   $shBrushJava.js',
+				'jfx javafx             $shBrushJavaFX.js',
+				'js jscript javascript  $shBrushJScript.js',
+				'perl pl                $shBrushPerl.js',
+				'php                    $shBrushPhp.js',
+				'text plain             $shBrushPlain.js',
+				'py python              $shBrushPython.js',
+				'ruby rails ror rb      $shBrushRuby.js',
+				'sass scss              $shBrushSass.js',
+				'scala                  $shBrushScala.js',
+				'sql                    $shBrushSql.js',
+				'vb vbnet               $shBrushVb.js',
+				'xml xhtml xslt html    $shBrushXml.js'
+				));
+try{
+	SyntaxHighlighter.all();
+	markdown_highlight();
+}catch(e){
+}
+});
+		// 加载图片
+		function loadImage(){
+			$("img").each(function(key,val){
+				var src = $(val).attr("src");
+				var id = $(val).attr("id");
+				if(id=="blog_avatar") return;
+				getImageWidth(src,function(w,h){
+					var screenWidth = $(document).width();
+			    	// 图片适配屏幕
+			    	if(screenWidth>0 && w< screenWidth/2){
+			    		$(val).css("width","auto");
+			    	    $(val).css("height","auto");
+			    	}else{
+			    	    // 填充全屏
+			    	    $(val).css("width","100%");
+			    	    $(val).css("height","auto");
+			    	}
+			    })
+				// $(val).load(function(){
+				// 	$(this).addClass("img-thumbnail");
+				// });
+		});
+		}
+
+
+
+		function load(){
+			loadTheme();
+			if(typeof(app) =="object"){
+				var blog = app.getBlog();
+				if(blog!=""){
+					blog = $.parseJSON(blog);
+					$("#blog_title").html(blog.title);
+					$("#blog_date").text(blog.postDate);
+					$("#author_name").text(blog.author);
+
+					$("#news_date").text(blog.postDate);
+					$("#news_author").text(blog.author);
+
+					if(!blog.avatar||  blog.avatar==null ||  blog.avatar==""){
+					    $("#blog_avatar").hide();
+					}
+
+					$("#blog_avatar").attr("src", blog.avatar);
+					$("#author").attr("blogApp", blog.blogApp);
+
+					if(blog.blogType == "BLOG"){
+						//  作者点击时间
+						$("#blog_avatar").unbind("click");
+						$("#author").bind("click",function(){
+							if(typeof(app) =="object"){
+								app.jumpToBlogger($(this).attr("blogApp"));
+							}else{
+								alert("不支持跳转到作者主页");
+							}
+						});
+						$("#news").hide();
+					}else{
+						$("#news").show();
+					    $("#author").hide();
+						$("#header").css("margin-top","60px");
+					}
+
+					$("#blog_content").html("");
+					if(blog.content==null|| blog.content==""){
+						$("#blog_content").append("<p>接口缺失正文内容，可能由于博客发布时间已经久远，接口任性就是没有返回数据。</p><p>你可以尝试点击下面阅读原文阅读，也可以点击右上方的更多按钮查看原文。</p><p><a href='"+blog.url +"' class='a-source'>【阅读原文】</a></p>");
+					}else{
+						$("#blog_content").html(blog.content);
+						if($(".math").length>0){
+                            // 渲染数学公式
+                            alert('mathjax');
+                            cb_mathjax_render();
+						}
+					}
+				}
+			}
+			try{
+                //  官网，调用的方法，适配代码折叠
+                fixPostBody();
+                loadImage();
+                initImage();
+                // 重新设置代码高亮
+                refreshCodeTheme();
+
+            }catch(e){
+                alert(e);
+            	console.error(e);
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div id="header">
+
+        <div id="author" class="clearfix">
+            <img id="blog_avatar" class="img-circle img-thumbnail" border=0
+                 style="width:52px; height:52px; padding:0;"/>
+            <div class="author_right">
+                <span id="author_name">作者昵称</span>
+                <span id="blog_date">发布时间</span>
+            </div>
+            <button id="btn_author" type="button" class="btn btn_author btn-default">作者主页</button>
+        </div>
+
+
+        <h3 id="blog_title" class="clearfix">标题</h3>
+
+        <div class="author clearfix" id="news">
+            <span id="news_author"></span>
+            <span id="news_date">发布时间</span>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        if(typeof(app) =="object"){
+            var blog = app.getBlog();
+            if(blog!=""){
+                blog = $.parseJSON(blog);
+                if(blog.blogType != "BLOG"){
+                    $("#author").hide();
+                    $("#news").show();
+                }else{
+                    $("#news").hide();
+                }
+            }
+        }
+
+    </script>
+
+    <div id="blog_content" class="clearfix">
+
+    </div>
+</div>
+</body>
+</html>

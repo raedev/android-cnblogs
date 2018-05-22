@@ -55,7 +55,7 @@ public final class DbFactory {
      */
     public void clearCache() {
         // 删除博客数据
-//        ActiveAndroid.clearCache();
+        DbCnblogs.getSession().clear();
         getBlog().clearCache();
         getAdvert().clearCache();
     }

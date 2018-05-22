@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -58,7 +59,7 @@ public final class AppRoute {
     /**
      * 意见反馈
      */
-    public static final String PATH_FEEDBACK = "/app/feedback";
+    public static final String PATH_FEEDBACK = "/feedback/index";
     /**
      * 首页
      */
@@ -66,11 +67,12 @@ public final class AppRoute {
     /**
      * 登录
      */
-    public static final String PATH_LOGIN = "/app/login";
+    public static final String PATH_LOGIN = "/user/login/index";
     /**
      * 网页登录
      */
-    public static final String PATH_WEB_LOGIN = "/web/login";
+    public static final String PATH_WEB_LOGIN = "/user/login/web";
+
     /**
      * 粉丝以及关注
      */
@@ -95,7 +97,7 @@ public final class AppRoute {
     /**
      * 设置
      */
-    public static final String PATH_SETTING = "/app/setting";
+    public static final String PATH_SETTING = "/setting/index";
     /**
      * 搜索
      */
@@ -140,6 +142,8 @@ public final class AppRoute {
      * 浏览记录
      */
     public static final String PATH_BLOG_HISTORY = "/blog/history";
+    public static final String PATH_FRAGMENT_MINE = "/home/mine";
+    public static final String PATH_FRAGMENT_MOMENT = "/moment/home";
 
     /**
      * 初始化
@@ -390,14 +394,14 @@ public final class AppRoute {
     /**
      * 我的收藏
      */
-    public static void jumpToFavorites(Activity context) {
+    public static void routeToFavorites(Activity context) {
         ARouter.getInstance().build(PATH_FAVORITE).navigation(context, REQ_CODE_FAVORITES);
     }
 
     /**
      * 设置
      */
-    public static void jumpToSetting(Context context) {
+    public static void routeToSetting(Context context) {
         route(context, PATH_SETTING);
     }
 
@@ -512,14 +516,14 @@ public final class AppRoute {
     /**
      * 提到我的闪存
      */
-    public static void jumpToMomentAtMe(Context context) {
+    public static void routeToMomentAtMe(Context context) {
         ARouter.getInstance().build(PATH_MOMENT_MENTION).navigation(context);
     }
 
     /**
      * 跳转到图片选择
      */
-    public static void jumpToImageSelection(Activity context, ArrayList<String> selectedImages) {
+    public static void routeToImageSelection(Activity context, ArrayList<String> selectedImages) {
 
         Postcard postcard = ARouter.getInstance().build(PATH_IMAGE_SELECTION);
         if (selectedImages != null) {
@@ -531,7 +535,7 @@ public final class AppRoute {
     /**
      * 关于我们
      */
-    public static void jumpToAboutMe(Context context) {
+    public static void routeToAboutMe(Context context) {
         route(context, PATH_ABOUT_ME);
     }
 
@@ -540,5 +544,13 @@ public final class AppRoute {
      */
     public static void routeToHistory(Context context) {
         route(context, PATH_BLOG_HISTORY);
+    }
+
+    public static Fragment newMineFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_MINE).navigation();
+    }
+
+    public static Fragment newMomentFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_MOMENT).navigation();
     }
 }

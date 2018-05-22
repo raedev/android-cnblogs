@@ -145,17 +145,17 @@ final class ApiUrls {
     static final String API_POST_IMAGE = "https://upload.cnblogs.com/imageuploader/processupload?host=www.cnblogs.com";
 
     // 服务端接口地址
-    private static final String RAE_API_BASIC = "http://www.raeblog.com/cnblogs/index.php/";
+    private static final String RAE_API_BASIC = "https://raedev.io/cnblogs/";
 
     //    public static final String RAE_API_BASIC = "http://192.168.168.10/cnblogs/index.php/";
     // 启动页广告
-    static final String RAE_API_AD_LAUNCHER = RAE_API_BASIC + "app/ad/launcher";
+    static final String RAE_API_AD_LAUNCHER = RAE_API_BASIC + "ad/launcher";
     // 检查更新
-    static final String RAE_API_CHECK_VERSION = RAE_API_BASIC + "app/version/{versionCode}";
-    static final String RAE_API_MESSAGE = RAE_API_BASIC + "app/messages";
-    static final String RAE_API_MESSAGE_COUNT = RAE_API_BASIC + "app/messages/count";
+    static final String RAE_API_CHECK_VERSION = RAE_API_BASIC + "version/{versionCode}";
+    static final String RAE_API_MESSAGE = RAE_API_BASIC + "messages/system";
+    static final String RAE_API_MESSAGE_COUNT = RAE_API_BASIC + "messages/system/count";
     // 搜索-热搜
-    static final String API_SEARCH_HOT = RAE_API_BASIC + "app/search";
+    static final String API_SEARCH_HOT = RAE_API_BASIC + "search/keyword/hot";
 
     /**
      * 新浪短链接接口

@@ -30,8 +30,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'com.github.raee:runit:1.0.0'
+    androidTestImplementation('com.github.raee:runit:1.0.0', {
+        exclude group: 'com.android.support'
+    })
     testImplementation 'junit:junit:4.12'
 
     implementation rootProject.ext.dependencies.annotations

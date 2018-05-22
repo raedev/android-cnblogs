@@ -62,6 +62,7 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                 .subscribe(new DefaultObserver<AdvertBean>() {
                     @Override
                     public void onNext(AdvertBean advertBean) {
+                        mAdvertBean = advertBean;
                         getView().onLoadImage(advertBean.getAdName(), advertBean.getImageUrl());
                     }
 
@@ -105,6 +106,7 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
 
                         // 保存到数据，等待下一次加载
                         mDbAdvert.save(data);
+                        mAdvertBean = data;
 
                         // 加载图片
                         if (!TextUtils.isEmpty(data.getImageUrl()))

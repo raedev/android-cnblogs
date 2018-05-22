@@ -1,4 +1,4 @@
-include ':module-sdk', ':module-resource', ':module-basic', ':module-home', ':module-widget', ':module-middleware'
+include ':module-sdk', ':module-resource', ':module-basic', ':module-home', ':module-widget', ':module-middleware', ':module-user', ':module-moment'
 if (!IsModule.toBoolean()) {
     include ':app'
 }

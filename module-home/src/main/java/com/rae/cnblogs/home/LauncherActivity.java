@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.AppImageLoader;
-import com.rae.cnblogs.basic.activity.BasicActivity;
+import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.home.launcher.LauncherContract;
 import com.rae.cnblogs.home.launcher.LauncherPresenterImpl;
 import com.rae.cnblogs.theme.ThemeCompat;

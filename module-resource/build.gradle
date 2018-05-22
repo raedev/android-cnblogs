@@ -8,6 +8,27 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+
+        buildConfigField 'String', 'BUGLY_APP_ID', '"' + rootProject.ext.account.buglyAppId + '"'
+
+        //  LeanCloud配置
+        buildConfigField 'String', 'LEAN_CLOUD_APP_ID', '"' + rootProject.ext.account.leancloudAppId + '"'
+        buildConfigField 'String', 'LEAN_CLOUD_APP_KEY', '"' + rootProject.ext.account.leancloudAppKey + '"'
+
+        // 微信APP ID
+        buildConfigField 'String', 'WECHAT_APP_ID', '"' + rootProject.ext.account.wechatAppId + '"'
+        buildConfigField 'String', 'WECHAT_APP_SECRET', '"' + rootProject.ext.account.wechatAppSecret + '"'
+        buildConfigField 'String', 'WEIBO_APP_ID', '"' + rootProject.ext.account.weiboAppId + '"'
+        buildConfigField 'String', 'WEIBO_APP_SECRET', '"' + rootProject.ext.account.weiboAppSecret + '"'
+        buildConfigField 'String', 'QQ_APP_ID', '"' + rootProject.ext.account.qqAppId + '"'
+        buildConfigField 'String', 'QQ_APP_SECRET', '"' + rootProject.ext.account.qqAppSecret + '"'
+        buildConfigField 'String', 'UMENG_APPKEY', '"' + rootProject.ext.account.umengAppKey + '"'
+        sourceSets {
+            main {
+                assets.srcDirs = ['assets']
+            }
+        }
     }
 
     buildTypes {
@@ -22,4 +43,5 @@ android {
 // 模块资源，仅存放资源文件，不要依赖其他第三方库
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies.appcompat
 }

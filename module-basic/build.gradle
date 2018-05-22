@@ -27,10 +27,15 @@ dependencies {
     implementation rootProject.ext.dependencies.butterknife
     implementation rootProject.ext.dependencies.rxlifecycle
     implementation rootProject.ext.dependencies.multidex
-    implementation rootProject.ext.dependencies.glide
     implementation rootProject.ext.dependencies.umengCommon
     implementation rootProject.ext.dependencies.umengAnalytics
+    implementation rootProject.ext.dependencies.walle
+    api rootProject.ext.dependencies.glide
+    api(rootProject.ext.dependencies.recyclerview, {
+        exclude group: 'com.android.support'
+    })
 
+    api rootProject.ext.dependencies.eventBus
     api(rootProject.ext.dependencies.arouter, {
         exclude group: 'com.android.support'
     })

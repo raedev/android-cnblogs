@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/tab_channel_background">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        style="@style/AppToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:fitsSystemWindows="false"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/title"
+            android:textColor="@color/ph1"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
+</FrameLayout>

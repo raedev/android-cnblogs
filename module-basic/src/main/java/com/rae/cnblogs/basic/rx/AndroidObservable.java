@@ -1,5 +1,6 @@
 package com.rae.cnblogs.basic.rx;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import io.reactivex.Observable;
@@ -27,6 +28,11 @@ public class AndroidObservable<T> extends Observable<T> implements HasUpstreamOb
         this.source = value
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public AndroidObservable<T> with(LifecycleOwner owner) {
+        mLifecycleProvider = new LifecycleProvider(owner);
+        return this;
     }
 
     public AndroidObservable<T> with(@NonNull LifecycleProvider provider) {

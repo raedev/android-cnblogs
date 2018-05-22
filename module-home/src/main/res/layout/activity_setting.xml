@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/basic_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="36dp">
+
+            <LinearLayout
+                android:id="@+id/ll_clear_cache"
+                style="@style/ItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_clear_cache"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/default_right_arrow"
+                    android:text="@string/clear_cache"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+
+
+                <com.rae.cnblogs.widget.ImageLoadingView
+                    android:id="@+id/img_clear_cache"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_task_finish"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_font_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/font_setting"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/praises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/praises"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_share"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/share_app"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_help_center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help_center"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_github"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/github"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_open_source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/open_source"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_about_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/ItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/about_me"
+                    android:textColor="@color/ph1" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_check_update"
+                style="@style/ItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/check_update"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+
+
+                <ProgressBar
+                    android:id="@+id/pb_check_update"
+                    style="@style/Widget.AppCompat.ProgressBar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:indeterminateDrawable="@drawable/progress_bar_loading"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_check_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/ph3" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_beta_version"
+                style="@style/ItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/beta_version"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/default_right_arrow"
+                    android:gravity="right"
+                    android:textColor="@color/ph3"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:layout_marginTop="36dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/logout"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.v7.widget.FitWindowsLinearLayout>

@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rae.cnblogs.user">
+
+    <application>
+        <!--登录-->
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleTop" />
+
+        <!--网页登录-->
+        <activity android:name=".WebLoginActivity" />
+    </application>
+</manifest>

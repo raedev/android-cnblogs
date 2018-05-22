@@ -5,10 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.rae.cnblogs.basic.rx.LifecycleProvider;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 /**
  * MVP Presenter
  * Created by ChenRui on 2018/4/18.
@@ -24,6 +20,7 @@ public abstract class BasicPresenter<V extends IPresenterView> implements IPrese
         mLifecycleProvider = new LifecycleProvider(view);
     }
 
+    @NonNull
     public V getView() {
         return mView;
     }
@@ -62,14 +59,6 @@ public abstract class BasicPresenter<V extends IPresenterView> implements IPrese
             throw new NullPointerException("object is null ");
         }
         return object;
-    }
-
-
-    protected <T> Observable<T> createObservable(Observable<T> observable) {
-        observable = observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-        return mLifecycleProvider.with(observable);
     }
 
     @NonNull

@@ -4,6 +4,7 @@ if (IsModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+apply plugin: 'com.jakewharton.butterknife'
 android {
 
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -12,11 +13,16 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         applicationId "com.rae.cnblogs.home"
-        versionCode 1
+        versionCode rootProject.ext.android.versionCode
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -30,19 +36,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     annotationProcessor rootProject.ext.annotationProcessors.butterknife
+    annotationProcessor rootProject.ext.annotationProcessors.arouter
 
     implementation project(':module-resource')
     implementation project(':module-basic')
     implementation project(':module-widget')
     implementation project(':module-sdk')
     implementation project(':module-middleware')
+    implementation project(':module-user')
+//    if (!IsModule.toBoolean()) {
+//        implementation project(':module-moment')
+//    }
 
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.butterknife
+    implementation rootProject.ext.dependencies.switchbutton
+    implementation rootProject.ext.dependencies.avoscloudSdk
+    implementation rootProject.ext.dependencies.avoscloudFeedback
+    implementation(rootProject.ext.dependencies.raeSwift, {
+        exclude group: 'com.android.support'
+    })
 
 }

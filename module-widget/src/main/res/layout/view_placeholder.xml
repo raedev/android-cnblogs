@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_divider"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp">
+
+    <!--空视图-->
+    <LinearLayout
+        android:id="@+id/ll_placeholder_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_placeholder_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_empty_placeholder" />
+
+        <TextView
+            android:id="@+id/tv_placeholder_empty_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center|start"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@string/empty_message"
+            android:textColor="@color/ph2"
+            android:textSize="@dimen/h2"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_placeholder_retry"
+            style="@style/AppButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/bg_btn_default"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:text="@string/retry"
+            android:textColor="@color/ph2"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!--未登录-->
+    <LinearLayout
+        android:id="@+id/ll_placeholder_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pic_msg_unlogin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center|start"
+            android:lineSpacingMultiplier="1.5"
+            android:text="@string/unlogin_hint"
+            android:textColor="@color/ph1"
+            android:textSize="@dimen/h2"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_placeholder_login"
+            style="@style/AppButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="52dp"
+            android:background="@drawable/public_button_login"
+            android:text="@string/go_login"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!--加载中-->
+    <LinearLayout
+        android:id="@+id/ll_placeholder_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            style="@style/ProgressBar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:indeterminateDuration="1500" />
+
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/ph4"
+            android:textSize="12sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

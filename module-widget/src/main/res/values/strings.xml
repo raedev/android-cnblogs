@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">module-widget</string>
     <string name="no_more_tips">数据加载完毕</string>
+    <string name="confirm">知道了</string>
 </resources>

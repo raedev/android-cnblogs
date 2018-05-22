@@ -16,9 +16,9 @@ import java.util.WeakHashMap;
 import skin.support.SkinCompatManager;
 import skin.support.app.SkinCompatDelegate;
 import skin.support.content.res.SkinCompatResources;
+import skin.support.content.res.SkinCompatThemeUtils;
 import skin.support.observe.SkinObservable;
 import skin.support.observe.SkinObserver;
-import skin.support.widget.SkinCompatThemeUtils;
 
 import static skin.support.widget.SkinCompatHelper.INVALID_ID;
 import static skin.support.widget.SkinCompatHelper.checkResourceId;
@@ -104,7 +104,7 @@ public class SkinActivityLifecycleCompat implements Application.ActivityLifecycl
                     Drawable drawable = SkinCompatResources.getInstance().getDrawable(windowBackgroundResId);
                     activity.getWindow().setBackgroundDrawable(drawable);
                 } else if ("mipmap".equals(typeName)) {
-                    Drawable drawable = SkinCompatResources.getInstance().getMipmap(windowBackgroundResId);
+                    Drawable drawable = SkinCompatResources.getInstance().getDrawable(windowBackgroundResId);
                     activity.getWindow().setBackgroundDrawable(drawable);
                 }
             }

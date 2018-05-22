@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.rae.cnblogs.widget.AppLayout
+        android:id="@+id/ptr_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/default_background"
+        android:orientation="vertical">
+
+        <com.rae.cnblogs.widget.PlaceholderView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.rae.cnblogs.widget.RaeRecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.rae.cnblogs.widget.PlaceholderView>
+
+    </com.rae.cnblogs.widget.AppLayout>
+
+
+    <Button
+        android:id="@+id/tv_edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_write_comment"
+        android:gravity="left|center"
+        android:paddingLeft="21dp"
+        android:paddingRight="21dp"
+        android:text="@string/edit_moment_comment"
+        android:textColor="@color/ph3"
+        android:textSize="@dimen/h2" />
+</LinearLayout>

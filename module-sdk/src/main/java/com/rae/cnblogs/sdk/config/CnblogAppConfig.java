@@ -18,9 +18,9 @@ public class CnblogAppConfig {
     public static String APP_CHANNEL = "official";
     private static CnblogAppConfig sInstance;
 
-    public static CnblogAppConfig getsInstance(Context applicationContext) {
+    public static CnblogAppConfig getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new CnblogAppConfig(applicationContext.getApplicationContext());
+            sInstance = new CnblogAppConfig(context.getApplicationContext());
         }
         return sInstance;
     }
@@ -93,13 +93,6 @@ public class CnblogAppConfig {
     }
 
     /**
-     * 指引-点赞缓存提示
-     */
-    public void likeGuide() {
-        mConfig.edit().putBoolean("hasLikeGuide", true).apply();
-    }
-
-    /**
      * 指引-登录提示
      */
     public boolean hasLoginGuide() {
@@ -109,20 +102,15 @@ public class CnblogAppConfig {
     /**
      * 指引-登录提示
      */
-    public void loginGuide() {
+    public void applyLoginGuide() {
         mConfig.edit().putBoolean("hasLoginGuide", true).apply();
     }
 
-
     /**
-     * 记录首页退出时间
+     * 指引-点赞缓存提示
      */
-    public long getMainExitTimeMillis() {
-        return mConfig.getLong("MainExitTimeMillis", 0);
-    }
-
-    public void setMainExitTimeMillis(long value) {
-        mConfig.edit().putLong("MainExitTimeMillis", value).apply();
+    public void likeGuide() {
+        mConfig.edit().putBoolean("hasLikeGuide", true).apply();
     }
 
     /**

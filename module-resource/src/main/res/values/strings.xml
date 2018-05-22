@@ -83,7 +83,7 @@
     <string name="dialog_tips_post_like">点赞成功，由于缓存问题，点赞数量更新较慢。</string>
     <string name="tips_comment_success">发表评论成功</string>
     <string name="github">开源项目</string>
-    <string name="agree">我同意</string>
+    <string name="agree">同意</string>
     <string name="tips_logout">是否真的退出登录？</string>
     <string name="update_now">立即更新</string>
     <string name="cancel_bookmarks_title">收藏接口限制</string>
@@ -98,13 +98,14 @@
     <string name="share_app_desc">听说大牛都在用的博客园APP，一个面向开发者的知识分享社区，一个纯净的技术交流社区。</string>
     <string name="market_url">market://details?id=com.rae.cnblogs</string>
     <string name="service_name">博客园离线服务</string>
-    <string name="permission_tips_message">博客园需要读取/写入您的存储卡，禁止后部分功能受到限制，是否再次开启？</string>
-    <string name="permission_granted">同意申请权限</string>
+    <string name="permission_tips_message">博客园需要读取/写入您的存储卡，禁止后大部分功能将受到限制，是否再次申请？</string>
+    <string name="permission_granted">继续申请</string>
     <string name="feedback">意见反馈</string>
     <string name="view_now">立即查看</string>
     <string name="feedback_hint">请填写反馈信息</string>
-    <string name="permission_request_message">博客园准备申请读取/写入您的内存卡权限，用于博客缓存以及图片缓存。</string>
-    <string name="allow">允许</string>
+    <string name="permission_request_message">准备申请读取/写入您的内存卡权限，用于博客缓存以及图片缓存，请允许权限。</string>
+    <string name="allow">允许申请</string>
+    <string name="permission_cancel">取消申请</string>
     <string name="title_request_permissions">权限申请</string>
     <string name="forget_password">忘记密码？</string>
     <string name="forget_password_url">https://passport.cnblogs.com/GetMyPassword.aspx</string>
@@ -152,4 +153,7 @@
     <string name="title_comment">全部评论（%s）</string>
     <string name="search_hint">搜索博客/博主/新闻/知识库</string>
     <string name="about_me">关于我们</string>
+    <string name="browse_history">浏览记录</string>
+    <string name="tips_clean_cache">将清理所有博客以及离线缓存数据，是否确定清除？</string>
+    <string name="clean_now">立即清除</string>
 </resources>

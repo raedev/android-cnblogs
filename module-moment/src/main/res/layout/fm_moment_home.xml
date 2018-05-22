@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <com.rae.cnblogs.widget.RaeViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:background="@color/default_background" />
+
+    <com.rae.cnblogs.widget.ToolbarToastView
+        android:id="@+id/tool_bar_toast_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:background="#503ba7ee"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingEnd="@dimen/default_margin"
+        android:paddingLeft="@dimen/default_margin"
+        android:paddingRight="@dimen/default_margin"
+        android:paddingStart="@dimen/default_margin"
+        android:paddingTop="8dp"
+        android:text="提示信息"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_home_height"
+        android:background="@drawable/bg_tab_home">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.rae.cnblogs.widget.RaeSkinImageView
+                android:id="@+id/tv_post"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@drawable/ic_moment_post"
+                app:nightColor="@color/nightIconColor" />
+
+            <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/tv_post"
+                android:layout_toLeftOf="@+id/img_mine"
+                android:layout_toRightOf="@+id/tv_post"
+                android:layout_toStartOf="@+id/img_mine"
+                app:tabBackground="@android:color/transparent"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/ph1"
+                app:tabIndicatorHeight="2dp"
+                app:tabIndicatorWidth="16dp"
+                app:tabMode="fixed"
+                app:tabPadding="0dp"
+                app:tabSelectedTextColor="@color/ph1"
+                app:tabTextAppearance="@style/DiscoverTabTextAppearance"
+                app:tabTextColor="@color/ph2">
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_recommend" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_follow" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_sns_mine" />
+
+
+            </com.rae.cnblogs.widget.RaeSkinDesignTabLayout>
+
+            <com.rae.cnblogs.widget.RaeSkinImageView
+                android:id="@+id/img_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@drawable/ic_moment_notification"
+                app:nightColor="@color/nightIconColor" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+</RelativeLayout>

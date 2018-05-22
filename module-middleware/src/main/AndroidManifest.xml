@@ -1,6 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.env">
+    package="com.rae.cnblogs.middleware">
 
-    <application android:name="com.rae.cnblogs.CnblogsApplication" />
+    <application android:name="com.rae.cnblogs.CnblogsApplication">
+        <!--全屏图片预览-->
+        <activity
+            android:name="com.rae.cnblogs.activity.ImagePreviewActivity"
+            android:theme="@style/AppTheme.Translucent" />
+        <activity
+            android:name="com.rae.cnblogs.activity.ImageSelectionActivity"
+            android:label="@string/label_image_selection" />
+    </application>
 
 </manifest>

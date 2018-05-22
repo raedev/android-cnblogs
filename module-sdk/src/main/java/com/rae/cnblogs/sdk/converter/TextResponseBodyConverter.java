@@ -187,6 +187,8 @@ public class TextResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             return obj.getBoolean("success");
         } else if (obj.has("isSuccess")) {
             return obj.getBoolean("isSuccess"); // 发布闪存返回的字段
+        } else if (obj.has("code")) {
+            return obj.getInt("code") == 200; // raedev.io
         }
         return false;
     }

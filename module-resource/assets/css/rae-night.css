@@ -1,0 +1,80 @@
+body,div,p,.cnblogs_code div{
+    background:#1F1F21;
+    color:#8f9091;
+}
+div{
+    opacity: 0.9;
+    filter: alpha(opacity=90); /*  For IE8 and earlier */
+}
+.img-thumbnail {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background: none;
+    border:none;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+code{
+    background: #2B303B !important;
+    border:none !important;
+    color:#C0C5CE !important;
+}
+
+pre, pre code, .hljs{
+    background: #2B303B;
+    color: #C0C5CE;
+    border:none;
+}
+.hljs-string, .hljs-title, .hljs-section, .hljs-attribute, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-addition{
+    color:#ECCC87;
+}
+.hljs-function{
+    color:#8EA1B4;
+}
+.code_key_primary, .hljs-keyword, .hljs-selector-tag, .hljs-built_in, .hljs-name, .hljs-tag{
+    color:#B58DAC;
+    font-weight: bold;
+}
+.code_comment,.hljs-comment, .hljs-quote, .hljs-variable{
+     color:#65737F;
+ }
+.code_args{
+     color:#C0C5CE;
+ }
+.code_symbol{
+     color:#C0C5CE;
+ }
+.code_text,.hljs-string{
+     color:#A2BF88;
+ }
+.code_high_night{
+     color:#FFCD22;
+ }
+
+img{
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+blockquote{
+	border:none;
+    border-left: 5px solid #eee;
+}
+a {
+    color: #4893D8;
+}
+#author {
+    margin-top: 72px;
+    border-bottom: 1px solid #3E3E40;
+    padding-bottom: 12px;
+}
+.btn-default {
+    color: #8f9091;
+    background-color: #000;
+    border-color: #8f9091;
+}

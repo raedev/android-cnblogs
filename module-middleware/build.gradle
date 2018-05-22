@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 /*
 * 这个模块用于解耦逻辑跟资源类文件依赖太紧密的问题
@@ -12,8 +13,17 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
-
+    dexOptions {
+        javaMaxHeapSize "2g"
+        preDexLibraries = false
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -24,7 +34,16 @@ android {
 }
 
 dependencies {
+    annotationProcessor rootProject.ext.annotationProcessors.butterknife
+    annotationProcessor rootProject.ext.annotationProcessors.arouter
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.butterknife
+    implementation rootProject.ext.dependencies.avoscloudSdk
+    implementation rootProject.ext.dependencies.avoscloudFeedback
+    api(rootProject.ext.dependencies.swipebacklayout, {
+        exclude group: 'com.android.support'
+    })
     implementation project(':module-basic')
     implementation project(':module-resource')
     implementation project(':module-widget')

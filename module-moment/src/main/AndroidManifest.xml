@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rae.cnblogs.moment">
+
+    <application>
+        <activity android:name=".MomentTestActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <!--发布闪存服务-->
+        <service android:name=".service.MomentIntentService" />
+
+        <activity
+            android:name=".PostMomentActivity"
+            android:label="@string/label_post_moment" />
+        <activity
+            android:name=".MomentDetailActivity"
+            android:label="@string/label_moment_detail" />
+
+        <activity
+            android:name=".MomentMessageActivity"
+            android:label="@string/label_moment_message" />
+
+        <activity
+            android:name=".MomentAtMeActivity"
+            android:label="@string/label_moment_at_me" />
+    </application>
+</manifest>
