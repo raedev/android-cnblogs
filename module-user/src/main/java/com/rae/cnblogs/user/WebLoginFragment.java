@@ -28,6 +28,8 @@ import com.tencent.bugly.crashreport.CrashReport;
  */
 public class WebLoginFragment extends WebViewFragment implements LoginContract.View {
 
+    private RaeWebViewClient mRaeWebViewClient;
+
     public static WebLoginFragment newInstance(String url) {
         Bundle args = new Bundle();
         args.putString("url", url);
@@ -87,13 +89,15 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
             }
         });
         parent.addView(mPlaceholderView);
-
     }
 
 
     @Override
     public WebViewClient getWebViewClient() {
-        return new RaeWebViewClient(getProgressBar(), getAppLayout()) {
+
+        if (mRaeWebViewClient != null) return mRaeWebViewClient;
+
+        mRaeWebViewClient = new RaeWebViewClient(getProgressBar(), getAppLayout()) {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -114,8 +118,13 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
                 }
             }
 
-
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
         };
+
+        return mRaeWebViewClient;
     }
 
     @Override
@@ -136,6 +145,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         getActivity().finish();
         getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
 
     @Override
     public void onLoginFailed(String message) {

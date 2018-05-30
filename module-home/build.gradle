@@ -45,9 +45,6 @@ dependencies {
     implementation project(':module-sdk')
     implementation project(':module-middleware')
     implementation project(':module-user')
-//    if (!IsModule.toBoolean()) {
-//        implementation project(':module-moment')
-//    }
 
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.butterknife

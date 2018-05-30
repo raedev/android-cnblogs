@@ -6,9 +6,21 @@
         <activity
             android:name="com.rae.cnblogs.activity.ImagePreviewActivity"
             android:theme="@style/AppTheme.Translucent" />
+        <!--照片选择-->
         <activity
             android:name="com.rae.cnblogs.activity.ImageSelectionActivity"
             android:label="@string/label_image_selection" />
+        <!--网页-->
+        <activity android:name="com.rae.cnblogs.activity.WebActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--cnblogs://web-->
+                <data
+                    android:host="web"
+                    android:scheme="cnblogs" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,127 +1,60 @@
 package com.rae.cnblogs.sdk.db;
 
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 
 import com.rae.cnblogs.sdk.bean.BlogBean;
+import com.rae.cnblogs.sdk.bean.BlogBeanDao;
 import com.rae.cnblogs.sdk.bean.BlogType;
+import com.rae.cnblogs.sdk.bean.DaoSession;
+import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
+import com.rae.cnblogs.sdk.db.model.UserBlogInfoDao;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 
+import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 /**
  * 博客数据库
- * Created by ChenRui on 2017/1/25 0025 16:56.
+ * <p>说明：</p>
+ * <p>1.1.4之前使用了数据库缓存博文内容，导致数据库文件过大。</p>
+ * <p>1.1.5版本改成文件的形式保存，格式为：blogId + blogType 取MD5值保存。</p>
+ * <p>Created by ChenRui on 2017/1/25 0025 16:56.</p>
  */
-public class DbBlog extends DbCnblogs {
+public class DbBlog {
+
+    private final DaoSession mSession;
 
     DbBlog() {
-    }
-
-    public UserBlogInfo get(String blogId) {
-        if (TextUtils.isEmpty(blogId)) return null;
-//        return new Select().from(UserBlogInfo.class).where("blogId=?", blogId).executeSingle();
-        return null;
-    }
-
-    public List<BlogBean> getList(String category, int page, BlogType type) {
-        return null;
-//        return new Select().from(BlogBean.class).where("blogType=? and categoryId=?", type.getTypeName(), category).orderBy("blogId desc").offset(page * 20).limit(20).execute();
-    }
-
-    @Nullable
-    public BlogBean getBlog(String blogId) {
-//        try {
-//            return new Select().from(BlogBean.class).where("blogId=?", blogId).executeSingle();
-//        } catch (OutOfMemoryError e) {
-//            // fix bug #616 内存空间满了
-//            DbFactory.getInstance().clearData();
-//        }
-        return null;
-    }
-
-    public void saveBlogInfo(UserBlogInfo m) {
-//        m.save();
-    }
-
-
-    public boolean exists(String blogId) {
-        return false;
-//        return new Select().from(BlogBean.class).where("blogId=?", blogId).exists();
-    }
-
-    public void addAll(final List<BlogBean> blogs, final String categoryId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // 执行插入
-                executeTransaction(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (BlogBean blog : blogs) {
-                            blog.setCategoryId(categoryId);
-                            // 查找是否已经有了，有了就跳过
-                            if (exists(blog.getBlogId())) {
-//                                Log.w("rae-db", "跳过：" + blog.getBlogId() + " = " + blog.getTitle());
-                                continue;
-                            }
-
-//                            Log.i("rae-db", "插入数据库：" + blog.getBlogId() + " = " + blog.getTitle());
-//                            blog.save();
-                        }
-                    }
-                });
-
-            }
-        }).start();
-    }
-
-    public List<BlogBean> findAll() {
-        return null;
-//        return new Select().from(BlogBean.class).execute();
+        mSession = DbCnblogs.getSession();
     }
 
     /**
-     * 获取没有内容的列表
+     * 批量添加博客，默认把分类Id都设置成为传入的分类参数
      *
-     * @return
+     * @param categoryId 分类Id
      */
-    public List<BlogBean> findAllWithoutBlogContent() {
-        return null;
-//        return new Select().from(BlogBean.class).as("blog").leftJoin(UserBlogInfo.class).as("info").on("blog.blogId=info.blogId").where("info.content is NULL").execute();
+    public void addAll(List<BlogBean> blogs, String categoryId) {
+        for (BlogBean blog : blogs) {
+            blog.setCategoryId(categoryId);
+        }
+        addAll(blogs);
     }
 
     /**
-     * 删除收藏
-     *
-     * @param url 路径
+     * 批量添加博客
      */
-    public void removeBookmarks(final String url) {
-        // 找到已经收藏的
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-//
-//                UserBlogInfo model = new Select()
-//                        .from(UserBlogInfo.class).as("a")
-//                        .leftJoin(BlogBean.class).as("b")
-//                        .on("a.blogId=b.blogId")
-//                        .where("a.isBookmarks=?", 1)
-//                        .and("b.url like ?", String.format("%%%s%%", url))
-//                        .executeSingle();
-//
-//
-//                if (model == null || TextUtils.isEmpty(model.getBlogId())) return;
-//                model.setBookmarks(false);
-//                model.save();
-            }
-        }).start();
-    }
-
-
-    public void updateBlog(BlogBean m) {
-//        m.save();
+    public void addAll(List<BlogBean> blogs) {
+        mSession.getBlogBeanDao().insertOrReplaceInTx(blogs);
     }
 
     /**
@@ -131,49 +64,191 @@ public class DbBlog extends DbCnblogs {
      */
     void clearCache() {
         // 1、清除blogs表的缓存
-
-//        super.executeTransaction(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Delete().from(BlogBean.class).execute();
-//                // 2、清除blog_info表的博文内容以及已读状态
-//                ActiveAndroid.execSQL("update blog_info set content=null,isRead=0");
-//            }
-//        });
-
-
-    }
-
-    public void updateBlogContent(final String blogId, final String blogType, final String content) {
-//        executeTransaction(new Runnable() {
-//            @Override
-//            public void run() {
-//                UserBlogInfo blogInfo = new Select().from(UserBlogInfo.class).where("blogId=?", blogId).executeSingle();
-//                if (blogInfo == null) {
-//                    blogInfo = new UserBlogInfo();
-//                }
-//
-//                blogInfo.setBlogId(blogId);
-//                blogInfo.setBlogType(blogType);
-//                blogInfo.setContent(content);
-//                long id = blogInfo.save();
-//
-////                Log.e("rae-db", "插入数据库：" + blogType + " -> " + blogId + "; id =" + id + "; 是否为空：" + TextUtils.isEmpty(content));
-//            }
-//        });
-
+        mSession.getBlogBeanDao().deleteAll();
+        mSession.getUserBlogInfoDao().deleteAll();
     }
 
     /**
-     * 清除数据
+     * 博客是否存在
      */
-    public void clearData() {
-//        executeTransaction(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Delete().from(UserBlogInfo.class).execute();
-//                new Delete().from(BlogBean.class).execute();
-//            }
-//        });
+    public boolean exists(String blogId) {
+        return mSession.getBlogBeanDao().queryBuilder().where(BlogBeanDao.Properties.BlogId.eq(blogId)).count() > 0;
+    }
+
+    /**
+     * 查询所有博客数据
+     */
+    public List<BlogBean> findAll() {
+        return mSession.getBlogBeanDao().loadAll();
+    }
+
+    /**
+     * 获取没有内容的列表
+     *
+     * @return
+     */
+    public List<BlogBean> findAllWithoutBlogContent() {
+        QueryBuilder<BlogBean> builder = mSession.getBlogBeanDao().queryBuilder();
+        builder.join(BlogBeanDao.Properties.BlogId, UserInfoBean.class, UserBlogInfoDao.Properties.BlogId)
+                .where(UserBlogInfoDao.Properties.Content.isNull());
+        return builder.list();
+    }
+
+    /**
+     * 获取用户博客信息
+     *
+     * @param blogId
+     * @return
+     */
+    @Nullable
+    public UserBlogInfo get(String blogId) {
+        if (TextUtils.isEmpty(blogId)) return null;
+        return mSession.getUserBlogInfoDao()
+                .queryBuilder()
+                .where(UserBlogInfoDao.Properties.BlogId.eq(blogId))
+                .unique();
+    }
+
+    /**
+     * 获取博客信息
+     */
+    @Nullable
+    public BlogBean getBlog(String blogId) {
+        return mSession.getBlogBeanDao().load(blogId);
+    }
+
+    /**
+     * 获取博客内容
+     *
+     * @param blogType 博客类型
+     * @param blogId   博客Id
+     */
+    @Nullable
+    public String getBlogContent(String blogType, String blogId) {
+        // 找到博客信息
+        UserBlogInfo blogInfo = mSession.getUserBlogInfoDao()
+                .queryBuilder()
+                .where(UserBlogInfoDao.Properties.BlogId.eq(blogId), UserBlogInfoDao.Properties.BlogType.eq(blogType))
+                .build()
+                .unique();
+
+        if (blogInfo == null) return null;
+
+        try {
+            String path = blogInfo.getContent();
+            if (TextUtils.isEmpty(path) || !new File(path).exists()) return null;
+            FileInputStream inputStream = new FileInputStream(path);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[128];
+            int len = 0;
+            while ((len = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, len);
+            }
+            outputStream.flush();
+            outputStream.close();
+            inputStream.close();
+            return outputStream.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /**
+     * 获取指定分类的博客列表
+     *
+     * @param category 分类名称
+     * @param page     分页
+     * @param type     类型
+     */
+    @Nullable
+    public List<BlogBean> getList(String category, int page, BlogType type) {
+        QueryBuilder<BlogBean> builder = mSession.getBlogBeanDao().queryBuilder();
+        return builder.where(UserBlogInfoDao.Properties.BlogType.eq(type.getTypeName()))
+                .where(UserBlogInfoDao.Properties.BlogType.eq(category))
+                .orderDesc(UserBlogInfoDao.Properties.BlogId)
+                .offset(page * 20)
+                .limit(20)
+                .list();
+    }
+
+    /**
+     * 删除收藏
+     *
+     * @param url 路径
+     */
+    public void removeBookmarks(final String url) {
+        QueryBuilder<UserBlogInfo> builder = mSession.getUserBlogInfoDao().queryBuilder();
+        builder.join(UserBlogInfoDao.Properties.BlogId, BlogBean.class, BlogBeanDao.Properties.BlogId)
+                .where(UserBlogInfoDao.Properties.IsBookmarks.eq(true),
+                        BlogBeanDao.Properties.Url.like(String.format("%%%s%%", url)));
+
+        List<UserBlogInfo> userBlogs = builder.list();
+
+        if (userBlogs == null || userBlogs.size() <= 0 || TextUtils.isEmpty(userBlogs.get(0).getBlogId()))
+            return;
+
+        UserBlogInfo m = userBlogs.get(0);
+        m.setBookmarks(false);
+        mSession.getUserBlogInfoDao().update(m);
+    }
+
+    /**
+     * 保存用户的博客信息
+     */
+    public void saveUserBlogInfo(UserBlogInfo m) {
+        mSession.getUserBlogInfoDao().save(m);
+    }
+
+    /**
+     * 更新博客信息
+     */
+    public void updateBlog(BlogBean m) {
+        mSession.getBlogBeanDao().update(m);
+    }
+
+    /**
+     * 更新博客内容
+     *
+     * @param blogId   博客Id
+     * @param blogType 博客类型
+     * @param content  博客内容
+     */
+    public void updateBlogContent(@NonNull String blogId, @NonNull String blogType, @NonNull String content) {
+        try {
+            // 找到博客信息
+            UserBlogInfo blogInfo = mSession.getUserBlogInfoDao()
+                    .queryBuilder()
+                    .where(UserBlogInfoDao.Properties.BlogId.eq(blogId), UserBlogInfoDao.Properties.BlogType.eq(blogType))
+                    .build()
+                    .unique();
+
+            if (blogInfo == null) {
+                blogInfo = new UserBlogInfo();
+                blogInfo.setBlogId(blogId);
+                blogInfo.setBlogType(blogType);
+            }
+
+            // 写入文件
+            String fileName = Base64.encodeToString((blogId + blogType).getBytes(), Base64.NO_WRAP);
+            File dir = DbCnblogs.getInstance().getCacheDir();
+            File file = new File(dir, fileName);
+            if (file.exists() && file.delete()) {
+                Log.w("cnblogs", "delete content file success, path is " + file.getPath());
+            }
+
+            // 写文本内容
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(content.getBytes());
+            outputStream.flush();
+            outputStream.close();
+            // 保存路径
+            blogInfo.setContent(file.getPath());
+            mSession.getUserBlogInfoDao().save(blogInfo);
+        } catch (Exception e) {
+            Log.e("cnblogs", "update blog content failed! id is " + blogId, e);
+        }
+
     }
 }

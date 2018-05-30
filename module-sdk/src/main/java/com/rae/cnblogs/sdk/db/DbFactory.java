@@ -59,11 +59,4 @@ public final class DbFactory {
         getBlog().clearCache();
         getAdvert().clearCache();
     }
-
-    /**
-     * 清除数据
-     */
-    public void clearData() {
-        getBlog().clearData();
-    }
 }

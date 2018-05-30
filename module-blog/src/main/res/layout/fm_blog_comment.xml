@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.rae.cnblogs.widget.AppLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_edit_comment">
+
+        <com.rae.cnblogs.widget.PlaceholderView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:empty_icon="@drawable/comment_empty"
+            app:empty_message="@string/empty_comment"
+            app:mode="loading">
+
+            <com.rae.cnblogs.widget.RaeRecyclerView
+                android:id="@+id/rec_blog_comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.rae.cnblogs.widget.PlaceholderView>
+    </com.rae.cnblogs.widget.AppLayout>
+
+
+    <Button
+
+        android:id="@+id/tv_edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_write_comment"
+        android:gravity="left|center"
+        android:paddingLeft="21dp"
+        android:paddingRight="21dp"
+        android:text="@string/edit_comment"
+        android:textColor="@color/ph3"
+        android:textSize="@dimen/h2" />
+
+</RelativeLayout>

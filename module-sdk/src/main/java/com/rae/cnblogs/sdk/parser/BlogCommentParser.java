@@ -47,54 +47,43 @@ public class BlogCommentParser implements IJsonParser<List<BlogCommentBean>> {
         // 解析XML
         Document document = Jsoup.parse(html);
 
-        Elements posts = document.select(".post");
-        Elements feeds = document.select(".feedbackItem");
-        Elements lis = document.select(".commentlist li");
-        if (feeds.size() <= 0 && posts.size() > 0) {
-            feeds = posts;
-        }
-        if (lis.size() > 0 && feeds.size() <= 0) {
-            feeds = lis;
-        }
-
-        for (Element feed : feeds) {
+        Elements bodys = document.select(".blog_comment_body");
+        if (bodys.size() <= 0) return result; // 没有评论
+        for (Element body : bodys) {
             BlogCommentBean m = new BlogCommentBean();
-            String id = ApiUtils.getNumber(feed.select(".layer").attr("href"));
-            String authorName = feed.select("#a_comment_author_" + id).text();
-            String blogApp = ApiUtils.getBlogApp(feed.select("#a_comment_author_" + id).attr("href"));
-            String date = ApiUtils.getDate(feed.select(".comment_date").text());
+            result.add(m);
+            String id = ApiUtils.getNumber(body.attr("id"));
+            m.setId(id);
+            // 作者节点
+            Element author = document.select("#a_comment_author_" + id).first();
+            if (author != null) {
+                m.setAuthorName(author.text());
+                m.setBlogApp(ApiUtils.getBlogApp(author.attr("href")));
+            }
+            m.setAvatar(document.select("#comment_" + id + "_avatar").text());
 
-            m.setQuote(feed.select(".comment_quote").text().replace("引用", ""));
-
-
-            Elements bodyElement = feed.select(".blog_comment_body");
-            if (!TextUtils.isEmpty(m.getQuote()) && bodyElement.size() > 0 && bodyElement.get(0).childNodes().size() > 1) {
-                List<Node> nodes = bodyElement.get(0).childNodes();
+            // 解析引用的评论
+            m.setQuote(body.select(".comment_quote").text().replace("引用", ""));
+            if (!TextUtils.isEmpty(m.getQuote()) && body.childNodes().size() > 1) {
+                List<Node> nodes = body.childNodes();
                 m.setQuoteBlogApp(nodes.get(1).outerHtml());
                 nodes.get(0).remove();
                 nodes.get(0).remove();
                 nodes.get(0).remove();
             }
             // 内容移掉引用
-            bodyElement.select("fieldset").remove();
-            m.setBody(bodyElement.text());
+            body.select("fieldset").remove();
+            m.setBody(body.text());
+        }
 
-//            String body = feed.select(".blog_comment_body").text();
-            String like = ApiUtils.getNumber(feed.select(".comment_digg").text());
-            String unlike = ApiUtils.getNumber(feed.select(".comment_bury").text());
-            String avatar = feed.select(".comment_" + id + "_avatar").text();
-
-
-            m.setId(id);
-            m.setAuthorName(authorName);
-            m.setAvatar(avatar);
-            m.setBlogApp(blogApp);
-            m.setDate(date);
-//            m.setBody(body);
-            m.setLike(like);
-            m.setUnlike(unlike);
-
-            result.add(m);
+        // 找时间
+        Elements dateElements = document.select(".comment_date");
+        if (dateElements.size() == bodys.size()) {
+            for (int i = 0; i < dateElements.size(); i++) {
+                Element element = dateElements.get(i);
+                BlogCommentBean m = result.get(i);
+                m.setDate(element.text());
+            }
         }
         return result;
     }

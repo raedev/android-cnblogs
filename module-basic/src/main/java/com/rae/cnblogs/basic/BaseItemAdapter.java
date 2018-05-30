@@ -104,6 +104,13 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
 
     public abstract void onBindViewHolder(VH holder, int position, T m);
 
+    public void setDataList(List<T> data) {
+        if (mDataList != null && mDataList != data) {
+            mDataList.clear();
+            mDataList = null;
+        }
+        mDataList = data;
+    }
 
     /**
      * 通知数据集合发生改变
@@ -111,11 +118,7 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
      * @param data 数据
      */
     public void invalidate(List<T> data) {
-        if (mDataList != null && mDataList != data) {
-            mDataList.clear();
-            mDataList = null;
-        }
-        mDataList = data;
+        setDataList(data);
         notifyDataSetChanged();
     }
 

@@ -5,6 +5,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -241,6 +243,9 @@ public class ShareDialogFragment extends BasicDialogFragment {
         if (getActivity() instanceof OnShareListener) {
             mOnShareClickListener = (OnShareListener) getActivity();
         }
+        if (mOnShareClickListener == null && getParentFragment() instanceof OnShareListener) {
+            mOnShareClickListener = (OnShareListener) getParentFragment();
+        }
         Bundle arguments = getArguments();
         if (arguments != null) {
             boolean visibility = arguments.getBoolean("extVisibility", true);
@@ -404,6 +409,15 @@ public class ShareDialogFragment extends BasicDialogFragment {
 
     // 查看原文
     protected void onViewSourceClick() {
+        if (getContext() == null) return;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setData(Uri.parse("cnblogs://web"));
+        intent.putExtra("url", getUrl());
+        ResolveInfo resolveInfo = getContext().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfo != null) {
+            getContext().startActivity(intent);
+        }
     }
 
     // 用浏览器打开
@@ -424,7 +438,7 @@ public class ShareDialogFragment extends BasicDialogFragment {
         ClipboardManager clipboardManager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboardManager == null) return;
         clipboardManager.setPrimaryClip(ClipData.newPlainText("url", getUrl()));
-        UICompat.success(getContext(), R.string.copy_link_success);
+        UICompat.toastInCenter(getContext(), getString(R.string.copy_link_success));
     }
 
     // 取消

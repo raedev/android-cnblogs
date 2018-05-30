@@ -21,4 +21,8 @@ public final class AppGson {
         return sGson;
     }
 
+    public static String toJson(Object obj) {
+        return sGson.toJson(obj);
+    }
+
 }

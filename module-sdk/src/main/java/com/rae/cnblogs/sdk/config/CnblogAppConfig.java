@@ -2,6 +2,7 @@ package com.rae.cnblogs.sdk.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import com.rae.cnblogs.sdk.AppGson;
@@ -27,8 +28,17 @@ public class CnblogAppConfig {
 
     private SharedPreferences mConfig;
 
+    private int mVersion;
+
     private CnblogAppConfig(Context context) {
         mConfig = context.getApplicationContext().getSharedPreferences("CNBLOG_SDK_CONFIG", Context.MODE_PRIVATE);
+
+        try {
+            mVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            mVersion = 0;
+        }
     }
 
     /**
@@ -153,5 +163,23 @@ public class CnblogAppConfig {
      */
     public void setPostMomentInProgressTips(boolean value) {
         mConfig.edit().putBoolean("PostMomentInProgressTips", value).apply();
+    }
+
+    /**
+     * 获取一次性的值
+     *
+     * @param key 键
+     */
+    public boolean getOnce(String key) {
+        return mConfig.getBoolean(String.format("ONCE_%s_%s", mVersion, key), false);
+    }
+
+    /**
+     * 设置一次性的值
+     *
+     * @param key 键
+     */
+    public void setOnce(String key) {
+        mConfig.edit().putBoolean(String.format("ONCE_%s_%s", mVersion, key), true).apply();
     }
 }

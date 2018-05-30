@@ -39,8 +39,8 @@ public abstract class PageObservable<T> {
     }
 
     public void complete(List<T> dataList) {
-        if (this.mPage <= startPageIndex) {
-            this.mDataList.clear();
+        if (canResetData()) {
+            onClearData();
         }
 
         if (this.mPage > startPageIndex && Rx.isEmpty(dataList)) {
@@ -52,9 +52,22 @@ public abstract class PageObservable<T> {
         }
     }
 
+    protected void onClearData() {
+        this.mDataList.clear();
+    }
+
+    /**
+     * 释放资源
+     */
     public void destroy() {
         this.mDataList.clear();
+        this.mProvider.dispose();
         this.mView = null;
+        this.mProvider = null;
+    }
+
+    public boolean canResetData() {
+        return this.mPage <= startPageIndex;
     }
 
     protected void onNoMoreData() {
@@ -73,7 +86,6 @@ public abstract class PageObservable<T> {
                         } else {
                             mView.onEmptyData(message);
                         }
-
                     }
 
                     protected void onEmpty(List<T> data) {
@@ -100,5 +112,9 @@ public abstract class PageObservable<T> {
 
     protected void onLoadDataComplete(List<T> dataList) {
         this.mView.onLoadData(dataList);
+    }
+
+    public int getCurrentPage() {
+        return mPage;
     }
 }

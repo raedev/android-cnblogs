@@ -8,6 +8,11 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.util.List;
 
 /**
@@ -15,8 +20,11 @@ import java.util.List;
  * 注意：序列化的时候不要传数据大的这两个字段（summary、content)
  * Created by ChenRui on 2016/11/28 23:45.
  */
-//@Table(name = "blogs")
+@Entity(nameInDb = "blogs")
 public class BlogBean implements Parcelable {
+
+    @Id
+    private String blogId;
 
     private String title;
 
@@ -36,7 +44,6 @@ public class BlogBean implements Parcelable {
 
     private String postDate;
 
-    private String blogId;
 
     private String blogApp;
 
@@ -53,8 +60,9 @@ public class BlogBean implements Parcelable {
     /**
      * 博客类型，参考取值{@link BlogType#getTypeName()}
      */
-
     private String blogType;
+
+    @Transient
     private List<String> mThumbList;
 
     public String getBlogType() {
@@ -269,6 +277,14 @@ public class BlogBean implements Parcelable {
         dest.writeString(this.likes);
     }
 
+    public boolean getIsReaded() {
+        return this.isReaded;
+    }
+
+    public void setIsReaded(boolean isReaded) {
+        this.isReaded = isReaded;
+    }
+
     protected BlogBean(Parcel in) {
         this.title = in.readString();
         this.url = in.readString();
@@ -289,6 +305,31 @@ public class BlogBean implements Parcelable {
         this.mThumbList = in.createStringArrayList();
 //        this.content = in.readString(); //  不传递大数据
         this.likes = in.readString();
+    }
+
+    @Generated(hash = 1946534084)
+    public BlogBean(String blogId, String title, String url, String avatar, String summary, String author,
+                    String authorUrl, String comment, String views, String postDate, String blogApp, String tag,
+                    String categoryId, String thumbUrls, boolean isReaded, String blogType, String content,
+                    String likes) {
+        this.blogId = blogId;
+        this.title = title;
+        this.url = url;
+        this.avatar = avatar;
+        this.summary = summary;
+        this.author = author;
+        this.authorUrl = authorUrl;
+        this.comment = comment;
+        this.views = views;
+        this.postDate = postDate;
+        this.blogApp = blogApp;
+        this.tag = tag;
+        this.categoryId = categoryId;
+        this.thumbUrls = thumbUrls;
+        this.isReaded = isReaded;
+        this.blogType = blogType;
+        this.content = content;
+        this.likes = likes;
     }
 
     public static final Creator<BlogBean> CREATOR = new Creator<BlogBean>() {

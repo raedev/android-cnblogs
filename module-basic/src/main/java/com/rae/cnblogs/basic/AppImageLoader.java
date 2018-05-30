@@ -41,23 +41,27 @@ public final class AppImageLoader {
      * 加载头像
      */
     public static void displayAvatar(@Nullable String url, @Nullable ImageView view) {
+        displayAvatar(url, view, DEFAULT_AVATAR_PLACE_HOLDER_ID);
+    }
+
+    public static void displayAvatar(@Nullable String url, @Nullable ImageView view, int resId) {
         if (view == null)
             return;
         if (TextUtils.isEmpty(url)) {
-            view.setImageResource(DEFAULT_AVATAR_PLACE_HOLDER_ID);
+            view.setImageResource(resId);
             return;
         }
 
         Context context = view.getContext();
-        if (DEFAULT_AVATAR_PLACE_HOLDER_ID == -1) {
-            DEFAULT_AVATAR_PLACE_HOLDER_ID = context.getResources().getIdentifier("default_avatar_placeholder", "drawable", context.getPackageName());
+        if (resId == -1) {
+            resId = context.getResources().getIdentifier("default_avatar_placeholder", "drawable", context.getPackageName());
         }
 
         GlideApp.with(view)
                 .load(url)
 //                .centerCrop()
-                .placeholder(DEFAULT_AVATAR_PLACE_HOLDER_ID)
-                .error(DEFAULT_AVATAR_PLACE_HOLDER_ID)
+                .placeholder(resId)
+                .error(resId)
                 // 渐变动画
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(view);

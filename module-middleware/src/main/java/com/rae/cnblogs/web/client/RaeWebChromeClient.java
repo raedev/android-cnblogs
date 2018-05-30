@@ -27,6 +27,7 @@ public class RaeWebChromeClient extends WebChromeClient {
         return true;
     }
 
+
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);

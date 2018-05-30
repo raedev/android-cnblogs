@@ -30,7 +30,7 @@ public final class AppDataManager {
     }
 
     //清理WebView缓存数据库
-    public void clearWebViewCache() {
+    private void clearWebViewCache() {
         try {
 
             // 兼容高版本：/data/data/com.rae.cnblogs/app_webview

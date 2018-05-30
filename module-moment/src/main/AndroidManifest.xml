@@ -2,6 +2,7 @@
     package="com.rae.cnblogs.moment">
 
     <application>
+
         <activity android:name=".MomentTestActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -11,18 +12,19 @@
 
         <!--发布闪存服务-->
         <service android:name=".service.MomentIntentService" />
-
+        <!--发布闪存-->
         <activity
             android:name=".PostMomentActivity"
             android:label="@string/label_post_moment" />
+        <!--闪存详情-->
         <activity
             android:name=".MomentDetailActivity"
             android:label="@string/label_moment_detail" />
-
+        <!--闪存消息-->
         <activity
             android:name=".MomentMessageActivity"
             android:label="@string/label_moment_message" />
-
+        <!--提到我的消息-->
         <activity
             android:name=".MomentAtMeActivity"
             android:label="@string/label_moment_at_me" />

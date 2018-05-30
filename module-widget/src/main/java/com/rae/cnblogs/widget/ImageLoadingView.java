@@ -57,7 +57,7 @@ public class ImageLoadingView extends AppCompatImageView {
         mLoadingValueAnimator = ValueAnimator.ofInt(10, getMeasuredHeight() / 3)
                 .setDuration(mDuration);
         mLoadingValueAnimator.setInterpolator(new AnticipateOvershootInterpolator());
-        mLoadingValueAnimator.setRepeatCount(3);
+        mLoadingValueAnimator.setRepeatCount(-1);
         mLoadingValueAnimator.setRepeatMode(ValueAnimator.REVERSE);
         mLoadingValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -173,11 +173,15 @@ public class ImageLoadingView extends AppCompatImageView {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stop();
+        release();
     }
 
-    public void stop() {
-        stopLoading();
+    /**
+     * 释放动画资源
+     */
+    public void release() {
+        if (mLoadingValueAnimator != null)
+            mLoadingValueAnimator.cancel();
         if (mAnimators[0] != null)
             mAnimators[0].cancel();
         if (mAnimators[1] != null)

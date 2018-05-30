@@ -12,8 +12,7 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.rae.cnblogs.sdk.bean.BlogBean;
-import com.rae.cnblogs.sdk.bean.BlogType;
+import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.model.MomentMetaData;
 
@@ -33,8 +32,6 @@ public final class AppRoute {
     public static final int REQ_LOGIN = 10086;
     /*朋友界面 - 来自粉丝*/
     public static final int ACTIVITY_FRIENDS_TYPE_FANS = 1;
-    /*朋友界面 - 来自关注*/
-    private static final int ACTIVITY_FRIENDS_TYPE_FOLLOW = 2;
     // 分类
     public static final int REQ_CODE_CATEGORY = 102;
     // 收藏
@@ -47,11 +44,10 @@ public final class AppRoute {
     public static final int REQ_IMAGE_SELECTION = 106;
     // 图片选择
     public static final int REQ_CODE_IMAGE_SELECTED = 107;
-
     /**
      * 博客内容
      */
-    public static final String PATH_BLOG_CONTENT = "/app/blog/content";
+    public static final String PATH_CONTENT_DETAIL = "/blog/content/detail";
     /**
      * 网页
      */
@@ -72,7 +68,6 @@ public final class AppRoute {
      * 网页登录
      */
     public static final String PATH_WEB_LOGIN = "/user/login/web";
-
     /**
      * 粉丝以及关注
      */
@@ -85,7 +80,6 @@ public final class AppRoute {
      * 博主主页
      */
     public static final String PATH_BLOGGER = "/blogger/index";
-
     /**
      * 栏目分类
      */
@@ -144,6 +138,8 @@ public final class AppRoute {
     public static final String PATH_BLOG_HISTORY = "/blog/history";
     public static final String PATH_FRAGMENT_MINE = "/home/mine";
     public static final String PATH_FRAGMENT_MOMENT = "/moment/home";
+    /*朋友界面 - 来自关注*/
+    private static final int ACTIVITY_FRIENDS_TYPE_FOLLOW = 2;
 
     /**
      * 初始化
@@ -169,28 +165,12 @@ public final class AppRoute {
     /**
      * 博客正文界面
      *
-     * @param blogId 博客ID
-     * @param type   博客类型
+     * @param id       内容Id
+     * @param blogType 博客类型
      */
-    public static void routeToBlogContent(Context context, String blogId, BlogType type) {
-        ARouter.getInstance().build(PATH_BLOG_CONTENT)
-                .withString("blogId", blogId)
-                .withString("type", type.getTypeName())
-                .navigation(context);
-    }
-
-    /**
-     * 博客正文界面
-     *
-     * @param blog 博客实体
-     * @param type 博客类型
-     */
-    public static void routeToBlogContent(Context context, @NonNull BlogBean blog, @NonNull BlogType type) {
-        // 不传递摘要和正文这些过大的数据。进去博文正文之后再从数据库拉取。已经在BlogBean里面处理大数据问题
-        ARouter.getInstance().build(PATH_BLOG_CONTENT)
-                .withParcelable("blog", blog)
-                .withString("blogId", blog.getBlogId())
-                .withString("type", type.getTypeName())
+    public static void routeToContentDetail(Context context, ContentEntity entity) {
+        ARouter.getInstance().build(PATH_CONTENT_DETAIL)
+                .withParcelable("entity", entity)
                 .navigation(context);
     }
 
@@ -219,7 +199,8 @@ public final class AppRoute {
      * @param url 路径
      */
     public static void routeToWebNewTask(Context context, String url) {
-        ARouter.getInstance().build(PATH_FEEDBACK)
+        ARouter.getInstance().build(PATH_WEB)
+                .withString("url", url)
                 .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .navigation(context);
     }
@@ -462,10 +443,9 @@ public final class AppRoute {
     /**
      * 博客评论
      */
-    public static void routeToComment(Context context, BlogBean blog, BlogType type) {
+    public static void routeToComment(Context context, ContentEntity entity) {
         ARouter.getInstance().build(PATH_BLOG_COMMENT)
-                .withString("type", type.getTypeName())
-                .withParcelable("blog", blog)
+                .withParcelable("entity", entity)
                 .navigation(context);
     }
 

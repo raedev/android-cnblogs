@@ -1,8 +1,8 @@
-//if (IsModule.toBoolean()) {
-//    apply plugin: 'com.android.application'
-//} else {
+if (IsModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
     apply plugin: 'com.android.library'
-//}
+}
 apply plugin: 'com.jakewharton.butterknife'
 
 android {

@@ -3,13 +3,18 @@ package com.rae.cnblogs.sdk.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
 /**
  * 分类
  * Created by ChenRui on 2016/11/30 0030 17:20.
  */
-//@Table(name = "categories")
+@Entity(nameInDb = "categories")
 public class CategoryBean implements Parcelable {
 
+    @Id
     private String categoryId;
 
     private String parentId;
@@ -96,6 +101,14 @@ public class CategoryBean implements Parcelable {
         dest.writeByte(this.isHide ? (byte) 1 : (byte) 0);
     }
 
+    public boolean getIsHide() {
+        return this.isHide;
+    }
+
+    public void setIsHide(boolean isHide) {
+        this.isHide = isHide;
+    }
+
     protected CategoryBean(Parcel in) {
         this.categoryId = in.readString();
         this.parentId = in.readString();
@@ -103,6 +116,17 @@ public class CategoryBean implements Parcelable {
         this.type = in.readString();
         this.orderNo = in.readInt();
         this.isHide = in.readByte() != 0;
+    }
+
+    @Generated(hash = 1895999032)
+    public CategoryBean(String categoryId, String parentId, String name, String type,
+                        int orderNo, boolean isHide) {
+        this.categoryId = categoryId;
+        this.parentId = parentId;
+        this.name = name;
+        this.type = type;
+        this.orderNo = orderNo;
+        this.isHide = isHide;
     }
 
     public static final Creator<CategoryBean> CREATOR = new Creator<CategoryBean>() {

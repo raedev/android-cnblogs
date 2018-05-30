@@ -6,17 +6,12 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.rae.cnblogs.widget.PlaceholderView
-        android:id="@+id/placeholder_web"
+    <!--内容区域-->
+    <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--内容区域-->
-        <FrameLayout
-            android:id="@+id/fl_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/web_action_bar_height" />
-    </com.rae.cnblogs.widget.PlaceholderView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/web_action_bar_height" />
 
     <!--夜间模式遮罩层-->
     <View

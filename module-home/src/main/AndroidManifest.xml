@@ -24,8 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--网页-->
-        <activity android:name="com.rae.cnblogs.activity.WebActivity" />
         <!--设置-->
         <activity
             android:name=".SettingActivity"

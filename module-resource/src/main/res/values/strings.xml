@@ -19,7 +19,7 @@
     <string name="history">浏览记录</string>
     <string name="cancel">取消</string>
     <string name="tips_loading">正在加载…</string>
-    <string name="copy_link_success">复制链接成功</string>
+    <string name="copy_link_success">链接复制成功</string>
     <string name="open_browser">浏览器打开</string>
     <string name="copyright">Copyright © 2004–2018 cnblogs.com All Rights Reserved</string>
     <string name="loading">正在加载…</string>
@@ -55,6 +55,7 @@
     <string name="i_try_agin">我再试试</string>
     <string name="go_web_login">去网页版登录</string>
     <string name="delete_comment">删除评论</string>
+    <string name="tips_delete_comment">是否真的删除这条评论？</string>
     <string name="delete_favorites">删除收藏</string>
     <string name="setting">更多设置</string>
     <string name="logout">退出登录</string>
@@ -79,14 +80,14 @@
     <string name="finish">完成</string>
     <string name="title_category">分类</string>
     <string name="i_get_it">我知道了</string>
-    <string name="dialog_tips_post_comment">您伟大的讲话发表成功\n由于缓存更新较慢，请稍候再到评论区查看您已经发布的评论。\n您发表的评论长按可以进行删除。</string>
+    <string name="dialog_tips_post_comment">您伟大的讲话发表成功</string>
     <string name="dialog_tips_post_like">点赞成功，由于缓存问题，点赞数量更新较慢。</string>
     <string name="tips_comment_success">发表评论成功</string>
     <string name="github">开源项目</string>
     <string name="agree">同意</string>
     <string name="tips_logout">是否真的退出登录？</string>
     <string name="update_now">立即更新</string>
-    <string name="cancel_bookmarks_title">收藏接口限制</string>
+    <string name="cancel_bookmarks_title">接口不支持直接取消收藏，请前往收藏列表进行操作。</string>
     <string name="go_now">立即前往</string>
     <string name="cnblogs_cookie_url">http://cnblogs.com</string>
     <string name="clear_cache">清除缓存</string>
@@ -156,4 +157,5 @@
     <string name="browse_history">浏览记录</string>
     <string name="tips_clean_cache">将清理所有博客以及离线缓存数据，是否确定清除？</string>
     <string name="clean_now">立即清除</string>
+    <string name="tips_comment_empty_blog_app">很抱歉，博主还没有开通博客功能</string>
 </resources>

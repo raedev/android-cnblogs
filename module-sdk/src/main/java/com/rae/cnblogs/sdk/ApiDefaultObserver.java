@@ -68,11 +68,12 @@ public abstract class ApiDefaultObserver<T> extends DisposableObserver<T> {
         String message = BuildConfig.DEBUG ? e.getMessage() : "数据加载失败，请重试";
 
 
-        if (message != null && message.contains("登录过期")) {
+        if (message != null && (message.contains("登录过期") || message.contains("登录") || message.contains("Authorization"))) {
             clearLoginToken();
             onLoginExpired();
             return;
         }
+
         if (TextUtils.isEmpty(message)) {
             message = "接口信息异常";
         }

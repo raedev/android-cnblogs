@@ -27,6 +27,10 @@ public enum BlogType {
      * 知识库
      */
     KB("KB"),
+
+    /**
+     * 未知类型
+     */
     UNKNOWN("UNKNOWN");
 
     private String typeName;

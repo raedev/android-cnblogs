@@ -1,6 +1,7 @@
 package com.rae.cnblogs.activity;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -67,9 +68,11 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
 
     @Nullable
     protected String getUrl() {
-        // data 为空从intent 获取
-        if (getIntent().getData() == null) return getIntent().getStringExtra("url");
-        return getIntent().getData().toString();
+        Uri uri = getIntent().getData();
+        // 没有获取来自深度链接
+        if (uri == null || TextUtils.equals(uri.getScheme(), "cnblogs"))
+            return getIntent().getStringExtra("url");
+        return uri.toString();
     }
 
     @Override
@@ -86,7 +89,7 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
         if (url.contains("&")) {
             url += "&share_from=com.rae.cnblogs";
         }
-        dialog.setShareWeb(url, getTitle().toString(), String.format("%s - 分享自博客园APP", getTitle()), null);
+        dialog.setShareWeb(url, getTitle().toString(), String.format("%s-分享自Android客户端", getTitle()), null);
     }
 
     @Override

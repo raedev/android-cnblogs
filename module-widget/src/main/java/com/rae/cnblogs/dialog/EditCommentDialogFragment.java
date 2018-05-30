@@ -1,6 +1,8 @@
 package com.rae.cnblogs.dialog;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -38,7 +40,7 @@ public class EditCommentDialogFragment extends BasicDialogFragment {
      */
     public static final int FROM_TYPE_MOMENT = 1;
 
-    public static EditCommentDialogFragment newInstance(int fromType, Entry entry) {
+    public static EditCommentDialogFragment newInstance(int fromType, @Nullable Entry entry) {
 
         Bundle args = new Bundle();
         args.putInt("fromType", fromType);
@@ -172,6 +174,7 @@ public class EditCommentDialogFragment extends BasicDialogFragment {
     protected void onLoadWindowAttr(@NonNull Window window) {
         super.onLoadWindowAttr(window);
         window.setDimAmount(0.5f);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             window.setElevation(0f);

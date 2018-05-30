@@ -5,6 +5,6 @@ package com.rae.cnblogs.widget;
  * Created by rae on 2018/5/17.
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
-public interface IScrollTopable {
+public interface ITopScrollable {
     void scrollToTop();
 }

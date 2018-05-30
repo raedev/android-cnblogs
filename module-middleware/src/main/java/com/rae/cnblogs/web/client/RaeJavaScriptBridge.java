@@ -26,14 +26,25 @@ public class RaeJavaScriptBridge {
 
     private String html;
 
+    // 博客JSON
+    private String blog;
+
     @JavascriptInterface
     public void setHtml(String html) {
         this.html = html;
     }
 
-
     public String getHtml() {
         return html;
+    }
+
+    @JavascriptInterface
+    public String getBlog() {
+        return blog;
+    }
+
+    public void setBlog(String blog) {
+        this.blog = blog;
     }
 
     @JavascriptInterface

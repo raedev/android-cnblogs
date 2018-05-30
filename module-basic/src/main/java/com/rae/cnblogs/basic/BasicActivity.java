@@ -11,7 +11,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 
 /**
- * 基类
+ * 基类视图
  * Created by ChenRui on 2016/12/1 21:35.
  */
 public abstract class BasicActivity extends AppCompatActivity implements IPresenterView {
@@ -51,6 +51,9 @@ public abstract class BasicActivity extends AppCompatActivity implements IPresen
         }
     }
 
+    /**
+     * 显示返回键
+     */
     private void displayHomeAsUp(@NonNull Toolbar toolbar) {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.webkit.WebView;
+import android.widget.Scroller;
 
 import java.lang.reflect.Field;
 
@@ -21,6 +22,10 @@ public class RaeWebView extends WebView {
 
     protected OnScrollChangeListener mOnScrollChangeListener;
 
+
+    // 弹性滑动
+    private Scroller mScroller;
+
     static {
         try {
             sConfigCallback = Class.forName("android.webkit.BrowserFrame")
@@ -34,27 +39,36 @@ public class RaeWebView extends WebView {
 
     public RaeWebView(Context context) {
         super(context);
+        init();
     }
 
     public RaeWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public RaeWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public RaeWebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init();
     }
 
     public RaeWebView(Context context, AttributeSet attrs, int defStyleAttr, boolean privateBrowsing) {
         super(context, attrs, defStyleAttr, privateBrowsing);
+        init();
     }
 
     public void setOnScrollChangeListener(OnScrollChangeListener onScrollChangeListener) {
         mOnScrollChangeListener = onScrollChangeListener;
+    }
+
+    private void init() {
+        mScroller = new Scroller(getContext());
     }
 
     @Override
@@ -87,4 +101,23 @@ public class RaeWebView extends WebView {
             mOnScrollChangeListener.onScrollChange(l, t, oldl, oldt);
         }
     }
+
+    private void smoothScroll(int destX, int destY) {
+        int scrollX = getScrollX();
+        int deltaX = destX - scrollX;
+        mScroller.startScroll(scrollX, 0, deltaX, 0, 500);
+        invalidate();
+    }
+
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            invalidate();
+        }
+    }
+
+
+
 }

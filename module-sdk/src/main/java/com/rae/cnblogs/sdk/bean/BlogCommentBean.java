@@ -1,12 +1,14 @@
 package com.rae.cnblogs.sdk.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /**
  * 博客评论实体
  * Created by ChenRui on 2016/12/10 18:00.
  */
-public class BlogCommentBean {
+public class BlogCommentBean implements Parcelable {
 
     private String id;
     private String authorName;
@@ -107,4 +109,51 @@ public class BlogCommentBean {
     public String getAvatar() {
         return mAvatar;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.authorName);
+        dest.writeString(this.blogApp);
+        dest.writeString(this.date);
+        dest.writeString(this.body);
+        dest.writeString(this.quote);
+        dest.writeString(this.quoteBlogApp);
+        dest.writeString(this.like);
+        dest.writeString(this.unlike);
+        dest.writeString(this.mAvatar);
+    }
+
+    public BlogCommentBean() {
+    }
+
+    protected BlogCommentBean(Parcel in) {
+        this.id = in.readString();
+        this.authorName = in.readString();
+        this.blogApp = in.readString();
+        this.date = in.readString();
+        this.body = in.readString();
+        this.quote = in.readString();
+        this.quoteBlogApp = in.readString();
+        this.like = in.readString();
+        this.unlike = in.readString();
+        this.mAvatar = in.readString();
+    }
+
+    public static final Parcelable.Creator<BlogCommentBean> CREATOR = new Parcelable.Creator<BlogCommentBean>() {
+        @Override
+        public BlogCommentBean createFromParcel(Parcel source) {
+            return new BlogCommentBean(source);
+        }
+
+        @Override
+        public BlogCommentBean[] newArray(int size) {
+            return new BlogCommentBean[size];
+        }
+    };
 }

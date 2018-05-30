@@ -27,7 +27,6 @@ import com.rae.cnblogs.web.client.RaeJavaScriptBridge;
 import com.rae.cnblogs.web.client.RaeWebChromeClient;
 import com.rae.cnblogs.web.client.RaeWebViewClient;
 import com.rae.cnblogs.widget.AppLayout;
-import com.rae.cnblogs.widget.PlaceholderView;
 import com.rae.cnblogs.widget.RaeWebView;
 
 import java.io.File;
@@ -42,33 +41,24 @@ import io.reactivex.annotations.Nullable;
  */
 public class WebViewFragment extends BasicFragment {
 
+    RaeWebView mWebView;
+    FrameLayout mContentLayout;
+    ProgressBar mProgressBar;
+    AppLayout mAppLayout;
     private String mUrl;
     private String mRawUrl;
     private RaeJavaScriptBridge mJavaScriptApi;
     private WebViewClient mRaeWebViewClient;
     private boolean mEnablePullToRefresh = true;
-//    private JavaNetCookieJar mJavaNetCookieJar;
-
-
-    public static WebViewFragment newInstance(String url) {
-
-        Bundle args = new Bundle();
-        args.putString("url", url);
-        WebViewFragment fragment = new WebViewFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    RaeWebView mWebView;
-    FrameLayout mContentLayout;
-    ProgressBar mProgressBar;
-    AppLayout mAppLayout;
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fm_web;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mRawUrl = getArguments().getString("url");
+            mUrl = mRawUrl;
+        }
     }
-
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface", "JavascriptInterface"})
     @Override
@@ -116,89 +106,6 @@ public class WebViewFragment extends BasicFragment {
 
     }
 
-    public ProgressBar getProgressBar() {
-        return mProgressBar;
-    }
-
-    public AppLayout getAppLayout() {
-        return mAppLayout;
-    }
-
-    @Override
-    protected void onLoadData() {
-
-        // 夜间模式
-        if (ThemeCompat.isNight()) {
-            mWebView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_night));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && BuildConfig.DEBUG) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
-
-        // 下载监听
-        mWebView.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                try {
-                    Uri uri = Uri.parse(url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    UICompat.failed(getContext(), "下载文件错误");
-                }
-            }
-        });
-
-        mAppLayout.setEnabled(mEnablePullToRefresh);
-        mAppLayout.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
-                mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE); // 下拉刷新禁止使用缓存
-                mWebView.reload(); // 刷新WebView
-            }
-
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                // 是否处于顶部
-                return mProgressBar.getVisibility() != View.VISIBLE && !mWebView.canScrollVertically(-1) && super.checkCanDoRefresh(frame, content, header);
-            }
-        });
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mRawUrl = getArguments().getString("url");
-            mUrl = mRawUrl;
-        }
-    }
-
-    public String getRawUrl() {
-        return mRawUrl;
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mContentLayout != null) {
-            mContentLayout.removeAllViews();
-        }
-        if (mAppLayout != null) {
-            mAppLayout.removeAllViews();
-        }
-        if (mRaeWebViewClient != null && mRaeWebViewClient instanceof RaeWebViewClient) {
-            ((RaeWebViewClient) mRaeWebViewClient).destroy();
-        }
-        if (mWebView != null) {
-            mWebView.removeAllViews();
-            mWebView.destroy();
-        }
-        super.onDestroy();
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -217,23 +124,45 @@ public class WebViewFragment extends BasicFragment {
             });
         }
 
-        int placeholderId = getResources().getIdentifier("placeholder_web", "id", activity.getPackageName());
-        PlaceholderView placeholderView = activity.findViewById(placeholderId);
-        if (placeholderView != null && mRaeWebViewClient != null && mRaeWebViewClient instanceof RaeWebViewClient) {
-            placeholderView.dismiss();
-            placeholderView.setOnRetryClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mWebView.reload();
-                }
-            });
-            ((RaeWebViewClient) mRaeWebViewClient).setPlaceHolderView(placeholderView);
-        }
-
     }
 
-    public String getUrl() {
-        return mWebView.getUrl();
+    @Override
+    public void onDestroy() {
+        if (mContentLayout != null) {
+            mContentLayout.removeAllViews();
+        }
+        if (mAppLayout != null) {
+            mAppLayout.removeAllViews();
+        }
+        if (mRaeWebViewClient instanceof RaeWebViewClient) {
+            ((RaeWebViewClient) mRaeWebViewClient).destroy();
+        }
+        if (mWebView != null) {
+            mWebView.removeAllViews();
+            mWebView.destroy();
+        }
+        super.onDestroy();
+    }
+
+    public static WebViewFragment newInstance(String url) {
+
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        WebViewFragment fragment = new WebViewFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public void enablePullToRefresh(boolean enable) {
+        if (mAppLayout != null) {
+            mAppLayout.setEnabled(enable);
+        } else {
+            mEnablePullToRefresh = enable;
+        }
+    }
+
+    public AppLayout getAppLayout() {
+        return mAppLayout;
     }
 
     /**
@@ -243,15 +172,82 @@ public class WebViewFragment extends BasicFragment {
         return mJavaScriptApi.getHtml();
     }
 
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
+    }
+
+    public String getRawUrl() {
+        return mRawUrl;
+    }
+
+    public String getUrl() {
+        return mWebView.getUrl();
+    }
+
+    public RaeWebView getWebView() {
+        return mWebView;
+    }
+
+    @Override
+    protected void onLoadData() {
+
+        // 夜间模式
+        if (ThemeCompat.isNight()) {
+            mWebView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_night));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && BuildConfig.DEBUG) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
+        // 支持下载监听
+        mWebView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                try {
+                    Uri uri = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                    // 然后返回到上一级
+                    getWebView().goBack();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    UICompat.failed(getContext(), "下载文件错误");
+                }
+            }
+        });
+
+        mAppLayout.setEnabled(mEnablePullToRefresh);
+        mAppLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                // 是否处于顶部
+                return mProgressBar.getVisibility() != View.VISIBLE && !mWebView.canScrollVertically(-1) && super.checkCanDoRefresh(frame, content, header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout ptrFrameLayout) {
+                mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE); // 下拉刷新禁止使用缓存
+                mWebView.reload(); // 刷新WebView
+            }
+        });
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fm_web;
+    }
+
     public WebChromeClient getWebChromeClient() {
-        return new RaeWebChromeClient(mProgressBar);
+        return new RaeWebChromeClient(getProgressBar());
     }
 
     public WebViewClient getWebViewClient() {
-        return new RaeWebViewClient(mProgressBar, mAppLayout);
+        return new RaeWebViewClient(getProgressBar(), mAppLayout);
     }
 
-    public Object getJavascriptApi() {
+    public RaeJavaScriptBridge getJavascriptApi() {
         return mJavaScriptApi;
     }
 
@@ -261,14 +257,5 @@ public class WebViewFragment extends BasicFragment {
 
     public void reload() {
         mWebView.reload();
-    }
-
-
-    public void enablePullToRefresh(boolean enable) {
-        if (mAppLayout != null) {
-            mAppLayout.setEnabled(enable);
-        } else {
-            mEnablePullToRefresh = enable;
-        }
     }
 }

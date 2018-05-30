@@ -2,6 +2,9 @@ package com.rae.cnblogs.basic;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.meituan.android.walle.WalleChannelReader;
@@ -41,5 +44,22 @@ public final class ApplicationCompat {
     public static String getChannel(Context context) {
         String channel = WalleChannelReader.getChannel(context);
         return TextUtils.isEmpty(channel) ? "official" : channel;
+    }
+
+
+    /**
+     * 检查网络是否可用
+     */
+    public static boolean isNetworkError(Context context) {
+        if (context == null) return true;
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) return false;
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable();
+    }
+
+
+    public static boolean checkFragmentIsActive(Fragment fragment) {
+        return fragment.isVisible();
     }
 }

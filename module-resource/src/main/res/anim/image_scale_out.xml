@@ -3,15 +3,15 @@
     android:shareInterpolator="true"
     android:interpolator="@android:interpolator/accelerate_decelerate">
 
-    <scale
-        android:duration="300"
-        android:fromXScale="100%"
-        android:fromYScale="100%"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:startOffset="50"
-        android:toXScale="80%p"
-        android:toYScale="80%p" />
+    <!--   <scale
+           android:duration="300"
+           android:fromXScale="100%"
+           android:fromYScale="100%"
+           android:pivotX="50%"
+           android:pivotY="50%"
+           android:startOffset="50"
+           android:toXScale="80%p"
+           android:toYScale="80%p" />-->
 
     <alpha
         android:duration="300"
