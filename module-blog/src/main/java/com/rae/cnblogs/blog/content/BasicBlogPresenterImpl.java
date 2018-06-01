@@ -9,11 +9,14 @@ import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.basic.IPageView;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.blog.comm.ContentListContract;
+import com.rae.cnblogs.blog.job.JobEvent;
 import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.db.DbBlog;
 import com.rae.cnblogs.sdk.db.DbFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,13 @@ public abstract class BasicBlogPresenterImpl extends BasicPresenter<ContentListC
                 CategoryBean category = getView().getCategory();
                 // 获取博客列表
                 return BasicBlogPresenterImpl.this.onCreateObserver(category, page);
+            }
+
+            @Override
+            protected void onLoadDataComplete(List<BlogBean> dataList) {
+                super.onLoadDataComplete(dataList);
+                // 通知异步下载博文内容
+                EventBus.getDefault().post(new JobEvent(JobEvent.ACTION_JOB_BLOG_CONTENT));
             }
         };
 

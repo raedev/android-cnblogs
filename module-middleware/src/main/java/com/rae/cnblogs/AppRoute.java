@@ -45,21 +45,30 @@ public final class AppRoute {
     // 图片选择
     public static final int REQ_CODE_IMAGE_SELECTED = 107;
     /**
+     * 首页
+     */
+    public static final String PATH_APP_HOME = "/main/home";
+
+    /**
      * 博客内容
      */
     public static final String PATH_CONTENT_DETAIL = "/blog/content/detail";
+
+    /**
+     * 博主主页
+     */
+    public static final String PATH_BLOGGER = "/blog/author";
+
     /**
      * 网页
      */
-    public static final String PATH_WEB = "/web/index";
+    public static final String PATH_WEB = "/web/home";
+
     /**
      * 意见反馈
      */
-    public static final String PATH_FEEDBACK = "/feedback/index";
-    /**
-     * 首页
-     */
-    public static final String PATH_APP_HOME = "/app/home";
+    public static final String PATH_FEEDBACK = "/home/feedback";
+
     /**
      * 登录
      */
@@ -71,43 +80,62 @@ public final class AppRoute {
     /**
      * 粉丝以及关注
      */
-    public static final String PATH_FRIENDS = "/app/friends";
+    public static final String PATH_FRIENDS = "/user/friends";
     /**
      * 图片预览
      */
     public static final String PATH_IMAGE_PREVIEW = "/image/preview";
+
     /**
-     * 博主主页
+     * 图片选择
      */
-    public static final String PATH_BLOGGER = "/blogger/index";
+    public static final String PATH_IMAGE_SELECTION = "/image/selection";
     /**
      * 栏目分类
      */
-    public static final String PATH_CATEGORY = "/category/index";
+    public static final String PATH_CATEGORY = "/blog/category";
     /**
      * 我的收藏
      */
-    public static final String PATH_FAVORITE = "/favorite/index";
-    /**
-     * 设置
-     */
-    public static final String PATH_SETTING = "/setting/index";
+    public static final String PATH_FAVORITE = "/blog/favorite";
     /**
      * 搜索
      */
-    public static final String PATH_SEARCH = "/app/search";
-    /**
-     * 系统消息
-     */
-    public static final String PATH_SYSTEM_MESSAGE = "/system/message";
-    /**
-     * 字体设置
-     */
-    public static final String PATH_FONT_SETTING = "/font/setting";
+    public static final String PATH_SEARCH = "/blog/search";
     /**
      * 博客评论
      */
-    public static final String PATH_BLOG_COMMENT = "/app/blog/comment";
+    public static final String PATH_BLOG_COMMENT = "/blog/comment";
+    /**
+     * 浏览记录
+     */
+    public static final String PATH_BLOG_HISTORY = "/blog/history";
+
+    /**
+     * 博客首页
+     */
+    public static final String PATH_FRAGMENT_HOME = "/blog/home/fragment";
+    /**
+     * 设置
+     */
+    public static final String PATH_SETTING = "/home/setting";
+    /**
+     * 系统消息
+     */
+    public static final String PATH_SYSTEM_MESSAGE = "/home/sysmessage";
+    /**
+     * 关于我们
+     */
+    public static final String PATH_ABOUT_ME = "/home/about";
+    /**
+     * 字体设置
+     */
+    public static final String PATH_FONT_SETTING = "/home/font";
+
+    /**
+     * 我的
+     */
+    public static final String PATH_FRAGMENT_MINE = "/home/mine/fragment";
     /**
      * 发布闪存
      */
@@ -124,20 +152,13 @@ public final class AppRoute {
      * 提到我的闪存消息
      */
     public static final String PATH_MOMENT_MENTION = "/moment/mention";
+
     /**
-     * 图片选择
+     * 闪存动态
      */
-    public static final String PATH_IMAGE_SELECTION = "/image/selection";
-    /**
-     * 关于我们
-     */
-    public static final String PATH_ABOUT_ME = "/app/about";
-    /**
-     * 浏览记录
-     */
-    public static final String PATH_BLOG_HISTORY = "/blog/history";
-    public static final String PATH_FRAGMENT_MINE = "/home/mine";
-    public static final String PATH_FRAGMENT_MOMENT = "/moment/home";
+    public static final String PATH_FRAGMENT_MOMENT = "/moment/home/fragment";
+
+
     /*朋友界面 - 来自关注*/
     private static final int ACTIVITY_FRIENDS_TYPE_FOLLOW = 2;
 
@@ -164,9 +185,6 @@ public final class AppRoute {
 
     /**
      * 博客正文界面
-     *
-     * @param id       内容Id
-     * @param blogType 博客类型
      */
     public static void routeToContentDetail(Context context, ContentEntity entity) {
         ARouter.getInstance().build(PATH_CONTENT_DETAIL)
@@ -532,5 +550,9 @@ public final class AppRoute {
 
     public static Fragment newMomentFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_MOMENT).navigation();
+    }
+
+    public static Fragment newHomeFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_HOME).navigation();
     }
 }

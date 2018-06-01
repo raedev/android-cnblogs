@@ -59,11 +59,17 @@ final class ApiUrls {
     // 收藏-添加
     static final String API_BOOK_MARKS_ADD = "https://wz.cnblogs.com/api/wz";
 
+    // 收藏-标签
+    static final String API_BOOK_MARKS_TAGS = "https://wz.cnblogs.com/mytag/";
+
     // 收藏-删除
     static final String API_BOOK_MARKS_DELETE = "https://wz.cnblogs.com/api/wz/{id}";
 
     // 收藏-列表
     static final String API_BOOK_MARKS_LIST = "https://wz.cnblogs.com/my/{page}.html";
+
+    // 收藏-标签列表
+    static final String API_BOOK_MARKS_TAG_LIST = "https://wz.cnblogs.com/my/{tag}/{page}.html";
 
     // 知识库-内容
     static final String API_KB_CONTENT = "https://kb.cnblogs.com/page/{id}/";

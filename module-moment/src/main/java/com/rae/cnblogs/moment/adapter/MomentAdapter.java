@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.GlideApp;
@@ -129,9 +130,10 @@ public class MomentAdapter extends BaseItemAdapter<MomentBean, SimpleViewHolder>
         holder.authorView.setText(m.getAuthorName());
         holder.dateView.setText(m.getPostTime());
         holder.summaryView.setText(Html.fromHtml(m.getContent()));
-        holder.androidTagView.setVisibility(m.isAndroidClient() ? View.VISIBLE : View.GONE);
-        holder.commentView.setVisibility("0".equals(m.getCommentCount()) ? View.GONE : View.VISIBLE);
-        holder.commentView.setText("0".equals(m.getCommentCount()) ? "" : m.getCommentCount() + "条回复");
+        UICompat.setVisibility(holder.androidTagView, m.isAndroidClient());
+        UICompat.setVisibility(holder.commentView, !"0".equals(m.getCommentCount()));
+        if (holder.commentView != null)
+            holder.commentView.setText("0".equals(m.getCommentCount()) ? "" : m.getCommentCount() + "条回复");
     }
 
     static class ItemImageClickListener implements View.OnClickListener {

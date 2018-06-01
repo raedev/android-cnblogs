@@ -24,10 +24,10 @@ import butterknife.BindView;
 @Route(path = AppRoute.PATH_FONT_SETTING)
 public class FontSettingActivity extends SwipeBackBasicActivity {
 
-    @BindView(R.id.tv_message)
+    @BindView(R2.id.tv_message)
     TextView mMessage;
 
-    @BindView(R.id.seekBar)
+    @BindView(R2.id.seekBar)
     RaeSeekBar mSeekBar;
 
     private boolean mFontChanged;

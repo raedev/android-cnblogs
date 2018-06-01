@@ -6,6 +6,7 @@ import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
+import com.rae.cnblogs.basic.rx.DefaultEmptyObserver;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.AppGson;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
@@ -217,6 +218,18 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                     @Override
                     protected void accept(BlogBean content) {
                         getView().onLoadDataSuccess(content, AppGson.toJson(content));
+                    }
+                });
+
+        // 更新博客为已读状态
+        Observable.just(contentEntity)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DefaultEmptyObserver<ContentEntity>() {
+                    @Override
+                    public void onNext(ContentEntity contentEntity) {
+                        // TODO :更新数据库
+                        DbBlog dbBlog = DbFactory.getInstance().getBlog();
+
                     }
                 });
 

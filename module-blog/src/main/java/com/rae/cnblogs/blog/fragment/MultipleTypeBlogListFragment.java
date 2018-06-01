@@ -188,6 +188,9 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
     @Override
     public void onLoginExpired() {
         // 不用实现
+        mAppLayout.refreshComplete();
+        mRecyclerView.loadMoreComplete();
+        AppRoute.routeToLogin(getContext());
     }
 
     @Override
@@ -197,5 +200,9 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
         } else {
             UICompat.scrollToTop(mRecyclerView);
         }
+    }
+
+    protected ContentItemAdapter getAdapter() {
+        return mAdapter;
     }
 }

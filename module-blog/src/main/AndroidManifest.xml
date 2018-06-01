@@ -4,15 +4,18 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true">
-        <activity android:name=".BlogTestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity android:name=".ContentDetailActivity" />
         <activity
             android:name=".CommentActivity"
             android:label="@string/label_comment" />
+        <activity
+            android:name=".FavoritesActivity"
+            android:label="@string/my_favorites" />
+
+        <service
+            android:name=".CnblogsService"
+            android:exported="false"
+            android:label="@string/service_name" />
     </application>
 </manifest>

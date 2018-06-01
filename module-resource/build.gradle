@@ -8,6 +8,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
 
         buildConfigField 'String', 'BUGLY_APP_ID', '"' + rootProject.ext.account.buglyAppId + '"'

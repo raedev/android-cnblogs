@@ -2,14 +2,6 @@
     package="com.rae.cnblogs.moment">
 
     <application>
-
-        <activity android:name=".MomentTestActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
         <!--发布闪存服务-->
         <service android:name=".service.MomentIntentService" />
         <!--发布闪存-->

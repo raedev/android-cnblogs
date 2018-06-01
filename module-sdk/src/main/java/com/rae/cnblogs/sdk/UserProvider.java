@@ -85,6 +85,10 @@ public final class UserProvider {
         return mSessionManager.isLogin();
     }
 
+    public boolean isNotLogin() {
+        return !isLogin();
+    }
+
     /**
      * 退出登录，释放资源
      */

@@ -7,10 +7,8 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.db.DbBlog;
 import com.rae.cnblogs.sdk.db.DbFactory;
-import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.utils.ApiUtils;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,59 +29,6 @@ public class KBListParser implements IHtmlParser<List<BlogBean>> {
 
     public KBListParser() {
         mDbBlog = DbFactory.getInstance().getBlog();
-    }
-
-    /**
-     * 缓存小图
-     *
-     * @param m
-     */
-    protected void cacheThumbUrls(BlogBean m) {
-        // 小图处理：从数据库中获取
-        BlogBean dbBlog = mDbBlog.getBlog(m.getBlogId()); // 获取小图
-        UserBlogInfo blogInfo = mDbBlog.get(m.getBlogId());
-
-        if (blogInfo != null) {
-            m.setReaded(blogInfo.isRead());
-        }
-
-        if (dbBlog != null && !TextUtils.isEmpty(dbBlog.getThumbUrls())) {
-            m.setThumbUrls(dbBlog.getThumbUrls()); // 存在有小图
-        } else {
-            if (dbBlog != null && blogInfo != null && !TextUtils.isEmpty(blogInfo.getContent())) {
-                m.setThumbUrls(createThumbUrls(blogInfo.getContent()));
-                dbBlog.setThumbUrls(m.getThumbUrls());
-                // 更新小图
-                mDbBlog.updateBlog(dbBlog);
-            }
-        }
-    }
-
-    /**
-     * 获取小图
-     *
-     * @param content 博文
-     */
-    private String createThumbUrls(String content) {
-        try {
-            List<String> result = new ArrayList<>();
-            Elements elements = Jsoup.parse(content).select("img");
-            for (Element element : elements) {
-                String src = element.attr("src");
-
-                // 过滤一些没有用的图片
-                if (TextUtils.isEmpty(src) || src.contains(".gif")) {
-                    continue;
-                }
-
-                result.add(ApiUtils.getUrl(src));
-            }
-
-            return mGson.toJson(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -117,13 +62,8 @@ public class KBListParser implements IHtmlParser<List<BlogBean>> {
             m.setViews(ApiUtils.getNumber(element.select(".kb_footer .view").text()));
             m.setLikes(getLikeCount(element.select(".kb_footer").text()));
             m.setBlogType(BlogType.KB.getTypeName());
-
-
-            UserBlogInfo blogInfo = mDbBlog.get(m.getBlogId());
-            if (blogInfo != null) {
-                m.setReaded(blogInfo.isRead());
-            }
-            cacheThumbUrls(m);
+            // 同步一下数据
+            BlogListParser.syncLocalData(mDbBlog, m);
             result.add(m);
         }
         return result;

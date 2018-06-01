@@ -289,8 +289,13 @@ public class CommentFragment extends BasicFragment implements CommentContract.Vi
     /**
      * 点击评论
      */
-    @OnClick(R.id.tv_edit_comment)
+    @OnClick(R2.id.tv_edit_comment)
     public void onCommentClick() {
+        // 检查登录
+        if (UserProvider.getInstance().isNotLogin()) {
+            AppRoute.routeToLogin(getContext());
+            return;
+        }
         showCommentDialog(null);
     }
 }

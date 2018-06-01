@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_tab_home"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            style="@style/AppToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="false"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="48dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/title"
+                android:textColor="@color/ph1"
+                android:textSize="18sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
+            android:id="@+id/tab_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            app:tabBackground="@android:color/transparent"
+            app:tabContentStart="0dp"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/ph1"
+            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorRadius="4dp"
+            app:tabIndicatorWidth="16dp"
+            app:tabMode="scrollable"
+            app:tabPadding="0dp"
+            app:tabSelectedTextColor="@color/homeTabSelectedTextColor"
+            app:tabTextAppearance="@style/TabTextAppearance.Simple"
+            app:tabTextColor="@color/homeTabTextColor" />
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</android.support.v7.widget.FitWindowsLinearLayout>

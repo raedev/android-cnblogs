@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rae.cnblogs.moment">
+
+    <application>
+        <activity
+            android:name=".MomentTestActivity"
+            android:label="闪存模块测试">
+            <!-- <intent-filter>
+                 <category android:name="android.intent.category.LAUNCHER" />
+                 <action android:name="android.intent.action.MAIN" />
+             </intent-filter>-->
+        </activity>
+    </application>
+</manifest>

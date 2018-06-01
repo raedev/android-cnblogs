@@ -26,9 +26,9 @@ import butterknife.BindView;
 @Route(path = AppRoute.PATH_SYSTEM_MESSAGE)
 public class SystemMessageActivity extends SwipeBackBasicActivity implements SystemMessageContract.View {
 
-    @BindView(R.id.recycler_view)
+    @BindView(R2.id.recycler_view)
     RaeRecyclerView mRecyclerView;
-    @BindView(R.id.placeholder)
+    @BindView(R2.id.placeholder)
     PlaceholderView mPlaceholderView;
 
     SystemMessageAdapter mAdapter;

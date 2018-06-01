@@ -24,6 +24,7 @@ import com.rae.cnblogs.blog.detail.ContentDetailContract;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.EditCommentDialogFragment;
 import com.rae.cnblogs.dialog.ShareDialogFragment;
+import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
@@ -349,6 +350,11 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
      */
     @OnClick(R2.id.tv_edit_comment)
     public void onEditCommentClick() {
+        // 检查登录
+        if (UserProvider.getInstance().isNotLogin()) {
+            AppRoute.routeToLogin(getContext());
+            return;
+        }
         // 弹出评论
         EditCommentDialogFragment fragment = EditCommentDialogFragment
                 .newInstance(EditCommentDialogFragment.FROM_TYPE_BLOG, null);

@@ -98,7 +98,7 @@
     <string name="share_app_title">推荐一个好应用「博客园」给你</string>
     <string name="share_app_desc">听说大牛都在用的博客园APP，一个面向开发者的知识分享社区，一个纯净的技术交流社区。</string>
     <string name="market_url">market://details?id=com.rae.cnblogs</string>
-    <string name="service_name">博客园离线服务</string>
+    <string name="service_name">博客园服务</string>
     <string name="permission_tips_message">博客园需要读取/写入您的存储卡，禁止后大部分功能将受到限制，是否再次申请？</string>
     <string name="permission_granted">继续申请</string>
     <string name="feedback">意见反馈</string>

@@ -60,7 +60,8 @@ public class FriendsBlogListParser extends BlogListParser {
             m.setLikes(likes);
             m.setBlogType(BlogType.BLOG.getTypeName());
 
-            cacheThumbUrls(m);
+            // 同步一下数据
+            BlogListParser.syncLocalData(mDbBlog, m);
             result.add(m);
         }
 

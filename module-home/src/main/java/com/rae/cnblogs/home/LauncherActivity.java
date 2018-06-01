@@ -26,13 +26,13 @@ import butterknife.OnClick;
  */
 public class LauncherActivity extends BasicActivity implements LauncherContract.View {
 
-    @BindView(R.id.img_launcher_display)
+    @BindView(R2.id.img_launcher_display)
     ImageView mDisplayView;
 
-    @BindView(R.id.tv_launcher_name)
+    @BindView(R2.id.tv_launcher_name)
     TextView mNameView;
 
-    @BindView(R.id.tv_skip)
+    @BindView(R2.id.tv_skip)
     CountDownTextView mCountDownTextView;
 
     LauncherContract.Presenter mPresenter;
@@ -101,7 +101,7 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
         }
     }
 
-    @OnClick(R.id.img_launcher_display)
+    @OnClick(R2.id.img_launcher_display)
     public void onAdClick() {
         mPresenter.onAdClick();
     }
@@ -113,7 +113,7 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
     }
 
 
-    @OnClick(R.id.tv_skip)
+    @OnClick(R2.id.tv_skip)
     public void onSkipClick() {
         finish();
     }

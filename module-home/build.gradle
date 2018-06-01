@@ -12,7 +12,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
-        applicationId "com.rae.cnblogs.home"
         versionCode rootProject.ext.android.versionCode
         versionName "1.0"
         multiDexEnabled true

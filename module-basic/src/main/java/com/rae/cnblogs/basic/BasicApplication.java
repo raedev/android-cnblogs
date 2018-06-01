@@ -3,6 +3,8 @@ package com.rae.cnblogs.basic;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.support.multidex.MultiDex;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public class BasicApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         int pid = android.os.Process.myPid();
         String processAppName = getAppName(pid);
         if (processAppName == null || getPackageName().equalsIgnoreCase(processAppName)) {
@@ -27,6 +31,18 @@ public class BasicApplication extends Application {
      */
     protected void onFirstCreate() {
 
+//        // 启动博客园服务
+//        Intent intent = new Intent();
+//        intent.setClassName(getPackageName(), "com.rae.cnblogs.blog.CnblogsService");
+//
+//        /*
+//         * Android 8.0 不允许创建后台服务了
+//         * */
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
+//            startForegroundService(intent);
+//        } else {
+//            startService(intent);
+//        }
     }
 
     @Override

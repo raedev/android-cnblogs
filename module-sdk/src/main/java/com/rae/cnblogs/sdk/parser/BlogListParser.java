@@ -2,12 +2,11 @@ package com.rae.cnblogs.sdk.parser;
 
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
+import com.rae.cnblogs.sdk.AppGson;
 import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.db.DbBlog;
 import com.rae.cnblogs.sdk.db.DbFactory;
-import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.utils.ApiUtils;
 
 import org.jsoup.Jsoup;
@@ -27,36 +26,30 @@ import java.util.TreeMap;
  */
 public class BlogListParser implements IHtmlParser<List<BlogBean>> {
 
-    private DbBlog mDbBlog;
-    private Gson mGson = new Gson();
+    DbBlog mDbBlog;
 
-
-    public BlogListParser() {
+    BlogListParser() {
         mDbBlog = DbFactory.getInstance().getBlog();
     }
 
     /**
-     * 缓存小图
-     *
-     * @param m
+     * 同步本地数据库数据
      */
-    protected void cacheThumbUrls(BlogBean m) {
-        // 小图处理：从数据库中获取
-        BlogBean dbBlog = mDbBlog.getBlog(m.getBlogId()); // 获取小图
-        UserBlogInfo blogInfo = mDbBlog.get(m.getBlogId());
-
-        if (blogInfo != null) {
-            m.setReaded(blogInfo.isRead());
+    public static void syncLocalData(DbBlog dbBlog, BlogBean m) {
+        BlogBean blog = dbBlog.getBlog(m.getBlogId());
+        // 没有入库的情况
+        if (blog == null) {
+            return;
         }
-
-        if (dbBlog != null && !TextUtils.isEmpty(dbBlog.getThumbUrls())) {
-            m.setThumbUrls(dbBlog.getThumbUrls()); // 存在有小图
-        } else {
-            if (dbBlog != null && blogInfo != null && !TextUtils.isEmpty(blogInfo.getContent())) {
-                m.setThumbUrls(createThumbUrls(blogInfo.getContent()));
-                dbBlog.setThumbUrls(m.getThumbUrls());
-                // 更新小图
-                mDbBlog.updateBlog(dbBlog);
+        m.setIsRead(blog.getIsRead()); // 设置已读状态
+        m.setThumbUrls(blog.getThumbUrls()); // 设置博客图片
+        if (TextUtils.isEmpty(blog.getThumbUrls())) {
+            // 解析图片地址
+            String content = dbBlog.getBlogContent(m.getBlogType(), m.getBlogId());
+            if (!TextUtils.isEmpty(content)) {
+                m.setThumbUrls(createThumbUrls(content));
+                // 更新博客
+                dbBlog.updateBlog(m);
             }
         }
     }
@@ -66,7 +59,7 @@ public class BlogListParser implements IHtmlParser<List<BlogBean>> {
      *
      * @param content 博文
      */
-    private String createThumbUrls(String content) {
+    private static String createThumbUrls(String content) {
         try {
             List<String> result = new ArrayList<>();
             // 排序的MAP
@@ -111,7 +104,7 @@ public class BlogListParser implements IHtmlParser<List<BlogBean>> {
             }
 
 
-            return mGson.toJson(result);
+            return AppGson.toJson(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,7 +151,7 @@ public class BlogListParser implements IHtmlParser<List<BlogBean>> {
             m.setPostDate(ApiUtils.getDate(element.select(".post_item_foot").text())); // 发布时间
             m.setLikes(ApiUtils.getCount(item.select(".diggnum").text()));  // 点赞或者是推荐
             m.setBlogType(BlogType.BLOG.getTypeName());
-            cacheThumbUrls(m);
+            syncLocalData(mDbBlog, m);
             result.add(m);
         }
 

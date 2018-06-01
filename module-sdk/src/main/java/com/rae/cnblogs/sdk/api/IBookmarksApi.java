@@ -4,8 +4,10 @@ import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.JsonBody;
 import com.rae.cnblogs.sdk.Parser;
 import com.rae.cnblogs.sdk.bean.BookmarksBean;
+import com.rae.cnblogs.sdk.bean.TagBean;
 import com.rae.cnblogs.sdk.parser.BookmarksDelParser;
 import com.rae.cnblogs.sdk.parser.BookmarksParser;
+import com.rae.cnblogs.sdk.parser.BookmarksTagParser;
 
 import java.util.List;
 
@@ -23,6 +25,17 @@ import retrofit2.http.Path;
  * Created by ChenRui on 2017/1/14 13:53.
  */
 public interface IBookmarksApi {
+
+    /**
+     * 获取所有的标签
+     */
+    @GET(ApiUrls.API_BOOK_MARKS_TAGS)
+    @Headers({
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Upgrade-Insecure-Requests: 1"
+    })
+    @Parser(BookmarksTagParser.class)
+    Observable<List<TagBean>> getTags();
 
     /**
      * 添加到收藏夹
@@ -48,6 +61,20 @@ public interface IBookmarksApi {
     })
     @Parser(BookmarksParser.class)
     Observable<List<BookmarksBean>> getBookmarks(@Path("page") int page);
+
+    /**
+     * 获取收藏列表
+     *
+     * @param tag  标签
+     * @param page 页码
+     */
+    @GET(ApiUrls.API_BOOK_MARKS_TAG_LIST)
+    @Headers({
+            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Upgrade-Insecure-Requests: 1"
+    })
+    @Parser(BookmarksParser.class)
+    Observable<List<BookmarksBean>> getTagBookmarks(@Path("tag") String tag, @Path("page") int page);
 
     /**
      * 删除收藏

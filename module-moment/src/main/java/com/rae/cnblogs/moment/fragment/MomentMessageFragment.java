@@ -17,7 +17,7 @@ import com.rae.cnblogs.moment.message.IMomentMessageContract;
 import com.rae.cnblogs.moment.message.MomentMessagePresenterImpl;
 import com.rae.cnblogs.sdk.bean.MomentCommentBean;
 import com.rae.cnblogs.widget.AppLayout;
-import com.rae.cnblogs.widget.IScrollTopable;
+import com.rae.cnblogs.widget.ITopScrollable;
 import com.rae.cnblogs.widget.PlaceholderView;
 import com.rae.cnblogs.widget.RaeRecyclerView;
 
@@ -33,7 +33,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * 回复我的消息
  * Created by ChenRui on 2017/11/6 0006 14:21.
  */
-public class MomentMessageFragment extends BasicFragment implements IScrollTopable, IMomentMessageContract.View, EditCommentDialogFragment.OnEditCommentListener {
+public class MomentMessageFragment extends BasicFragment implements ITopScrollable, IMomentMessageContract.View, EditCommentDialogFragment.OnEditCommentListener {
 
     @BindView(R2.id.recycler_view)
     RaeRecyclerView mRecyclerView;

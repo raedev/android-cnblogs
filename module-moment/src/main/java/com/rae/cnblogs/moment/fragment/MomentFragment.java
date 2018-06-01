@@ -20,7 +20,7 @@ import com.rae.cnblogs.moment.main.MomentPresenterImpl;
 import com.rae.cnblogs.sdk.api.IMomentApi;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.widget.AppLayout;
-import com.rae.cnblogs.widget.IScrollTopable;
+import com.rae.cnblogs.widget.ITopScrollable;
 import com.rae.cnblogs.widget.PlaceholderView;
 import com.rae.cnblogs.widget.RaeRecyclerView;
 import com.rae.cnblogs.widget.ToolbarToastView;
@@ -35,7 +35,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * 闪存列表
  * Created by ChenRui on 2017/10/27 0027 10:41.
  */
-public class MomentFragment extends BasicFragment implements IMomentContract.View, IScrollTopable {
+public class MomentFragment extends BasicFragment implements IMomentContract.View, ITopScrollable {
 
 
     /**

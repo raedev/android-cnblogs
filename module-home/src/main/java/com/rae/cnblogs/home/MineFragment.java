@@ -20,7 +20,6 @@ import com.rae.cnblogs.home.mine.MinePresenterImpl;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.theme.ThemeCompat;
-import com.rae.cnblogs.widget.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -61,7 +60,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
 
     @Override
     protected int getLayoutId() {
-        return R2.layout.fm_mine;
+        return R.layout.fm_mine;
     }
 
     @Override

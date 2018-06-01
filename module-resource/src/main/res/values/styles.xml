@@ -59,6 +59,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TabTextAppearance.Simple">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="DiscoverTabTextAppearance" parent="TextAppearance.AppCompat.Medium.Inverse">
         <item name="android:textSize">16sp</item>
         <!--兼容夜间模式-->

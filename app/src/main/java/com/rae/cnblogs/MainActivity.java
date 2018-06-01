@@ -1,4 +1,4 @@
-package com.rae.cnblogs.home;
+package com.rae.cnblogs;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -10,13 +10,15 @@ import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.BasicActivity;
+import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.main.MainContract;
@@ -43,8 +45,24 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
+        // 测试登录
+        debugLogin();
         initTab();
         requestPermissions();
+        // 启动服务
+        startService(new Intent(this, CnblogsService.class));
+
+    }
+
+    protected void debugLogin() {
+        String url = "cnblogs.com";
+        String cookie = "257609FA8BD9AB43F07A4B4110DEA5561685E8827D2536EB50CB07E6BD72A852B65E7121C7282323F9689202135E707D72184476D358B429FD5F32F00103BE9C02414571D796E42637836235120D40B4D03C3CC6";
+        String netCoreCookie = "CfDJ8FHXRRtkJWRFtU30nh_M9mAcOtlDEoxNOvReESDtP-LGb9f1uAbknAYX_5g3d2Y-mOtPlu_vqplSTz3mRrRqcUrNE9QYYCP7cqzVzbnLztUF38wiIP6XaW10kl0QvUi_xEdaOv62KWeqYeZMAwtkOqw4H4ark-KBNhDzGAPDG3L0_5ymM3XA8f8RBjbNG5ZDE7bAwIQq3GtI4oX_4rl5uoS2Xw8n36ESUB4tQJ0kdOJf8GeKYdOWoZznhRwmrRiUl_VtGOVryQYV3-8hys11UEodQTYM1MLAL8QhJLp6ZKOAI3UMLQfcHMfKNL7_bZhd5w";
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
+        cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
+        cookieManager.setCookie(url, ".Cnblogs.AspNetCore.Cookies=" + netCoreCookie + "; domain=.cnblogs.com; path=/; HttpOnly");
+        cookieManager.flush();
     }
 
     @Override
@@ -57,9 +75,9 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         RaeFragmentAdapter adapter = new RaeFragmentAdapter(getSupportFragmentManager());
 
         // 初始化TAB
-//        addTab(adapter, R.string.tab_home, R.drawable.tab_home, HomeFragment.newInstance());
-//        addTab(adapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
-//        addTab(adapter, R.string.tab_discover, R.drawable.tab_library, DiscoverFragment.newInstance());
+        addTab(adapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
+        addTab(adapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
+        addTab(adapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newMomentFragment());
         addTab(adapter, R.string.tab_mine, R.drawable.tab_mine, AppRoute.newMineFragment());
 
         mViewPager.setOffscreenPageLimit(adapter.getCount());
@@ -70,7 +88,12 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         mViewPager.addOnPageChangeListener(new RaeTabLayout.TabLayoutOnPageChangeListener(mTabLayout));
     }
 
-    private void addTab(RaeFragmentAdapter adapter, int resId, int iconId, @NonNull Fragment fragment) {
+    private void addTab(RaeFragmentAdapter adapter, int resId, int iconId, Fragment fragment) {
+        if (fragment == null) {
+            Log.e("rae", "初始化首页TAB的Fragment为空！" + getString(resId));
+            return;
+        }
+
         RaeTabLayout.Tab tab = mTabLayout.newTab();
         View tabView = View.inflate(this, R.layout.tab_view, null);
         TextView v = tabView.findViewById(R.id.tv_tab_view);

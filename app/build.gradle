@@ -16,6 +16,11 @@ android {
             abiFilters "x86"
             abiFilters "armeabi-v7a"
         }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
     dexOptions {
         javaMaxHeapSize "2g"
@@ -33,6 +38,7 @@ android {
         debug {
             minifyEnabled false
             debuggable true
+            applicationIdSuffix '.debug'
             signingConfig signingConfigs.release
         }
         release {
@@ -45,11 +51,24 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    annotationProcessor rootProject.ext.annotationProcessors.butterknife
+    annotationProcessor rootProject.ext.annotationProcessors.arouter
     implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.butterknife
+    implementation(rootProject.ext.dependencies.raeSwift, {
+        exclude group: 'com.android.support'
+    })
+    implementation project(':module-resource')
+    implementation project(':module-basic')
+    implementation project(':module-widget')
+    implementation project(':module-sdk')
+    implementation project(':module-middleware')
+
     // 模块化
     if (!IsModule.toBoolean()) {
-        implementation project(':module-resource')
-        implementation project(':module-env')
+        implementation project(':module-user')
         implementation project(':module-home')
+        implementation project(':module-moment')
+        implementation project(':module-blog')
     }
 }

@@ -86,7 +86,6 @@ public class SearchBlogListParser extends BlogListParser {
             m.setLikes(likes);
             m.setBlogType(mBlogType.getTypeName());
 
-            cacheThumbUrls(m);
             result.add(m);
         }
 
@@ -152,8 +151,6 @@ public class SearchBlogListParser extends BlogListParser {
             m.setPostDate(date);
             m.setLikes(likes);
             m.setBlogType(mBlogType.getTypeName());
-
-            cacheThumbUrls(m);
             result.add(m);
         }
 

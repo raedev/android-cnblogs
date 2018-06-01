@@ -6,16 +6,17 @@ import android.widget.TextView;
 
 import com.rae.cnblogs.basic.holder.SimpleViewHolder;
 import com.rae.cnblogs.home.R;
+import com.rae.cnblogs.home.R2;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SystemMessageHolder extends SimpleViewHolder {
-    @BindView(R.id.img_thumb)
+    @BindView(R2.id.img_thumb)
     ImageView mThumbImageView;
-    @BindView(R.id.tv_title)
+    @BindView(R2.id.tv_title)
     TextView mTitleView;
-    @BindView(R.id.tv_date)
+    @BindView(R2.id.tv_date)
     TextView mDateView;
 
     public SystemMessageHolder(View itemView) {

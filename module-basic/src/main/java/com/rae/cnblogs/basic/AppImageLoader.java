@@ -47,20 +47,21 @@ public final class AppImageLoader {
     public static void displayAvatar(@Nullable String url, @Nullable ImageView view, int resId) {
         if (view == null)
             return;
-        if (TextUtils.isEmpty(url)) {
-            view.setImageResource(resId);
-            return;
-        }
 
         Context context = view.getContext();
         if (resId == -1) {
             resId = context.getResources().getIdentifier("default_avatar_placeholder", "drawable", context.getPackageName());
         }
 
+        if (TextUtils.isEmpty(url)) {
+            view.setImageResource(resId);
+            return;
+        }
+
         GlideApp.with(view)
                 .load(url)
-//                .centerCrop()
-                .placeholder(resId)
+                .centerCrop()
+//                .placeholder(resId)
                 .error(resId)
                 // 渐变动画
                 .transition(DrawableTransitionOptions.withCrossFade(300))

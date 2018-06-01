@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.blog.R;
@@ -30,6 +31,7 @@ import butterknife.OnClick;
  * Created by rae on 2018/5/26.
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
+@Route(path = AppRoute.PATH_FRAGMENT_HOME)
 public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.View, RaeTabLayout.OnTabSelectedListener {
 
     public static BlogHomeFragment newInstance() {
@@ -44,7 +46,7 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
     @BindView(R2.id.vp_blog_list)
     ViewPager mViewPager;
 
-    @BindView(R.id.tv_search)
+    @BindView(R2.id.tv_search)
     TextView mSearchView;
 
     private BlogHomeContract.Presenter mPresenter;

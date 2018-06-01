@@ -25,7 +25,7 @@ import com.rae.cnblogs.moment.R2;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IMomentApi;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
-import com.rae.cnblogs.widget.IScrollTopable;
+import com.rae.cnblogs.widget.ITopScrollable;
 import com.rae.cnblogs.widget.RaeViewPager;
 import com.rae.cnblogs.widget.ToolbarToastView;
 
@@ -132,8 +132,8 @@ public class MomentHomeFragment extends BasicFragment {
         // 闪存发布成功，点击返回顶部
         if (type == ToolbarToastView.TYPE_POST_SUCCESS && mAdapter != null && mViewPager.getCurrentItem() >= 0) {
             Fragment momentFragment = mAdapter.getItem(mViewPager.getCurrentItem());
-            if (momentFragment instanceof IScrollTopable) {
-                ((IScrollTopable) momentFragment).scrollToTop();
+            if (momentFragment instanceof ITopScrollable) {
+                ((ITopScrollable) momentFragment).scrollToTop();
             }
         }
         // 提到我的

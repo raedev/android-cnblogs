@@ -4,7 +4,6 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.db.DbBlog;
 import com.rae.cnblogs.sdk.db.DbFactory;
-import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.utils.ApiUtils;
 
 import org.jsoup.nodes.Document;
@@ -45,9 +44,10 @@ public class NewsListParser implements IHtmlParser<List<BlogBean>> {
             m.setAvatar(element.select("topicIcon").text().replace("images0.cnblogs.com/news_topic///", ""));
             m.setBlogType(BlogType.NEWS.getTypeName());
 
-            UserBlogInfo blogInfo = mDbBlog.get(m.getBlogId());
+            // 查询数据库已读状态
+            BlogBean blogInfo = mDbBlog.getBlog(m.getBlogId());
             if (blogInfo != null) {
-                m.setReaded(blogInfo.isRead());
+                m.setIsRead(blogInfo.getIsRead());
             }
 
             result.add(m);

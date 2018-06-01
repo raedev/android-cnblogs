@@ -15,6 +15,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 public class CnblogsApplication extends BasicApplication {
     @Override
     protected void onFirstCreate() {
+        super.onFirstCreate();
         // 主题初始化
         AppThemeManager.init(this);
         // 路由初始化

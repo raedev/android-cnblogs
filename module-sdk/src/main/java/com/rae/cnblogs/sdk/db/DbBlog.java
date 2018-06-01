@@ -8,7 +8,6 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogBeanDao;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.bean.DaoSession;
-import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfoDao;
 
@@ -84,21 +83,13 @@ public class DbBlog {
 
     /**
      * 获取没有内容的列表
-     *
-     * @return
      */
     public List<BlogBean> findAllWithoutBlogContent() {
-        QueryBuilder<BlogBean> builder = mSession.getBlogBeanDao().queryBuilder();
-        builder.join(BlogBeanDao.Properties.BlogId, UserInfoBean.class, UserBlogInfoDao.Properties.BlogId)
-                .where(UserBlogInfoDao.Properties.Content.isNull());
-        return builder.list();
+        return mSession.getBlogBeanDao().queryBuilder().where(BlogBeanDao.Properties.Content.isNull()).list();
     }
 
     /**
      * 获取用户博客信息
-     *
-     * @param blogId
-     * @return
      */
     @Nullable
     public UserBlogInfo get(String blogId) {
@@ -114,7 +105,7 @@ public class DbBlog {
      */
     @Nullable
     public BlogBean getBlog(String blogId) {
-        return mSession.getBlogBeanDao().load(blogId);
+        return mSession.getBlogBeanDao().queryBuilder().where(BlogBeanDao.Properties.BlogId.eq(blogId)).unique();
     }
 
     /**
@@ -126,9 +117,9 @@ public class DbBlog {
     @Nullable
     public String getBlogContent(String blogType, String blogId) {
         // 找到博客信息
-        UserBlogInfo blogInfo = mSession.getUserBlogInfoDao()
+        BlogBean blogInfo = mSession.getBlogBeanDao()
                 .queryBuilder()
-                .where(UserBlogInfoDao.Properties.BlogId.eq(blogId), UserBlogInfoDao.Properties.BlogType.eq(blogType))
+                .where(BlogBeanDao.Properties.BlogId.eq(blogId), BlogBeanDao.Properties.BlogType.eq(blogType))
                 .build()
                 .unique();
 
@@ -218,16 +209,15 @@ public class DbBlog {
     public void updateBlogContent(@NonNull String blogId, @NonNull String blogType, @NonNull String content) {
         try {
             // 找到博客信息
-            UserBlogInfo blogInfo = mSession.getUserBlogInfoDao()
+            BlogBean blogInfo = mSession.getBlogBeanDao()
                     .queryBuilder()
-                    .where(UserBlogInfoDao.Properties.BlogId.eq(blogId), UserBlogInfoDao.Properties.BlogType.eq(blogType))
+                    .where(BlogBeanDao.Properties.BlogId.eq(blogId), BlogBeanDao.Properties.BlogType.eq(blogType))
                     .build()
                     .unique();
 
             if (blogInfo == null) {
-                blogInfo = new UserBlogInfo();
-                blogInfo.setBlogId(blogId);
-                blogInfo.setBlogType(blogType);
+                Log.e("rae", "Update blog content error,because the blog entity not found.");
+                return;
             }
 
             // 写入文件
@@ -245,7 +235,7 @@ public class DbBlog {
             outputStream.close();
             // 保存路径
             blogInfo.setContent(file.getPath());
-            mSession.getUserBlogInfoDao().save(blogInfo);
+            mSession.getBlogBeanDao().save(blogInfo);
         } catch (Exception e) {
             Log.e("cnblogs", "update blog content failed! id is " + blogId, e);
         }

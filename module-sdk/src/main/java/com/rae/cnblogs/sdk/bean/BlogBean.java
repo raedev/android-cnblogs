@@ -55,7 +55,9 @@ public class BlogBean implements Parcelable {
 
     private String thumbUrls; // 预览小图,JSON 格式，比如：["http://img.cnblogs.com/a.jpg","http://img.cnblogs.com/b.jpg"]
 
-    protected boolean isReaded;
+    private boolean isRead; // 是否已读
+
+    private Long updateTime; // 更新阅读时间
 
     /**
      * 博客类型，参考取值{@link BlogType#getTypeName()}
@@ -201,14 +203,6 @@ public class BlogBean implements Parcelable {
         return blogId;
     }
 
-    public boolean isReaded() {
-        return isReaded;
-    }
-
-    public void setReaded(boolean readed) {
-        isReaded = readed;
-    }
-
     public String getCategoryId() {
         return categoryId;
     }
@@ -236,7 +230,6 @@ public class BlogBean implements Parcelable {
             if (mThumbList == null) {
                 mThumbList = new Gson().fromJson(thumbUrls, new TypeToken<List<String>>() {
                 }.getType());
-//                mThumbList = JSON.parseArray(thumbUrls, String.class);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,6 +242,16 @@ public class BlogBean implements Parcelable {
         return super.toString() + "@" + title;
     }
 
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -256,61 +259,63 @@ public class BlogBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.blogId);
         dest.writeString(this.title);
         dest.writeString(this.url);
         dest.writeString(this.avatar);
-//        dest.writeString(this.summary);  //  不传递大数据
+        dest.writeString(this.summary);
         dest.writeString(this.author);
         dest.writeString(this.authorUrl);
         dest.writeString(this.comment);
         dest.writeString(this.views);
         dest.writeString(this.postDate);
-        dest.writeString(this.blogId);
         dest.writeString(this.blogApp);
         dest.writeString(this.tag);
         dest.writeString(this.categoryId);
         dest.writeString(this.thumbUrls);
-        dest.writeByte(this.isReaded ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isRead ? (byte) 1 : (byte) 0);
+        dest.writeValue(this.updateTime);
         dest.writeString(this.blogType);
         dest.writeStringList(this.mThumbList);
-//        dest.writeString(this.content); //  不传递大数据
+        dest.writeString(this.content);
         dest.writeString(this.likes);
     }
 
-    public boolean getIsReaded() {
-        return this.isReaded;
+    public boolean getIsRead() {
+        return this.isRead;
     }
 
-    public void setIsReaded(boolean isReaded) {
-        this.isReaded = isReaded;
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     protected BlogBean(Parcel in) {
+        this.blogId = in.readString();
         this.title = in.readString();
         this.url = in.readString();
         this.avatar = in.readString();
-//        this.summary = in.readString(); //  不传递大数据
+        this.summary = in.readString();
         this.author = in.readString();
         this.authorUrl = in.readString();
         this.comment = in.readString();
         this.views = in.readString();
         this.postDate = in.readString();
-        this.blogId = in.readString();
         this.blogApp = in.readString();
         this.tag = in.readString();
         this.categoryId = in.readString();
         this.thumbUrls = in.readString();
-        this.isReaded = in.readByte() != 0;
+        this.isRead = in.readByte() != 0;
+        this.updateTime = (Long) in.readValue(Long.class.getClassLoader());
         this.blogType = in.readString();
         this.mThumbList = in.createStringArrayList();
-//        this.content = in.readString(); //  不传递大数据
+        this.content = in.readString();
         this.likes = in.readString();
     }
 
-    @Generated(hash = 1946534084)
+    @Generated(hash = 1110720888)
     public BlogBean(String blogId, String title, String url, String avatar, String summary, String author,
                     String authorUrl, String comment, String views, String postDate, String blogApp, String tag,
-                    String categoryId, String thumbUrls, boolean isReaded, String blogType, String content,
+                    String categoryId, String thumbUrls, boolean isRead, Long updateTime, String blogType, String content,
                     String likes) {
         this.blogId = blogId;
         this.title = title;
@@ -326,7 +331,8 @@ public class BlogBean implements Parcelable {
         this.tag = tag;
         this.categoryId = categoryId;
         this.thumbUrls = thumbUrls;
-        this.isReaded = isReaded;
+        this.isRead = isRead;
+        this.updateTime = updateTime;
         this.blogType = blogType;
         this.content = content;
         this.likes = likes;

@@ -36,4 +36,9 @@ public class BookmarksApiTest extends BaseTest {
     public void testDeleteBookmarks() {
         runTest("testDeleteBookmarks", mApi.delBookmarks("3987443"));
     }
+
+    @Test
+    public void testBookmarkTags() {
+        runTest("testBookmarkTags", mApi.getTags());
+    }
 }

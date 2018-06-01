@@ -1,5 +1,6 @@
 package rae.com.cnblogs.sdk;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.CnblogsApiProvider;
 import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.UserProvider;
+import com.rae.cnblogs.sdk.db.DbCnblogs;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -34,18 +36,20 @@ public class BaseTest {
     @Before
     public void setup() {
         mContext = InstrumentationRegistry.getTargetContext();
-        UserProvider.init(mContext);
-//        DbCnblogs.init(mContext);
+        UserProvider.init((Application) mContext.getApplicationContext());
+        DbCnblogs.init(mContext);
         // 模拟已经登录, 需要.CNBlogsCookie和.Cnblogs.AspNetCore.Cookies
         autoLogin();
     }
 
     protected void autoLogin() {
-        String url = "www.cnblogs.com";
+        String url = "wz.cnblogs.com";
+        String cookie = "257609FA8BD9AB43F07A4B4110DEA5561685E8827D2536EB50CB07E6BD72A852B65E7121C7282323F9689202135E707D72184476D358B429FD5F32F00103BE9C02414571D796E42637836235120D40B4D03C3CC6";
+        String netCoreCookie = "CfDJ8FHXRRtkJWRFtU30nh_M9mAcOtlDEoxNOvReESDtP-LGb9f1uAbknAYX_5g3d2Y-mOtPlu_vqplSTz3mRrRqcUrNE9QYYCP7cqzVzbnLztUF38wiIP6XaW10kl0QvUi_xEdaOv62KWeqYeZMAwtkOqw4H4ark-KBNhDzGAPDG3L0_5ymM3XA8f8RBjbNG5ZDE7bAwIQq3GtI4oX_4rl5uoS2Xw8n36ESUB4tQJ0kdOJf8GeKYdOWoZznhRwmrRiUl_VtGOVryQYV3-8hys11UEodQTYM1MLAL8QhJLp6ZKOAI3UMLQfcHMfKNL7_bZhd5w";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
-        cookieManager.setCookie(url, ".CNBlogsCookie=23C783112C89888B509652C2E962F88CF742E008BBD65B72381446683D73615B621C71846010E7A134A78DA4F421DDAC42AA504B70709D67283D0AEBAA274E4CD6D029D6DA9B089048AD24FE5D369F4B7261790536E75A2AC51883F533878D1EE20AA30B; domain=.cnblogs.com; path=/; HttpOnly");
-        cookieManager.setCookie(url, ".Cnblogs.AspNetCore.Cookies=CfDJ8BMYgQprmCpNu7uffp6PrYZAlx7wnnFIHwWOK8_lsJJwLMVz-wlYX9HKRB146BmGnDk4Vt_azop7Ce64ouMrxCne5EjwlIZVp1azwx4ZgnLqOGRTfGEzFDMMpVRmEZ32MZaEBXSAJGl_PsOjdlPEJeAevz_WkwvF3BaD5wkAPQnpGhjnkL4HkN0YE_jztsJkZfaUAYBr6BEjALTy75OOH_7NLiLZmOg0tjodbckftsi4HtjRtHwX2T4imGGEOeC84VdYndayUwNNZVvEbX0nOd2jeHRjWYpr7YzxcgajVhUh; domain=.cnblogs.com; path=/; HttpOnly");
+        cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
+        cookieManager.setCookie(url, ".Cnblogs.AspNetCore.Cookies=" + netCoreCookie + "; domain=.cnblogs.com; path=/; HttpOnly");
         cookieManager.flush();
     }
 
