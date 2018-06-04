@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.RaeTabLayout;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.rae.cnblogs.basic.AppFragmentAdapter;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
@@ -25,12 +27,12 @@ import com.rae.cnblogs.home.main.MainContract;
 import com.rae.cnblogs.home.main.MainPresenterImpl;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
-import com.rae.swift.app.RaeFragmentAdapter;
+import com.rae.cnblogs.widget.ITopScrollable;
 
 import butterknife.BindView;
 
 @Route(path = AppRoute.PATH_APP_HOME)
-public class MainActivity extends BasicActivity implements MainContract.View {
+public class MainActivity extends BasicActivity implements MainContract.View, RaeTabLayout.OnTabSelectedListener {
 
     @BindView(R.id.vp_main)
     ViewPager mViewPager;
@@ -39,6 +41,7 @@ public class MainActivity extends BasicActivity implements MainContract.View {
     RaeTabLayout mTabLayout;
 
     MainContract.Presenter mPresenter;
+    private AppFragmentAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         requestPermissions();
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-
+        AppRoute.routeToWeb(this, "https://www.cnblogs.com");
     }
 
     protected void debugLogin() {
@@ -62,7 +65,9 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
         cookieManager.setCookie(url, ".Cnblogs.AspNetCore.Cookies=" + netCoreCookie + "; domain=.cnblogs.com; path=/; HttpOnly");
-        cookieManager.flush();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookieManager.flush();
+        }
     }
 
     @Override
@@ -72,23 +77,25 @@ public class MainActivity extends BasicActivity implements MainContract.View {
     }
 
     private void initTab() {
-        RaeFragmentAdapter adapter = new RaeFragmentAdapter(getSupportFragmentManager());
+        mAdapter = new AppFragmentAdapter(getSupportFragmentManager());
 
         // 初始化TAB
-        addTab(adapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
-        addTab(adapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
-        addTab(adapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newMomentFragment());
-        addTab(adapter, R.string.tab_mine, R.drawable.tab_mine, AppRoute.newMineFragment());
+        addTab(mAdapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
+        addTab(mAdapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
+        addTab(mAdapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newMomentFragment());
+        addTab(mAdapter, R.string.tab_mine, R.drawable.tab_mine, AppRoute.newMineFragment());
 
-        mViewPager.setOffscreenPageLimit(adapter.getCount());
-        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(mAdapter.getCount());
+        mViewPager.setAdapter(mAdapter);
 
         // 联动
         mTabLayout.addOnTabSelectedListener(new RaeTabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         mViewPager.addOnPageChangeListener(new RaeTabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+
+        mTabLayout.addOnTabSelectedListener(this);
     }
 
-    private void addTab(RaeFragmentAdapter adapter, int resId, int iconId, Fragment fragment) {
+    private void addTab(AppFragmentAdapter adapter, int resId, int iconId, Fragment fragment) {
         if (fragment == null) {
             Log.e("rae", "初始化首页TAB的Fragment为空！" + getString(resId));
             return;
@@ -103,6 +110,31 @@ public class MainActivity extends BasicActivity implements MainContract.View {
         tab.setCustomView(tabView);
         mTabLayout.addTab(tab);
         adapter.add(getString(resId), fragment);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mTabLayout.removeOnTabSelectedListener(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onTabSelected(RaeTabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabUnselected(RaeTabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(RaeTabLayout.Tab tab) {
+        int position = tab.getPosition();
+        Fragment fragment = mAdapter.getCurrent(mViewPager.getId(), position);
+        if (fragment instanceof ITopScrollable) {
+            ((ITopScrollable) fragment).scrollToTop();
+        }
     }
 
 

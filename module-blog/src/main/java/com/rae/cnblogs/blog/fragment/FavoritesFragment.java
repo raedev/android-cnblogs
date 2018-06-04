@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.blog.comm.ContentListContract;
@@ -44,7 +45,21 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment {
             @Override
             public void onItemClick(ContentEntity item) {
                 // 跳转网页
-                AppRoute.routeToWeb(getContext(), item.getUrl());
+                String url = item.getUrl();
+                if (TextUtils.isEmpty(url)) {
+                    UICompat.failed(getContext(), "收藏地址为空");
+                    return;
+                }
+                if (url.contains("news.cnblogs.com") || url.contains("kb.cnblogs.com")) {
+                    // 新闻\知识库跳转网页
+                    AppRoute.routeToWeb(getContext(), url);
+                } else if (url.contains("cnblogs")) {
+                    // 只有博客园的地址才跳到博文详情
+                    AppRoute.newContentDetail(getContext(), url).show(getChildFragmentManager(), "contentDetail");
+                } else {
+                    // 普通网页
+                    AppRoute.routeToWeb(getContext(), url);
+                }
             }
         });
     }

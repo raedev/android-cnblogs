@@ -7,9 +7,11 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.blog.BuildConfig;
 import com.rae.cnblogs.blog.R;
 import com.rae.cnblogs.blog.R2;
@@ -49,6 +51,7 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
 
     @Nullable
     private IBlogDetailFragment mBlogDetailFragment;
+    private WebViewClient mRaeWebViewClient;
 
     public static ContentWebViewFragment newInstance(Bundle args) {
         ContentWebViewFragment fragment = new ContentWebViewFragment();
@@ -198,5 +201,19 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
     @Override
     public ProgressBar getProgressBar() {
         return mProgressBarWeb;
+    }
+
+    @Override
+    public WebViewClient getWebViewClient() {
+        if (mRaeWebViewClient != null) return mRaeWebViewClient;
+        mRaeWebViewClient = new RaeWebViewClient(getProgressBar(), getAppLayout()) {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                AppRoute.routeToWeb(view.getContext(), url);
+                return true;
+            }
+        };
+        return mRaeWebViewClient;
+
     }
 }

@@ -32,7 +32,7 @@ import butterknife.OnClick;
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
 @Route(path = AppRoute.PATH_FRAGMENT_HOME)
-public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.View, RaeTabLayout.OnTabSelectedListener {
+public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.View, RaeTabLayout.OnTabSelectedListener, ITopScrollable {
 
     public static BlogHomeFragment newInstance() {
         return new BlogHomeFragment();
@@ -136,9 +136,9 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
     /**
      * 滚动到顶部
      */
-    private void scrollToTop() {
-        int currentItem = mViewPager.getCurrentItem();
-        Fragment fragment = mAdapter.getFragment(currentItem, R.id.vp_blog_list);
+    @Override
+    public void scrollToTop() {
+        Fragment fragment = mAdapter.getCurrent(mViewPager.getId(), mViewPager.getCurrentItem());
         if (fragment instanceof ITopScrollable) {
             ((ITopScrollable) fragment).scrollToTop();
         }

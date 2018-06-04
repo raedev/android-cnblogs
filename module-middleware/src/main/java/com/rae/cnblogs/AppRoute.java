@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -110,6 +111,10 @@ public final class AppRoute {
      * 浏览记录
      */
     public static final String PATH_BLOG_HISTORY = "/blog/history";
+    /**
+     * 博文中转
+     */
+    public static final String PATH_BLOG_ROUTE = "/blog/route";
 
     /**
      * 博客首页
@@ -192,6 +197,7 @@ public final class AppRoute {
                 .navigation(context);
     }
 
+
     /**
      * 网页
      *
@@ -230,7 +236,6 @@ public final class AppRoute {
         ARouter.getInstance().build(PATH_APP_HOME)
                 .withFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
                         | Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
-                        | Intent.FLAG_ACTIVITY_SINGLE_TOP
                         | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .navigation(context);
     }
@@ -554,5 +559,16 @@ public final class AppRoute {
 
     public static Fragment newHomeFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_HOME).navigation();
+    }
+
+    /**
+     * 博客正文界面
+     *
+     * @param url 博客地址
+     */
+    public static DialogFragment newContentDetail(Context context, String url) {
+        return (DialogFragment) ARouter.getInstance().build(PATH_BLOG_ROUTE)
+                .withString("url", url)
+                .navigation(context);
     }
 }

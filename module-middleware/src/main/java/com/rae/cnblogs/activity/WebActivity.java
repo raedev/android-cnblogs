@@ -63,7 +63,7 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
     }
 
     protected WebViewFragment getWebViewFragment(String url) {
-        return WebViewFragment.newInstance(url);
+        return WebViewFragment.newInstance(url, getIntent().getStringExtra("from"));
     }
 
     @Nullable

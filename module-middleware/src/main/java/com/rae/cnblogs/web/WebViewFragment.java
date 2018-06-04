@@ -23,6 +23,7 @@ import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.middleware.BuildConfig;
 import com.rae.cnblogs.middleware.R;
 import com.rae.cnblogs.theme.ThemeCompat;
+import com.rae.cnblogs.web.client.AppJavaScript;
 import com.rae.cnblogs.web.client.RaeJavaScriptBridge;
 import com.rae.cnblogs.web.client.RaeWebChromeClient;
 import com.rae.cnblogs.web.client.RaeWebViewClient;
@@ -73,7 +74,7 @@ public class WebViewFragment extends BasicFragment {
         mContentLayout.addView(mWebView);
 
 
-        mJavaScriptApi = new RaeJavaScriptBridge(getContext());
+        mJavaScriptApi = new AppJavaScript(getContext(), getChildFragmentManager(), getFrom());
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDisplayZoomControls(false);
@@ -144,10 +145,10 @@ public class WebViewFragment extends BasicFragment {
         super.onDestroy();
     }
 
-    public static WebViewFragment newInstance(String url) {
-
+    public static WebViewFragment newInstance(String url, String from) {
         Bundle args = new Bundle();
         args.putString("url", url);
+        args.putString("from", from);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(args);
         return fragment;
@@ -182,6 +183,10 @@ public class WebViewFragment extends BasicFragment {
 
     public String getUrl() {
         return mWebView.getUrl();
+    }
+
+    private String getFrom() {
+        return getArguments() == null ? null : getArguments().getString("from");
     }
 
     public RaeWebView getWebView() {

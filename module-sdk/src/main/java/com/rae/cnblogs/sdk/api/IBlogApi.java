@@ -8,6 +8,8 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
 import com.rae.cnblogs.sdk.parser.BlogCommentParser;
 import com.rae.cnblogs.sdk.parser.BlogContentParser;
+import com.rae.cnblogs.sdk.parser.BlogContentSourceParser;
+import com.rae.cnblogs.sdk.parser.BlogInfoParser;
 import com.rae.cnblogs.sdk.parser.BlogListParser;
 import com.rae.cnblogs.sdk.parser.BlogOpenStatusParser;
 import com.rae.cnblogs.sdk.parser.KBContentParser;
@@ -24,12 +26,22 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * 博客相关API
  * Created by ChenRui on 2016/11/28 23:34.
  */
 public interface IBlogApi {
+
+    /**
+     * 根据链接获取博客信息
+     *
+     * @param url 链接地址
+     */
+    @GET
+    @Parser(BlogInfoParser.class)
+    Observable<BlogBean> getBlog(@Url String url);
 
     /**
      * 获取分类博客列表
@@ -51,6 +63,15 @@ public interface IBlogApi {
     @GET(ApiUrls.API_BLOG_CONTENT)
     @Parser(BlogContentParser.class)
     Observable<String> getBlogContent(@Path("id") String id);
+
+    /**
+     * 从原文中获取博文内容
+     *
+     * @param url 原文地址
+     */
+    @GET
+    @Parser(BlogContentSourceParser.class)
+    Observable<String> getBlogContentSource(@Url String url);
 
 
     /**

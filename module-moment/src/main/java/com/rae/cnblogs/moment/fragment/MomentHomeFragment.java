@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -44,7 +44,7 @@ import butterknife.OnClick;
  * Created by ChenRui on 2017/10/26 0026 23:31.
  */
 @Route(path = AppRoute.PATH_FRAGMENT_MOMENT)
-public class MomentHomeFragment extends BasicFragment {
+public class MomentHomeFragment extends BasicFragment implements ITopScrollable {
 
     public static MomentHomeFragment newInstance() {
         return new MomentHomeFragment();
@@ -150,6 +150,14 @@ public class MomentHomeFragment extends BasicFragment {
         }
     }
 
+    @Override
+    public void scrollToTop() {
+        Fragment fragment = mAdapter.getCurrent(mViewPager.getId(), mViewPager.getCurrentItem());
+        if (fragment instanceof ITopScrollable) {
+            ((ITopScrollable) fragment).scrollToTop();
+        }
+    }
+
     public void showToast(int type, String msg) {
         mToastView.setType(type);
         mToastView.show(msg);
@@ -159,12 +167,14 @@ public class MomentHomeFragment extends BasicFragment {
         mToastView.dismiss();
     }
 
-    public static class MomentHomeFragmentAdapter extends FragmentStatePagerAdapter {
+    public static class MomentHomeFragmentAdapter extends FragmentPagerAdapter {
 
         private final List<MomentFragment> mFragments = new ArrayList<>();
+        private final FragmentManager mFragmentManager;
 
         MomentHomeFragmentAdapter(FragmentManager fm) {
             super(fm);
+            mFragmentManager = fm;
             mFragments.add(MomentFragment.newInstance(IMomentApi.MOMENT_TYPE_ALL));
             mFragments.add(MomentFragment.newInstance(IMomentApi.MOMENT_TYPE_FOLLOWING));
             mFragments.add(MomentFragment.newInstance(IMomentApi.MOMENT_TYPE_MY));
@@ -178,6 +188,10 @@ public class MomentHomeFragment extends BasicFragment {
         @Override
         public int getCount() {
             return Rx.getCount(mFragments);
+        }
+
+        public Fragment getCurrent(int viewId, int position) {
+            return mFragmentManager.findFragmentByTag("android:switcher:" + viewId + ":" + position);
         }
     }
 
@@ -201,6 +215,7 @@ public class MomentHomeFragment extends BasicFragment {
         @Override
         public void onTabReselected(RaeTabLayout.Tab tab) {
             onTabSelected(tab);
+            scrollToTop();
         }
     }
 

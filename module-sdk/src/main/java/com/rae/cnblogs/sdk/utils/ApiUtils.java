@@ -99,11 +99,15 @@ public final class ApiUtils {
     }
 
 
+    /**
+     * 获取最后匹配的数字
+     */
     public static String getNumber(String text) {
         if (TextUtils.isEmpty(text)) return text;
         Matcher matcher = Pattern.compile("\\d+").matcher(text);
-        if (matcher.find()) {
-            return matcher.group();
+
+        while (matcher.find()) {
+            text = matcher.group();
         }
         return text;
     }
@@ -217,5 +221,10 @@ public final class ApiUtils {
                 return text;
         }
         return text;
+    }
+
+    public static String subString(String text, int count) {
+        if (TextUtils.isEmpty(text) || text.length() < count) return text;
+        return text.substring(0, count);
     }
 }

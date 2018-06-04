@@ -54,8 +54,8 @@ public class BlogHomeFragmentAdapter extends FragmentPagerAdapter {
     }
 
     @Nullable
-    public Fragment getFragment(int index, int viewPagerId) {
-        return mFragmentManager.findFragmentByTag("android:switcher:" + viewPagerId + ":" + index);
+    public Fragment getCurrent(int viewId, int position) {
+        return mFragmentManager.findFragmentByTag("android:switcher:" + viewId + ":" + position);
     }
 
     public void setDataList(List<CategoryBean> dataList) {

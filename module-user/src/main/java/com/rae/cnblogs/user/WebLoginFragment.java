@@ -127,6 +127,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         return mRaeWebViewClient;
     }
 
+
     @Override
     public void onUserLicense() {
         // 不用处理

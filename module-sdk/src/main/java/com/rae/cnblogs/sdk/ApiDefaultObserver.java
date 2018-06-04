@@ -48,6 +48,9 @@ public abstract class ApiDefaultObserver<T> extends DisposableObserver<T> {
                 clearLoginToken();
                 onLoginExpired();
                 return;
+            } else if (ex.code() == 404) {
+                onError("没找到页面0x404");
+                return;
             } else if (ex.code() == 503) {
                 onError("服务器拒绝连接0x503");
                 return;
@@ -55,7 +58,7 @@ public abstract class ApiDefaultObserver<T> extends DisposableObserver<T> {
                 onError("服务器发生错误0x" + ex.code());
                 return;
             } else {
-                onError("网络连接错误，请检查网络连接");
+                onError("请求错误，状态码0x" + ex.code());
                 return;
             }
         }

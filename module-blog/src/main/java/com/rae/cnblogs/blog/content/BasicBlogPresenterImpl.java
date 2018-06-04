@@ -3,6 +3,7 @@ package com.rae.cnblogs.blog.content;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.rae.cnblogs.ContentEntityConverter;
 import com.rae.cnblogs.PageObservable;
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.ContentEntity;
@@ -82,21 +83,8 @@ public abstract class BasicBlogPresenterImpl extends BasicPresenter<ContentListC
      */
     protected List<ContentEntity> convertEntity(List<BlogBean> data) {
         for (BlogBean b : data) {
-            ContentEntity m = new ContentEntity();
-            mDataList.add(m);
-            m.setType(mBlogType.getTypeName());
-            m.setId(b.getBlogId());
-            m.setAuthor(b.getAuthor());
-            m.setAvatar(b.getAvatar());
-            m.setTitle(b.getTitle());
-            m.setSummary(b.getSummary());
-            m.setDate(b.getPostDate());
-            m.setViewCount(b.getViews());
-            m.setCommentCount(b.getComment());
-            m.setLikeCount(b.getLikes());
-            m.setAuthorId(b.getBlogApp());
-            m.setUrl(b.getUrl());
-            m.setThumbs((ArrayList<String>) b.getThumbs());
+            b.setBlogType(mBlogType.getTypeName());
+            mDataList.add(ContentEntityConverter.convert(b));
         }
         return mDataList;
     }

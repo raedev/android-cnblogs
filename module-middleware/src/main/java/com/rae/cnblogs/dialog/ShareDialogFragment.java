@@ -414,6 +414,7 @@ public class ShareDialogFragment extends BasicDialogFragment {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setData(Uri.parse("cnblogs://web"));
         intent.putExtra("url", getUrl());
+        intent.putExtra("from", "blog");
         ResolveInfo resolveInfo = getContext().getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
         if (resolveInfo != null) {
             getContext().startActivity(intent);

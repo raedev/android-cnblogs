@@ -1,7 +1,6 @@
 <resources>
     <dimen name="tab_height">52dp</dimen>
     <dimen name="action_bar_height">52dp</dimen>
-    <dimen name="web_action_bar_height">56dp</dimen>
     <dimen name="tab_home_height">48dp</dimen>
     <dimen name="h1">16sp</dimen>
     <dimen name="h2">14sp</dimen>

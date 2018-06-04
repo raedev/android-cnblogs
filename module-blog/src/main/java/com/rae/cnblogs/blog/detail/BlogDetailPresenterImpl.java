@@ -1,6 +1,7 @@
 package com.rae.cnblogs.blog.detail;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicPresenter;
@@ -103,9 +104,6 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
             return;
         }
 
-        // 初始化接口
-        if (mBookmarksApi == null)
-            mBookmarksApi = CnblogsApiFactory.getInstance(getContext()).getBookmarksApi();
 
         if (selected) {
             // 不支持取消收藏
@@ -113,7 +111,13 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
             return;
         }
 
+        // 初始化接口
+        if (mBookmarksApi == null) {
+            mBookmarksApi = CnblogsApiFactory.getInstance(getContext()).getBookmarksApi();
+        }
+
         ContentEntity entity = getView().getContentEntity();
+        assert mBookmarksApi != null;
         AndroidObservable.create(mBookmarksApi
                 .addBookmarks(
                         entity.getTitle(),
@@ -269,6 +273,7 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
     private Observable<String> fetchContentSource() {
 
         String id = getView().getContentEntity().getId();
+        String url = getView().getContentEntity().getUrl();
 
         // 数据源1： 本地数据库
         Observable<String> local = Observable
@@ -291,46 +296,68 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                 .map(new Function<String, String>() {
                     @Override
                     public String apply(String content) {
+                        // 博文内容接口也没有返回内容
+                        if (TextUtils.isEmpty(content))
+                            return null;
+
                         updateContent(content);
                         return content;
                     }
 
-                    /**
-                     * 异步更新博客内容
-                     * @param content 内容
-                     */
-                    private void updateContent(String content) {
+                })
+                // 返回为空默认返回空的观察者
+                .onErrorResumeNext(Observable.<String>empty());
 
-                        // 缓存内容
-                        final String[] data = new String[]{
-                                getView().getContentEntity().getId(),
-                                getView().getContentEntity().getType(),
-                                content
-                        };
-
-                        Observable
-                                .just(data)
-                                .subscribeOn(Schedulers.newThread())
-                                .subscribe(new DefaultObserver<String[]>() {
-                                    @Override
-                                    public void onNext(String[] value) {
-                                        DbFactory.getInstance()
-                                                .getBlog()
-                                                .updateBlogContent(data[0], data[1], data[2]);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-
-                                    }
-                                });
+        // 数据源3： 从原文地址获取
+        Observable<String> source = mBlogApi
+                .getBlogContentSource(url)
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String content) {
+                        updateContent(content);
+                        return content;
                     }
                 });
-        return Observable.concat(local, network);
+
+
+        return Observable.concat(local, network, source);
+    }
+
+
+    /**
+     * 异步更新博客内容
+     *
+     * @param content 内容
+     */
+    private void updateContent(String content) {
+
+        // 缓存内容
+        final String[] data = new String[]{
+                getView().getContentEntity().getId(),
+                getView().getContentEntity().getType(),
+                content
+        };
+
+        Observable
+                .just(data)
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(new DefaultObserver<String[]>() {
+                    @Override
+                    public void onNext(String[] value) {
+                        DbFactory.getInstance()
+                                .getBlog()
+                                .updateBlogContent(data[0], data[1], data[2]);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

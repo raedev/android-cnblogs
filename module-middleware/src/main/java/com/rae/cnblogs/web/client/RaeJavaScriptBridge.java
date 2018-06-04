@@ -76,4 +76,17 @@ public class RaeJavaScriptBridge {
         }
     }
 
+    protected Context getContext() {
+        return mReference.get();
+    }
+
+
+    public String getString(int resId) {
+        return getContext().getString(resId);
+    }
+
+
+    public String getString(int resId, Object... args) {
+        return getContext().getString(resId, args);
+    }
 }

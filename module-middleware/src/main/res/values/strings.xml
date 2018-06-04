@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">module-env</string>
+    <string name="tips_web_blog_route">已为你优化了《%s》的阅读界面，是否查看优化后的界面？</string>
 </resources>

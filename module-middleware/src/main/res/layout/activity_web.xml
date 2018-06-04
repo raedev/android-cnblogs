@@ -11,7 +11,7 @@
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/web_action_bar_height" />
+        android:layout_marginTop="@dimen/action_bar_height" />
 
     <!--夜间模式遮罩层-->
     <View
@@ -21,7 +21,7 @@
         android:background="#90000000"
         android:visibility="gone" />
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/tab_channel_background">

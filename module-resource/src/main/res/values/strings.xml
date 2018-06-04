@@ -158,4 +158,6 @@
     <string name="tips_clean_cache">将清理所有博客以及离线缓存数据，是否确定清除？</string>
     <string name="clean_now">立即清除</string>
     <string name="tips_comment_empty_blog_app">很抱歉，博主还没有开通博客功能</string>
+    <string name="default_image_desc">正在加载</string>
+    <string name="loading_blog_content">加载博客中</string>
 </resources>

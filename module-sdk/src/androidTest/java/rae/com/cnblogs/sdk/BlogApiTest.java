@@ -28,6 +28,14 @@ public class BlogApiTest extends BaseTest {
      * 获取分类
      */
     @Test
+    public void testBlogInfo() {
+        runTest("testBlogInfo", mApi.getBlog("https://www.cnblogs.com/zx3180/p/9121204.html"));
+    }
+
+    /**
+     * 获取分类
+     */
+    @Test
     public void testCategory() {
         ICategoryApi api = getApiProvider().getCategoriesApi();
         runTest("testCategory", api.getCategories());

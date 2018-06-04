@@ -37,6 +37,10 @@ public class DbBlog {
         mSession = DbCnblogs.getSession();
     }
 
+    public void add(BlogBean data) {
+        mSession.getBlogBeanDao().insertOrReplace(data);
+    }
+
     /**
      * 批量添加博客，默认把分类Id都设置成为传入的分类参数
      *

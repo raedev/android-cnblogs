@@ -68,6 +68,10 @@ public class RaeWebViewClient extends WebViewClient {
             at.setTitle(view.getTitle());
             injectJavascriptFromAssets(view, "js/rae.js");
         }
+
+        // 传递HTML文本回调到本地接口
+        String method = "app.setHtml(document.getElementsByTagName(\"html\")[0].innerHTML);";
+        injectJavascript(view, method);
     }
 
 
@@ -82,6 +86,7 @@ public class RaeWebViewClient extends WebViewClient {
         showEmpty(view, failingUrl);
         view.stopLoading();
     }
+
 
     private void showEmpty(WebView view, String url) {
         // fix bug #643
