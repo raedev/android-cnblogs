@@ -18,8 +18,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
-
 /**
  * Created by rae on 2018/6/4.
  * Copyright (c) https://github.com/raedev All rights reserved.
@@ -55,25 +53,21 @@ public class AppJavaScript extends RaeJavaScriptBridge {
             return;
         }
         BlogInfoParser blogInfoParser = new BlogInfoParser();
-        try {
-            BlogBean blogBean = blogInfoParser.parse(document, html);
-            final ContentEntity entity = ContentEntityConverter.convert(blogBean);
-            // 是博文页面
-            new DefaultDialogFragment.Builder()
-                    .cancelable(true)
-                    .message(getString(R.string.tips_web_blog_route, title))
-                    .confirmText(getString(R.string.view_now))
-                    .confirm(new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            AppRoute.routeToContentDetail(getContext(), entity);
-                        }
-                    })
-                    .show(mFragmentManager);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        BlogBean blogBean = blogInfoParser.parse(document, html);
+        final ContentEntity entity = ContentEntityConverter.convert(blogBean);
+        // 是博文页面
+        new DefaultDialogFragment.Builder()
+                .cancelable(true)
+                .message(getString(R.string.tips_web_blog_route, title))
+                .confirmText(getString(R.string.view_now))
+                .confirm(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        AppRoute.routeToContentDetail(getContext(), entity);
+                    }
+                })
+                .show(mFragmentManager);
     }
 
 }
