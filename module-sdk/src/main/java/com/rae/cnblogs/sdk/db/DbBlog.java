@@ -79,6 +79,20 @@ public class DbBlog {
     }
 
     /**
+     * 获取浏览记录
+     */
+    public List<BlogBean> getRecentHistory(int page) {
+
+        return mSession.getBlogBeanDao()
+                .queryBuilder()
+                .where(BlogBeanDao.Properties.IsRead.eq(true))
+                .limit(20)
+                .offset(Math.max(0, page - 1) * 20)
+                .orderDesc(BlogBeanDao.Properties.UpdateTime)
+                .list();
+    }
+
+    /**
      * 查询所有博客数据
      */
     public List<BlogBean> findAll() {

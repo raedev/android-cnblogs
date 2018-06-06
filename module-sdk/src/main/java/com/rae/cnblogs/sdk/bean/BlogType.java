@@ -59,4 +59,14 @@ public enum BlogType {
         }
         return BlogType.UNKNOWN;
     }
+
+
+    public String getDisplayName() {
+        if (this == NEWS) {
+            return "新闻";
+        } else if (this == KB) {
+            return "知识库";
+        }
+        return "博客";
+    }
 }

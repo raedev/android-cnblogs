@@ -15,14 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_back" />
 
         <ImageView
             android:id="@+id/img_action_bar_more"

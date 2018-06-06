@@ -23,7 +23,7 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
 
     public interface onItemClickListener<T> {
 
-        void onItemClick(T item);
+        void onItemClick(Context context, T item);
     }
 
     private List<T> mDataList;
@@ -69,7 +69,7 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(dataItem);
+                mOnItemClickListener.onItemClick(v.getContext(), dataItem);
             }
         });
     }

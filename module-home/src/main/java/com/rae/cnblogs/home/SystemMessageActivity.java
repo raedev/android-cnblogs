@@ -1,5 +1,6 @@
 package com.rae.cnblogs.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -44,7 +45,7 @@ public class SystemMessageActivity extends SwipeBackBasicActivity implements Sys
 
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<SystemMessageBean>() {
             @Override
-            public void onItemClick(SystemMessageBean item) {
+            public void onItemClick(Context context, SystemMessageBean item) {
                 AppRoute.routeToWeb(getContext(), item.getUrl());
             }
         });

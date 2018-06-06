@@ -41,8 +41,13 @@ public class BlogListParser implements IHtmlParser<List<BlogBean>> {
         if (blog == null) {
             return;
         }
+
+        // 以下是需要同步的字段
         m.setIsRead(blog.getIsRead()); // 设置已读状态
         m.setThumbUrls(blog.getThumbUrls()); // 设置博客图片
+        m.setUpdateTime(blog.getUpdateTime()); // 阅读时间
+        m.setContent(blog.getContent()); // 内容保存路径
+
         if (TextUtils.isEmpty(blog.getThumbUrls())) {
             // 解析图片地址
             String content = dbBlog.getBlogContent(m.getBlogType(), m.getBlogId());

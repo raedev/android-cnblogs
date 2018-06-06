@@ -1,5 +1,6 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -146,7 +147,7 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
         // 点击跳转都详情
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<ContentEntity>() {
             @Override
-            public void onItemClick(ContentEntity item) {
+            public void onItemClick(Context context, ContentEntity item) {
                 AppRoute.routeToContentDetail(getContext(), item);
             }
         });

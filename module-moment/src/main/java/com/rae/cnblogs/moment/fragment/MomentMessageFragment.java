@@ -1,5 +1,6 @@
 package com.rae.cnblogs.moment.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -72,7 +73,7 @@ public class MomentMessageFragment extends BasicFragment implements ITopScrollab
         mAdapter = new MomentMessageAdapter();
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<MomentCommentBean>() {
             @Override
-            public void onItemClick(MomentCommentBean item) {
+            public void onItemClick(Context context, MomentCommentBean item) {
                 // 弹出回复对话框
                 EditCommentDialogFragment.Entry<MomentCommentBean> entry = new EditCommentDialogFragment.Entry<>();
                 entry.setAuthorName(item.getAuthorName());

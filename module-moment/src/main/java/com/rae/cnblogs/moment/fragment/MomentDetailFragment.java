@@ -1,5 +1,6 @@
 package com.rae.cnblogs.moment.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -129,7 +130,7 @@ public class MomentDetailFragment extends BasicFragment implements IMomentDetail
         mAdapter.setOnFollowClickListener(mOnFollowClickListener);
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<MomentCommentBean>() {
             @Override
-            public void onItemClick(MomentCommentBean item) {
+            public void onItemClick(Context context, MomentCommentBean item) {
                 if (item == null) {
                     UICompat.failed(getContext(), "数据为空");
                     return;

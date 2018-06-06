@@ -102,7 +102,7 @@ public class BlogBean implements Parcelable {
     private String content;
 
     public String getLikes() {
-        return likes;
+        return TextUtils.isEmpty(likes) ? "0" : likes;
     }
 
     public void setLikes(String likes) {
@@ -160,7 +160,7 @@ public class BlogBean implements Parcelable {
     }
 
     public String getComment() {
-        return comment;
+        return TextUtils.isEmpty(comment) ? "0" : comment;
     }
 
     public void setComment(String comment) {
@@ -168,7 +168,7 @@ public class BlogBean implements Parcelable {
     }
 
     public String getViews() {
-        return views;
+        return TextUtils.isEmpty(views) ? "0" : views;
     }
 
     public void setViews(String views) {

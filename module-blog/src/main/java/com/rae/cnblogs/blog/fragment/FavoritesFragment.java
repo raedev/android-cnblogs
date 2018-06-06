@@ -1,5 +1,6 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -43,7 +44,7 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment {
         super.onActivityCreated(savedInstanceState);
         getAdapter().setOnItemClickListener(new BaseItemAdapter.onItemClickListener<ContentEntity>() {
             @Override
-            public void onItemClick(ContentEntity item) {
+            public void onItemClick(Context context, ContentEntity item) {
                 // 跳转网页
                 String url = item.getUrl();
                 if (TextUtils.isEmpty(url)) {

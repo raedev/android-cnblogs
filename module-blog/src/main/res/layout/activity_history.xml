@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.FitWindowsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.rae.cnblogs.widget.AppLayout
+        android:id="@+id/app_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/action_bar_height">
+
+        <com.rae.cnblogs.widget.PlaceholderView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.rae.cnblogs.widget.RaeRecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.rae.cnblogs.widget.PlaceholderView>
+    </com.rae.cnblogs.widget.AppLayout>
+
+    <include layout="@layout/basic_toolbar" />
+
+</android.support.v7.widget.FitWindowsFrameLayout>

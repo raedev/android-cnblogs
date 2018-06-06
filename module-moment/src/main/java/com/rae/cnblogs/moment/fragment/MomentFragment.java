@@ -1,5 +1,6 @@
 package com.rae.cnblogs.moment.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -98,7 +99,7 @@ public class MomentFragment extends BasicFragment implements IMomentContract.Vie
         });
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<MomentBean>() {
             @Override
-            public void onItemClick(MomentBean item) {
+            public void onItemClick(Context context, MomentBean item) {
                 if (item != null)
                     AppRoute.routeToMomentDetail(getContext(), item);
             }

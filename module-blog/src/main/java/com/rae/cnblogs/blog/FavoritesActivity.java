@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
+import com.rae.cnblogs.basic.Rx;
 import com.rae.cnblogs.blog.adapter.FavoriteFragmentAdapter;
 import com.rae.cnblogs.blog.favorite.FavoriteContract;
 import com.rae.cnblogs.blog.favorite.FavoritePresenterImpl;
@@ -59,6 +61,12 @@ public class FavoritesActivity extends SwipeBackBasicActivity implements RaeTabL
 
     @Override
     public void onLoadTags(List<TagBean> data) {
+        // 没有任何标签
+        if (Rx.getCount(data) <= 0) {
+            mTabLayout.setVisibility(View.GONE);
+        } else {
+            mTabLayout.setVisibility(View.VISIBLE);
+        }
         // 添加一个全部
         data.add(0, new TagBean("全部"));
         mAdapter.setDataList(data);

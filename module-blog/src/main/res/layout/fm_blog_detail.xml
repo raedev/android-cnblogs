@@ -21,11 +21,19 @@
         android:paddingLeft="@dimen/default_margin"
         android:paddingRight="@dimen/default_margin">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/ic_back" />
+
         <Button
             android:id="@+id/tv_edit_comment"
             android:layout_width="180dp"
             android:layout_height="30dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="12dp"
             android:background="@drawable/bg_write_comment"
             android:gravity="left|center"
             android:paddingLeft="21dp"

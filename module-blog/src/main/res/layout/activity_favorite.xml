@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
+            android:visibility="gone"
             app:tabBackground="@android:color/transparent"
             app:tabContentStart="0dp"
             app:tabGravity="center"

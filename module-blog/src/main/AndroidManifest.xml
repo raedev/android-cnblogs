@@ -12,6 +12,9 @@
         <activity
             android:name=".FavoritesActivity"
             android:label="@string/my_favorites" />
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/history" />
 
         <service
             android:name=".CnblogsService"

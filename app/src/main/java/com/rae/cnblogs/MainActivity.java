@@ -54,8 +54,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         requestPermissions();
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-        AppRoute.routeToWeb(this, "https://www.cnblogs.com");
     }
+
 
     protected void debugLogin() {
         String url = "cnblogs.com";

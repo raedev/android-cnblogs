@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rae.cnblogs.AppRoute;
@@ -44,12 +42,12 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         EditCommentDialogFragment.OnEditCommentListener,
         ShareDialogFragment.OnShareListener {
 
-    // 返回按钮
-    @Nullable
-    private ImageView mBackView;
-    // 更多按钮
-    @Nullable
-    private ImageView mMoreView;
+//    // 返回按钮
+//    @Nullable
+//    private ImageView mBackView;
+//    // 更多按钮
+//    @Nullable
+//    private ImageView mMoreView;
 
     @BindView(R2.id.tv_like_badge)
     TextView mLikeView;
@@ -107,10 +105,10 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         super.onActivityCreated(savedInstanceState);
         FragmentActivity activity = getActivity();
         // 找父类的控件
-        if (activity != null) {
-            mBackView = activity.findViewById(R.id.back);
-            mMoreView = activity.findViewById(R.id.img_action_bar_more);
-        }
+//        if (activity != null) {
+//            mBackView = activity.findViewById(R.id.back);
+//            mMoreView = activity.findViewById(R.id.img_action_bar_more);
+//        }
 
 
         // 评论角标
@@ -297,22 +295,22 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
      */
     @Override
     public void onScrollChange(int x, int y, int oldX, int oldY) {
-        if (mBackView == null || mMoreView == null || getContext() == null) return;
-        final int transparentId = ContextCompat.getColor(getContext(), android.R.color.transparent);
-        if (y <= 0) {
-            // 显示默认的
-            mBackView.setBackgroundColor(transparentId);
-            mMoreView.setBackgroundColor(transparentId);
-            mBackView.setImageResource(R.drawable.ic_back);
-            mMoreView.setImageResource(R.drawable.ic_action_bar_more);
-        } else {
-            //  显示圆圈的
-            int bgResId = R.drawable.bg_blog_content_back;
-            mBackView.setBackgroundResource(bgResId);
-            mMoreView.setBackgroundResource(bgResId);
-            mBackView.setImageResource(R.drawable.ic_back_white);
-            mMoreView.setImageResource(R.drawable.ic_blog_content_more);
-        }
+//        if (mBackView == null || mMoreView == null || getContext() == null) return;
+//        final int transparentId = ContextCompat.getColor(getContext(), android.R.color.transparent);
+//        if (y <= 0) {
+//            // 显示默认的
+//            mBackView.setBackgroundColor(transparentId);
+//            mMoreView.setBackgroundColor(transparentId);
+//            mBackView.setImageResource(R.drawable.ic_back);
+//            mMoreView.setImageResource(R.drawable.ic_action_bar_more);
+//        } else {
+//            //  显示圆圈的
+//            int bgResId = R.drawable.bg_blog_content_back;
+//            mBackView.setBackgroundResource(bgResId);
+//            mMoreView.setBackgroundResource(bgResId);
+//            mBackView.setImageResource(R.drawable.ic_back_white);
+//            mMoreView.setImageResource(R.drawable.ic_blog_content_more);
+//        }
     }
 
     /**
@@ -360,6 +358,13 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
                 .newInstance(EditCommentDialogFragment.FROM_TYPE_BLOG, null);
         mEditCommentDialogFragment = fragment;
         fragment.show(getChildFragmentManager(), "comment");
+    }
+
+    @OnClick(R2.id.back)
+    public void onBackClick() {
+        FragmentActivity activity = getActivity();
+        if (activity != null)
+            activity.finish();
     }
 
     /**

@@ -231,9 +231,12 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                 .subscribe(new DefaultEmptyObserver<ContentEntity>() {
                     @Override
                     public void onNext(ContentEntity contentEntity) {
-                        // TODO :更新数据库
                         DbBlog dbBlog = DbFactory.getInstance().getBlog();
-
+                        BlogBean blog = dbBlog.getBlog(contentEntity.getId());
+                        if (blog == null) return;
+                        blog.setIsRead(true); // 已阅读
+                        blog.setUpdateTime(System.currentTimeMillis()); // 阅读时间
+                        dbBlog.updateBlog(blog);
                     }
                 });
 
@@ -284,10 +287,12 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                     public String apply(String id) {
                         // 根据ID和类型获取博文内容
                         String type = getView().getContentEntity().getType();
-                        return mDbBlog.getBlogContent(type, id);
+                        String content = mDbBlog.getBlogContent(type, id);
+                        if (TextUtils.isEmpty(content)) return null;
+                        return content;
                     }
                 })
-                // 返回为空默认返回空的观察者
+                // 返回为空默认返回空的观察者，执行下个观察者
                 .onErrorResumeNext(Observable.<String>empty());
 
         // 数据源2： 网络数据
@@ -305,7 +310,6 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                     }
 
                 })
-                // 返回为空默认返回空的观察者
                 .onErrorResumeNext(Observable.<String>empty());
 
         // 数据源3： 从原文地址获取
@@ -320,7 +324,7 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                 });
 
 
-        return Observable.concat(local, network, source);
+        return Observable.concat(local, network, source).take(1);
     }
 
 
@@ -330,6 +334,8 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
      * @param content 内容
      */
     private void updateContent(String content) {
+
+        if (TextUtils.isEmpty(content)) return;
 
         // 缓存内容
         final String[] data = new String[]{
