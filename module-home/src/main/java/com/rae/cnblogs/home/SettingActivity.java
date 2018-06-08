@@ -1,8 +1,6 @@
 package com.rae.cnblogs.home;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -18,7 +16,6 @@ import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
-import com.rae.cnblogs.dialog.ShareDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.setting.SettingContract;
 import com.rae.cnblogs.home.setting.SettingPresenterImpl;
@@ -56,7 +53,6 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
 
     private SettingContract.Presenter mPresenter;
 
-    private ShareDialogFragment mShareDialogFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,20 +146,6 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
                 .show(getSupportFragmentManager(), "Logout");
     }
 
-    /**
-     * 分享
-     */
-    @OnClick(R2.id.ll_share)
-    public void onShareClick() {
-        AppMobclickAgent.onClickEvent(getContext(), "ShareApp");
-        if (mShareDialogFragment == null) {
-            String url = getString(R.string.share_app_url);
-            String title = getString(R.string.share_app_title);
-            String desc = getString(R.string.share_app_desc);
-            mShareDialogFragment = ShareDialogFragment.newInstance(url, title, desc, null, R.drawable.ic_share_app, false, false);
-        }
-        mShareDialogFragment.show(getSupportFragmentManager(), "shareApp");
-    }
 
     /**
      * 开源项目
@@ -221,24 +203,6 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
         mCheckUpdateProgress.setVisibility(View.VISIBLE);
         mCheckUpdateMsgView.setVisibility(View.GONE);
         mPresenter.checkUpdate();
-    }
-
-    /**
-     * 好评
-     */
-    @OnClick(R2.id.praises)
-    public void onPraisesClick() {
-        AppMobclickAgent.onClickEvent(getContext(), "Praises");
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.market_url))));
-        } catch (Exception e) {
-            UICompat.failed(this, getString(R.string.praises_error));
-        }
-    }
-
-    @OnClick(R2.id.ll_font_setting)
-    public void onFontSettingClick() {
-        AppRoute.routeToFontSetting(this);
     }
 
     @OnClick(R2.id.ll_about_me)

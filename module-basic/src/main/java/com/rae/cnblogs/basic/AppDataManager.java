@@ -94,11 +94,11 @@ public final class AppDataManager {
     }
 
     /**
-     * 是否空间不足，条件：可用空间小于1GB
+     * 是否空间不足，条件：可用空间小于100MB
      */
     public boolean isInsufficient() {
         long size = getSDCardFreeSpace();
-        return size < 1024 && size != -1;
+        return size < 100 && size != -1;
     }
 
     /**

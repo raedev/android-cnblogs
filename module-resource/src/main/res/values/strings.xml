@@ -71,7 +71,8 @@
     <string name="new_version_title">发现新版本</string>
     <string name="login_expired">登录过期，请重新登录</string>
     <string name="blogger_need_login">请先登录</string>
-    <string name="please_login">请登录</string>
+    <string name="please_login">登 录</string>
+    <string name="introduction">发现更大的技术世界</string>
     <string name="github_issue_url">http://www.raeblog.com/cnblogs/issues</string>
     <string name="github_url">https://github.com/raee/android-cnblogs</string>
     <string name="delete">删除</string>
@@ -120,6 +121,7 @@
     <string name="url_help_center">http://www.raeblog.com/cnblogs/help.html</string>
     <string name="url_license">http://www.raeblog.com/cnblogs/license.html</string>
     <string name="system_message">系统消息</string>
+    <string name="message_center">消息中心</string>
     <string name="url_signin">https://passport.cnblogs.com/user/signin</string>
     <string name="login_help_message">您可以点击立即前往查看相关的问题以及原因，或者截图向我们进行意见反馈。</string>
     <string name="url_login_help">http://www.raeblog.com/cnblogs/loginHelp.html</string>

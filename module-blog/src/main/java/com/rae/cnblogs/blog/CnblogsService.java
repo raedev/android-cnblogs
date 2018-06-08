@@ -75,7 +75,7 @@ public class CnblogsService extends Service {
             double dbSize = appDataManager.getDatabaseTotalSize();
             Log.i("rae", "是否空间不够：" + isInsufficient + "; 数据库缓存大小：" + dbSize);
             // 当数据大于30MB，清空博客缓存数据
-            if (dbSize > 30 || isInsufficient) {
+            if (dbSize > 120 || isInsufficient) {
                 Log.i("rae-service", "清除数据！" + dbSize);
                 DbFactory.getInstance().clearCache();
             }

@@ -47,56 +47,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_font_setting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical">
-
-                <TextView
-                    style="@style/ItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/font_setting"
-                    android:textColor="@color/ph1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-
-                android:id="@+id/praises"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical">
-
-                <TextView
-                    style="@style/ItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/praises"
-                    android:textColor="@color/ph1" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_share"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical">
-
-                <TextView
-                    style="@style/ItemStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/share_app"
-                    android:textColor="@color/ph1" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:id="@+id/ll_help_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -144,8 +94,7 @@
                 android:id="@+id/ll_about_me"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:visibility="gone">
+                android:gravity="center_vertical">
 
                 <TextView
                     style="@style/ItemStyle"
