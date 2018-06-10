@@ -21,6 +21,9 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        manifestPlaceholders = [
+                "qqappid": rootProject.ext.account.qqAppId
+        ]
     }
     dexOptions {
         javaMaxHeapSize "2g"
@@ -38,7 +41,7 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-            applicationIdSuffix '.debug'
+//            applicationIdSuffix '.debug'
             signingConfig signingConfigs.release
         }
         release {

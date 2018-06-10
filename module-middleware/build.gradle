@@ -41,6 +41,7 @@ dependencies {
     implementation rootProject.ext.dependencies.butterknife
     implementation rootProject.ext.dependencies.avoscloudSdk
     implementation rootProject.ext.dependencies.avoscloudFeedback
+
     api(rootProject.ext.dependencies.swipebacklayout, {
         exclude group: 'com.android.support'
     })

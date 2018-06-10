@@ -18,11 +18,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.OvershootInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,9 +32,6 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -173,6 +165,13 @@ public class ShareDialogFragment extends BasicDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mShareAction = new ShareAction(getActivity());
+    }
+
+
+    /**
+     * 初始化分析信息
+     */
+    private void initShareInfo() {
         Bundle arg = getArguments();
         if (arg != null) {
             String url = arg.getString("shareUrl", "url");
@@ -193,14 +192,6 @@ public class ShareDialogFragment extends BasicDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setShareIcon(R.drawable.ic_share_app);
-    }
-
-    public void setShareTitle(String title) {
-        mShareAction.withText(title);
-    }
-
-    public void setShareUrl(String url) {
-        mShareAction.withMedia(new UMWeb(url));
     }
 
     public void setShareWeb(@NonNull String url, @NonNull String title, @Nullable String desc, String thumb) {
@@ -254,6 +245,7 @@ public class ShareDialogFragment extends BasicDialogFragment {
             setExtLayoutVisibility(extLayoutVisibility ? View.VISIBLE : View.GONE);
         }
 
+        initShareInfo();
         showNightText();
     }
 
@@ -286,50 +278,50 @@ public class ShareDialogFragment extends BasicDialogFragment {
         mDividerView.setVisibility(visibility);
     }
 
-    // 开始动画
-    private void startAnim() {
-
-        List<View> views = new ArrayList<>();
-        views.add(mQQView);
-        views.add(mQzoneView);
-        views.add(mWeChatView);
-        views.add(mWeChatSNSView);
-        views.add(mSinaView);
-        startAnimSet(views);
-
-        views.clear();
-        views.add(mViewSourceView);
-        views.add(mNightView);
-        views.add(mFontSettingView);
-        views.add(mBrowseriew);
-        views.add(mLinkView);
-        startAnimSet(views);
-        views.clear();
-
-
-    }
-
-    // 开始动画效果
-    private void startAnimSet(List<View> views) {
-        long afterTime = 100;
-        for (View view : views) {
-            afterTime += 100;
-
-            AnimationSet set = new AnimationSet(false);
-            TranslateAnimation animation = new TranslateAnimation(0, 0, 0, 0, Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0);
-            animation.setDuration(800);
-            animation.setInterpolator(new OvershootInterpolator());
-            animation.setStartOffset(afterTime);
-
-            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1.0f);
-            alphaAnimation.setDuration(300);
-            alphaAnimation.setStartOffset(afterTime);
-
-            set.addAnimation(animation);
-            set.addAnimation(alphaAnimation);
-            view.startAnimation(set);
-        }
-    }
+//    // 开始动画
+//    private void startAnim() {
+//
+//        List<View> views = new ArrayList<>();
+//        views.add(mQQView);
+//        views.add(mQzoneView);
+//        views.add(mWeChatView);
+//        views.add(mWeChatSNSView);
+//        views.add(mSinaView);
+//        startAnimSet(views);
+//
+//        views.clear();
+//        views.add(mViewSourceView);
+//        views.add(mNightView);
+//        views.add(mFontSettingView);
+//        views.add(mBrowseriew);
+//        views.add(mLinkView);
+//        startAnimSet(views);
+//        views.clear();
+//
+//
+//    }
+//
+//    // 开始动画效果
+//    private void startAnimSet(List<View> views) {
+//        long afterTime = 100;
+//        for (View view : views) {
+//            afterTime += 100;
+//
+//            AnimationSet set = new AnimationSet(false);
+//            TranslateAnimation animation = new TranslateAnimation(0, 0, 0, 0, Animation.RELATIVE_TO_PARENT, 1.0f, Animation.RELATIVE_TO_PARENT, 0);
+//            animation.setDuration(800);
+//            animation.setInterpolator(new OvershootInterpolator());
+//            animation.setStartOffset(afterTime);
+//
+//            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1.0f);
+//            alphaAnimation.setDuration(300);
+//            alphaAnimation.setStartOffset(afterTime);
+//
+//            set.addAnimation(animation);
+//            set.addAnimation(alphaAnimation);
+//            view.startAnimation(set);
+//        }
+//    }
 
 
     /**
@@ -341,15 +333,12 @@ public class ShareDialogFragment extends BasicDialogFragment {
         }
 
         try {
-
             UMShareAPI umShareAPI = UMShareAPI.get(getContext());
-
             // fix bug #536 没有安装应用
             if (getContext() instanceof Activity && !umShareAPI.isInstall((Activity) getContext(), type)) {
                 UICompat.failed(getContext(), "请安装" + type);
                 return;
             }
-
             mShareAction.setPlatform(type);
             mShareAction.share();
         } catch (Exception e) {
@@ -423,7 +412,7 @@ public class ShareDialogFragment extends BasicDialogFragment {
 
     // 用浏览器打开
     protected void onBrowserViewClick() {
-        if (getUrl() == null) return;
+        if (getUrl() == null || getContext() == null) return;
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(getUrl()));
@@ -435,7 +424,7 @@ public class ShareDialogFragment extends BasicDialogFragment {
 
     // 复制链接
     protected void onLinkClick() {
-        if (getUrl() == null) return;
+        if (getUrl() == null || getContext() == null) return;
         ClipboardManager clipboardManager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboardManager == null) return;
         clipboardManager.setPrimaryClip(ClipData.newPlainText("url", getUrl()));

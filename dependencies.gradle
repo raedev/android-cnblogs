@@ -11,6 +11,7 @@ ext {
     ]
 
     // 依赖配置
+
     dependencies = [
             appcompat          : 'com.android.support:appcompat-v7:' + ext.android.supportVersion,
             design             : 'com.android.support:design:' + ext.android.supportVersion,
@@ -40,10 +41,16 @@ ext {
             roundedImage       : 'com.makeramen:roundedimageview:2.3.0',
             multidex           : 'com.android.support:multidex:1.0.2',
             glide              : 'com.github.bumptech.glide:glide:4.0.0',
+
             // 友盟统计-公共库
-            umengCommon        : 'com.umeng.sdk:common:1.4.1',
+            umengCommon        : 'com.umeng.sdk:common:1.5.1',
             // 友盟统计-APP分析库
-            umengAnalytics     : 'com.umeng.sdk:analytics:7.4.1',
+            umengAnalytics     : 'com.umeng.sdk:analytics:7.5.3',
+            umShareCore        : 'com.umeng.sdk:share-core:6.9.2',
+            umShareQQ          : 'com.umeng.sdk:share-qq:6.9.2.0',
+            umShareWechat      : 'com.umeng.sdk:share-wechat:6.9.2',
+            umengShareSina     : 'com.umeng.sdk:share-sina:6.9.2',
+
             greendao           : 'org.greenrobot:greendao:3.2.2',
             // 美团渠道包库
             walle              : 'com.meituan.android.walle:library:1.1.6',
@@ -57,7 +64,6 @@ ext {
             swipebacklayout    : 'me.imid.swipebacklayout.lib:library:1.1.0',
             photoView          : 'com.github.chrisbanes:PhotoView:2.1.2',
     ]
-
     // 注解配置
     annotationProcessors = [
             butterknife: 'com.jakewharton:butterknife-compiler:9.0.0-SNAPSHOT',

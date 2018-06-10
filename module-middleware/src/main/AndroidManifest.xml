@@ -1,26 +1,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.middleware">
+          package="com.rae.cnblogs.middleware">
 
     <application android:name="com.rae.cnblogs.CnblogsApplication">
         <!--全屏图片预览-->
         <activity
             android:name="com.rae.cnblogs.activity.ImagePreviewActivity"
-            android:theme="@style/AppTheme.Translucent" />
+            android:theme="@style/AppTheme.Translucent"/>
         <!--照片选择-->
         <activity
             android:name="com.rae.cnblogs.activity.ImageSelectionActivity"
-            android:label="@string/label_image_selection" />
+            android:label="@string/label_image_selection"/>
         <!--网页-->
         <activity android:name="com.rae.cnblogs.activity.WebActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
                 <!--cnblogs://web-->
                 <data
                     android:host="web"
-                    android:scheme="cnblogs" />
+                    android:scheme="cnblogs"/>
             </intent-filter>
         </activity>
+
+        <!--微信分享-->
+        <activity
+            android:name="com.rae.cnblogs.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
     </application>
 
 </manifest>

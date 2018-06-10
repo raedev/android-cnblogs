@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_divider"
-    android:fitsSystemWindows="true">
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/background_divider">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingBottom="36dp">
+
+        <View
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_padding_top"/>
 
         <!--头部-->
         <RelativeLayout
@@ -28,7 +32,7 @@
                 android:layout_height="72dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/boy"
-                app:riv_corner_radius="72dp" />
+                app:riv_corner_radius="72dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -46,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/please_login"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/tv_introduction"
@@ -55,7 +59,7 @@
                     android:layout_marginTop="2dp"
                     android:text="@string/introduction"
                     android:textColor="@color/ph3"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
 
             </LinearLayout>
@@ -89,7 +93,7 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h1"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,7 +101,7 @@
                     android:layout_marginTop="6dp"
                     android:text="关注"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h3" />
+                    android:textSize="@dimen/h3"/>
 
             </LinearLayout>
 
@@ -116,7 +120,7 @@
                     android:text="0"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h1"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,7 +128,7 @@
                     android:layout_marginTop="6dp"
                     android:text="粉丝"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h3" />
+                    android:textSize="@dimen/h3"/>
 
 
             </LinearLayout>
@@ -156,7 +160,7 @@
                 android:gravity="center"
                 android:text="@string/my_favorites"
                 android:textColor="#FF555555"
-                android:textSize="@dimen/h3" />
+                android:textSize="@dimen/h3"/>
 
             <TextView
                 android:id="@+id/tv_history"
@@ -168,7 +172,7 @@
                 android:gravity="center"
                 android:text="@string/history"
                 android:textColor="#FF555555"
-                android:textSize="@dimen/h3" />
+                android:textSize="@dimen/h3"/>
 
             <FrameLayout
                 android:id="@+id/ll_system_message"
@@ -187,7 +191,7 @@
                         android:layout_height="8dp"
                         android:layout_gravity="end"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_badge" />
+                        android:background="@drawable/bg_badge"/>
 
                     <TextView
                         android:id="@+id/tv_system_message"
@@ -199,7 +203,7 @@
                         android:gravity="center"
                         android:text="@string/message_center"
                         android:textColor="#FF555555"
-                        android:textSize="@dimen/h3" />
+                        android:textSize="@dimen/h3"/>
                 </FrameLayout>
             </FrameLayout>
 
@@ -213,7 +217,7 @@
                 android:gravity="center"
                 android:text="@string/night_mode"
                 android:textColor="#FF555555"
-                android:textSize="@dimen/h3" />
+                android:textSize="@dimen/h3"/>
 
         </LinearLayout>
 
@@ -234,13 +238,13 @@
                 android:gravity="center"
                 android:text="@string/font_setting"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:drawableEnd="@drawable/default_right_arrow" />
+                android:drawableEnd="@drawable/default_right_arrow"/>
         </LinearLayout>
 
         <!--意见反馈-->
@@ -259,7 +263,7 @@
                 android:gravity="center"
                 android:text="@string/feedback"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <ImageView
                 android:id="@+id/img_feedback_badge"
@@ -268,13 +272,13 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/bg_badge"
-                android:visibility="invisible" />
+                android:visibility="invisible"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:drawableEnd="@drawable/default_right_arrow" />
+                android:drawableEnd="@drawable/default_right_arrow"/>
         </LinearLayout>
 
         <!--推荐分享-->
@@ -294,13 +298,13 @@
                 android:gravity="center"
                 android:text="@string/share_app"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:drawableEnd="@drawable/default_right_arrow" />
+                android:drawableEnd="@drawable/default_right_arrow"/>
         </LinearLayout>
         <!--给个好评-->
         <LinearLayout
@@ -318,13 +322,13 @@
                 android:gravity="center"
                 android:text="@string/praises"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:drawableEnd="@drawable/default_right_arrow" />
+                android:drawableEnd="@drawable/default_right_arrow"/>
         </LinearLayout>
 
         <!--更多设置-->
@@ -344,13 +348,13 @@
                 android:gravity="center"
                 android:text="@string/setting"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:drawableEnd="@drawable/default_right_arrow" />
+                android:drawableEnd="@drawable/default_right_arrow"/>
         </LinearLayout>
 
 

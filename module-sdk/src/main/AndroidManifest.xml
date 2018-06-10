@@ -1,19 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.sdk">
+          package="com.rae.cnblogs.sdk">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application android:label="@string/app_name">
-
-        <!--
-
-                &lt;!&ndash;博客服务&ndash;&gt;
-                <service
-                    android:name=".service.BlogService"
-                    android:description="@string/blog_service_desc"
-                    android:enabled="true"
-                    android:label="@string/blog_service_label"/>
-        -->
-
     </application>
 
 </manifest>
