@@ -72,11 +72,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="28dp"
+            android:paddingBottom="12dp"
             android:paddingEnd="24dp"
             android:paddingStart="24dp"
-            android:paddingTop="8dp"
-            android:visibility="gone">
+            android:paddingTop="12dp"
+            android:visibility="visible">
 
             <LinearLayout
                 android:id="@+id/layout_account_follow"
@@ -127,6 +127,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="粉丝"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h3"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h1"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="我的博客"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h3"/>
 

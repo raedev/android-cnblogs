@@ -97,7 +97,7 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
                 .subscribe(new ApiDefaultObserver<FriendsInfoBean>() {
                     @Override
                     protected void onError(String message) {
-                        getView().onLoadFansCount("--", "--");
+                        getView().onLoadFansCount("0", "0");
                     }
 
                     @Override

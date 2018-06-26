@@ -1,4 +1,4 @@
-include ':module-sdk', ':module-resource', ':module-basic', ':module-widget', ':module-middleware', ':module-user'
+include ':module-sdk', ':module-resource', ':module-basic', ':module-widget', ':module-middleware', ':module-user', ':module-discover'
 include ':module-home'
 include ':module-moment'
 include ':module-blog'

@@ -163,6 +163,11 @@ public final class AppRoute {
      */
     public static final String PATH_FRAGMENT_MOMENT = "/moment/home/fragment";
 
+    /**
+     * 发现
+     */
+    public static final String PATH_FRAGMENT_DISCOVER = "/discover/fragment";
+
 
     /*朋友界面 - 来自关注*/
     private static final int ACTIVITY_FRIENDS_TYPE_FOLLOW = 2;
@@ -555,6 +560,13 @@ public final class AppRoute {
 
     public static Fragment newMomentFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_MOMENT).navigation();
+    }
+
+    /**
+     * 发现页
+     */
+    public static Fragment newDiscoverFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_DISCOVER).navigation();
     }
 
     public static Fragment newHomeFragment() {

@@ -41,7 +41,7 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-//            applicationIdSuffix '.debug'
+            applicationIdSuffix '.debug'
             signingConfig signingConfigs.release
         }
         release {
@@ -73,5 +73,6 @@ dependencies {
         implementation project(':module-home')
         implementation project(':module-moment')
         implementation project(':module-blog')
+        implementation project(':module-discover')
     }
 }

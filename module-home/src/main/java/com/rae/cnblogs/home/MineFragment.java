@@ -103,7 +103,6 @@ public class MineFragment extends BasicFragment implements MineContract.View {
      */
     @Override
     public void onLoadUserInfo(@NonNull UserInfoBean user) {
-        mDisplayNameView.setVisibility(View.VISIBLE);
         mFansAndFollowLayout.setVisibility(View.VISIBLE);
         AppImageLoader.displayAvatar(user.getAvatar(), mAvatarView);
         mDisplayNameView.setText(user.getDisplayName());
@@ -118,6 +117,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     @Override
     public void onNotLogin() {
         // 没有登录的UI
+        mDisplayNameView.setText(R.string.please_login);
         mAvatarView.setImageResource(R.drawable.boy);
         mFansAndFollowLayout.setVisibility(View.GONE);
         mFansCountView.setText("0");

@@ -20,11 +20,16 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.basic.AppFragmentAdapter;
 import com.rae.cnblogs.basic.BasicActivity;
+import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.main.MainContract;
 import com.rae.cnblogs.home.main.MainPresenterImpl;
+import com.rae.cnblogs.sdk.ApiDefaultObserver;
+import com.rae.cnblogs.sdk.CnblogsApiFactory;
+import com.rae.cnblogs.sdk.UserProvider;
+import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
 import com.rae.cnblogs.widget.ITopScrollable;
@@ -68,6 +73,21 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cookieManager.flush();
         }
+
+        // 获取用户信息
+        AndroidObservable.create(CnblogsApiFactory.getInstance(this).getUserApi().getUserInfo("chenrui7"))
+                .with(this)
+                .subscribe(new ApiDefaultObserver<UserInfoBean>() {
+                    @Override
+                    protected void onError(String message) {
+
+                    }
+
+                    @Override
+                    protected void accept(UserInfoBean userInfo) {
+                        UserProvider.getInstance().setLoginUserInfo(userInfo);
+                    }
+                });
     }
 
     @Override
@@ -82,7 +102,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         // 初始化TAB
         addTab(mAdapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
         addTab(mAdapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
-        addTab(mAdapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newMomentFragment());
+        addTab(mAdapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newDiscoverFragment());
         addTab(mAdapter, R.string.tab_mine, R.drawable.tab_mine, AppRoute.newMineFragment());
 
         mViewPager.setOffscreenPageLimit(mAdapter.getCount());
