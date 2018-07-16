@@ -6,6 +6,16 @@
         <item name="android:fitsSystemWindows">false</item>
     </style>
 
+    <style name="AppTheme.Login" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:windowBackground">@drawable/bg_login</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
+    </style>
+
 
     <style name="umeng_socialize_dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowTranslucentStatus">true</item>

@@ -2,8 +2,11 @@ package com.rae.cnblogs.user;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
+import android.view.WindowManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
@@ -28,9 +31,13 @@ public class LoginActivity extends BasicActivity implements LoginContract.View {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        overridePendingTransition(R.anim.slide_in_bottom, android.R.anim.fade_out);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        getWindow().setGravity(Gravity.BOTTOM);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            getWindow().setElevation(0);
+        }
         mPresenter = new LoginPresenterImpl(this);
     }
 
@@ -99,10 +106,6 @@ public class LoginActivity extends BasicActivity implements LoginContract.View {
         mPresenter.login();
     }
 
-    @OnClick(R2.id.ll_login_contract)
-    public void onLoginContractClick() {
-        AppRoute.routeToWeb(this, getString(R.string.url_login_help));
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

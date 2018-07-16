@@ -12,7 +12,7 @@
     <dimen name="default_radius">4dp</dimen>
     <dimen name="public_button_height">40dp</dimen>
     <dimen name="public_radius">2dp</dimen>
-    <dimen name="default_dialog_margin">45dp</dimen>
+    <dimen name="default_dialog_margin">12dp</dimen>
     <dimen name="default_hint_card_dialog_margin">36dp</dimen>
     <dimen name="item_blog_list_thumb_height">86dp</dimen>
     <dimen name="item_blog_list_thumb_large_height">180dp</dimen>

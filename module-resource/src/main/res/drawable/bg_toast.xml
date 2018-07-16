@@ -2,11 +2,13 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <solid android:color="#C1000000" />
+
     <corners android:radius="4dp" />
-    <!--   <padding
-           android:bottom="@dimen/default_margin"
-           android:left="@dimen/default_margin"
-           android:right="@dimen/default_margin"
-           android:top="@dimen/default_margin" />-->
+
+    <padding
+        android:bottom="@dimen/default_margin"
+        android:left="@dimen/default_margin"
+        android:right="@dimen/default_margin"
+        android:top="@dimen/default_margin" />
 
 </shape>

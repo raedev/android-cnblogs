@@ -32,6 +32,7 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
+import com.rae.cnblogs.user.LoginActivity;
 import com.rae.cnblogs.widget.ITopScrollable;
 
 import butterknife.BindView;
@@ -59,6 +60,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         requestPermissions();
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
+
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
 

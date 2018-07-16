@@ -20,7 +20,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_clear_cache"
-                style="@style/ItemStyle"
+                style="@style/SettingItemStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
@@ -30,7 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableRight="@drawable/default_right_arrow"
+                    android:drawableEnd="@drawable/default_right_arrow"
                     android:text="@string/clear_cache"
                     android:textColor="@color/ph1"
                     android:textSize="16sp" />
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    style="@style/ItemStyle"
+                    style="@style/SettingItemStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/help_center"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    style="@style/ItemStyle"
+                    style="@style/SettingItemStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/github"
@@ -81,7 +81,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    style="@style/ItemStyle"
+                    style="@style/SettingItemStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -97,7 +97,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    style="@style/ItemStyle"
+                    style="@style/SettingItemStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -109,7 +109,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_check_update"
-                style="@style/ItemStyle"
+                style="@style/SettingItemStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
@@ -142,7 +142,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_beta_version"
-                style="@style/ItemStyle"
+                style="@style/SettingItemStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"

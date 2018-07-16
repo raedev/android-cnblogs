@@ -4,6 +4,7 @@
     <application>
         <!--登录-->
         <activity
+            android:theme="@style/AppTheme.Login"
             android:name=".LoginActivity"
             android:launchMode="singleTop" />
 

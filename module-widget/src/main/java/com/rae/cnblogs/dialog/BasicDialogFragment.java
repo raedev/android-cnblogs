@@ -1,13 +1,13 @@
 package com.rae.cnblogs.dialog;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,8 +64,11 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
     protected void onLoadWindowAttr(@NonNull Window window) {
         if (getContext() != null) {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            window.setDimAmount(0.3f);
+            window.setGravity(Gravity.BOTTOM | Gravity.FILL_HORIZONTAL);
             int margin = (int) getContext().getResources().getDimension(R.dimen.default_dialog_margin);
-            InsetDrawable drawable = new InsetDrawable(new ColorDrawable(Color.TRANSPARENT), margin, 0, margin, 0);
+            InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(getContext(), R.drawable.bg_dialog_default), margin, margin, margin, margin);
+            window.setWindowAnimations(R.style.SlideAnimation);
             window.setBackgroundDrawable(drawable);
         }
     }
