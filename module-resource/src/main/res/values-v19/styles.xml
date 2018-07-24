@@ -4,6 +4,9 @@
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">false</item>
+        <item name="android:buttonStyle">@style/AppButton</item>
+        <item name="buttonStyle">@style/AppButton</item>
+        <item name="editTextStyle">@style/AppEditTextStyle</item>
     </style>
 
     <style name="AppTheme.Login" parent="Theme.AppCompat.Light.Dialog.Alert">

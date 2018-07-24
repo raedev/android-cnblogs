@@ -1,5 +1,6 @@
 package com.rae.cnblogs.basic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -50,4 +53,14 @@ public abstract class BasicFragment extends Fragment {
     }
 
     protected abstract int getLayoutId();
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        if (fragments == null) return;
+        for (Fragment fragment : fragments) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }

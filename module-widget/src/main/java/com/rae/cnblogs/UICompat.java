@@ -1,6 +1,7 @@
 package com.rae.cnblogs;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -176,5 +178,16 @@ public final class UICompat {
     @Nullable
     public static Fragment findCurrentFragment(FragmentManager fm, ViewPager viewPager) {
         return fm.findFragmentByTag("android:switcher:" + viewPager.getId() + ":" + viewPager.getCurrentItem());
+    }
+
+    public static void hideSoftInputFromWindow(@NonNull Context context, @NonNull View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null)
+            imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+
+    public static void hideSoftInputFromWindow(@NonNull Activity context) {
+        hideSoftInputFromWindow(context, context.getWindow().getDecorView());
     }
 }

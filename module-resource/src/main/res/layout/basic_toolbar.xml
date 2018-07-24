@@ -21,7 +21,8 @@
             android:singleLine="true"
             android:text="@string/title"
             android:textColor="@color/ph1"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </android.support.v7.widget.Toolbar>
 </FrameLayout>

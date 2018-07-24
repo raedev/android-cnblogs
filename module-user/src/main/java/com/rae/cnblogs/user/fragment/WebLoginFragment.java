@@ -1,4 +1,4 @@
-package com.rae.cnblogs.user;
+package com.rae.cnblogs.user.fragment;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.sdk.CnblogsApiException;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
+import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.login.LoginContract;
 import com.rae.cnblogs.user.login.LoginPresenterImpl;
 import com.rae.cnblogs.web.WebViewFragment;

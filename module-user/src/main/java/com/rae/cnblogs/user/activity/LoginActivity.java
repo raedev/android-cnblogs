@@ -1,4 +1,4 @@
-package com.rae.cnblogs.user;
+package com.rae.cnblogs.user.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
+import com.rae.cnblogs.user.R;
+import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.login.LoginContract;
 import com.rae.cnblogs.user.login.LoginPresenterImpl;
 

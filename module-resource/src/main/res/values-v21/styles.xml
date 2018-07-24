@@ -3,6 +3,7 @@
 
     <style name="AppButton" parent="@style/Widget.AppCompat.Button.Borderless">
         <item name="android:stateListAnimator">@null</item>
+
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">

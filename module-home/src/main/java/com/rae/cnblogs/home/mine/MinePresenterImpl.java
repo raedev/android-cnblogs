@@ -18,7 +18,12 @@ import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
+import com.rae.cnblogs.sdk.event.UserInfoEvent;
 import com.tencent.bugly.crashreport.CrashReport;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -36,11 +41,18 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
 
     public MinePresenterImpl(MineContract.View view) {
         super(view);
+        EventBus.getDefault().register(this);
         mConfig = CnblogAppConfig.getInstance(getContext());
         CnblogsApiProvider provider = CnblogsApiFactory.getInstance(getContext());
         mUserApi = provider.getUserApi();
         mFriendApi = provider.getFriendApi();
         mRaeServerApi = provider.getRaeServerApi();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -155,5 +167,11 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
         } catch (Exception e) {
             CrashReport.postCatchedException(new CnblogsReportException("意见反馈发生异常！", e));
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(UserInfoEvent event) {
+        // 重新加载数据
+        loadUserInfo();
     }
 }

@@ -1,7 +1,5 @@
 package com.rae.cnblogs.blog.category;
 
-import android.util.Log;
-
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
@@ -72,7 +70,6 @@ public class CategoryPresenterImpl extends BasicPresenter<CategoryContract.View>
                 .subscribe(new DefaultObserver<ThreadEntity>() {
                     @Override
                     public void onNext(ThreadEntity threadEntity) {
-                        Log.i("rae", "当前线程为：" + Thread.currentThread().getId());
                         threadUpdateCategoies(threadEntity.mycategories, threadEntity.recommendcategories);
                     }
 

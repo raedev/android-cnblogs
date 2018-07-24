@@ -4,11 +4,18 @@
     <application>
         <!--登录-->
         <activity
-            android:theme="@style/AppTheme.Login"
-            android:name=".LoginActivity"
-            android:launchMode="singleTop" />
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Login" />
 
         <!--网页登录-->
-        <activity android:name=".WebLoginActivity" />
+        <activity android:name=".activity.WebLoginActivity" />
+
+        <activity
+            android:name=".activity.FriendsActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+
+        </activity>
+        <activity android:name=".activity.SearchFriendsActivity" />
     </application>
 </manifest>

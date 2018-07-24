@@ -1,4 +1,4 @@
-package com.rae.cnblogs.user;
+package com.rae.cnblogs.user.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,8 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.WebActivity;
+import com.rae.cnblogs.user.R;
+import com.rae.cnblogs.user.fragment.WebLoginFragment;
 import com.rae.cnblogs.web.WebViewFragment;
 
 /**

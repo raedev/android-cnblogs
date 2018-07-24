@@ -275,4 +275,10 @@ public class EditCommentDialogFragment extends BasicDialogFragment {
     void onCancelClick() {
         dismiss();
     }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new SlideDialog(getContext());
+    }
 }

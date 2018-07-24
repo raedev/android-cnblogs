@@ -91,7 +91,7 @@ public interface IFriendsApi {
     Observable<List<UserInfoBean>> getFollowList(@Path("blogApp") String blogApp, @Query("page") int page);
 
     /**
-     * 获取我的关注列表
+     * 获取我的粉丝列表
      *
      * @param blogApp
      * @param page    页码
@@ -99,4 +99,15 @@ public interface IFriendsApi {
     @GET(ApiUrls.API_FRIENDS_FANS_LIST)
     @Parser(FriendsListParser.class)
     Observable<List<UserInfoBean>> getFansList(@Path("blogApp") String blogApp, @Query("page") int page);
+
+
+    /**
+     * 获取我的关注列表
+     *
+     * @param keyword 搜索关键字
+     * @param page    页码
+     */
+    @GET(ApiUrls.API_FRIENDS_SEARCH)
+    @Parser(FriendsListParser.class)
+    Observable<List<UserInfoBean>> searchFriends(@Query("key") String keyword, @Query("page") int page);
 }

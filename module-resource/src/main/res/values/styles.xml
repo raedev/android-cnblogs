@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" />
@@ -11,8 +12,6 @@
         <item name="toolbarNavigationButtonStyle">@style/AppToolbarNavigationButtonStyle</item>
         <!--<item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>-->
-        <item name="buttonStyle">@style/AppButton</item>
-        <item name="editTextStyle">@style/AppEditTextStyle</item>
         <item name="android:windowIsTranslucent">true</item>
         <!--<item name="android:windowAnimationStyle">@style/AppAnimation</item>-->
         <item name="android:windowBackground">@color/default_background</item>
@@ -41,7 +40,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="AppButton" parent="@style/Widget.AppCompat.Button.Borderless"></style>
+    <style name="AppButton" parent="@style/Widget.AppCompat.Button.Borderless">
+
+    </style>
 
     <style name="AppActionBar" parent="Base.Widget.AppCompat.ActionBar.Solid">
 
@@ -64,7 +65,7 @@
     </style>
 
     <style name="DiscoverTabTextAppearance" parent="TextAppearance.AppCompat.Medium.Inverse">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
         <!--兼容夜间模式-->
         <item name="android:textColor">@color/text_color_default_tab</item>
     </style>
@@ -140,6 +141,6 @@
         <item name="contentInsetStart">0dp</item><!-- 设置该属性解决空白部分-->
         <item name="contentInsetEnd">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
-        <item name="navigationIcon">@drawable/ic_back</item>
+        <item name="navigationIcon">@drawable/ic_arrow_left</item>
     </style>
 </resources>

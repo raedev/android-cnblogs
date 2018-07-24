@@ -32,7 +32,6 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
-import com.rae.cnblogs.user.LoginActivity;
 import com.rae.cnblogs.widget.ITopScrollable;
 
 import butterknife.BindView;
@@ -45,6 +44,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
     @BindView(R.id.tab_main)
     RaeTabLayout mTabLayout;
+
+    private long mBackKeyDownTime;
 
     MainContract.Presenter mPresenter;
     private AppFragmentAdapter mAdapter;
@@ -60,15 +61,13 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         requestPermissions();
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-
-        startActivity(new Intent(this, LoginActivity.class));
     }
 
 
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "257609FA8BD9AB43F07A4B4110DEA5561685E8827D2536EB50CB07E6BD72A852B65E7121C7282323F9689202135E707D72184476D358B429FD5F32F00103BE9C02414571D796E42637836235120D40B4D03C3CC6";
-        String netCoreCookie = "CfDJ8FHXRRtkJWRFtU30nh_M9mAcOtlDEoxNOvReESDtP-LGb9f1uAbknAYX_5g3d2Y-mOtPlu_vqplSTz3mRrRqcUrNE9QYYCP7cqzVzbnLztUF38wiIP6XaW10kl0QvUi_xEdaOv62KWeqYeZMAwtkOqw4H4ark-KBNhDzGAPDG3L0_5ymM3XA8f8RBjbNG5ZDE7bAwIQq3GtI4oX_4rl5uoS2Xw8n36ESUB4tQJ0kdOJf8GeKYdOWoZznhRwmrRiUl_VtGOVryQYV3-8hys11UEodQTYM1MLAL8QhJLp6ZKOAI3UMLQfcHMfKNL7_bZhd5w";
+        String cookie = "26004F7A01C39CBACF70ED396FFA307BB21E7AEDE4B6245B5B433F47540749569981C77803953DFE28B7F5741FB795F49187BB7BDA995F5B150A8C65B418D70E25802D583F09F66005298BD6A817C913884D4436";
+        String netCoreCookie = "CfDJ8FHXRRtkJWRFtU30nh_M9mBulNHC1c_O8RDhAJhrChUixuMz1QxRLZ-f-3-WHrQV6olTonldUcMkhUBz2wW3bB4ZMIHEnQUr7EP2HREgyEeyaffzgkf-7eMRCxKejSvBV81SdD5CQXuyAQF5jCHElhQ2eMfB8vz26qp4_Df5eZmfH8e0eOiWjrXY1FRW-WcWbUzHLKwNfYiDaZx5F5n1bEPMJDzRfKeOKPZOxFxM_mFCC_BTy-_gQ79Qdvpg15bVs5FkK_oCdnZBS5o9sh5_BrSNWpAnqzWF97uvWptCoJ5N";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
@@ -235,5 +234,15 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
             mViewPager.setCurrentItem(1);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - mBackKeyDownTime) > 2000) {
+            UICompat.toast(this, "再按一次退出");
+            mBackKeyDownTime = System.currentTimeMillis();
+            return;
+        }
+        super.onBackPressed();
     }
 }

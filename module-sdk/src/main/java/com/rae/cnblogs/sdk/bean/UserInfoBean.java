@@ -33,10 +33,24 @@ public class UserInfoBean implements Parcelable {
     private String remarkName;
 
 
+    /**
+     * 是已经关注
+     */
+    private boolean mHasFollow;
+
+
 //    /**
 //     * 入园时间
 //     */
 //    private String joinDate;
+
+    public boolean isHasFollow() {
+        return mHasFollow;
+    }
+
+    public void setHasFollow(boolean hasFollow) {
+        mHasFollow = hasFollow;
+    }
 
     public String getAvatar() {
         return avatar;
@@ -55,6 +69,10 @@ public class UserInfoBean implements Parcelable {
     }
 
     public String getDisplayName() {
+        // 优先显示备注
+        if (!TextUtils.isEmpty(remarkName)) {
+            return remarkName;
+        }
         return displayName;
     }
 

@@ -58,7 +58,7 @@
                         android:gravity="center"
                         android:singleLine="true"
                         android:text="@string/search_hint"
-                        android:textColor="@color/ph3"
+                        android:textColor="#c2c2c2"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -83,9 +83,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:tabBackground="@android:color/transparent"
-                app:tabIndicatorColor="@color/ph1"
+                app:tabIndicatorColor="@color/tabIndicatorColor"
                 app:tabIndicatorHeight="2dp"
-                app:tabIndicatorWidth="16dp"
+                app:tabIndicatorWidth="14dp"
                 app:tabMinWidth="52dp"
                 app:tabMode="scrollable"
                 app:tabPaddingEnd="6dp"

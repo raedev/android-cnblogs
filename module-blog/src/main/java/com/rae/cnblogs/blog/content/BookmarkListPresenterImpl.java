@@ -4,8 +4,10 @@ import com.rae.cnblogs.PageObservable;
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.basic.IPageView;
-import com.rae.cnblogs.blog.comm.ContentListContract;
+import com.rae.cnblogs.basic.rx.AndroidObservable;
+import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
+import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.bean.BookmarksBean;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
@@ -19,7 +21,7 @@ import io.reactivex.Observable;
  * Created by rae on 2018/6/1.
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
-public class BookmarkListPresenterImpl extends BasicPresenter<ContentListContract.View> implements ContentListContract.Presenter, IPageView<BookmarksBean> {
+public class BookmarkListPresenterImpl extends BasicPresenter<BookmarkListContract.View> implements BookmarkListContract.Presenter, IPageView<BookmarksBean> {
     // 维护数据源
     private final List<ContentEntity> mDataList = new ArrayList<>();
     private PageObservable<BookmarksBean> mPageObservable;
@@ -27,7 +29,7 @@ public class BookmarkListPresenterImpl extends BasicPresenter<ContentListContrac
 
     /**
      */
-    public BookmarkListPresenterImpl(ContentListContract.View view) {
+    public BookmarkListPresenterImpl(BookmarkListContract.View view) {
         super(view);
         mBookmarksApi = CnblogsApiFactory.getInstance(getContext()).getBookmarksApi();
         // 创建分页对象
@@ -85,6 +87,23 @@ public class BookmarkListPresenterImpl extends BasicPresenter<ContentListContrac
             mPageObservable.destroy();
             mPageObservable = null;
         }
+    }
+
+    @Override
+    public void delete(final ContentEntity item) {
+        AndroidObservable.create(mBookmarksApi.delBookmarks(item.getId()))
+                .with(this)
+                .subscribe(new ApiDefaultObserver<Empty>() {
+                    @Override
+                    protected void onError(String message) {
+                        getView().onDeleteBookmarksError(message);
+                    }
+
+                    @Override
+                    protected void accept(Empty empty) {
+                        getView().onDeleteBookmarksSuccess(item);
+                    }
+                });
     }
 
     @Override

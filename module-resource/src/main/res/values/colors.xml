@@ -34,4 +34,5 @@
     <color name="color_image_selection_post">#3ba7ee</color>
     <color name="blogger_image_alpha_color">#4C000000</color>
     <color name="black">#000000</color>
+    <color name="tabIndicatorColor">#2c92ff</color>
 </resources>

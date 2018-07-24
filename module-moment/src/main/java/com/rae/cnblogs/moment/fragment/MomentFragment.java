@@ -111,6 +111,12 @@ public class MomentFragment extends BasicFragment implements IMomentContract.Vie
                 start();
             }
         });
+        mPlaceholderView.setOnLoginListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppRoute.routeToLogin(v.getContext());
+            }
+        });
 
         mAppLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override

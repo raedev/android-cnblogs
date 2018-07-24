@@ -1,12 +1,16 @@
 package com.rae.cnblogs.basic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -80,5 +84,33 @@ public abstract class BasicActivity extends AppCompatActivity implements IPresen
 
     protected int getHomeAsUpIndicator() {
         return 0;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 传递到Fragment
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments == null) return;
+        for (Fragment fragment : fragments) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        if (mTitleView != null)
+            mTitleView.setText(title);
+        else
+            super.setTitle(title);
+    }
+
+    @Override
+    public void setTitle(int titleId) {
+        if (mTitleView != null)
+            mTitleView.setText(titleId);
+        else
+            super.setTitle(titleId);
     }
 }

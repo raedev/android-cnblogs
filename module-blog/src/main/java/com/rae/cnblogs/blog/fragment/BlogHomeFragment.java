@@ -1,10 +1,15 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,6 +26,7 @@ import com.rae.cnblogs.blog.home.BlogHomePresenterImpl;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.widget.ITopScrollable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,7 +44,12 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
         return new BlogHomeFragment();
     }
 
+
     private BlogHomeFragmentAdapter mAdapter;
+
+    // 当前用户查看的分类Tab
+    @Nullable
+    private CharSequence mCurrentCategoryName;
 
     @BindView(R2.id.tab_category)
     RaeTabLayout mTabLayout;
@@ -83,10 +94,31 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
      * 加载分类
      */
     @Override
-    public void onLoadCategory(List<CategoryBean> data) {
+    public void onLoadCategory(final List<CategoryBean> data) {
         mAdapter.clear();
         mAdapter.setDataList(data);
         mAdapter.notifyDataSetChanged();
+        relocation(data);
+    }
+
+    /**
+     * 重新找索引
+     */
+    private void relocation(List<CategoryBean> data) {
+        // 找到所在的索引
+        int index = 0;
+        if (mCurrentCategoryName != null) {
+            int size = data.size();
+            for (int i = 0; i < size; i++) {
+                CategoryBean item = data.get(i);
+                if (TextUtils.equals(item.getName(), mCurrentCategoryName)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        mViewPager.setCurrentItem(index); // 选择
     }
 
     /**
@@ -142,5 +174,51 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
         if (fragment instanceof ITopScrollable) {
             ((ITopScrollable) fragment).scrollToTop();
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppRoute.REQ_CODE_CATEGORY && resultCode == Activity.RESULT_OK && data != null) {
+            CategoryBean category = data.getParcelableExtra("data");
+            ArrayList<CategoryBean> dataSet = data.getParcelableArrayListExtra("dataSet");
+            reloadTab(dataSet, category, data.getBooleanExtra("enableReload", false));
+        }
+    }
+
+
+    /**
+     * 重新加载TAB选项卡
+     *
+     * @param category             分类
+     * @param enableClearFragments 是否重新加载
+     */
+    private void reloadTab(List<CategoryBean> data, @Nullable CategoryBean category, boolean enableClearFragments) {
+        if (category == null) {
+            // 保存当前用户查看的Tab索引
+            int position = mTabLayout.getSelectedTabPosition();
+            mCurrentCategoryName = mAdapter.getPageTitle(Math.max(0, position));
+
+        } else {
+            mCurrentCategoryName = category.getName();
+        }
+
+        if (enableClearFragments)
+            clearFragments();
+
+
+        onLoadCategory(data);
+    }
+
+    private void clearFragments() {
+        // 销毁当前的
+        FragmentManager fragmentManager = getChildFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments == null) return;
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (Fragment fragment : fragments) {
+            fragmentTransaction.remove(fragment);
+        }
+        fragmentTransaction.commit();
     }
 }

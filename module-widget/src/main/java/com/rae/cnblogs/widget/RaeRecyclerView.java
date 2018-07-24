@@ -69,6 +69,7 @@ public class RaeRecyclerView extends XRecyclerView implements SkinCompatSupporta
         return mFootView;
     }
 
+
     /**
      * 设置没有更多数据的文本文字
      *

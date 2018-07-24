@@ -31,6 +31,7 @@ dependencies {
     annotationProcessor rootProject.ext.annotationProcessors.butterknife
     annotationProcessor rootProject.ext.annotationProcessors.arouter
     implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.design
     implementation rootProject.ext.dependencies.butterknife
     implementation project(':module-basic')
     implementation project(':module-resource')

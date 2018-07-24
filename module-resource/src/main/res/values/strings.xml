@@ -20,9 +20,10 @@
     <string name="cancel">取消</string>
     <string name="tips_loading">正在加载…</string>
     <string name="copy_link_success">链接复制成功</string>
+    <string name="delete_bookmarks_success">删除收藏成功</string>
     <string name="open_browser">浏览器打开</string>
     <string name="copyright">Copyright © 2004–2018 cnblogs.com All Rights Reserved</string>
-    <string name="loading">正在加载…</string>
+    <string name="loading">请稍后…</string>
     <string name="signing">正在登录…</string>
     <string name="loading_web_user_info">请稍等片刻</string>
     <string name="loading_user_info">「%s」遇见你真好</string>
@@ -59,7 +60,7 @@
     <string name="delete_favorites">删除收藏</string>
     <string name="setting">更多设置</string>
     <string name="logout">退出登录</string>
-    <string name="following">关注</string>
+    <string name="following">+关注</string>
     <string name="cancel_follow">取消关注</string>
     <string name="feed">动态</string>
     <string name="blog">博客</string>
@@ -79,7 +80,7 @@
     <string name="deleting">正在删除..</string>
     <string name="edit">编辑</string>
     <string name="finish">完成</string>
-    <string name="title_category">分类</string>
+    <string name="title_category">所有分类</string>
     <string name="i_get_it">我知道了</string>
     <string name="dialog_tips_post_comment">您伟大的讲话发表成功</string>
     <string name="dialog_tips_post_like">点赞成功，由于缓存问题，点赞数量更新较慢。</string>
@@ -113,6 +114,7 @@
     <string name="forget_password_url">https://passport.cnblogs.com/GetMyPassword.aspx</string>
     <string name="reg_url">https://account.cnblogs.com</string>
     <string name="search">搜索</string>
+    <string name="friends_search">搜索园友</string>
     <string name="open_source">开源许可</string>
     <string name="night_mode">夜间模式</string>
     <string name="day_mode">日间模式</string>
@@ -162,4 +164,5 @@
     <string name="tips_comment_empty_blog_app">很抱歉，博主还没有开通博客功能</string>
     <string name="default_image_desc">正在加载</string>
     <string name="loading_blog_content">加载博客中</string>
+    <string name="unfollow">取消关注</string>
 </resources>

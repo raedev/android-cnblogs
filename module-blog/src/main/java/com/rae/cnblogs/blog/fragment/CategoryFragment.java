@@ -1,12 +1,15 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
@@ -21,6 +24,7 @@ import com.rae.cnblogs.widget.drag.ItemTouchHelperAdapter;
 import com.rae.cnblogs.widget.drag.OnStartDragListener;
 import com.rae.cnblogs.widget.drag.SimpleItemTouchHelperCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,11 +53,18 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
     @BindView(R2.id.btn_edit)
     Button mEditView;
 
+    @BindView(R2.id.tv_message)
+    TextView mMessageView;
+
     //  拖拽排序适配器
     CategoryDragAdapter mDragAdapter;
 
     // 推荐分类适配器
     CategoryDragAdapter mRecommendAdapter;
+
+    @Nullable
+    private CategorytemTouchHelperCallback mItemToucCallback;
+    private boolean mEnableReload;
 
     public static CategoryFragment newInstance(@Nullable CategoryBean selectedItem) {
         Bundle args = new Bundle();
@@ -86,22 +97,35 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
 
             @Override
             public void onItemRemoveClick(int position, CategoryBean item) {
+
                 // 从我的分类中删除
                 mDragAdapter.remove(position);
-                mDragAdapter.notifyDataSetChanged();
+                mDragAdapter.notifyItemRemoved(position);
+
                 // 添加到推荐分类
-                mRecommendAdapter.add(item);
-                mRecommendAdapter.notifyDataSetChanged();
+                int p = mRecommendAdapter.getItemCount();
+                mRecommendAdapter.add(p, item);
+                mRecommendAdapter.notifyItemInserted(p);
             }
 
             @Override
             public void onItemClick(int position, CategoryBean item) {
-                // TODO 跳转到分类
+                // 处于编辑模式的时候不可用
+                if (mEditView.isSelected()) return;
+
+                // 跳转到分类
+                FragmentActivity activity = getActivity();
+                if (activity == null) return;
+                Intent data = new Intent();
+                data.putExtra("data", item);
+                activity.setResult(Activity.RESULT_OK, data);
+                makeResultOK(item, mEnableReload);
+                activity.finish();
             }
 
             @Override
             public void onItemLongClick(int position, CategoryBean item) {
-                UICompat.toastInCenter(getContext(), item.getName());
+                // 不处理
             }
         };
         mDragAdapter = new CategoryDragAdapter(this, dragItemListener);
@@ -111,8 +135,8 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
         mRecyclerView.setAdapter(mDragAdapter);
 
         // 初始化Item拖拽
-        ItemTouchHelper.Callback callback = new CategorytemTouchHelperCallback(mDragAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemToucCallback = new CategorytemTouchHelperCallback(mDragAdapter);
+        mItemTouchHelper = new ItemTouchHelper(mItemToucCallback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 
         // 推荐分类
@@ -121,8 +145,9 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
             private Runnable mSaveRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    Log.w("rae", "保存分类");
                     mPresenter.save(mDragAdapter.getItems(), mRecommendAdapter.getItems());
+                    mDragAdapter.notifyDataSetChanged();
+                    makeResultOK();
                 }
             };
 
@@ -134,12 +159,14 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
             @Override
             public void onItemClick(int position, CategoryBean item) {
                 // 添加到我的分类中去
-                mDragAdapter.add(item);
-                mDragAdapter.notifyDataSetChanged();
+                int p = mDragAdapter.getItemCount();
+                mDragAdapter.add(p, item);
+                mDragAdapter.notifyItemInserted(p);
+//                mDragAdapter.notifyDataSetChanged();
 
                 // 从推荐分类中删除
                 mRecommendAdapter.remove(position);
-                mRecommendAdapter.notifyDataSetChanged();
+                mRecommendAdapter.notifyItemRemoved(position);
 
                 // 保存分类
                 mEditView.removeCallbacks(mSaveRunnable);
@@ -152,7 +179,7 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
             }
         };
         mRecommendAdapter = new CategoryDragAdapter(this, recommendItemListener);
-        mRecommendRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mRecommendRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRecommendRecyclerView.setHasFixedSize(true);
         mRecommendRecyclerView.setNestedScrollingEnabled(false);
         mRecommendRecyclerView.setAdapter(mRecommendAdapter);
@@ -196,17 +223,42 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
         if (isEdit) {
             // 点击完成状态
             mEditView.setText(R.string.edit);
+            mMessageView.setText("点击进入分类");
             // 保存分类
             mPresenter.save(mDragAdapter.getItems(), mRecommendAdapter.getItems());
+            // 标志结果状态
+            makeResultOK();
         } else {
             // 点击编辑状态
             mEditView.setText(R.string.finish);
+            mMessageView.setText("拖动排序");
         }
 
         mEditView.setSelected(!isEdit);
         mDragAdapter.setIsEditMode(mEditView.isSelected());
         mDragAdapter.notifyDataSetChanged();
+        if (mItemToucCallback != null) {
+            mItemToucCallback.setDragEnabled(mEditView.isSelected());
+        }
+    }
 
+    /**
+     * 标志结果
+     */
+    private void makeResultOK(CategoryBean item, boolean enableReload) {
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            Intent intent = new Intent();
+            intent.putExtra("enableReload", enableReload);
+            intent.putExtra("data", item);
+            intent.putParcelableArrayListExtra("dataSet", new ArrayList<>(mDragAdapter.getItems()));
+            activity.setResult(Activity.RESULT_OK, intent);
+        }
+    }
+
+    private void makeResultOK() {
+        mEnableReload = true;
+        makeResultOK(null, true);
     }
 
 
@@ -215,12 +267,32 @@ public class CategoryFragment extends BasicFragment implements CategoryContract.
      */
     private class CategorytemTouchHelperCallback extends SimpleItemTouchHelperCallback {
 
+        /**
+         * 是否可以拖动的
+         */
+        private boolean mDragEnabled = false;
+
         CategorytemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
             super(adapter);
         }
 
+        public void setDragEnabled(boolean dragEnabled) {
+            mDragEnabled = dragEnabled;
+        }
+
+        @Override
+        public boolean isLongPressDragEnabled() {
+            return mDragEnabled;
+        }
+
+        @Override
+        public boolean isItemViewSwipeEnabled() {
+            return mDragEnabled;
+        }
+
         @Override
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
+            if (!mDragEnabled) return false;
             int position = target.getAdapterPosition();
             return position > 1 && super.onMove(recyclerView, source, target);
         }

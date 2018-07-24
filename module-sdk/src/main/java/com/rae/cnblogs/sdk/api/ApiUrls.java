@@ -86,11 +86,14 @@ final class ApiUrls {
     // 朋友-关注-列表
     static final String API_FRIENDS_FOLLOW_LIST = "https://home.cnblogs.com/u/{blogApp}/relation/following";
 
+    // 朋友-搜索
+    static final String API_FRIENDS_SEARCH = "https://home.cnblogs.com/user/Search.aspx";
+
     // 朋友-粉丝-列表
     static final String API_FRIENDS_FANS_LIST = "https://home.cnblogs.com/u/{blogApp}/relation/followers";
 
     // 朋友-关注-发起
-    static final String API_FRIENDS_FOLLOW = "https://home.cnblogs.com/ajax/follow/FollowUser?remark=";
+    static final String API_FRIENDS_FOLLOW = "https://home.cnblogs.com/ajax/follow/followUser?remark=";
 
     // 朋友-关注-取消
     static final String API_FRIENDS_UN_FOLLOW = "https://home.cnblogs.com/ajax/follow/RemoveFollow?isRemoveGroup=false";

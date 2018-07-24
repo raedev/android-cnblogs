@@ -2,6 +2,7 @@ package com.rae.cnblogs.widget.drag;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -28,11 +29,12 @@ public abstract class DragRecylerViewAdapter<T, VH extends RecyclerView.ViewHold
     }
 
     public void remove(int position) {
+        Log.i("Rae", "移除：" + position);
         mItems.remove(position);
     }
 
-    public void add(T item) {
-        mItems.add(item);
+    public void add(int position, T item) {
+        mItems.add(position, item);
     }
 
     public T getDataItem(int position) {
@@ -45,6 +47,7 @@ public abstract class DragRecylerViewAdapter<T, VH extends RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final VH holder, int position) {
+
         if (holder.itemView != null) {
             holder.itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override

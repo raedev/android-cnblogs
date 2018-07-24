@@ -89,6 +89,9 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
         }
     }
 
+    public ContentListContract.Presenter getPresenter() {
+        return mPresenter;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -96,6 +99,16 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
         mPlaceholderView.dismiss();
         mRecyclerView.setLoadingMoreEnabled(false);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                if (mAdapter.getItemCount() > 0)
+                    mPlaceholderView.dismiss();
+                else
+                    mPlaceholderView.empty();
+            }
+        });
 
         // 下拉刷新
         mAppLayout.setPtrHandler(new PtrDefaultHandler() {

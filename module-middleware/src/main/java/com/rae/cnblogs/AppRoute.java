@@ -31,8 +31,13 @@ public final class AppRoute {
      * 登录返回
      */
     public static final int REQ_LOGIN = 10086;
+
     /*朋友界面 - 来自粉丝*/
-    public static final int ACTIVITY_FRIENDS_TYPE_FANS = 1;
+    public static final String ACTIVITY_FRIENDS_TYPE_FANS = "fans";
+
+    /*朋友界面 - 来自关注*/
+    private static final String ACTIVITY_FRIENDS_TYPE_FOLLOW = "follow";
+
     // 分类
     public static final int REQ_CODE_CATEGORY = 102;
     // 收藏
@@ -83,6 +88,10 @@ public final class AppRoute {
      */
     public static final String PATH_FRIENDS = "/user/friends";
     /**
+     * 粉丝以及关注
+     */
+    public static final String PATH_FRIENDS_SEARCH = "/user/friends/search";
+    /**
      * 图片预览
      */
     public static final String PATH_IMAGE_PREVIEW = "/image/preview";
@@ -98,7 +107,7 @@ public final class AppRoute {
     /**
      * 我的收藏
      */
-    public static final String PATH_FAVORITE = "/blog/favorite";
+    public static final String PATH_FAVORITE = "/blog/auth/favorite";
     /**
      * 搜索
      */
@@ -168,9 +177,6 @@ public final class AppRoute {
      */
     public static final String PATH_FRAGMENT_DISCOVER = "/discover/fragment";
 
-
-    /*朋友界面 - 来自关注*/
-    private static final int ACTIVITY_FRIENDS_TYPE_FOLLOW = 2;
 
     /**
      * 初始化
@@ -278,6 +284,13 @@ public final class AppRoute {
     }
 
     /**
+     * 搜索园友
+     */
+    public static void routeToSearchFriends(Context context) {
+        route(context, PATH_FRIENDS_SEARCH);
+    }
+
+    /**
      * 关注
      *
      * @param bloggerName 博主昵称
@@ -294,11 +307,11 @@ public final class AppRoute {
      * @param bloggerName 博主昵称
      * @param blogApp     博主ID
      */
-    private static void routeToFriends(Context context, int type, String bloggerName, String blogApp) {
+    private static void routeToFriends(Context context, String type, String bloggerName, String blogApp) {
         ARouter.getInstance().build(PATH_FRIENDS)
                 .withString("blogApp", blogApp)
                 .withString("bloggerName", bloggerName)
-                .withInt("fromType", type)
+                .withString("fromType", type)
                 .navigation(context);
     }
 

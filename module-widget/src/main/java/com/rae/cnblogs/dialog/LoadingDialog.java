@@ -16,7 +16,7 @@ public class LoadingDialog extends DefaultDialog {
     private TextView mLoadingTextView;
 
     public LoadingDialog(Context context) {
-        super(context);
+        super(context, 0);
     }
 
     @Override

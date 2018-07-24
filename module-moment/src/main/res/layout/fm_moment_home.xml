@@ -37,35 +37,25 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_home_height"
-        android:background="@drawable/bg_tab_home">
+        android:layout_height="@dimen/action_bar_height"
+        android:paddingTop="10dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.rae.cnblogs.widget.RaeSkinImageView
-                android:id="@+id/tv_post"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/default_margin"
-                android:src="@drawable/ic_moment_post"
-                app:nightColor="@color/nightIconColor" />
 
             <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
                 android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/tv_post"
-                android:layout_toLeftOf="@+id/img_mine"
-                android:layout_toRightOf="@+id/tv_post"
-                android:layout_toStartOf="@+id/img_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:tabBackground="@android:color/transparent"
                 app:tabGravity="center"
                 app:tabIndicatorColor="@color/ph1"
-                app:tabIndicatorHeight="2dp"
-                app:tabIndicatorWidth="16dp"
+                app:tabIndicatorHeight="0dp"
                 app:tabMode="fixed"
                 app:tabPadding="0dp"
                 app:tabSelectedTextColor="@color/ph1"
@@ -94,11 +84,21 @@
                 android:id="@+id/img_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_toStartOf="@+id/tv_post"
                 android:src="@drawable/ic_moment_notification"
+                app:nightColor="@color/nightIconColor" />
+
+            <com.rae.cnblogs.widget.RaeSkinImageView
+                android:id="@+id/tv_post"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:layout_marginStart="@dimen/default_margin"
+                android:src="@drawable/ic_moment_post"
                 app:nightColor="@color/nightIconColor" />
 
         </RelativeLayout>

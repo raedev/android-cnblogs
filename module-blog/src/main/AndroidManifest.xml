@@ -15,7 +15,9 @@
         <activity
             android:name=".HistoryActivity"
             android:label="@string/history" />
-        <activity android:name=".CategoryActivity" />
+        <activity
+            android:name=".CategoryActivity"
+            android:label="@string/title_category" />
 
         <service
             android:name=".CnblogsService"

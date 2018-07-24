@@ -11,7 +11,7 @@
         android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/action_bar_height" />
+        android:layout_marginTop="54dp" />
 
     <!--夜间模式遮罩层-->
     <View

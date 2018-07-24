@@ -74,6 +74,12 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.destroy();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         // 夜间模式处理

@@ -1,6 +1,7 @@
 package com.rae.cnblogs.blog.adapter;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,14 +31,16 @@ public class CategoryDragAdapter extends DragRecylerViewAdapter<CategoryBean, Ca
 
     @Override
     public void onClick(View v) {
-        int position = (int) v.getTag();
+        CategoryHolder holder = (CategoryHolder) v.getTag();
+        int position = holder.getAdapterPosition();
         CategoryBean item = getDataItem(position);
         mCategoryItemListener.onItemClick(position, item);
     }
 
     @Override
     public boolean onLongClick(View v) {
-        int position = (int) v.getTag();
+        CategoryHolder holder = (CategoryHolder) v.getTag();
+        int position = holder.getAdapterPosition();
         CategoryBean item = getDataItem(position);
         mCategoryItemListener.onItemLongClick(position, item);
         return false;
@@ -73,8 +76,10 @@ public class CategoryDragAdapter extends DragRecylerViewAdapter<CategoryBean, Ca
     @Override
     public void onBindViewHolder(@NonNull final CategoryHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        holder.itemView.setTag(position);
+        holder.itemView.setTag(holder);
         final CategoryBean item = getDataItem(position);
+        String itemName = item.getName();
+        holder.itemView.setActivated(!TextUtils.equals("推荐", itemName) & !TextUtils.equals("首页", itemName));
         holder.setTitle(item.getName());
         holder.setIsEditMode(mIsEditMode && !isLockItem(position));
         holder.setOnRemoveClickListener(new View.OnClickListener() {

@@ -17,7 +17,7 @@
             android:id="@+id/tool_bar"
             style="@style/AppToolBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/action_bar_height"
             android:fitsSystemWindows="false"
             android:gravity="center">
 
@@ -25,13 +25,13 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
+                android:layout_marginEnd="24dp"
                 android:ellipsize="end"
-                android:gravity="center"
                 android:singleLine="true"
                 android:text="@string/title"
                 android:textColor="@color/ph1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </android.support.v7.widget.Toolbar>
 

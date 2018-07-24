@@ -17,4 +17,5 @@
     <dimen name="item_blog_list_thumb_height">86dp</dimen>
     <dimen name="item_blog_list_thumb_large_height">180dp</dimen>
     <dimen name="default_padding_top">0dp</dimen>
+    <dimen name="friends_foot_padding">30dp</dimen>
 </resources>

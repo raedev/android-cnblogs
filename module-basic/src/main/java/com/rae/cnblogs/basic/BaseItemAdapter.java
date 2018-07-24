@@ -26,11 +26,17 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
         void onItemClick(Context context, T item);
     }
 
+    public interface onItemLongClickListener<T> {
+
+        void onItemLongClick(Context context, T item);
+    }
+
     private List<T> mDataList;
 
     private LayoutInflater mLayoutInflater;
     private Context mContext;
     private onItemClickListener<T> mOnItemClickListener;
+    private onItemLongClickListener<T> mOnItemLongClickListener;
 
     public BaseItemAdapter() {
     }
@@ -69,7 +75,19 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onItemClick(v.getContext(), dataItem);
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(v.getContext(), dataItem);
+                }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnItemLongClickListener != null) {
+                    mOnItemLongClickListener.onItemLongClick(v.getContext(), dataItem);
+                }
+                return false;
             }
         });
     }
@@ -167,6 +185,10 @@ public abstract class BaseItemAdapter<T, VH extends RecyclerView.ViewHolder> ext
      */
     public void setOnItemClickListener(onItemClickListener<T> listener) {
         mOnItemClickListener = listener;
+    }
+
+    public void setOnItemLongClickListener(onItemLongClickListener<T> onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
     }
 
     public void destroy() {

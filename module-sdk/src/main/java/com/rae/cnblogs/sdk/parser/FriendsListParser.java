@@ -16,44 +16,6 @@ import java.util.List;
  */
 public class FriendsListParser implements IHtmlParser<List<UserInfoBean>> {
 
-//    @Override
-//    public List<UserInfoBean> parse(String json) {
-//        try {
-//            // 解析公共部分
-//            JSONObject obj = new JSONObject(json);
-//            if (!obj.has("Users")) {
-//                return null;
-//            }
-//            JSONArray users = obj.getJSONArray("Users");
-//            int len = users.length();
-//            List<UserInfoBean> result = new ArrayList<>();
-//            for (int i = 0; i < len; i++) {
-//            /*
-//                {
-//                "DisplayName":"RJ",
-//                "Alias":"cs_net",
-//                "Remark":null,
-//                "IconName":"//pic.cnblogs.com/face/u130671.gif"
-//                }
-//            */
-//                UserInfoBean m = new UserInfoBean();
-//                JSONObject user = users.getJSONObject(i);
-//                m.setDisplayName(user.getString("DisplayName"));
-//                m.setBlogApp(user.getString("Alias"));
-//                m.setRemarkName(user.isNull("Remark") ? null : user.getString("Remark"));
-//                m.setAvatar(user.isNull("IconName") ? null : ApiUtils.getUrl(user.getString("IconName")));
-//                result.add(m);
-//            }
-//
-//
-//            return result;
-//
-//        } catch (JSONException ignored) {
-//
-//        }
-//        return null;
-//    }
-
     @Override
     public List<UserInfoBean> parse(Document document, String html) {
         List<UserInfoBean> result = new ArrayList<>();
@@ -61,11 +23,18 @@ public class FriendsListParser implements IHtmlParser<List<UserInfoBean>> {
         for (Element li : elements) {
             UserInfoBean m = new UserInfoBean();
             result.add(m);
+
+            // 头像
+            String avatarPath = ".avatar48 img"; // 搜索的
+            if (li.select(avatarPath).size() <= 0) {
+                avatarPath = ".avatar_pic img"; // 默认的
+            }
+            m.setAvatar(ApiUtils.getUrl(li.select(avatarPath).attr("src")));
             m.setUserId(li.attr("id"));
-            m.setAvatar(ApiUtils.getUrl(li.select(".avatar_pic img").attr("src")));
             m.setBlogApp(ApiUtils.getBlogApp(li.select("a[title]").attr("href")));
             m.setDisplayName(li.select("a[title]").attr("title"));
             m.setRemarkName(li.select(".remark_name a").eq(1).text());
+            m.setHasFollow(li.select(".edit").hasText());
         }
         return result;
     }
