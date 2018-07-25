@@ -37,7 +37,9 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_bar_height"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingStart="12dp"
         android:paddingTop="10dp"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"

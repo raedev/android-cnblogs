@@ -20,7 +20,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@color/default_background"
+            android:src="@color/background_divider"
             app:riv_corner_radius="32dp" />
 
 
@@ -28,7 +28,7 @@
             android:layout_width="100dp"
             android:layout_height="4dp"
             android:layout_marginLeft="9dp"
-            android:background="@color/default_background" />
+            android:background="@color/background_divider" />
 
     </LinearLayout>
 
@@ -36,14 +36,14 @@
         android:layout_width="160dp"
         android:layout_height="4dp"
         android:layout_marginBottom="11dp"
-        android:background="@color/default_background" />
+        android:background="@color/background_divider" />
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginBottom="6dp"
-        android:background="@color/default_background" />
+        android:background="@color/background_divider" />
 
 
     <RelativeLayout

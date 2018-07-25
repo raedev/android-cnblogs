@@ -111,7 +111,7 @@ public final class AppRoute {
     /**
      * 搜索
      */
-    public static final String PATH_SEARCH = "/blog/search";
+    public static final String PATH_SEARCH = "/home/search";
     /**
      * 博客评论
      */

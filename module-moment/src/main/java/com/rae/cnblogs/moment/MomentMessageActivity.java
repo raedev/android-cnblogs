@@ -1,6 +1,5 @@
 package com.rae.cnblogs.moment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -20,14 +19,13 @@ public class MomentMessageActivity extends SwipeBackBasicActivity {
 
     private MomentMessageFragment mFragment;
 
-    @SuppressLint("InvalidR2Usage")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moment_message);
         mFragment = new MomentMessageFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R2.id.content, mFragment)
+                .add(R.id.content, mFragment)
                 .commitNow();
     }
 
