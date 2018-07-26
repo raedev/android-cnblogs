@@ -60,6 +60,6 @@ public final class ApplicationCompat {
 
 
     public static boolean checkFragmentIsActive(Fragment fragment) {
-        return fragment.isVisible();
+        return fragment.isVisible() && !fragment.isDetached() && fragment.isAdded();
     }
 }

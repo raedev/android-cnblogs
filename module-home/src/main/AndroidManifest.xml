@@ -33,6 +33,10 @@
             android:label="@string/feedback"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".search.SearchActivity" />
+
+        <activity
+            android:name=".search.SearchActivity"
+            android:theme="@style/AppTheme.NoTranslucent"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 </manifest>

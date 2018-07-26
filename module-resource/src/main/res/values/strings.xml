@@ -156,7 +156,7 @@
     <string name="blog_apply">立即申请</string>
     <string name="moment_unlogin_hint">登录后，更多评论等你来发现。</string>
     <string name="title_comment">全部评论（%s）</string>
-    <string name="search_hint">搜索博客/博主/新闻/知识库</string>
+    <string name="search_hint">搜索发现更大的世界</string>
     <string name="about_me">关于我们</string>
     <string name="browse_history">浏览记录</string>
     <string name="tips_clean_cache">将清理所有博客以及离线缓存数据，是否确定清除？</string>

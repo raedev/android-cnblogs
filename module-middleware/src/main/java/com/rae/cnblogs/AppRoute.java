@@ -14,6 +14,8 @@ import android.util.Log;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.rae.cnblogs.basic.ContentEntity;
+import com.rae.cnblogs.sdk.bean.BlogType;
+import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.model.MomentMetaData;
 
@@ -177,6 +179,10 @@ public final class AppRoute {
      */
     public static final String PATH_FRAGMENT_DISCOVER = "/discover/fragment";
 
+    /**
+     * 搜索
+     */
+    public static final String PATH_FRAGMENT_BLOG_SEARCH = "/search/fragment";
 
     /**
      * 初始化
@@ -584,6 +590,21 @@ public final class AppRoute {
 
     public static Fragment newHomeFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_HOME).navigation();
+    }
+
+    /**
+     * 发现页
+     */
+    public static Fragment newSearchFragment(String keyword, BlogType type) {
+        CategoryBean category = new CategoryBean();
+        category.setName(keyword);
+        category.setType(type.getTypeName());
+        return (Fragment) ARouter
+                .getInstance()
+                .build(PATH_FRAGMENT_BLOG_SEARCH)
+                .withString("type", type.getTypeName())
+                .withParcelable("category", category)
+                .navigation();
     }
 
     /**

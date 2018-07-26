@@ -19,6 +19,7 @@ public class CategoryActivity extends BasicActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.keep_current);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Fragment fragment = CategoryFragment.newInstance(null);

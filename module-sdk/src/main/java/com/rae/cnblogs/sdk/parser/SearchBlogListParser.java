@@ -51,13 +51,13 @@ public class SearchBlogListParser extends BlogListParser {
 
             String id = getId(element.select(".searchURL").text());
 
-            String title = element.select(".searchItemTitle a").html(); // 标题
+            String title = element.select(".searchItemTitle a").text(); // 标题
             if (TextUtils.isEmpty(title)) {
                 title = element.select(".searchItemTitle").html(); // 标题
             }
             String url = element.select(".searchURL").text(); // 原文链接
 //            String avatar = getAvatar(element.select(".pfs").attr("src")); // 头像地址
-            String summary = element.select(".searchCon").html(); // 摘要
+            String summary = element.select(".searchCon").text(); // 摘要
             String author = element.select(".searchItemInfo-userName").text(); // 作者
             String authorUrl = element.select(".searchItemInfo-userName a").attr("href"); // 作者博客地址
             String blogApp = ApiUtils.getBlogApp(authorUrl);

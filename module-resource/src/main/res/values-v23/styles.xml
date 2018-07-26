@@ -9,4 +9,11 @@
         <item name="buttonStyle">@style/AppButton</item>
         <item name="editTextStyle">@style/AppEditTextStyle</item>
     </style>
+
+    <style name="AppTheme.NoTranslucent">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 </resources>

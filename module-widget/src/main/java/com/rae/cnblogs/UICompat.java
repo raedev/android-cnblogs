@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -189,5 +190,13 @@ public final class UICompat {
 
     public static void hideSoftInputFromWindow(@NonNull Activity context) {
         hideSoftInputFromWindow(context, context.getWindow().getDecorView());
+    }
+
+    /**
+     * 设置文本，并自动滚动到文本末端
+     */
+    public static void setText(@NonNull EditText view, @NonNull String text) {
+        view.setText(text);
+        view.setSelection(view.length());
     }
 }

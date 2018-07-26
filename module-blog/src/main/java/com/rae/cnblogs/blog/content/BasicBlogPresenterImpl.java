@@ -215,4 +215,8 @@ public abstract class BasicBlogPresenterImpl extends BasicPresenter<ContentListC
     protected void onStart() {
         mPageObservable.start();
     }
+
+    public BlogType getBlogType() {
+        return mBlogType;
+    }
 }

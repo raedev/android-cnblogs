@@ -93,6 +93,10 @@
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
+    <style name="SlideOverShootAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom_overshoot</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
 
     <style name="ShareIcon">
         <item name="android:layout_marginTop">22dp</item>

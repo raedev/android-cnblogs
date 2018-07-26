@@ -222,7 +222,7 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
         fragmentTransaction.commit();
     }
 
-    @OnClick(R2.id.tv_search)
+    @OnClick(R2.id.fl_search)
     public void onSearchClick() {
         AppRoute.routeToSearch(getContext());
     }

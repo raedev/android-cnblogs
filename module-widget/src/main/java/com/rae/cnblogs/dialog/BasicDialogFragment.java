@@ -68,7 +68,7 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
             window.setGravity(Gravity.BOTTOM | Gravity.FILL_HORIZONTAL);
             int margin = (int) getContext().getResources().getDimension(R.dimen.default_dialog_margin);
             InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(getContext(), R.drawable.bg_dialog_default), margin, margin, margin, margin);
-            window.setWindowAnimations(R.style.SlideAnimation);
+            window.setWindowAnimations(R.style.SlideOverShootAnimation);
             window.setBackgroundDrawable(drawable);
         }
     }

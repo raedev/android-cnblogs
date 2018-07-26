@@ -131,7 +131,7 @@ public abstract class FriendsFragment extends BasicFragment implements FriendsCo
 
     @Override
     public void onEmptyData(String msg) {
-        mPlaceholderView.setEmptyMessage(msg);
+        mPlaceholderView.empty(msg);
         mAppLayout.refreshComplete();
     }
 

@@ -59,4 +59,8 @@ public final class DbFactory {
         getBlog().clearCache();
         getAdvert().clearCache();
     }
+
+    public DbSearch getSearch() {
+        return new DbSearch();
+    }
 }

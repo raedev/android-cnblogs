@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout android:id="@+id/coordinator_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -58,7 +58,7 @@
                         android:gravity="center"
                         android:singleLine="true"
                         android:text="@string/search_hint"
-                        android:textColor="#c2c2c2"
+                        android:textColor="#9C9DA2"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -99,6 +99,8 @@
                 android:id="@+id/img_edit_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
                 android:src="@drawable/channel_manager_icon"
                 app:nightColor="@color/nightIconColor" />
 

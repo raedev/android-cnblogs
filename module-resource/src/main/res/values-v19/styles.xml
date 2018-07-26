@@ -19,6 +19,11 @@
         <item name="android:windowAnimationStyle">@style/SlideAnimation</item>
     </style>
 
+    <style name="AppTheme.NoTranslucent">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
 
     <style name="umeng_socialize_dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowTranslucentStatus">true</item>

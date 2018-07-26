@@ -10,13 +10,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_tab_home">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:padding="12dp"
-            android:src="@drawable/ic_back_closed" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,6 +19,13 @@
             android:textColor="@color/ph1"
             android:textSize="@dimen/h1" />
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:padding="12dp"
+            android:src="@drawable/ic_back_closed" />
     </FrameLayout>
 
     <FrameLayout

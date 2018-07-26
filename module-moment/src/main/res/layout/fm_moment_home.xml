@@ -89,7 +89,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_toStartOf="@+id/tv_post"
-                android:src="@drawable/ic_moment_notification"
+                android:src="@drawable/ic_moment_at_me"
                 app:nightColor="@color/nightIconColor" />
 
             <com.rae.cnblogs.widget.RaeSkinImageView

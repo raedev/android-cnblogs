@@ -20,7 +20,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/default_margin"
-            android:src="@drawable/ic_moment_at_me" />
+            android:src="@drawable/ic_moment_notification" />
     </RelativeLayout>
 
 
