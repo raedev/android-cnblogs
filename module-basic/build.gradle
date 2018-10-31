@@ -7,6 +7,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [qqappid: 'abc']
     }
 
     buildTypes {
@@ -21,6 +22,7 @@ android {
 /* 基础模块尽量少依赖其他项目，造成不必要的耦合 */
 
 dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor rootProject.ext.annotationProcessors.glide
 
     implementation rootProject.ext.dependencies.appcompat
@@ -32,10 +34,11 @@ dependencies {
     // 友盟
     api rootProject.ext.dependencies.umengCommon
     api rootProject.ext.dependencies.umengAnalytics
-    api rootProject.ext.dependencies.umShareCore
-    api rootProject.ext.dependencies.umShareQQ
-    api rootProject.ext.dependencies.umShareWechat
-    api rootProject.ext.dependencies.umengShareSina
+
+//    api rootProject.ext.dependencies.umShareCore
+//    api rootProject.ext.dependencies.umShareQQ
+//    api rootProject.ext.dependencies.umShareWechat
+//    api rootProject.ext.dependencies.umengShareSina
 
 
     api(rootProject.ext.dependencies.recyclerview, {

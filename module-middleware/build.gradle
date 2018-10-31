@@ -19,6 +19,7 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+
     }
     dexOptions {
         javaMaxHeapSize "2g"

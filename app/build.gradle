@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -21,9 +20,6 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
-        manifestPlaceholders = [
-                "qqappid": rootProject.ext.account.qqAppId
-        ]
     }
     dexOptions {
         javaMaxHeapSize "2g"
@@ -50,10 +46,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor rootProject.ext.annotationProcessors.butterknife
     annotationProcessor rootProject.ext.annotationProcessors.arouter
     implementation rootProject.ext.dependencies.appcompat
@@ -66,7 +66,6 @@ dependencies {
     implementation project(':module-widget')
     implementation project(':module-sdk')
     implementation project(':module-middleware')
-
     // 模块化
     if (!IsModule.toBoolean()) {
         implementation project(':module-user')

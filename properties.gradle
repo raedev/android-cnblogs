@@ -12,20 +12,20 @@ ext {
             keyPassword    : properties.getProperty("keystore.password", "cnblogs"),
             storePassword  : properties.getProperty("keystore.storePassword", "cnblogs"),
             // 友盟
-            umengAppKey    : properties.getProperty("umengAppKey"),
+            umengAppKey    : properties.getProperty("umengAppKey", "you_key"),
             // 腾讯Bugly
-            buglyAppId     : properties.getProperty("buglyAppId"),
+            buglyAppId     : properties.getProperty("buglyAppId", "you_key"),
             // 友盟
-            leancloudAppId : properties.getProperty("leancloudAppId"),
-            leancloudAppKey: properties.getProperty("leancloudAppKey"),
+            leancloudAppId : properties.getProperty("leancloudAppId", "you_key"),
+            leancloudAppKey: properties.getProperty("leancloudAppKey", "you_key"),
             // 微信分享
-            wechatAppId    : properties.getProperty("wechatAppId"),
-            wechatAppSecret: properties.getProperty("wechatAppSecret"),
+            wechatAppId    : properties.getProperty("wechatAppId", "you_key"),
+            wechatAppSecret: properties.getProperty("wechatAppSecret", "you_key"),
             // 微博分享
-            weiboAppId     : properties.getProperty("weiboAppId"),
-            weiboAppSecret : properties.getProperty("weiboAppSecret"),
+            weiboAppId     : properties.getProperty("weiboAppId", "you_key"),
+            weiboAppSecret : properties.getProperty("weiboAppSecret", "you_key"),
             // QQ分享
-            qqAppId        : properties.getProperty("qqAppId"),
-            qqAppSecret    : properties.getProperty("qqAppSecret"),
+            qqAppId        : properties.getProperty("qqAppId", "you_key"),
+            qqAppSecret    : properties.getProperty("qqAppSecret", "you_key")
     ]
 }

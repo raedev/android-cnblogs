@@ -4,10 +4,10 @@ ext {
     // Android 扩展配置
     android = [
             versionCode      : 8, // 版本号
-            compileSdkVersion: 27,
-            targetSdkVersion : 27,
+            compileSdkVersion: 28,
+            targetSdkVersion : 28,
             minSdkVersion    : 17,
-            supportVersion   : '27.1.1'
+            supportVersion   : '28.0.0'
     ]
 
     // 依赖配置
@@ -18,6 +18,7 @@ ext {
             recyclerview       : 'com.android.support:recyclerview-v7:' + ext.android.supportVersion,
             annotations        : 'com.android.support:support-annotations:' + ext.android.supportVersion,
             cardview           : 'com.android.support:cardview-v7:' + ext.android.supportVersion,
+            supportV4          : 'com.android.support:support-v4:' + ext.android.supportVersion,
             rxjava             : 'io.reactivex.rxjava2:rxjava:2.1.0',
             rxandroid          : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             butterknife        : 'com.jakewharton:butterknife:9.0.0-SNAPSHOT',
@@ -35,7 +36,7 @@ ext {
             rxlifecycle        : 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:2.2.1',
             skin               : 'skin.support:skin-support:3.1.0-beta',
             skinDesign         : 'skin.support:skin-support-design:3.1.0-beta',
-            raeDesignExt       : 'com.rae.widget:design-ext:1.0.2',
+            raeDesignExt       : 'com.rae.widget:design-ext:28.0.0',
             ptr                : 'in.srain.cube:ultra-ptr:1.0.11',
             xRecyclerView      : 'com.github.raee:XRecyclerView:1.3.3',
             roundedImage       : 'com.makeramen:roundedimageview:2.3.0',
@@ -43,13 +44,14 @@ ext {
             glide              : 'com.github.bumptech.glide:glide:4.0.0',
 
             // 友盟统计-公共库
-            umengCommon        : 'com.umeng.sdk:common:1.5.1',
+            umengCommon        : 'com.umeng.sdk:common:1.5.3',
             // 友盟统计-APP分析库
             umengAnalytics     : 'com.umeng.sdk:analytics:7.5.3',
-            umShareCore        : 'com.umeng.sdk:share-core:6.9.2',
-            umShareQQ          : 'com.umeng.sdk:share-qq:6.9.2.0',
-            umShareWechat      : 'com.umeng.sdk:share-wechat:6.9.2',
-            umengShareSina     : 'com.umeng.sdk:share-sina:6.9.2',
+
+//            umShareCore        : 'com.umeng.sdk:share-core:6.9.2',
+//            umShareQQ          : 'com.umeng.sdk:share-qq:6.9.2.0',
+//            umShareWechat      : 'com.umeng.sdk:share-wechat:6.9.2',
+//            umengShareSina     : 'com.umeng.sdk:share-sina:6.9.2',
 
             greendao           : 'org.greenrobot:greendao:3.2.2',
             // 美团渠道包库
