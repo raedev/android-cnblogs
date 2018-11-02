@@ -28,7 +28,7 @@ public class BlogListParser implements IHtmlParser<List<BlogBean>> {
 
     DbBlog mDbBlog;
 
-    BlogListParser() {
+    public BlogListParser() {
         mDbBlog = DbFactory.getInstance().getBlog();
     }
 

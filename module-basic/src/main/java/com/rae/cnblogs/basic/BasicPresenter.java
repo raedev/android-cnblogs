@@ -66,4 +66,5 @@ public abstract class BasicPresenter<V extends IPresenterView> implements IPrese
     public LifecycleProvider getLifecycleProvider() {
         return mLifecycleProvider;
     }
+
 }
