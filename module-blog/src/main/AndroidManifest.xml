@@ -1,27 +1,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.blog">
+          package="com.rae.cnblogs.blog">
 
     <application
         android:allowBackup="true"
         android:fullBackupContent="true">
 
-        <activity android:name=".ContentDetailActivity" />
+        <activity android:name=".ContentDetailActivity"/>
         <activity
             android:name=".CommentActivity"
-            android:label="@string/label_comment" />
+            android:label="@string/label_comment"/>
         <activity
             android:name=".FavoritesActivity"
-            android:label="@string/my_favorites" />
+            android:label="@string/my_favorites"/>
         <activity
             android:name=".HistoryActivity"
-            android:label="@string/history" />
+            android:label="@string/history"/>
         <activity
             android:name=".CategoryActivity"
-            android:label="@string/title_category" />
+            android:label="@string/title_category"/>
+
+        <activity
+            android:name=".BloggerActivity"/>
 
         <service
             android:name=".CnblogsService"
             android:exported="false"
-            android:label="@string/service_name" />
+            android:label="@string/service_name"/>
     </application>
 </manifest>

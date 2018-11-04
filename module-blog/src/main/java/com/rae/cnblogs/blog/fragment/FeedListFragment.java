@@ -1,5 +1,6 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.blog.R;
 import com.rae.cnblogs.blog.R2;
+import com.rae.cnblogs.blog.adapter.FeedItemAdapter;
 import com.rae.cnblogs.blog.feed.FeedContract;
 import com.rae.cnblogs.blog.feed.FeedPresenterImpl;
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
@@ -58,7 +60,7 @@ public class FeedListFragment extends BasicFragment implements FeedContract.View
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mBlogApp = getArguments().getString("blogApp");
-            mFeedPresenter = new FeedPresenterImpl(getContext(),this);
+            mFeedPresenter = new FeedPresenterImpl(this);
         }
     }
 
@@ -82,12 +84,13 @@ public class FeedListFragment extends BasicFragment implements FeedContract.View
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseItemAdapter.onItemClickListener<UserFeedBean>() {
             @Override
-            public void onItemClick(UserFeedBean item) {
+            public void onItemClick(Context context, UserFeedBean item) {
                 if ("发表评论".equals(item.getAction())) {
                     return;
                 }
-                AppRoute.jumpToWeb(getContext(), item.getUrl());
+                AppRoute.routeToWeb(getContext(), item.getUrl());
             }
+
         });
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override

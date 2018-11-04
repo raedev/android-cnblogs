@@ -36,4 +36,5 @@
     <color name="black">#000000</color>
     <color name="tabIndicatorColor">#2c92ff</color>
     <color name="search_item_color">#FF555555</color>
+    <color name="blogger_indicator_color">#FF3BA7EE</color>
 </resources>

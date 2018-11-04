@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs">
+          package="com.rae.cnblogs">
 
     <application
         android:allowBackup="true"
@@ -7,7 +7,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--主界面-->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait">
 
         </activity>
     </application>

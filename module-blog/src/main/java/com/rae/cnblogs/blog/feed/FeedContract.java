@@ -26,5 +26,6 @@ public interface FeedContract {
     }
 
     interface Presenter extends IPresenter {
+        void loadMore();
     }
 }

@@ -15,6 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:elevation="0dp">
 
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
@@ -46,147 +47,210 @@
                     android:minHeight="240dp"
                     android:scaleType="center"/>
 
-                <!--圆形头像-->
-                <RelativeLayout
-                    android:id="@+id/ll_blog_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="140dp">
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:layout_width="62dp"
-                        android:layout_height="62dp"
-                        android:layout_centerInParent="true"
-                        android:src="@color/white"
-                        app:riv_corner_radius="74dp"/>
-
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/img_blog_avatar"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerInParent="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/boy"
-                        app:riv_corner_radius="70dp"/>
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/tv_blogger_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/ll_blog_avatar"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/ll_blog_avatar"
-                    android:paddingLeft="12dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/h1"/>
-
-
-                <!--个人信息-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_blogger_name"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@+id/ll_blog_avatar"
-                    android:gravity="start|center_vertical"
-                    android:paddingBottom="6dp"
-                    android:paddingTop="6dp">
+                    android:layout_marginTop="160dp"
+                    android:background="@drawable/bg_blogger_blur_new"
+                    android:orientation="vertical">
 
 
-                    <LinearLayout
-                        android:id="@+id/layout_account_follow"
+                    <!--圆形头像-->
+                    <RelativeLayout
+                        android:id="@+id/ll_blog_avatar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp">
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:paddingTop="20dp">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:layout_width="62dp"
+                            android:layout_height="62dp"
+                            android:src="@color/white"
+                            app:riv_corner_radius="74dp"/>
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/img_blog_avatar"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/boy"
+                            app:riv_corner_radius="70dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv_blogger_name"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="关注"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"/>
-
-                        <TextView
-                            android:id="@+id/tv_follow_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"
+                            android:layout_marginStart="18dp"
+                            android:layout_toEndOf="@id/img_blog_avatar"
+                            android:paddingStart="12dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/h1"
                             android:textStyle="bold"/>
 
-                    </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_blogger_introduce"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_blogger_name"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_toEndOf="@id/img_blog_avatar"
+                            android:paddingStart="12dp"
+                            android:text="@string/blogger_default_introduce"
+                            android:textColor="#FF9B9B9B"
+                            android:textSize="@dimen/h2"/>
 
+
+                        <LinearLayout
+                            android:id="@+id/rl_blogger_follow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center">
+
+
+                            <ProgressBar
+                                android:id="@+id/pb_blogger_follow"
+                                style="@style/Widget.AppCompat.ProgressBar"
+                                android:layout_width="62dp"
+                                android:layout_height="16dp"
+                                android:indeterminateDuration="3000"
+                                android:indeterminateTint="@android:color/white"
+                                android:indeterminateTintMode="src_in"
+                                android:visibility="gone"/>
+
+                            <Button
+                                android:id="@+id/btn_blogger_follow"
+                                android:layout_width="62dp"
+                                android:layout_height="26dp"
+                                android:background="@drawable/bg_btn_follow_blogger"
+                                android:text="@string/following"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h3"
+                                android:textStyle="bold"
+                                android:visibility="visible"/>
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                    <!--个人信息-->
                     <LinearLayout
-                        android:id="@+id/layout_account_fans"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp">
+                        android:layout_marginBottom="40dp"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="start|center_vertical"
+                        android:paddingBottom="6dp"
+                        android:paddingTop="6dp">
 
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/layout_account_fans"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="粉丝"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"/>
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp">
 
-                        <TextView
-                            android:id="@+id/tv_fans_count"
-                            android:layout_width="wrap_content"
+
+                            <TextView
+                                android:id="@+id/tv_fans_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="0"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h2"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="粉丝"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h3"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout_account_follow"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"
-                            android:textStyle="bold"/>
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_follow_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="0"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h2"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="关注"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h3"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_account_age"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp">
+
+
+                            <TextView
+                                android:id="@+id/tv_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="0"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h2"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="园龄"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/h3"/>
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layout_account_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="园龄"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"/>
-
-                        <TextView
-                            android:id="@+id/tv_age"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"
-                            android:textStyle="bold"/>
-
-                    </LinearLayout>
-
 
                 </LinearLayout>
 
@@ -204,72 +268,24 @@
                 app:layout_collapseParallaxMultiplier="1"
                 app:navigationIcon="@drawable/ic_back_white">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_title_1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="48dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/h1"
-                        android:visibility="gone"/>
-
-
-                    <LinearLayout
-                        android:id="@+id/rl_blogger_follow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="12dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_search"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
-                            android:src="@drawable/ic_nav_home_search"
-                            android:tint="@android:color/white"/>
-
-                        <ProgressBar
-                            android:id="@+id/pb_blogger_follow"
-                            style="@style/Widget.AppCompat.ProgressBar"
-                            android:layout_width="62dp"
-                            android:layout_height="16dp"
-                            android:indeterminateDuration="3000"
-                            android:indeterminateTint="@android:color/white"
-                            android:indeterminateTintMode="src_in"
-                            android:visibility="gone"/>
-
-                        <Button
-                            android:id="@+id/btn_blogger_follow"
-                            style="@style/AppButton"
-                            android:layout_width="62dp"
-                            android:layout_height="26dp"
-                            android:background="@drawable/bg_btn_follow"
-                            android:text="@string/following"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/h3"
-                            android:textStyle="bold"
-                            android:visibility="gone"/>
-                    </LinearLayout>
-
-                </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="48dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/h1"
+                    android:visibility="gone"/>
             </android.support.v7.widget.Toolbar>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <!--TAB-->
-        <android.support.design.widget.RaeSkinDesignTabLayout
+        <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
             android:id="@+id/tab_category"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -279,7 +295,7 @@
             app:layout_collapseParallaxMultiplier="0.75"
             app:layout_scrollFlags="scroll"
             app:tabBackground="@android:color/transparent"
-            app:tabIndicatorColor="@color/ph1"
+            app:tabIndicatorColor="@color/blogger_indicator_color"
             app:tabIndicatorHeight="2dp"
             app:tabIndicatorWidth="12dp"
             app:tabMode="fixed"
@@ -297,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:text="博客"/>
 
-        </android.support.design.widget.RaeSkinDesignTabLayout>
+        </com.rae.cnblogs.widget.RaeSkinDesignTabLayout>
 
     </android.support.design.widget.AppBarLayout>
 

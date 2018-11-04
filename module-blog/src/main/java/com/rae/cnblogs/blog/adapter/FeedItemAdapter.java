@@ -1,10 +1,14 @@
 package com.rae.cnblogs.blog.adapter;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rae.cnblogs.basic.AppImageLoader;
+import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.blog.R;
+import com.rae.cnblogs.blog.holder.FeedViewHolder;
 import com.rae.cnblogs.sdk.bean.UserFeedBean;
 import com.rae.cnblogs.theme.ThemeCompat;
 
@@ -35,7 +39,7 @@ public class FeedItemAdapter extends BaseItemAdapter<UserFeedBean, FeedViewHolde
         }
 
         if (!TextUtils.isEmpty(m.getAvatar())) {
-            RaeImageLoader.displayImage(m.getAvatar(), holder.avatarView);
+            AppImageLoader.displayAvatar(m.getAvatar(), holder.avatarView);
         }
 
         holder.feedActionView.setImageResource(ThemeCompat.isNight() ? R.drawable.link_allshare_pressed : R.drawable.ic_share_link);

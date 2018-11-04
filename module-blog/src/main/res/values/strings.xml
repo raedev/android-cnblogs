@@ -4,4 +4,5 @@
     <string name="enter_category">点击进入分类</string>
     <string name="recommend_category">推荐分类</string>
     <string name="click_add_category">点击添加分类</string>
+    <string name="title_blogger">博主信息页</string>
 </resources>

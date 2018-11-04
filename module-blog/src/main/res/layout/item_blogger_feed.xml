@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_margin"
+    android:paddingLeft="@dimen/default_margin"
+    android:paddingRight="@dimen/default_margin"
+    android:paddingTop="@dimen/default_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_blog_avatar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_user_avatar"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_default_user_avatar"
+            app:riv_corner_radius="32dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp">
+
+            <TextView
+                android:id="@+id/tv_blog_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAE敲代码"
+                android:textColor="@color/ph4"
+                android:textSize="@dimen/h3"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/tv_blog_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_blog_author"
+                android:layout_marginTop="4dp"
+                android:text="今天18:30"
+                android:textAlignment="gravity"
+                android:textColor="@color/ph4"
+                android:textSize="@dimen/h4"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.rae.cnblogs.widget.RaeTextView
+                android:id="@+id/tv_blog_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawablePadding="5dp"
+                android:gravity="bottom"
+                android:text="200"
+                android:textColor="@color/ph4"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_blog_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:lineSpacingExtra="6sp"
+        android:text="标题"
+        android:textColor="@color/ph1"
+        android:textSize="@dimen/summary"/>
+
+    <LinearLayout
+        android:id="@+id/ll_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_tag"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_blog_action"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:background="@color/dividerColor"
+            android:scaleType="center"
+            android:src="@drawable/ic_share_link"/>
+
+
+        <TextView
+            android:id="@+id/tv_blog_action_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:text="标签"
+            android:textColor="@color/ph2"
+            android:textSize="@dimen/h2"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

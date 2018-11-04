@@ -165,4 +165,5 @@
     <string name="default_image_desc">正在加载</string>
     <string name="loading_blog_content">加载博客中</string>
     <string name="unfollow">取消关注</string>
+    <string name="blogger_default_introduce">这人很懒，什么都没有留</string>
 </resources>

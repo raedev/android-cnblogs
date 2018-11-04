@@ -7,7 +7,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.RaeTabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,16 +29,17 @@ import com.rae.cnblogs.basic.GlideApp;
 import com.rae.cnblogs.basic.GlideRequest;
 import com.rae.cnblogs.blog.blogger.BloggerContract;
 import com.rae.cnblogs.blog.blogger.BloggerPresenterImpl;
+import com.rae.cnblogs.blog.fragment.FeedListFragment;
 import com.rae.cnblogs.blog.fragment.MultipleTypeBlogListFragment;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.RaeSkinDesignTabLayout;
 import com.rae.swift.app.RaeFragmentAdapter;
-import com.rae.cnblogs.blog.R;
-import com.rae.cnblogs.blog.R2;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -77,8 +77,8 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     @BindView(R2.id.btn_blogger_follow)
     Button mFollowView;
 
-    @BindView(R2.id.tool_bar)
-    Toolbar mToolbar;
+//    @BindView(R2.id.tool_bar)
+//    Toolbar mToolbar;
 
     @BindView(R2.id.vp_blogger)
     ViewPager mViewPager;
@@ -92,7 +92,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     @BindView(R2.id.layout_account_follow)
     View mFollowLayout;
 
-    @BindView(R2.id.tv_title)
+    @BindView(R2.id.tv_title_1)
     TextView mTitleView;
 
     @BindView(R2.id.app_bar)
@@ -104,18 +104,13 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     @BindView(R2.id.pb_blogger_follow)
     View mFollowProgressBar;
 
-//    @BindView(R2.id.img_alpha)
-//    ImageView mAlphaImageView;
-
-//    @BindView(R2.id.layout_blogger)
-//    BloggerLayout mBloggerLayout;
 
     String mBlogApp;
 
     @Nullable
     private FriendsInfoBean mUserInfo;
     private BloggerContract.Presenter mBloggerPresenter;
-    //    private FeedListFragment mFeedListFragment;
+    private FeedListFragment mFeedListFragment;
     private MultipleTypeBlogListFragment mBlogListFragment;
 
     @Override
@@ -125,7 +120,6 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         ButterKnife.bind(this);
         mFollowView.setEnabled(false);
 
-//        showHomeAsUp(mToolbar);
         mBlogApp = getIntent().getStringExtra("blogApp");
 
         if (mBlogApp == null) {
@@ -138,7 +132,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         CategoryBean category = new CategoryBean();
         category.setCategoryId(getBlogApp()); // 这里设置blogApp
 
-//        mFeedListFragment = FeedListFragment.newInstance(getBlogApp());
+        mFeedListFragment = FeedListFragment.newInstance(getBlogApp());
         mBlogListFragment = mBlogListFragment.newInstance(category);
 
         adapter.add(getString(R.string.feed), mFeedListFragment);
@@ -148,7 +142,9 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         mTabLayout.setupWithViewPager(mViewPager);
 
         mTabLayout.addOnTabSelectedListener(this);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+        }
         mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             final Animation mAnimation = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
 
@@ -158,20 +154,16 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
                 mAnimation.setDuration(800);
 
                 if (state == State.COLLAPSED) {
-//                    ThemeCompat.refreshStatusColor(getContext(), true);
-//                    setHomeAsUpIndicator(R.drawable.ic_back);
-//                    mFollowView.setBackgroundResource(R.drawable.bg_btn_follow_drak);
-//                    mFollowView.setTextColor(ContextCompat.getColor(getContext(), R.color.ph2));
+                    ThemeCompat.refreshStatusColor(BloggerActivity.this, true);
+                    setHomeAsUpIndicator(R.drawable.ic_back);
                     mTitleView.setVisibility(View.VISIBLE);
                     mTitleView.clearAnimation();
                     mTitleView.startAnimation(mAnimation);
                 } else {
                     mTitleView.clearAnimation();
                     mTitleView.setVisibility(View.GONE);
-//                    ThemeCompat.refreshStatusColor(getContext(), false);
-//                    setHomeAsUpIndicator(R.drawable.ic_back_white);
-//                    mFollowView.setBackgroundResource(R.drawable.bg_btn_follow);
-//                    mFollowView.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                    ThemeCompat.refreshStatusColor(BloggerActivity.this, false);
+                    setHomeAsUpIndicator(R.drawable.ic_back_white);
                 }
             }
 
@@ -181,31 +173,6 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
             }
         });
 
-//        mBloggerLayout.setOnScrollPercentChangeListener(new BloggerLayout.ScrollPercentChangeListener() {
-//            @Override
-//            public void onScrollPercentChange(float percent) {
-//                mBloggerBackgroundView.setAlpha(percent);
-////                mFollowView.setAlpha(percent > 0 ? percent : 1);
-//                mTitleView.setAlpha(percent);
-//
-//                if (percent > 0.5) {
-//                    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
-//                    mFollowView.setBackgroundResource(R.drawable.bg_btn_follow_drak);
-//                    mFollowView.setTextColor(ContextCompat.getColor(getContext(), R.color.ph2));
-//                } else {
-//                    getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_white);
-//                    mFollowView.setBackgroundResource(R.drawable.bg_btn_follow);
-//                    mFollowView.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
-//                }
-//            }
-//        });
-
-//        mBloggerLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                mBloggerLayout.scrollTo(0, 0);
-//            }
-//        });
 
         // 获取博主信息
         mBloggerPresenter = new BloggerPresenterImpl(this);
@@ -221,7 +188,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         mTabLayout.removeOnTabSelectedListener(this);
     }
 
-//    @Override
+    //    @Override
     public void onLoadBloggerInfo(final FriendsInfoBean userInfo) {
         mUserInfo = userInfo;
         mFansLayout.setClickable(true);
@@ -256,12 +223,20 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @Override
     public void onFollowSuccess() {
+        mFollowProgressBar.setVisibility(ViewPager.GONE);
+        mFollowView.setVisibility(View.VISIBLE);
 
+        mFollowView.setText(mBloggerPresenter.isFollowed() ? R.string.cancel_follow : R.string.following);
+        setResult(RESULT_OK);
+
+        // 发送通知
+        EventBus.getDefault().post(new UserInfoEvent());
     }
 
     @Override
     public void onFollowFailed(String message) {
-
+        mFollowProgressBar.setVisibility(ViewPager.GONE);
+        mFollowView.setVisibility(View.VISIBLE);
     }
 
     private void showAvatar(String blogApp, final String url) {
@@ -307,14 +282,14 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
                 .transition(DrawableTransitionOptions.withCrossFade());
     }
 
-//    @Override
+    //    @Override
     public String getBlogApp() {
         return mBlogApp;
     }
 
     @Override
     public void onLoadBloggerInfoFailed(String msg) {
-        
+
     }
 
 //    @Override
@@ -399,14 +374,14 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         } else {
             images.add(mUserInfo.getAvatar());
         }
-//        AppRoute.jumpToImagePreview(this, images, 0);
+        AppRoute.routeToImagePreview(this, images, 0);
     }
 
 
-    @OnClick(R2.id.tool_bar)
-    public void onTitleClick() {
-        takeScrollToTop(mViewPager.getCurrentItem());
-    }
+//    @OnClick(R2.id.tool_bar)
+//    public void onTitleClick() {
+//        takeScrollToTop(mViewPager.getCurrentItem());
+//    }
 
     /**
      * 返回顶部
