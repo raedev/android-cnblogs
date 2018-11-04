@@ -26,6 +26,11 @@ public class FriendsInfoBean extends UserInfoBean {
      */
     private String snsAge;
 
+    /**
+     * 自我介绍
+     */
+    private String introduce;
+
     public String getFans() {
         return fans;
     }
@@ -56,5 +61,13 @@ public class FriendsInfoBean extends UserInfoBean {
 
     public void setSnsAge(String snsAge) {
         this.snsAge = snsAge;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 }

@@ -24,6 +24,9 @@ public class FriendsInfoParser extends AbsUserInfoParser<FriendsInfoBean> {
         Elements profileLi = document.select("#user_profile li");
         for (Element element : profileLi) {
             String text = element.text();
+            if (text.contains("自我介绍")) {
+                result.setIntroduce(text.replace("自我介绍：", "").trim());
+            }
             if (text.contains("园龄")) {
                 result.setSnsAge(text.replace("园龄：", "").trim());
             }

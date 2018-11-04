@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.jcodecraeer.xrecyclerview.AppBarStateChangeListener;
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.GlideApp;
@@ -103,6 +104,9 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @BindView(R2.id.pb_blogger_follow)
     View mFollowProgressBar;
+
+    @BindView(R2.id.tv_blogger_introduce)
+    TextView mIntroduceView;
 
 
     String mBlogApp;
@@ -194,7 +198,9 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         mFansLayout.setClickable(true);
         mFollowLayout.setClickable(true);
         mFollowView.setEnabled(true);
-
+        if (!TextUtils.isEmpty(userInfo.getIntroduce())) {
+            mIntroduceView.setText(userInfo.getIntroduce());
+        }
         if (!TextUtils.isEmpty(userInfo.getSnsAge())) {
             mSnsAgeView.setText(userInfo.getSnsAge());
         }
@@ -237,6 +243,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     public void onFollowFailed(String message) {
         mFollowProgressBar.setVisibility(ViewPager.GONE);
         mFollowView.setVisibility(View.VISIBLE);
+        UICompat.toast(this, message);
     }
 
     private void showAvatar(String blogApp, final String url) {
@@ -289,47 +296,8 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @Override
     public void onLoadBloggerInfoFailed(String msg) {
-
+        UICompat.toast(this, msg);
     }
-
-//    @Override
-//    public void onLoadBloggerInfoFailed(String msg) {
-//        AppUI.toast(this, msg);
-//    }
-
-//    @Override
-//    public void onFollowFailed(String msg) {
-//        AppUI.dismiss();
-//        mFollowProgressBar.setVisibility(ViewPager.GONE);
-//        mFollowView.setVisibility(View.VISIBLE);
-//        AppUI.toast(this, msg);
-//    }
-
-//    @Override
-//    public void onFollowSuccess() {
-//        AppUI.dismiss();
-//
-//        mFollowProgressBar.setVisibility(ViewPager.GONE);
-//        mFollowView.setVisibility(View.VISIBLE);
-//
-//        mFollowView.setText(mBloggerPresenter.isFollowed() ? R.string.cancel_follow : R.string.following);
-//        setResult(RESULT_OK);
-//
-//        // 发送通知
-//        EventBus.getDefault().post(new UserInfoEvent());
-//    }
-
-//    @Override
-//    public void onNotLogin() {
-////        AppUI.toastInCenter(getContext(), getString(R.string.blogger_need_login));
-//        AppRoute.jumpToLogin(this);
-//        finish();
-//    }
-
-//    @Override
-//    protected void onStatusBarColorChanged() {
-//    }
-
 
     /**
      * 粉丝
