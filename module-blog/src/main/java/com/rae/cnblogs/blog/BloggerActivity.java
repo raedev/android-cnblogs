@@ -127,7 +127,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         mBlogApp = getIntent().getStringExtra("blogApp");
 
         if (mBlogApp == null) {
-//            AppUI.failed(this, "BlogApp为空！");
+            UICompat.failed(this, "BlogApp为空！");
             finish();
             return;
         }
