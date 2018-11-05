@@ -174,9 +174,9 @@ public class DbBlog {
     @Nullable
     public List<BlogBean> getList(String category, int page, BlogType type) {
         QueryBuilder<BlogBean> builder = mSession.getBlogBeanDao().queryBuilder();
-        return builder.where(UserBlogInfoDao.Properties.BlogType.eq(type.getTypeName()))
-                .where(UserBlogInfoDao.Properties.BlogType.eq(category))
-                .orderDesc(UserBlogInfoDao.Properties.BlogId)
+        return builder.where(BlogBeanDao.Properties.BlogType.eq(type.getTypeName()))
+                .where(BlogBeanDao.Properties.CategoryId.eq(category))
+                .orderDesc(BlogBeanDao.Properties.BlogId)
                 .offset(page * 20)
                 .limit(20)
                 .list();

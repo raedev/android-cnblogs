@@ -137,7 +137,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         category.setCategoryId(getBlogApp()); // 这里设置blogApp
 
         mFeedListFragment = FeedListFragment.newInstance(getBlogApp());
-        mBlogListFragment = mBlogListFragment.newInstance(category);
+        mBlogListFragment = MultipleTypeBlogListFragment.newInstance(category);
 
         adapter.add(getString(R.string.feed), mFeedListFragment);
         adapter.add(getString(R.string.blog), mBlogListFragment);
