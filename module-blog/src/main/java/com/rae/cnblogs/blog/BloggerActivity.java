@@ -30,11 +30,11 @@ import com.rae.cnblogs.basic.GlideApp;
 import com.rae.cnblogs.basic.GlideRequest;
 import com.rae.cnblogs.blog.blogger.BloggerContract;
 import com.rae.cnblogs.blog.blogger.BloggerPresenterImpl;
+import com.rae.cnblogs.blog.fragment.BloggerListFragment;
 import com.rae.cnblogs.blog.fragment.FeedListFragment;
 import com.rae.cnblogs.blog.fragment.MultipleTypeBlogListFragment;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
-import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.event.UserInfoEvent;
 import com.rae.cnblogs.theme.ThemeCompat;
@@ -133,11 +133,9 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         }
 
         RaeFragmentAdapter adapter = new RaeFragmentAdapter(getSupportFragmentManager());
-        CategoryBean category = new CategoryBean();
-        category.setCategoryId(getBlogApp()); // 这里设置blogApp
 
         mFeedListFragment = FeedListFragment.newInstance(getBlogApp());
-        mBlogListFragment = MultipleTypeBlogListFragment.newInstance(category);
+        mBlogListFragment = BloggerListFragment.newInstance(getBlogApp());
 
         adapter.add(getString(R.string.feed), mFeedListFragment);
         adapter.add(getString(R.string.blog), mBlogListFragment);

@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BasicFragment extends Fragment {
+public abstract class BasicFragment extends Fragment implements  IPresenterView {
 
     @Nullable
     private Unbinder mUnBinder;

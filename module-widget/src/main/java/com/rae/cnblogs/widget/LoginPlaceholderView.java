@@ -63,7 +63,7 @@ public class LoginPlaceholderView extends PlaceholderView implements Runnable {
         // 定时器
         removeCallbacks(this);
         // 连接超时
-        postDelayed(this, 15000);
+        postDelayed(this, 6000);
     }
 
     @Override
