@@ -183,7 +183,7 @@ try{
 						$("#blog_content").html(blog.content);
 						if($(".math").length>0){
                             // 渲染数学公式
-                            alert('mathjax');
+                            alert('正在渲染数学公式');
                             cb_mathjax_render();
 						}
 					}
@@ -204,7 +204,22 @@ try{
 
         }
 
+
     </script>
+
+    <!--支持数学公式渲染 MathJax-->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js']
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -244,6 +259,7 @@ try{
                 }
             }
         }
+
 
     </script>
 

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.rae.cnblogs">
+    package="com.rae.cnblogs">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,6 @@
         <!--主界面-->
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:configChanges="keyboard|keyboardHidden|orientation" />
     </application>
 </manifest>

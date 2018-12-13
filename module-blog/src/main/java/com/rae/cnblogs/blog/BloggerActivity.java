@@ -102,8 +102,8 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 //    @BindView(R2.id.view_bg_holder)
 //    View mBloggerBackgroundView;
 
-    @BindView(R2.id.pb_blogger_follow)
-    View mFollowProgressBar;
+//    @BindView(R2.id.pb_blogger_follow)
+//    View mFollowProgressBar;
 
     @BindView(R2.id.tv_blogger_introduce)
     TextView mIntroduceView;
@@ -227,7 +227,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @Override
     public void onFollowSuccess() {
-        mFollowProgressBar.setVisibility(ViewPager.GONE);
+//        mFollowProgressBar.setVisibility(ViewPager.GONE);
         mFollowView.setVisibility(View.VISIBLE);
 
         mFollowView.setText(mBloggerPresenter.isFollowed() ? R.string.cancel_follow : R.string.following);
@@ -239,7 +239,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @Override
     public void onFollowFailed(String message) {
-        mFollowProgressBar.setVisibility(ViewPager.GONE);
+//        mFollowProgressBar.setVisibility(ViewPager.GONE);
         mFollowView.setVisibility(View.VISIBLE);
         UICompat.toast(this, message);
     }
@@ -321,7 +321,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         if (mUserInfo == null) return;
 
 //        AppUI.loading(this);
-        mFollowProgressBar.setVisibility(ViewPager.VISIBLE);
+//        mFollowProgressBar.setVisibility(ViewPager.VISIBLE);
         mFollowView.setVisibility(View.GONE);
         mBloggerPresenter.doFollow();
     }

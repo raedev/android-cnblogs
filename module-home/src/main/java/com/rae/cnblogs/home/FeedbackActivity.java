@@ -576,6 +576,7 @@ public class FeedbackActivity extends SwipeBackBasicActivity {
                 holder.content =
                         convertView.findViewById(Resources.id
                                 .avoscloud_feedback_content(FeedbackActivity.this));
+                holder.content.setTextIsSelectable(true);
                 holder.timestamp =
                         convertView.findViewById(Resources.id
                                 .avoscloud_feedback_timestamp(FeedbackActivity.this));

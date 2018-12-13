@@ -1,5 +1,8 @@
 package com.rae.cnblogs.blog.detail;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -18,9 +21,15 @@ import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.api.INewsApi;
 import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
+import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.db.DbBlog;
 import com.rae.cnblogs.sdk.db.DbFactory;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -36,6 +45,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContract.View> implements ContentDetailContract.Presenter {
 
+    private final CnblogAppConfig mAppConfig;
+    private final ConnectivityManager mConnectivityManager;
     // 博客数据库
     private DbBlog mDbBlog;
     private IBlogApi mBlogApi;
@@ -45,8 +56,19 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
 
     public BlogDetailPresenterImpl(ContentDetailContract.View view) {
         super(view);
+        mConnectivityManager = (ConnectivityManager) view.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        mAppConfig = CnblogAppConfig.getInstance(getContext());
         mDbBlog = DbFactory.getInstance().getBlog();
         mBlogApi = CnblogsApiFactory.getInstance(getContext()).getBlogApi();
+    }
+
+    private boolean isWIFI() {
+        NetworkInfo networkInfo = mConnectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    private boolean networkIsOk() {
+        return mConnectivityManager.getActiveNetworkInfo() != null;
     }
 
 
@@ -199,6 +221,25 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
         // 请求内容
         AndroidObservable.create(fetchContentSource())
                 .with(this)
+
+                // 离线模式下处理图片
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String content) throws Exception {
+
+                        // 网络不可用、WIFI情况、 关闭智能无图模式
+                        if (!networkIsOk() || isWIFI() || !mAppConfig.disableBlogImage())
+                            return content;
+
+                        Document document = Jsoup.parse(content);
+                        Elements elements = document.select("img");
+                        for (Element element : elements) {
+                            element.attr("src", "file:///android_asset/images/placeholder.png");
+                        }
+
+                        return document.html();
+                    }
+                })
                 .map(new Function<String, BlogBean>() {
                     @Override
                     public BlogBean apply(String content) {
@@ -322,7 +363,6 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                         return content;
                     }
                 });
-
 
         return Observable.concat(local, network, source).take(1);
     }

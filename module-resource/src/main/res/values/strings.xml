@@ -75,7 +75,7 @@
     <string name="please_login">登 录</string>
     <string name="introduction">发现更大的技术世界</string>
     <string name="github_issue_url">http://www.raeblog.com/cnblogs/issues</string>
-    <string name="github_url">https://github.com/raee/android-cnblogs</string>
+    <string name="github_url">https://github.com/raedev/android-cnblogs</string>
     <string name="delete">删除</string>
     <string name="deleting">正在删除..</string>
     <string name="edit">编辑</string>
@@ -159,11 +159,11 @@
     <string name="search_hint">搜索发现更大的世界</string>
     <string name="about_me">关于我们</string>
     <string name="browse_history">浏览记录</string>
-    <string name="tips_clean_cache">将清理所有博客以及离线缓存数据，是否确定清除？</string>
+    <string name="tips_clean_cache">清理所有博客文章以及离线缓存数据</string>
     <string name="clean_now">立即清除</string>
     <string name="tips_comment_empty_blog_app">很抱歉，博主还没有开通博客功能</string>
     <string name="default_image_desc">正在加载</string>
     <string name="loading_blog_content">加载博客中</string>
     <string name="unfollow">取消关注</string>
-    <string name="blogger_default_introduce">本宝宝暂时没有想到我的签名</string>
+    <string name="blogger_default_introduce">本宝宝暂时没有签名</string>
 </resources>

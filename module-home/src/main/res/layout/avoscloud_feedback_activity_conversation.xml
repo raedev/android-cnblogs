@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/avoscloud_feedback_contact_background"
             android:gravity="center"
+            android:layout_marginTop="-6dp"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
             android:paddingLeft="12dp"

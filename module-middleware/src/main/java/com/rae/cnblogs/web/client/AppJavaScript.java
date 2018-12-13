@@ -8,10 +8,12 @@ import android.webkit.JavascriptInterface;
 
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.ContentEntityConverter;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.middleware.R;
 import com.rae.cnblogs.sdk.bean.BlogBean;
+import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.parser.BlogInfoParser;
 
 import org.jsoup.Jsoup;
@@ -56,7 +58,14 @@ public class AppJavaScript extends RaeJavaScriptBridge {
         BlogBean blogBean = blogInfoParser.parse(document, html);
         final ContentEntity entity = ContentEntityConverter.convert(blogBean);
         // 是博文页面
+        if (!CnblogAppConfig.getInstance(getContext()).canReaderTips()) {
+            UICompat.toast(getContext(), "已为您优化博客阅读体验");
+            AppRoute.routeToContentDetail(getContext(), entity);
+            return;
+        }
+
         new DefaultDialogFragment.Builder()
+                .canceledOnTouchOutside(false)
                 .cancelable(true)
                 .message(getString(R.string.tips_web_blog_route, title))
                 .confirmText(getString(R.string.view_now))

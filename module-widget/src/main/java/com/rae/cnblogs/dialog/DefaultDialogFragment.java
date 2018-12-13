@@ -44,6 +44,11 @@ public class DefaultDialogFragment extends BasicDialogFragment {
             return this;
         }
 
+        public Builder canceledOnTouchOutside(boolean cancelable) {
+            mData.putBoolean("canceledOnTouchOutside", cancelable);
+            return this;
+        }
+
         public Builder cancelable(boolean cancelable) {
             mData.putBoolean("cancelable", cancelable);
             return this;
@@ -130,6 +135,7 @@ public class DefaultDialogFragment extends BasicDialogFragment {
         String confirmText = arguments.getString("confirmText", getString(R.string.confirm));
         String cancelText = arguments.getString("cancelText", getString(R.string.cancel));
         boolean cancelable = arguments.getBoolean("cancelable");
+        boolean canceledOnTouchOutside = arguments.getBoolean("canceledOnTouchOutside", true);
         mTitleView.setText(message);
         mConfirmButton.setText(confirmText);
         mCancelButton.setText(cancelText);
@@ -139,6 +145,8 @@ public class DefaultDialogFragment extends BasicDialogFragment {
         } else {
             mCancelButton.setVisibility(View.GONE);
         }
+
+        getDialog().setCanceledOnTouchOutside(canceledOnTouchOutside);
 
         getDialog().setOnDismissListener(mOnDismissListener);
 

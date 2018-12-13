@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -17,6 +18,88 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="36dp">
+
+            <RelativeLayout
+                android:id="@+id/ll_web_reader"
+                style="@style/SettingItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_web_reader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/web_reader"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_web_reader"
+                    android:layout_marginTop="5dp"
+                    android:text="是否弹出自动优化博客提示框"
+                    android:textColor="@color/ph3"
+                    android:textSize="12sp" />
+
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/sb_web_reader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:checked="true"
+                    app:kswBackDrawable="@drawable/sb_default_back_drawable"
+                    app:kswBackMeasureRatio="2.5"
+                    app:kswThumbDrawable="@drawable/sb_default_thumb_drawable"
+                    app:kswThumbHeight="10dp"
+                    app:kswThumbMargin="3dp"
+                    app:kswThumbWidth="10dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_wifi_image"
+                style="@style/SettingItemStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_wifi_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="智能无图模式"
+                    android:textColor="@color/ph1"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_wifi_image"
+                    android:layout_marginTop="5dp"
+                    android:text="非WIFI环境下不显示博客图片"
+                    android:textColor="@color/ph3"
+                    android:textSize="12sp" />
+
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/sb_wifi_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:checked="true"
+                    app:kswBackDrawable="@drawable/sb_default_back_drawable"
+                    app:kswBackMeasureRatio="2.5"
+                    app:kswThumbDrawable="@drawable/sb_default_thumb_drawable"
+                    app:kswThumbHeight="10dp"
+                    app:kswThumbMargin="3dp"
+                    app:kswThumbWidth="10dp" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_clear_cache"
@@ -45,6 +128,7 @@
                     android:visibility="gone" />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/ll_help_center"
@@ -177,8 +261,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="@dimen/default_margin"
-                    android:layout_marginRight="@dimen/default_margin"
                     android:layout_marginTop="36dp"
+                    android:layout_marginRight="@dimen/default_margin"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/logout"

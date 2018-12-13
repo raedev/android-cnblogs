@@ -6,10 +6,12 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.kyleduo.switchbutton.SwitchButton;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.CnblogsApplication;
 import com.rae.cnblogs.UICompat;
@@ -20,6 +22,7 @@ import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.setting.SettingContract;
 import com.rae.cnblogs.home.setting.SettingPresenterImpl;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
+import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.widget.ImageLoadingView;
 import com.tencent.bugly.beta.tinker.TinkerManager;
 
@@ -45,6 +48,12 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
     View mLogoutLayout;
 
 
+    @BindView(R2.id.sb_wifi_image)
+    SwitchButton mBlogImageButton;
+
+    @BindView(R2.id.sb_web_reader)
+    SwitchButton mReaderTipsButton;
+
     @BindView(R2.id.tv_check_update)
     TextView mCheckUpdateMsgView;
 
@@ -52,14 +61,34 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
     ProgressBar mCheckUpdateProgress;
 
     private SettingContract.Presenter mPresenter;
+    private CnblogAppConfig mAppConfig;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        mAppConfig = CnblogAppConfig.getInstance(this);
         mPresenter = new SettingPresenterImpl(this);
         mPresenter.start();
+
+        // 智能无图按钮点击
+        mBlogImageButton.setChecked(mAppConfig.disableBlogImage());
+        mBlogImageButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                mAppConfig.setDisableBlogImage(isChecked);
+            }
+        });
+
+        // 阅读优化提示
+        mReaderTipsButton.setChecked(mAppConfig.canReaderTips());
+        mReaderTipsButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                mAppConfig.setReaderTips(isChecked);
+            }
+        });
     }
 
     @Override
@@ -91,6 +120,7 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
                 .confirm(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         performClearCache();
                     }
                 })

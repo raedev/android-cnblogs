@@ -19,6 +19,7 @@ import com.rae.cnblogs.sdk.db.DbFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,9 +98,11 @@ public abstract class BasicBlogPresenterImpl extends BasicPresenter<ContentListC
         AndroidObservable.create(Observable.just(page))
                 .map(new Function<Integer, List<BlogBean>>() {
                     @Override
-                    public List<BlogBean> apply(Integer page) {
+                    public List<BlogBean> apply(Integer page) throws IOException {
                         CategoryBean category = getView().getCategory();
-                        if (category == null) return null;
+                        if (category == null || category.getCategoryId() == null) {
+                            throw new NullPointerException("暂无记录");
+                        }
                         return mDbBlog.getList(category.getCategoryId(), page, mBlogType);
                     }
                 })

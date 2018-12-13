@@ -1,5 +1,7 @@
 package com.rae.cnblogs.sdk.db;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -19,8 +21,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 
 /**
  * 博客数据库
@@ -172,7 +172,8 @@ public class DbBlog {
      * @param type     类型
      */
     @Nullable
-    public List<BlogBean> getList(String category, int page, BlogType type) {
+    public List<BlogBean> getList(@Nullable String category, int page, BlogType type) {
+        if (category == null) return null;
         QueryBuilder<BlogBean> builder = mSession.getBlogBeanDao().queryBuilder();
         return builder.where(BlogBeanDao.Properties.BlogType.eq(type.getTypeName()))
                 .where(BlogBeanDao.Properties.CategoryId.eq(category))

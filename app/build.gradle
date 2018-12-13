@@ -10,7 +10,7 @@ android {
         versionName "1.1.5"
         multiDexEnabled true
         ndk {
-            // 兼容ebView问题
+            // 兼容webView问题
             abiFilters "armeabi"
             abiFilters "x86"
             abiFilters "armeabi-v7a"
@@ -37,7 +37,7 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-            applicationIdSuffix '.debug'
+//            applicationIdSuffix '.debug'
             signingConfig signingConfigs.release
         }
         release {

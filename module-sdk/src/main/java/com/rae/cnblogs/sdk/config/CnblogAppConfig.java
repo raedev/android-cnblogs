@@ -182,4 +182,43 @@ public class CnblogAppConfig {
     public void setOnce(String key) {
         mConfig.edit().putBoolean(String.format("ONCE_%s_%s", mVersion, key), true).apply();
     }
+
+
+    /**
+     * 是否智能禁用博文图片
+     *
+     * @return
+     */
+    public boolean disableBlogImage() {
+        return mConfig.getBoolean("DISABLE_BLOG_IMAGE", true);
+    }
+
+    /**
+     * 是否智能禁用博文图片
+     *
+     * @param value
+     */
+    public void setDisableBlogImage(boolean value) {
+        mConfig.edit().putBoolean("DISABLE_BLOG_IMAGE", value).apply();
+    }
+
+    /**
+     * 网页优化阅读提示框
+     *
+     * @return
+     */
+    public boolean canReaderTips() {
+        return mConfig.getBoolean("READER_TIPS", true);
+    }
+
+    /**
+     * 网页优化阅读提示框
+     *
+     * @return
+     */
+    public void setReaderTips(boolean isChecked) {
+        mConfig.edit().putBoolean("READER_TIPS", isChecked).apply();
+    }
+
+
 }

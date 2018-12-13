@@ -7,7 +7,7 @@ package com.rae.cnblogs.sdk.api;
 final class ApiUrls {
 
     // 博客-列表
-    static final String API_BLOG_LIST = "http://www.cnblogs.com/mvc/AggSite/PostList.aspx?ItemListActionName=PostList";
+    static final String API_BLOG_LIST = "https://www.cnblogs.com/mvc/AggSite/PostList.aspx?ItemListActionName=PostList";
 
     // 博客-内容
     static final String API_BLOG_CONTENT = "http://wcf.open.cnblogs.com/blog/post/body/{id}";
@@ -108,16 +108,16 @@ final class ApiUrls {
     static final String API_SEARCH_BLOGGER = "http://wcf.open.cnblogs.com/blog/bloggers/search";
 
     // 搜索-博客-内容
-    static final String API_SEARCH_BLOG_LIST = "http://zzk.cnblogs.com/s/blogpost";
+    static final String API_SEARCH_BLOG_LIST = "https://zzk.cnblogs.com/s/blogpost";
 
     // 搜索-个人博客
-    static final String API_SEARCH_BLOG_APP = "http://zzk.cnblogs.com/s/blogpost";
+    static final String API_SEARCH_BLOG_APP = "https://zzk.cnblogs.com/s/blogpost";
 
     // 搜索-知识库-列表
-    static final String API_SEARCH_KB_LIST = "http://zzk.cnblogs.com/s/kb";
+    static final String API_SEARCH_KB_LIST = "https://zzk.cnblogs.com/s/kb";
 
     // 搜索-新闻-列表
-    static final String API_SEARCH_NEWS_LIST = "http://zzk.cnblogs.com/s/news";
+    static final String API_SEARCH_NEWS_LIST = "https://zzk.cnblogs.com/s/news";
 
     // 闪存-全站
     static final String API_MOMENT_LIST = "https://ing.cnblogs.com/ajax/ing/GetIngList?PageSize=30";

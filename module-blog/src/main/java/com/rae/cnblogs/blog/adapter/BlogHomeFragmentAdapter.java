@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.text.TextUtils;
 
 import com.rae.cnblogs.basic.Rx;
+import com.rae.cnblogs.blog.fragment.KbListFragment;
 import com.rae.cnblogs.blog.fragment.MultipleTypeBlogListFragment;
+import com.rae.cnblogs.blog.fragment.NewsListFragment;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 
 import java.util.List;
@@ -37,6 +40,10 @@ public class BlogHomeFragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         CategoryBean m = mDataList.get(position);
+        if (TextUtils.equals("news", m.getType()))
+            return NewsListFragment.newInstance();
+        if (TextUtils.equals("kb", m.getType()))
+            return KbListFragment.newInstance();
         return MultipleTypeBlogListFragment.newInstance(m);
     }
 

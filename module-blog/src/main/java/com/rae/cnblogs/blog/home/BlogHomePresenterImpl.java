@@ -61,6 +61,22 @@ public class BlogHomePresenterImpl extends BasicPresenter<BlogHomeContract.View>
 
                     @Override
                     protected void accept(List<CategoryBean> data) {
+
+                        CategoryBean news = new CategoryBean();
+                        news.setCategoryId("0");
+                        news.setParentId("0");
+                        news.setName("新闻");
+                        news.setType("news");
+
+                        CategoryBean kb = new CategoryBean();
+                        kb.setCategoryId("0");
+                        kb.setParentId("0");
+                        kb.setName("知识库");
+                        kb.setType("kb");
+
+                        data.add(2, news);
+                        data.add(3, kb);
+
                         getView().onLoadCategory(data);
                     }
                 });

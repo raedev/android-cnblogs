@@ -55,19 +55,23 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
-        // 测试登录
-        debugLogin();
         initTab();
         requestPermissions();
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
+        if (BuildConfig.DEBUG) {
+            debugLogin();
+        }
     }
 
 
+    /**
+     * 登录调试
+     */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "26004F7A01C39CBACF70ED396FFA307BB21E7AEDE4B6245B5B433F47540749569981C77803953DFE28B7F5741FB795F49187BB7BDA995F5B150A8C65B418D70E25802D583F09F66005298BD6A817C913884D4436";
-        String netCoreCookie = "CfDJ8FHXRRtkJWRFtU30nh_M9mBulNHC1c_O8RDhAJhrChUixuMz1QxRLZ-f-3-WHrQV6olTonldUcMkhUBz2wW3bB4ZMIHEnQUr7EP2HREgyEeyaffzgkf-7eMRCxKejSvBV81SdD5CQXuyAQF5jCHElhQ2eMfB8vz26qp4_Df5eZmfH8e0eOiWjrXY1FRW-WcWbUzHLKwNfYiDaZx5F5n1bEPMJDzRfKeOKPZOxFxM_mFCC_BTy-_gQ79Qdvpg15bVs5FkK_oCdnZBS5o9sh5_BrSNWpAnqzWF97uvWptCoJ5N";
+        String cookie = "28E6D1BBA89ACB6EE5DF550A5F2054E76A60D2CE55F92465A59263AC78952CE9B5AB276BC6B26E68CAE5C096EFD9082817D5EC1951483E1420B549BAEE5EC5B2B46CAC4347CD603B1D1FEE1CBE114D39C96FA883";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNaViYaV05_zR2tme3N70DGDNqd5eFXK6QQWXD1FauprFJW5aNb-L6BzuH1SYrbbAqCXMB8zmMHaZW7k5AiHFDpdR9TjeAmDUed7cI-EleHMOOI3101hNBpTNPMd-j8J5SMG_yhdbF2_l4eonHptfrGjykx_mVaulTqQZEMKvgzpLYLNX3pilu5Aho578YmJQIY3v8046QY3yLbLNhhnqmb2J78QMdHv06B4kNJHiy5olgfuxHOkzB2xUzVI6FrI8KfOiImmw1dxg5mep_ebVaz";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
@@ -118,6 +122,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
     }
 
     private void addTab(AppFragmentAdapter adapter, int resId, int iconId, Fragment fragment) {
+
         if (fragment == null) {
             Log.e("rae", "初始化首页TAB的Fragment为空！" + getString(resId));
             return;
@@ -170,24 +175,21 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
                     .message(getString(R.string.permission_request_message))
                     .confirmText(getString(R.string.allow))
                     .cancelText(getString(R.string.permission_cancel))
-                    .confirm(new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            String[] permissionList = new String[]{
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.CALL_PHONE,
-                                    Manifest.permission.READ_LOGS,
-                                    Manifest.permission.READ_PHONE_STATE,
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.SET_DEBUG_APP,
-                                    Manifest.permission.SYSTEM_ALERT_WINDOW,
-                                    Manifest.permission.GET_ACCOUNTS,
-                                    Manifest.permission.WRITE_APN_SETTINGS
-                            };
-                            ActivityCompat.requestPermissions(MainActivity.this, permissionList, 100);
-                        }
+                    .confirm((dialog, which) -> {
+                        dialog.dismiss();
+                        String[] permissionList = new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.CALL_PHONE,
+                                Manifest.permission.READ_LOGS,
+                                Manifest.permission.READ_PHONE_STATE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.SET_DEBUG_APP,
+                                Manifest.permission.SYSTEM_ALERT_WINDOW,
+                                Manifest.permission.GET_ACCOUNTS,
+                                Manifest.permission.WRITE_APN_SETTINGS
+                        };
+                        ActivityCompat.requestPermissions(MainActivity.this, permissionList, 100);
                     })
                     .show(getSupportFragmentManager(), "permissionDialog");
 

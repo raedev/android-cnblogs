@@ -1,5 +1,6 @@
 package com.rae.cnblogs.blog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -8,6 +9,7 @@ import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.blog.fragment.BlogDetailFragment;
+import com.umeng.socialize.UMShareAPI;
 
 import butterknife.OnClick;
 
@@ -43,5 +45,11 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
             // 传到Fragment处理
             fragment.onActionMenuMoreClick();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -8,7 +8,7 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/title_tool_bar"
+        android:id="@+id/tool_bar"
         style="@style/AppToolBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height"
