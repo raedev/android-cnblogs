@@ -1,6 +1,5 @@
 package com.rae.cnblogs.user.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -13,17 +12,13 @@ import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
-import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
-import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.R2;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
@@ -35,6 +30,8 @@ public class PersonalAccountFragment extends BasicFragment implements View.OnCli
 
     @BindView(R2.id.et_text)
     EditText mTextView;
+    @BindView(R2.id.tv_sub_title)
+    TextView mTipsView;
     TextView mSaveView;
 
     private IUserApi mUserApi;
@@ -70,6 +67,7 @@ public class PersonalAccountFragment extends BasicFragment implements View.OnCli
         if (activity == null) return;
         mSaveView = activity.findViewById(R.id.btn_save);
         mSaveView.setOnClickListener(this);
+        mTipsView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -96,25 +94,8 @@ public class PersonalAccountFragment extends BasicFragment implements View.OnCli
                             return;
                         }
                         UserProvider.getInstance().logout(); // 退出登录
-                        EventBus.getDefault().post(new UserInfoChangedEvent());
-
-                        new DefaultDialogFragment
-                                .Builder()
-                                .canceledOnTouchOutside(false)
-                                .message("账号成功修改为 " + text + "，请重新登录！")
-                                .confirmText("去登录")
-                                .confirm(new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (getActivity() != null) {
-                                            AppRoute.finish();
-                                            AppRoute.routeToMain(getActivity());
-                                            AppRoute.routeToLogin(getActivity());
-                                        }
-                                    }
-                                })
-                                .show(getChildFragmentManager(), "Logout");
-
+                        AppRoute.finish();
+                        AppRoute.routeToActionResult(getContext(), "账号修改成功");
 
                     }
                 });

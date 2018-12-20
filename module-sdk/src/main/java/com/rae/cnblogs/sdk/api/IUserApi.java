@@ -147,6 +147,14 @@ public interface IUserApi {
     Observable<String> updateAccount(@Field("oldLoginName") String oldName,
                                      @Field("newLoginName") String newName);
 
+    /**
+     * 更新密码
+     */
+    @POST(ApiUrls.API_USER_PASSWORD)
+    @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
+    @FormUrlEncoded
+    Observable<String> changePassword(@Field("oldpwd") String oldPwd,
+                                      @Field("newpwd") String newPwd);
 
     /**
      * 获取账号信息

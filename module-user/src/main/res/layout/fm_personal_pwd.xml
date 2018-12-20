@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="42dp">
+
+
+    <EditText
+        android:id="@+id/et_old_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_personal_edit"
+        android:hint="请输入当前账号密码"
+        android:paddingStart="24dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="18dp"
+        android:singleLine="true"
+        android:textColor="@color/ph2"
+        android:textColorHint="@color/ph4"
+        android:textSize="@dimen/h2" />
+
+    <EditText
+        android:id="@+id/et_new_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_personal_edit"
+        android:hint="新密码8-30位必须包含字母、数字、特殊字符"
+        android:maxEms="30"
+        android:minEms="8"
+        android:paddingStart="24dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="18dp"
+        android:singleLine="true"
+        android:textColor="@color/ph2"
+        android:textColorHint="@color/ph4"
+        android:textSize="@dimen/h2" />
+
+
+    <Button
+        android:id="@+id/btn_save_view"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/bg_btn_primary"
+        android:text="@string/reset_password"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_sub_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="修改密码后会重新登录，请记住修改后的密码。"
+        android:textColor="#cecece"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:visibility="visible" />
+
+</LinearLayout>

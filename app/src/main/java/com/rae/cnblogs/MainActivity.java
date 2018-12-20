@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.basic.AppFragmentAdapter;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
+import com.rae.cnblogs.basic.rx.DefaultEmptyObserver;
 import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
@@ -36,6 +37,8 @@ import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.widget.ITopScrollable;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
@@ -59,11 +62,18 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
         initTab();
-        requestPermissions();
+
+        // 请求权限
+        AndroidObservable.create(io.reactivex.Observable.timer(3, TimeUnit.SECONDS)).with(this).subscribe(new DefaultEmptyObserver<Long>() {
+            @Override
+            public void onNext(Long aLong) {
+                requestPermissions();
+            }
+        });
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
         if (BuildConfig.DEBUG) {
-            debugLogin();
+//            debugLogin();
         }
     }
 
@@ -73,8 +83,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
      */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "6C55F7BB01F1C4CEBB563D4AAA2C9B85F2086BA23E5E11A3495B6EE49E72D6359E393DF59DD244681609EDBC14721F0EAD4F05C0FCBAB92FF93BDD5B12F9BE5CD82FB4E5F00884CD1BBEF4FC86E3F8FD389DF99D";
-        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTPb0ZONfd-tyYB1msfyk5CLz4oTOh9cobYsipxyPxYkVzm2mi6FMT6FYZDDyzgMTY4FZX4gpjDyO8ZdiiX6M4VQOxYx37Fw4MbfIiHucZ0iJSu8YXBVT0No7b3819FyLA2uleoAYpdue6jD6J0xOdlHQPT5yU9f2OMVQY5fs87ZWSxzKFShb15j0rwKvedWA0w7kwDz5FYAQ7RLPpSDrhyWWGltt-rwSkySpJ7NsuS_Ffm2T6sq1c0TsVZLpIDBS8yXw0cuxNbQTMZJrIxHuFbl";
+        String cookie = "A688D6A0971A93007FF8221C60E8E0FDB2866B1DF923C14422B361049C34194A5B1B25A7B3F72A002E41D100226A7F046D16B88F97412A6182FC4BF94F220D4A9236941DE58BCEFDA575CF4E3EB25A9D97BB7601";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNfOPU2k5nMET16IOYR6efcY_FO5y_VQp8XjUgDHWE5RRYwTjaP2ccyMxNewY4lzaOFKZVXbJ3iw1xroxqbUsPY3tOneapdybk-LE44YvlnpDtbq9OG3Ed4IAbj1mvlilS_JwslUTpLEjjAxWx9DvTqenfu1HV2fEgaca_B0X1gLUnt81lTwiukd5XwnRo_jRETZ4r4XH4p8nK6nOnMCb8tBMXkFyPQQ-_Q16LIgHzU_-xnLa_jxTUYedi4QCWoAmAUNz59-xiuOSj9m58xi61hiljfeTxl-E9qjAUokzBbkQ";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");

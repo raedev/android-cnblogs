@@ -3,16 +3,22 @@ package com.rae.cnblogs.sdk.utils;
 import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
 
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.Cipher;
 
 import okhttp3.HttpUrl;
 
@@ -226,5 +232,30 @@ public final class ApiUtils {
     public static String subString(String text, int count) {
         if (TextUtils.isEmpty(text) || text.length() < count) return text;
         return text.substring(0, count);
+    }
+
+
+    /**
+     * 博客园公钥加密
+     *
+     * @param text
+     * @return
+     */
+    public static String encrypt(String text) {
+        if (TextUtils.isEmpty(text)) return text;
+        String pubKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCp0wHYbg/NOPO3nzMD3dndwS0MccuMeXCHgVlGOoYyFwLdS24Im2e7YyhB0wrUsyYf0/nhzCzBK8ZC9eCWqd0aHbdgOQT6CuFQBMjbyGYvlVYU2ZP7kG9Ft6YV6oc9ambuO7nPZh+bvXH0zDKfi02prknrScAKC0XhadTHT3Al0QIDAQAB";
+        try {
+            // 加载公钥
+            X509EncodedKeySpec data = new X509EncodedKeySpec(Base64.decode(pubKey.getBytes(), Base64.DEFAULT));
+            KeyFactory factory = KeyFactory.getInstance("RSA");
+            PublicKey key = factory.generatePublic(data);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] encryptData = cipher.doFinal(text.getBytes());
+            return Base64.encodeToString(encryptData, Base64.DEFAULT);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return text;
     }
 }

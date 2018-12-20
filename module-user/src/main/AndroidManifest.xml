@@ -25,6 +25,6 @@
             android:label="修改头像" />
         <activity
             android:name=".activity.PersonalDetailActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateHidden" />
     </application>
 </manifest>

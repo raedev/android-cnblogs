@@ -200,6 +200,7 @@ public final class AppRoute {
 
     // 用户详情
     public static final String PATH_PERSONAL_DETAIL = "/user/info/detail";
+    public static final String PATH_ACTION_RESULT = "/middleware/action/result";
 
     /**
      * 初始化
@@ -240,6 +241,15 @@ public final class AppRoute {
      */
     public static void routeToWeb(Context context, String url) {
         ARouter.getInstance().build(PATH_WEB).withString("url", url).navigation(context);
+    }
+
+    /**
+     * 操作结果界面
+     *
+     * @param text 消息
+     */
+    public static void routeToActionResult(Context context, String text) {
+        ARouter.getInstance().build(PATH_ACTION_RESULT).withString(Intent.EXTRA_TEXT, text).navigation(context);
     }
 
     /**

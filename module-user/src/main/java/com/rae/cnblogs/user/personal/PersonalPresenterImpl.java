@@ -64,7 +64,7 @@ public class PersonalPresenterImpl extends BasicPresenter<PersonalContract.View>
     @Subscribe
     public void onEvent(UserInfoChangedEvent event) {
         if (event.getUserInfo() != null) {
-            getView().onLoadUserInfo(event.getUserInfo());
+            onStart();
         }
     }
 }

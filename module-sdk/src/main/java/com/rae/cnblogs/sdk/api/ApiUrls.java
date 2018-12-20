@@ -6,6 +6,9 @@ package com.rae.cnblogs.sdk.api;
  */
 final class ApiUrls {
 
+    // 修改密码
+    static final String API_USER_PASSWORD = "https://home.cnblogs.com/user/ChangPwd";
+
     // 更新头像
     static final String API_USER_AVATAR = "https://upload.cnblogs.com/avatar/crop";
 

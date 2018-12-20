@@ -61,6 +61,7 @@ public class WebViewFragment extends BasicFragment {
         }
     }
 
+
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface", "JavascriptInterface"})
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -101,9 +102,6 @@ public class WebViewFragment extends BasicFragment {
         mWebView.setWebChromeClient(getWebChromeClient());
         mWebView.setWebViewClient(mRaeWebViewClient);
 
-        if (mWebView != null && mUrl != null) {
-            loadUrl(mUrl);
-        }
 
     }
 
@@ -125,6 +123,9 @@ public class WebViewFragment extends BasicFragment {
             });
         }
 
+        if (mWebView != null && mUrl != null) {
+            loadUrl(mUrl);
+        }
     }
 
     @Override

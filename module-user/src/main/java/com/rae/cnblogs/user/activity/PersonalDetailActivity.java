@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.WindowManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.fragment.PersonalAccountFragment;
+import com.rae.cnblogs.user.fragment.PersonalIntroduceFragment;
 import com.rae.cnblogs.user.fragment.PersonalNickNameFragment;
+import com.rae.cnblogs.user.fragment.PersonalPasswordFragment;
 
 /**
  * Created by rae on 2018/12/19.
@@ -32,7 +35,7 @@ public class PersonalDetailActivity extends SwipeBackBasicActivity {
 
         int type = getIntent().getIntExtra("type", TYPE_NORMAL);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = new PersonalAccountFragment();
+        Fragment fragment;
         switch (type) {
             case TYPE_ACCOUNT:
                 fragment = new PersonalAccountFragment();
@@ -44,11 +47,12 @@ public class PersonalDetailActivity extends SwipeBackBasicActivity {
                 break;
             case TYPE_PWD:
                 setTitle("修改密码");
+                fragment = new PersonalPasswordFragment();
                 break;
             case TYPE_DESC:
-                setTitle("个性签名");
-                break;
             default:
+                fragment = new PersonalIntroduceFragment();
+                getWindow().clearFlags(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 break;
         }
 

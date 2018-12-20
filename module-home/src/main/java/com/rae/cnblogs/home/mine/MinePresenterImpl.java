@@ -102,23 +102,7 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
         }
 
         getView().onLoadUserInfo(userInfo);
-
-        // 加载粉丝关注数量
-        AndroidObservable
-                .create(mFriendApi.getFriendsInfo(userInfo.getBlogApp()))
-                .with(this)
-                .subscribe(new ApiDefaultObserver<FriendsInfoBean>() {
-                    @Override
-                    protected void onError(String message) {
-                        getView().onLoadFansCount("0", "0");
-                    }
-
-                    @Override
-                    protected void accept(FriendsInfoBean m) {
-                        getView().onLoadFansCount(m.getFans(), m.getFollows());
-                    }
-                });
-
+        loadFansInfo(userInfo);
         // 刷新用户信息
         AndroidObservable
                 .create(mUserApi.getUserInfo(userInfo.getBlogApp()))
@@ -144,6 +128,24 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
                             UserProvider.getInstance().setLoginUserInfo(userInfoBean);
                             EventBus.getDefault().post(new UserInfoChangedEvent(userInfoBean));
                         }
+                    }
+                });
+    }
+
+    private void loadFansInfo(UserInfoBean userInfo) {
+        // 加载粉丝关注数量
+        AndroidObservable
+                .create(mFriendApi.getFriendsInfo(userInfo.getBlogApp()))
+                .with(this)
+                .subscribe(new ApiDefaultObserver<FriendsInfoBean>() {
+                    @Override
+                    protected void onError(String message) {
+                        getView().onLoadFansCount("0", "0");
+                    }
+
+                    @Override
+                    protected void accept(FriendsInfoBean m) {
+                        getView().onLoadFansCount(m.getFans(), m.getFollows());
                     }
                 });
     }
@@ -177,6 +179,9 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
         // 重新加载数据
         if (event.isRefresh()) {
             loadUserInfo();
+        } else {
+            getView().onLoadUserInfo(event.getUserInfo());
+            loadFansInfo(event.getUserInfo());
         }
     }
 
