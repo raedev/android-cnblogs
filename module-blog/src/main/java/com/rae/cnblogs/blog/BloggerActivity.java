@@ -36,7 +36,7 @@ import com.rae.cnblogs.blog.fragment.MultipleTypeBlogListFragment;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.BlogCommentBean;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.RaeSkinDesignTabLayout;
 import com.rae.swift.app.RaeFragmentAdapter;
@@ -236,7 +236,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         setResult(RESULT_OK);
 
         // 发送通知
-        EventBus.getDefault().post(new UserInfoEvent());
+        EventBus.getDefault().post(new UserInfoChangedEvent());
     }
 
     @Override

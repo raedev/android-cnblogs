@@ -3,17 +3,17 @@ package com.rae.cnblogs.sdk.event;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 
 /**
- * 用户信息事件
+ * 登录信息事件
  * Created by ChenRui on 2017/10/10 0010 23:29.
  */
-public class UserInfoEvent {
+public class LoginInfoEvent {
     private boolean isLogin;
     private UserInfoBean mUserInfoBean;
 
-    public UserInfoEvent() {
+    public LoginInfoEvent() {
     }
 
-    public UserInfoEvent(boolean isLogin, UserInfoBean userInfoBean) {
+    public LoginInfoEvent(boolean isLogin, UserInfoBean userInfoBean) {
         this.isLogin = isLogin;
         mUserInfoBean = userInfoBean;
     }

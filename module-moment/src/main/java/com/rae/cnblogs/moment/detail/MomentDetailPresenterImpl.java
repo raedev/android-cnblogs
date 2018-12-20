@@ -17,7 +17,7 @@ import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.bean.MomentCommentBean;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
@@ -221,7 +221,7 @@ public class MomentDetailPresenterImpl extends BasicPresenter<IMomentDetailContr
                         }
                         getView().onFollowSuccess();
                         // 通知更新用户信息
-                        EventBus.getDefault().post(new UserInfoEvent());
+                        EventBus.getDefault().post(new UserInfoChangedEvent());
                     }
                 });
     }

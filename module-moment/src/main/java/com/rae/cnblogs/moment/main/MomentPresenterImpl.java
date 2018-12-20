@@ -12,7 +12,7 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IMomentApi;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -100,7 +100,7 @@ public class MomentPresenterImpl extends BasicPresenter<IMomentContract.View> im
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(UserInfoEvent event) {
+    public void onEvent(UserInfoChangedEvent event) {
         // 重新加载数据
         start();
     }

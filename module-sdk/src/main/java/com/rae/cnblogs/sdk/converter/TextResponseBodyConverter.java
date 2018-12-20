@@ -94,6 +94,10 @@ public class TextResponseBodyConverter<T> implements Converter<ResponseBody, T> 
         else if (type == String.class && mHtmlParser == null && mJsonParser == null) {
             return (T) text;
         }
+        // 如果是Empty的直接返回
+        else if (type == Empty.class) {
+            return (T) Empty.value();
+        }
         return html2Entity(text);
     }
 

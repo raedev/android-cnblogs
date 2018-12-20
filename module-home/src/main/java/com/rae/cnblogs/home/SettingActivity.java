@@ -168,6 +168,7 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
                 .Builder()
                 .cancelable(true)
                 .message(getString(R.string.tips_logout))
+                .confirmText("立即退出")
                 .confirm(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

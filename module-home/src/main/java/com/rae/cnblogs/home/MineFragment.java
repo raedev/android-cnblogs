@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,8 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     TextView mFollowCountView;
     @BindView(R2.id.tv_fans_count)
     TextView mFansCountView;
+    @BindView(R2.id.tv_introduction)
+    TextView mIntroductionView;
     @BindView(R2.id.tv_join_date)
     TextView mJoinDateView;
 
@@ -116,6 +119,9 @@ public class MineFragment extends BasicFragment implements MineContract.View {
         AppImageLoader.displayAvatar(user.getAvatar(), mAvatarView);
         mDisplayNameView.setText(user.getDisplayName());
         mJoinDateView.setText(user.getJoinDate());
+        if (!TextUtils.isEmpty(user.getIntroduce())) {
+            mIntroductionView.setText(user.getIntroduce());
+        }
     }
 
     @Override
@@ -155,7 +161,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     /**
      * 登录
      */
-    @OnClick({R2.id.rl_header})
+    @OnClick({R2.id.rl_header, R2.id.ll_join_date})
     public void onLoginClick() {
         if (mPresenter.isLogin())
             AppRoute.routeToUserCenter(getContext()); // 个人中心

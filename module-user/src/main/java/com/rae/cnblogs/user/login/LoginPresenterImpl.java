@@ -14,7 +14,8 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
+import com.rae.cnblogs.sdk.event.LoginInfoEvent;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
@@ -116,7 +117,8 @@ public class LoginPresenterImpl extends BasicPresenter<LoginContract.View> imple
                         // [重要] 同步Cookie登录信息
                         UserProvider.getInstance().cookieJar2CookieManager();
                         // 发送用户登录事件
-                        EventBus.getDefault().post(new UserInfoEvent(true, data));
+                        EventBus.getDefault().post(new LoginInfoEvent(true, data));
+                        EventBus.getDefault().post(new UserInfoChangedEvent(data));
                         getView().onLoginSuccess(data);
                     }
                 });

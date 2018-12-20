@@ -32,7 +32,10 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.widget.ITopScrollable;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
@@ -70,8 +73,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
      */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "11B528DB7F5E022881E9F70D32BE8D8540AB21983EC066382DC249936504C7C8FB5EB3F1FD0014012312C979995AC47BDB220100703D8472D68057541F4B16DFD91065F3220D9837F0B3D466EC5ECB0B80BBB9E4";
-        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNaBH4om7c7dgJVL5t0RltPPTKGvV6OTQ-OaF4wPzKJ455kTewvBOISWzDqEmX4qmEq7p4dbqXtZUM0JhOnb03_SiTRW_sWt8XzWNcALVKejodRAB_VCt1Ov9r2fWcgSLJrqVI13-FE2pPsoaKvgwRM5ci4nMQcWkA_6uV902omobjRsWrtQUPdcu_8sNiEmjIXWU6dZM1M0In4HDIQ880758xpo55gbepN-20DXB-p0TuSOydcYZKqnF8ncgKD_7CmJeOegbffeG1oat0XOQ28rxzTq4NhxiY_NQcva6PwmQ";
+        String cookie = "6C55F7BB01F1C4CEBB563D4AAA2C9B85F2086BA23E5E11A3495B6EE49E72D6359E393DF59DD244681609EDBC14721F0EAD4F05C0FCBAB92FF93BDD5B12F9BE5CD82FB4E5F00884CD1BBEF4FC86E3F8FD389DF99D";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTPb0ZONfd-tyYB1msfyk5CLz4oTOh9cobYsipxyPxYkVzm2mi6FMT6FYZDDyzgMTY4FZX4gpjDyO8ZdiiX6M4VQOxYx37Fw4MbfIiHucZ0iJSu8YXBVT0No7b3819FyLA2uleoAYpdue6jD6J0xOdlHQPT5yU9f2OMVQY5fs87ZWSxzKFShb15j0rwKvedWA0w7kwDz5FYAQ7RLPpSDrhyWWGltt-rwSkySpJ7NsuS_Ffm2T6sq1c0TsVZLpIDBS8yXw0cuxNbQTMZJrIxHuFbl";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
@@ -81,7 +84,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         }
 
         // 获取用户信息
-        AndroidObservable.create(CnblogsApiFactory.getInstance(this).getUserApi().getUserInfo("chenrui7"))
+        AndroidObservable.create(CnblogsApiFactory.getInstance(this).getUserApi().getUserInfo("393130"))
                 .with(this)
                 .subscribe(new ApiDefaultObserver<UserInfoBean>() {
                     @Override
@@ -92,6 +95,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
                     @Override
                     protected void accept(UserInfoBean userInfo) {
                         UserProvider.getInstance().setLoginUserInfo(userInfo);
+                        EventBus.getDefault().post(new UserInfoChangedEvent(userInfo));
                     }
                 });
     }

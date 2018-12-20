@@ -7,8 +7,16 @@ package com.rae.cnblogs.sdk.api;
 final class ApiUrls {
 
     // 更新头像
-    public static final String API_USER_AVATAR = "https://upload.cnblogs.com/avatar/crop";
-    public static final String API_USER_NICKNAME= "https://home.cnblogs.com/user/ChangeDisplayName";
+    static final String API_USER_AVATAR = "https://upload.cnblogs.com/avatar/crop";
+
+    // 修改昵称
+    static final String API_USER_NICKNAME = "https://home.cnblogs.com/user/ChangeDisplayName";
+
+    // 修改账号
+    static final String API_USER_ACCOUNT = "https://home.cnblogs.com/user/ChangeLoginName";
+
+    // 账号设置
+    static final String API_SETTING_ACCOUNT = "https://home.cnblogs.com/set/account";
 
     // 博客-列表
     static final String API_BLOG_LIST = "https://www.cnblogs.com/mvc/AggSite/PostList.aspx?ItemListActionName=PostList";

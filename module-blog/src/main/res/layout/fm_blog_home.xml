@@ -10,6 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_tab_home"
         android:orientation="vertical"
         app:elevation="0dp">
 
@@ -17,7 +18,6 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <LinearLayout
@@ -29,16 +29,16 @@
                     android:id="@+id/img_actionbar_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_logo_small"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <FrameLayout
                     android:id="@+id/fl_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_nav_search"
@@ -73,7 +73,6 @@
             android:id="@+id/ll_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tab_home_height"
-            android:background="@drawable/bg_tab_home"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

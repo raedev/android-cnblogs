@@ -18,6 +18,7 @@ import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
+import com.rae.cnblogs.sdk.event.LoginInfoEvent;
 import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -176,6 +177,14 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
         // 重新加载数据
         if (event.isRefresh()) {
             loadUserInfo();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(LoginInfoEvent event) {
+        // 退出登录了
+        if (!event.getIsLogin()) {
+            getView().onNotLogin();
         }
     }
 }

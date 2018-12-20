@@ -2,6 +2,7 @@ package com.rae.cnblogs.sdk.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 /**
@@ -47,6 +48,23 @@ public class UserInfoBean implements Parcelable {
      * 入园时间
      */
     private String joinDate;
+
+
+    /**
+     * 账号，从接口拿的，不是都有
+     */
+    @Nullable
+    private String account;
+
+    @Nullable
+    public String getAccount() {
+        if (TextUtils.isEmpty(account)) return blogApp;
+        return account;
+    }
+
+    public void setAccount(@Nullable String account) {
+        this.account = account;
+    }
 
     public boolean isHasFollow() {
         return mHasFollow;
@@ -142,6 +160,7 @@ public class UserInfoBean implements Parcelable {
         dest.writeByte(this.mHasFollow ? (byte) 1 : (byte) 0);
         dest.writeString(this.introduce);
         dest.writeString(this.joinDate);
+        dest.writeString(this.account);
     }
 
     protected UserInfoBean(Parcel in) {
@@ -153,6 +172,18 @@ public class UserInfoBean implements Parcelable {
         this.mHasFollow = in.readByte() != 0;
         this.introduce = in.readString();
         this.joinDate = in.readString();
+        this.account = in.readString();
     }
 
+    public static final Creator<UserInfoBean> CREATOR = new Creator<UserInfoBean>() {
+        @Override
+        public UserInfoBean createFromParcel(Parcel source) {
+            return new UserInfoBean(source);
+        }
+
+        @Override
+        public UserInfoBean[] newArray(int size) {
+            return new UserInfoBean[size];
+        }
+    };
 }

@@ -10,7 +10,7 @@ import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IRaeServerApi;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.LoginInfoEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,7 +41,7 @@ public class SettingPresenterImpl extends BasicPresenter<SettingContract.View> i
         getView().onNotLogin();
         AppMobclickAgent.onProfileSignOff();
         UserProvider.getInstance().logout();
-        EventBus.getDefault().post(new UserInfoEvent());
+        EventBus.getDefault().post(new LoginInfoEvent());
         getView().onLogout();
     }
 

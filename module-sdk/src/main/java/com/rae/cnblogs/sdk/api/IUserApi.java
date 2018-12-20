@@ -8,6 +8,7 @@ import com.rae.cnblogs.sdk.Parser;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.LoginToken;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
+import com.rae.cnblogs.sdk.parser.AccountParser;
 import com.rae.cnblogs.sdk.parser.LoginPageParser;
 import com.rae.cnblogs.sdk.parser.LoginParser;
 import com.rae.cnblogs.sdk.parser.SimpleUserInfoParser;
@@ -132,7 +133,26 @@ public interface IUserApi {
     @POST(ApiUrls.API_USER_NICKNAME)
     @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
     @FormUrlEncoded
-    Observable<Empty> updateNickName(@Field("oldDisplayName") String oldName,
-                                     @Field("newDisplayName") String newName);
+    Observable<String> updateNickName(@Field("oldDisplayName") String oldName,
+                                      @Field("newDisplayName") String newName);
+
+    /**
+     * 更新账号
+     *
+     * @return
+     */
+    @POST(ApiUrls.API_USER_ACCOUNT)
+    @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
+    @FormUrlEncoded
+    Observable<String> updateAccount(@Field("oldLoginName") String oldName,
+                                     @Field("newLoginName") String newName);
+
+
+    /**
+     * 获取账号信息
+     */
+    @GET(ApiUrls.API_SETTING_ACCOUNT)
+    @Parser(AccountParser.class)
+    Observable<String> getUserAccount();
 
 }

@@ -27,6 +27,8 @@ import java.util.ArrayList;
  */
 public final class AppRoute {
 
+    private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
+
     // WEB 登录
     public static final int REQ_CODE_WEB_LOGIN = 100;
     /**
@@ -207,6 +209,7 @@ public final class AppRoute {
             debug();
         }
         ARouter.init(applicationContext);
+        applicationContext.registerActivityLifecycleCallbacks(sAppActivityLifecycle);
     }
 
     public static void debug() {
@@ -683,4 +686,10 @@ public final class AppRoute {
     }
 
 
+    /**
+     * 退出所有的Activity
+     */
+    public static void finish() {
+        sAppActivityLifecycle.finish();
+    }
 }

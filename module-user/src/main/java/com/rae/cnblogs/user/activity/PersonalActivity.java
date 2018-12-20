@@ -45,7 +45,7 @@ public class PersonalActivity extends SwipeBackBasicActivity implements Personal
 
     @Override
     public void onLoadUserInfo(UserInfoBean user) {
-        mAccountView.setText(user.getBlogApp());
+        mAccountView.setText(user.getAccount());
         mNicknameView.setText(user.getDisplayName());
         mDescView.setText(user.getIntroduce());
         AppImageLoader.displayAvatar(user.getAvatar(), mAvatarView);

@@ -13,7 +13,6 @@ import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
-import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
@@ -80,7 +79,7 @@ public class PersonalNickNameFragment extends BasicFragment implements View.OnCl
         mSaveView.setText("保存中");
         AndroidObservable.create(mUserApi.updateNickName(mOldName, text))
                 .with(this)
-                .subscribe(new ApiDefaultObserver<Empty>() {
+                .subscribe(new ApiDefaultObserver<String>() {
                     @Override
                     protected void onError(String message) {
                         mSaveView.setEnabled(true);
@@ -89,7 +88,11 @@ public class PersonalNickNameFragment extends BasicFragment implements View.OnCl
                     }
 
                     @Override
-                    protected void accept(Empty empty) {
+                    protected void accept(String message) {
+                        if (!message.contains("成功")) {
+                            onError(message);
+                            return;
+                        }
                         EventBus.getDefault().post(new UserInfoChangedEvent());
                         UICompat.toastInCenter(getContext(), "昵称修改成功");
                         if (getActivity() != null)

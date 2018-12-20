@@ -13,7 +13,7 @@ import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.api.IFriendsApi;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -93,7 +93,7 @@ class FriendsPresenterImpl extends BasicPresenter<FriendsContract.View> implemen
                         m.setHasFollow(false);
                         getView().onUnFollowSuccess();
                         // 通知用户信息发生改变
-                        EventBus.getDefault().post(new UserInfoEvent());
+                        EventBus.getDefault().post(new UserInfoChangedEvent());
                     }
                 });
     }
@@ -115,7 +115,7 @@ class FriendsPresenterImpl extends BasicPresenter<FriendsContract.View> implemen
                         m.setHasFollow(true);
                         getView().onFollowSuccess();
                         // 通知用户信息发生改变
-                        EventBus.getDefault().post(new UserInfoEvent());
+                        EventBus.getDefault().post(new UserInfoChangedEvent());
                     }
                 });
     }
