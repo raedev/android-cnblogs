@@ -18,13 +18,14 @@
 
         <!--头部-->
         <RelativeLayout
+            android:id="@+id/rl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="28dp"
-            android:paddingEnd="24dp"
             android:paddingStart="24dp"
-            android:paddingTop="48dp">
+            android:paddingTop="48dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="28dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/img_blog_avatar"
@@ -37,8 +38,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/img_blog_avatar"
                 android:layout_alignTop="@+id/img_blog_avatar"
+                android:layout_alignBottom="@+id/img_blog_avatar"
                 android:layout_marginStart="28dp"
                 android:layout_toEndOf="@+id/img_blog_avatar"
                 android:gravity="center|start"
@@ -56,7 +57,7 @@
                     android:id="@+id/tv_introduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/introduction"
                     android:textColor="@color/ph3"
                     android:textSize="14sp" />
@@ -72,10 +73,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="24dp"
-            android:paddingEnd="24dp"
             android:paddingStart="24dp"
             android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="24dp"
             android:visibility="visible">
 
             <LinearLayout
@@ -109,8 +110,8 @@
                 android:id="@+id/layout_account_fans"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -143,18 +144,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_join_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h1"
+                    android:textSize="@dimen/h2"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="我的博客"
+                    android:layout_marginTop="8dp"
+                    android:text="我的园龄"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h3" />
 
@@ -168,26 +170,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="12dp"
-            android:paddingEnd="12dp"
             android:paddingStart="12dp"
-            android:paddingTop="12dp">
+            android:paddingTop="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="12dp">
 
             <TextView
                 android:id="@+id/tv_favorites"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawablePadding="2dp"
                 android:drawableTop="@drawable/icon_favorite"
+                android:drawablePadding="2dp"
                 android:gravity="center"
                 android:text="@string/my_favorites"
-                android:textColor="#FF555555"
+                android:textColor="@color/ph1"
                 android:textSize="@dimen/h3" />
 
             <TextView
@@ -195,11 +197,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawablePadding="2dp"
                 android:drawableTop="@drawable/icon_history"
+                android:drawablePadding="2dp"
                 android:gravity="center"
                 android:text="@string/history"
-                android:textColor="#FF555555"
+                android:textColor="@color/ph1"
                 android:textSize="@dimen/h3" />
 
             <FrameLayout
@@ -219,18 +221,19 @@
                         android:layout_height="8dp"
                         android:layout_gravity="end"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_badge" />
+                        android:background="@drawable/bg_badge"
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/tv_system_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:drawablePadding="2dp"
                         android:drawableTop="@drawable/icon_message_center"
+                        android:drawablePadding="2dp"
                         android:gravity="center"
                         android:text="@string/message_center"
-                        android:textColor="#FF555555"
+                        android:textColor="@color/ph1"
                         android:textSize="@dimen/h3" />
                 </FrameLayout>
             </FrameLayout>
@@ -240,16 +243,39 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawablePadding="2dp"
                 android:drawableTop="@drawable/icon_moom"
+                android:drawablePadding="2dp"
                 android:gravity="center"
                 android:text="@string/night_mode"
-                android:textColor="#FF555555"
+                android:textColor="@color/ph1"
                 android:textSize="@dimen/h3" />
 
         </LinearLayout>
 
+        <!--我的博客-->
+        <LinearLayout
+            android:id="@+id/ll_my_blog"
+            style="@style/ItemStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/icon_my_blog"
+                android:drawablePadding="21dp"
+                android:gravity="center"
+                android:text="@string/my_blog"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:drawableEnd="@drawable/default_right_arrow" />
+        </LinearLayout>
         <!--字体设置-->
         <LinearLayout
             android:id="@+id/ll_font_setting"
@@ -261,8 +287,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="21dp"
                 android:drawableStart="@drawable/icon_font_small"
+                android:drawablePadding="21dp"
                 android:gravity="center"
                 android:text="@string/font_setting"
                 android:textColor="@color/black"
@@ -286,8 +312,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="21dp"
                 android:drawableStart="@drawable/icon_feedback_small"
+                android:drawablePadding="21dp"
                 android:gravity="center"
                 android:text="@string/feedback"
                 android:textColor="@color/black"
@@ -315,14 +341,14 @@
             style="@style/ItemStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="21dp"
                 android:drawableStart="@drawable/icon_share_small"
+                android:drawablePadding="21dp"
                 android:gravity="center"
                 android:text="@string/share_app"
                 android:textColor="@color/black"
@@ -345,8 +371,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="21dp"
                 android:drawableStart="@drawable/icon_market_small"
+                android:drawablePadding="21dp"
                 android:gravity="center"
                 android:text="@string/praises"
                 android:textColor="@color/black"
@@ -365,14 +391,14 @@
             style="@style/ItemStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="21dp"
                 android:drawableStart="@drawable/icon_settings_small"
+                android:drawablePadding="21dp"
                 android:gravity="center"
                 android:text="@string/setting"
                 android:textColor="@color/black"
@@ -387,4 +413,5 @@
 
 
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

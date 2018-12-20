@@ -11,10 +11,15 @@ import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.R2;
 import com.rae.cnblogs.home.adapter.SearchResultFragmentAdapter;
 import com.rae.cnblogs.sdk.bean.BlogType;
+import com.rae.cnblogs.sdk.db.DbFactory;
+import com.rae.cnblogs.sdk.db.DbSearch;
 import com.rae.cnblogs.user.fragment.SearchFriendsFragment;
 import com.rae.cnblogs.widget.RaeAppTabLayout;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.observers.DefaultObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 搜索结果
@@ -41,9 +46,36 @@ public class SearchResultFragment extends BasicFragment {
         Bundle arguments = getArguments();
         if (arguments != null) {
             String text = arguments.getString(Intent.EXTRA_TEXT);
+            saveHistory(text);
             // 加载数据
             onLoadData(text);
         }
+    }
+
+    public void saveHistory(String keyword) {
+        // 保存历史记录
+        final DbSearch mDbSearch = DbFactory.getInstance().getSearch();
+        Observable.just(keyword)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new DefaultObserver<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        // 清除相同的记录
+                        mDbSearch.deleteSearchHistory(s);
+                        // 添加到历史中
+                        mDbSearch.addSearchHistory(s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void onLoadData(String text) {

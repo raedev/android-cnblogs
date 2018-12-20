@@ -20,6 +20,7 @@
     <color name="ph4">#999999</color>
     <color name="default_background">#FFFFFF</color>
     <color name="background_divider">#f8f8f8</color>
+    <color name="placeholder_background_divider">#f8f8f8</color>
     <color name="colorToastPrimary">#daedfa</color>
     <color name="commentAvatarColor">#6293b3</color>
     <color name="blog_item_pressed">#F0F0F0</color>

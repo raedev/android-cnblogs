@@ -15,13 +15,6 @@ public interface HotSearchContract {
          * 清除搜索记录
          */
         void clearSearchHistory();
-
-        /**
-         * 保存搜索记录
-         *
-         * @param keyword 搜索关键字
-         */
-        void saveHistory(String keyword);
     }
 
     interface View extends IPresenterView {

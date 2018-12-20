@@ -1,5 +1,7 @@
 package com.rae.cnblogs.sdk.bean;
 
+import android.os.Parcel;
+
 /**
  * 粉丝以及关注个数
  * Created by ChenRui on 2017/2/7 0007 15:25.
@@ -20,16 +22,6 @@ public class FriendsInfoBean extends UserInfoBean {
      */
     private boolean isFollowed;
 
-
-    /**
-     * 园龄
-     */
-    private String snsAge;
-
-    /**
-     * 自我介绍
-     */
-    private String introduce;
 
     public String getFans() {
         return fans;
@@ -55,19 +47,39 @@ public class FriendsInfoBean extends UserInfoBean {
         isFollowed = followed;
     }
 
-    public String getSnsAge() {
-        return snsAge;
+
+    public FriendsInfoBean() {
     }
 
-    public void setSnsAge(String snsAge) {
-        this.snsAge = snsAge;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public String getIntroduce() {
-        return introduce;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.fans);
+        dest.writeString(this.follows);
+        dest.writeByte(this.isFollowed ? (byte) 1 : (byte) 0);
     }
 
-    public void setIntroduce(String introduce) {
-        this.introduce = introduce;
+    protected FriendsInfoBean(Parcel in) {
+        super(in);
+        this.fans = in.readString();
+        this.follows = in.readString();
+        this.isFollowed = in.readByte() != 0;
     }
+
+    public static final Creator<FriendsInfoBean> CREATOR = new Creator<FriendsInfoBean>() {
+        @Override
+        public FriendsInfoBean createFromParcel(Parcel source) {
+            return new FriendsInfoBean(source);
+        }
+
+        @Override
+        public FriendsInfoBean[] newArray(int size) {
+            return new FriendsInfoBean[size];
+        }
+    };
 }

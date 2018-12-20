@@ -9,15 +9,17 @@
     <color name="colorPrimary_night">@color/nightColorPrimary</color>
     <color name="colorPrimaryDark_night">@color/nightColorPrimary</color>
     <color name="colorPrimaryBlack_night">@color/nightColorPrimary</color>
-    <color name="colorAccent_night">@color/nightColorPrimary</color>
+    <color name="colorAccent_night">#3c3c3c</color>
     <color name="transparent_night">#00000000</color>
     <color name="navBar_night">@color/nightColorPrimary</color>
     <color name="dividerPrimary_night">#2b2c2f</color>
     <color name="dividerColor_night">#2b2c2f</color>
+    <color name="placeholder_background_divider_night">#3b3b3c</color>
     <color name="ph4_night">#595959</color>
     <color name="ph3_night">#595959</color>\
     <color name="ph2_night">#505053</color>
     <color name="ph1_night">#8f9091</color>
+    <color name="black_night">#8f9091</color>
     <color name="default_background_night">#1F1F21</color>
     <color name="background_divider_night">@color/nightColorPrimary</color>
     <color name="colorToastPrimary_night">@color/nightColorPrimary</color>
@@ -26,7 +28,7 @@
     <color name="white_night">@color/nightColorPrimary</color>
     <color name="statusBarColor_night">@color/nightColorPrimary</color>
     <color name="red_night">#F00000</color>
-    <color name="categoryColor_night">#141518</color>
+    <color name="categoryColor_night">#2c2c2e</color>
     <color name="badge_color_night">#595959</color>
     <color name="homeTabTextColor_night">#58585b</color>
     <color name="homeTabSelectedTextColor_night">#8f9091</color>

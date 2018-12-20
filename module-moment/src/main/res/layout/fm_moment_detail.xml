@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_divider"
     android:orientation="vertical">
 
     <com.rae.cnblogs.widget.AppLayout
@@ -30,10 +31,10 @@
         android:id="@+id/tv_edit_comment"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:layout_marginBottom="6dp"
         android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginRight="@dimen/default_margin"
         android:layout_marginTop="6dp"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginBottom="6dp"
         android:background="@drawable/bg_write_comment"
         android:gravity="left|center"
         android:paddingLeft="21dp"

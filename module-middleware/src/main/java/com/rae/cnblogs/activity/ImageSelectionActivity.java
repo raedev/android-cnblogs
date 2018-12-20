@@ -60,24 +60,41 @@ public class ImageSelectionActivity extends BasicActivity {
     TextView mPostView;
     private ImageSelectionAdapter mAdapter;
     private ImageSelectedAdapter mSelectedAdapter;
-    private final int mMaxCount = 6; // 最大选择数量
-    private ArrayList<String> mSelectedImages;
+    private int mMaxCount = 6; // 最大选择数量
+
+    private boolean isSingleMode; // 是否为单选模式
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_selection);
-        mSelectedImages = getIntent().getStringArrayListExtra("selectedImages");
+        ArrayList<String> selectedImages = getIntent().getStringArrayListExtra("selectedImages");
+
+        // 单一模式
+        String imageUrl = getIntent().getStringExtra("imageUrl");
+        int type = getIntent().getIntExtra("type", 0);
+        isSingleMode = type == 1;
+        if (isSingleMode) {
+            mMaxCount = 1;
+            mPostView.setText(getString(R.string.button_text_image_post_default));
+            selectedImages = new ArrayList<>();
+            mSelectedRecyclerView.setVisibility(View.GONE);
+        }
+        if (imageUrl != null) {
+            selectedImages.add(imageUrl);
+        }
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         LinearLayoutManager lm = new LinearLayoutManager(this);
         lm.setOrientation(LinearLayoutManager.HORIZONTAL);
         mSelectedRecyclerView.setLayoutManager(lm);
         mAdapter = new ImageSelectionAdapter();
-        mAdapter.setSelectedImages(mSelectedImages);
+        mAdapter.setSelectedImages(selectedImages);
         mAdapter.setMaxCount(mMaxCount);
         mRecyclerView.setAdapter(mAdapter);
         mSelectedAdapter = new ImageSelectedAdapter();
         mSelectedRecyclerView.setAdapter(mSelectedAdapter);
+
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 
             private int sourceCount;
@@ -87,6 +104,10 @@ public class ImageSelectionActivity extends BasicActivity {
                 super.onChanged();
                 mSelectedAdapter.setDataList(mAdapter.getSelectedList());
                 mSelectedAdapter.notifyDataSetChanged();
+                if (isSingleMode) {
+                    mPostView.setEnabled(true);
+                    return;
+                }
                 if (mSelectedAdapter.getItemCount() > 0) {
                     mPostView.setEnabled(true);
                     mPostView.setText(getString(R.string.button_text_image_post, mSelectedAdapter.getItemCount(), mMaxCount));
@@ -125,15 +146,27 @@ public class ImageSelectionActivity extends BasicActivity {
                 AppRoute.routeToImagePreview((Activity) v.getContext(), images, position, images, mMaxCount);
             }
         });
+
+        // 点击列表图片
         mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = (int) v.getTag();
+                if (isSingleMode) {
+                    String path = mAdapter.getDataList().get(position);
+                    ArrayList<String> result = new ArrayList<>();
+                    result.add(path);
+                    mAdapter.setSelectedImages(result);
+                    onPostClick();
+                    return;
+                }
                 ArrayList<String> images = (ArrayList<String>) mAdapter.getDataList();
                 ArrayList<String> selectedImages = (ArrayList<String>) mAdapter.getSelectedList();
                 AppRoute.routeToImagePreview((Activity) v.getContext(), images, position, selectedImages, mMaxCount);
             }
         });
+
+
         start();
     }
 
@@ -265,6 +298,8 @@ public class ImageSelectionActivity extends BasicActivity {
         @Override
         public void onBindViewHolder(ImageSelectionHolder holder, int position) {
             String fileName = mUrls.get(position);
+
+            UICompat.setVisibility(holder.mCheckBox, mMaxCount > 1);
 
             holder.itemView.setTag(position);
             holder.itemView.setOnClickListener(mOnClickListener);

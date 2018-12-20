@@ -32,7 +32,7 @@
                     android:layout_marginLeft="12dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_logo_small"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <FrameLayout
                     android:id="@+id/fl_search"
@@ -42,10 +42,10 @@
                     android:layout_marginRight="12dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_nav_search"
-                    android:paddingBottom="5dp"
                     android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
                     android:paddingRight="6dp"
-                    android:paddingTop="5dp">
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:id="@+id/tv_search"
@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:drawableLeft="@drawable/ic_nav_home_search"
-                        android:drawablePadding="4dp"
+                        android:drawablePadding="12dp"
                         android:ellipsize="end"
                         android:gravity="center"
                         android:singleLine="true"
@@ -99,8 +99,8 @@
                 android:id="@+id/img_edit_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:src="@drawable/channel_manager_icon"
                 app:nightColor="@color/nightIconColor" />
 

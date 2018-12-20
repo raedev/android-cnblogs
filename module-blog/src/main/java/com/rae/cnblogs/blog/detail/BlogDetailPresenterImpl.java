@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.rae.cnblogs.ContentEntityConverter;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.ContentEntity;
@@ -244,10 +245,12 @@ public class BlogDetailPresenterImpl extends BasicPresenter<ContentDetailContrac
                     @Override
                     public BlogBean apply(String content) {
                         // 从数据库查询，转换为博客对象
-                        BlogBean data = mDbBlog.getBlog(getView().getContentEntity().getId());
+
+                        BlogBean data = mDbBlog.getBlog(contentEntity.getId());
                         if (data == null) {
                             // 没有查询到博客，可能没保存成功，或者缓存已经删除
-                            throw new NullPointerException("本地数据库没有找到博客信息");
+//                            throw new NullPointerException("本地数据库没有找到博客信息");
+                            data = ContentEntityConverter.convertToBlog(contentEntity);
                         }
                         data.setContent(content); // 设置博客内容
                         return data;

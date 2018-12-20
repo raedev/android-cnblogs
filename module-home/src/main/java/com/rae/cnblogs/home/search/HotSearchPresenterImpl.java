@@ -155,37 +155,37 @@ public class HotSearchPresenterImpl extends BasicPresenter<HotSearchContract.Vie
                 });
     }
 
-    @Override
-    public void saveHistory(String keyword) {
-        // 保存历史记录
-        Observable.just(keyword)
-                .subscribeOn(Schedulers.io())
-                .subscribe(new DefaultObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        // 清除相同的记录
-                        mDbSearch.deleteSearchHistory(s);
-                        // 添加到历史中
-                        mDbSearch.addSearchHistory(s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
+//    @Override
+//    public void saveHistory(String keyword) {
+//        // 保存历史记录
+//        Observable.just(keyword)
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new DefaultObserver<String>() {
+//                    @Override
+//                    public void onNext(String s) {
+//                        // 清除相同的记录
+//                        mDbSearch.deleteSearchHistory(s);
+//                        // 添加到历史中
+//                        mDbSearch.addSearchHistory(s);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//    }
 
     @Subscribe
     public void onEvent(SearchEvent event) {
         if (TextUtils.isEmpty(event.getSearchText())) return;
         // 保存搜索记录
-        saveHistory(event.getSearchText());
+//        saveHistory(event.getSearchText());
         loadHistory();
     }
 }

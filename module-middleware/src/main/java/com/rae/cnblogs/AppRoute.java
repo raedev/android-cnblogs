@@ -81,10 +81,22 @@ public final class AppRoute {
      * 登录
      */
     public static final String PATH_LOGIN = "/user/login/index";
+
     /**
      * 网页登录
      */
     public static final String PATH_WEB_LOGIN = "/user/login/web";
+
+    /**
+     * 个人中心
+     */
+    public static final String PATH_USER_CENTER = "/user/center/index";
+
+    /**
+     * 头像
+     */
+    public static final String PATH_AVATAR = "/user/center/avatar";
+
     /**
      * 粉丝以及关注
      */
@@ -184,6 +196,9 @@ public final class AppRoute {
      */
     public static final String PATH_FRAGMENT_BLOG_SEARCH = "/search/fragment";
 
+    // 用户详情
+    public static final String PATH_PERSONAL_DETAIL = "/user/info/detail";
+
     /**
      * 初始化
      */
@@ -251,9 +266,9 @@ public final class AppRoute {
      */
     public static void routeToMain(Context context) {
         ARouter.getInstance().build(PATH_APP_HOME)
-                .withFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
-                        | Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
-                        | Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                .withFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
+//                        | Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
+//                        | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .navigation(context);
     }
 
@@ -560,6 +575,44 @@ public final class AppRoute {
     }
 
     /**
+     * 跳转到图片选择
+     */
+    public static void routeToImageSelection(Activity context, String imageUrl) {
+        Postcard postcard = ARouter.getInstance().build(PATH_IMAGE_SELECTION);
+        postcard.withString("imageUrl", imageUrl);
+        postcard.withInt("type", 1); // 单一模式
+        postcard.navigation(context, REQ_IMAGE_SELECTION);
+    }
+
+    /**
+     * 账号修改
+     */
+    public static void routeToPersonalAccount(Context context) {
+        ARouter.getInstance().build(PATH_PERSONAL_DETAIL).withInt("type", 1).navigation(context);
+    }
+
+    /**
+     * 昵称修改
+     */
+    public static void routeToPersonalNickName(Context context) {
+        ARouter.getInstance().build(PATH_PERSONAL_DETAIL).withInt("type", 2).navigation(context);
+    }
+
+    /**
+     * 密码修改
+     */
+    public static void routeToResetPassword(Context context) {
+        ARouter.getInstance().build(PATH_PERSONAL_DETAIL).withInt("type", 3).navigation(context);
+    }
+
+    /**
+     * 个性签名
+     */
+    public static void routeToPersonalIntroduce(Context context) {
+        ARouter.getInstance().build(PATH_PERSONAL_DETAIL).withInt("type", 4).navigation(context);
+    }
+
+    /**
      * 关于我们
      */
     public static void routeToAboutMe(Context context) {
@@ -567,10 +620,21 @@ public final class AppRoute {
     }
 
     /**
+     * 个人中心
+     */
+    public static void routeToUserCenter(Context context) {
+        route(context, PATH_USER_CENTER);
+    }
+
+    /**
      * 浏览记录
      */
     public static void routeToHistory(Context context) {
         route(context, PATH_BLOG_HISTORY);
+    }
+
+    public static void routeToAvatar(Context context) {
+        route(context, PATH_AVATAR);
     }
 
     public static Fragment newMineFragment() {
@@ -617,4 +681,6 @@ public final class AppRoute {
                 .withString("url", url)
                 .navigation(context);
     }
+
+
 }

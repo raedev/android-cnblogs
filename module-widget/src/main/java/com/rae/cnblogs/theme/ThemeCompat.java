@@ -124,8 +124,6 @@ public final class ThemeCompat {
         } else {
             SkinCompatManager.getInstance().loadSkin("night", null, SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
         }
-
-
     }
 
     /**

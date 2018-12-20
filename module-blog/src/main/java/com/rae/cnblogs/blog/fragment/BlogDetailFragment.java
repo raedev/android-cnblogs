@@ -84,11 +84,14 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new BlogDetailPresenterImpl(this);
         // 初始化参数属性
         Bundle arguments = getArguments();
         if (arguments != null) {
             mContentEntity = arguments.getParcelable("entity");
+        }
+        mPresenter = new BlogDetailPresenterImpl(this);
+        if ("NEWS".equalsIgnoreCase(mContentEntity.getType())) {
+
         }
 
         // 初始化WebView

@@ -54,10 +54,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
-                android:background="@drawable/bg_blogger_blur_new"
+                android:layout_marginTop="240dp"
+                android:background="@drawable/bg_blogger_info_card"
                 android:orientation="vertical">
-
 
                 <!--圆形头像-->
                 <RelativeLayout
@@ -88,7 +87,7 @@
                         android:layout_marginStart="18dp"
                         android:layout_toEndOf="@id/img_blog_avatar"
                         android:paddingStart="12dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/h1"
                         android:textStyle="bold" />
 
@@ -156,7 +155,7 @@
                             android:layout_height="wrap_content"
 
                             android:text="0"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/h2"
                             android:textStyle="bold" />
 
@@ -165,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="粉丝"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/h3" />
 
 
@@ -187,9 +186,8 @@
                             android:id="@+id/tv_follow_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="0"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/h2"
                             android:textStyle="bold" />
 
@@ -198,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="关注"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/h3" />
 
                     </LinearLayout>
@@ -220,18 +218,17 @@
                             android:id="@+id/tv_age"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="0"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/h2"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/h3"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="6dp"
                             android:text="园龄"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/h3" />
 
                     </LinearLayout>

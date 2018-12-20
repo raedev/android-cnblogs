@@ -6,6 +6,10 @@ package com.rae.cnblogs.sdk.api;
  */
 final class ApiUrls {
 
+    // 更新头像
+    public static final String API_USER_AVATAR = "https://upload.cnblogs.com/avatar/crop";
+    public static final String API_USER_NICKNAME= "https://home.cnblogs.com/user/ChangeDisplayName";
+
     // 博客-列表
     static final String API_BLOG_LIST = "https://www.cnblogs.com/mvc/AggSite/PostList.aspx?ItemListActionName=PostList";
 
@@ -152,6 +156,9 @@ final class ApiUrls {
 
     // 上传图片
     static final String API_POST_IMAGE = "https://upload.cnblogs.com/imageuploader/processupload?host=www.cnblogs.com";
+
+    // 上传头像图片
+    static final String API_UPLOAD_AVATAR_IMAGE = "https://upload.cnblogs.com/ImageUploader/TemporaryAvatarUpload";
 
     // 服务端接口地址
     private static final String RAE_API_BASIC = "https://raedev.io/cnblogs/";

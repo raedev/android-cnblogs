@@ -38,11 +38,15 @@ public class UserInfoBean implements Parcelable {
      */
     private boolean mHasFollow;
 
+    /**
+     * 自我介绍
+     */
+    private String introduce;
 
-//    /**
-//     * 入园时间
-//     */
-//    private String joinDate;
+    /**
+     * 入园时间
+     */
+    private String joinDate;
 
     public boolean isHasFollow() {
         return mHasFollow;
@@ -96,13 +100,21 @@ public class UserInfoBean implements Parcelable {
         this.userId = userId;
     }
 
-//    public String getJoinDate() {
-//        return joinDate;
-//    }
-//
-//    public void setJoinDate(String joinDate) {
-//        this.joinDate = joinDate;
-//    }
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 
     public UserInfoBean() {
     }
@@ -127,6 +139,9 @@ public class UserInfoBean implements Parcelable {
         dest.writeString(this.avatar);
         dest.writeString(this.displayName);
         dest.writeString(this.remarkName);
+        dest.writeByte(this.mHasFollow ? (byte) 1 : (byte) 0);
+        dest.writeString(this.introduce);
+        dest.writeString(this.joinDate);
     }
 
     protected UserInfoBean(Parcel in) {
@@ -135,17 +150,9 @@ public class UserInfoBean implements Parcelable {
         this.avatar = in.readString();
         this.displayName = in.readString();
         this.remarkName = in.readString();
+        this.mHasFollow = in.readByte() != 0;
+        this.introduce = in.readString();
+        this.joinDate = in.readString();
     }
 
-    public static final Creator<UserInfoBean> CREATOR = new Creator<UserInfoBean>() {
-        @Override
-        public UserInfoBean createFromParcel(Parcel source) {
-            return new UserInfoBean(source);
-        }
-
-        @Override
-        public UserInfoBean[] newArray(int size) {
-            return new UserInfoBean[size];
-        }
-    };
 }

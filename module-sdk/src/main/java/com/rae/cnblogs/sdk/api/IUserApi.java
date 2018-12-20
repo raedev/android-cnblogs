@@ -11,9 +11,12 @@ import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.parser.LoginPageParser;
 import com.rae.cnblogs.sdk.parser.LoginParser;
 import com.rae.cnblogs.sdk.parser.SimpleUserInfoParser;
+import com.rae.cnblogs.sdk.parser.UploadAvatarParser;
 import com.rae.cnblogs.sdk.parser.UserInfoParser;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -21,6 +24,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * 用户接口，用户管理对应{@link UserProvider} 类
@@ -83,5 +87,52 @@ public interface IUserApi {
     @Headers({JsonBody.XHR})
     @Parser(UserInfoParser.class)
     Observable<UserInfoBean> getUserInfo(@Path("blogApp") String blogApp);
+
+
+    /**
+     * 上传头像图片
+     *
+     * @param fileName       文件名称
+     * @param headerFileName 文件名称
+     * @param file           文件
+     * @return 可访问的网络路径
+     */
+    @POST(ApiUrls.API_UPLOAD_AVATAR_IMAGE)
+    @Headers({
+            "X-Mime-Type: image/jpeg",
+            "Content-Type: application/octet-stream",
+            "Accept: */*",
+            "Referer: https://www.cnblogs.com",
+            "Origin: https://upload.cnblogs.com",
+            "X-Requested-With: XMLHttpRequest"
+    })
+    @JsonParser(UploadAvatarParser.class)
+    Observable<String> uploadAvatarImage(@Query("qqfile") String fileName, @Header("X-File-Name") String headerFileName, @Body RequestBody file);
+
+
+    /**
+     * 更新头像
+     *
+     * @return
+     */
+    @POST(ApiUrls.API_USER_AVATAR)
+    @FormUrlEncoded
+    @JsonParser(UploadAvatarParser.class)
+    Observable<String> updateAvatar(@Field("x") int x,
+                                    @Field("y") int y,
+                                    @Field("w") int w,
+                                    @Field("h") int h,
+                                    @Field("imgsrc") String url);
+
+    /**
+     * 更新昵称
+     *
+     * @return
+     */
+    @POST(ApiUrls.API_USER_NICKNAME)
+    @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
+    @FormUrlEncoded
+    Observable<Empty> updateNickName(@Field("oldDisplayName") String oldName,
+                                     @Field("newDisplayName") String newName);
 
 }

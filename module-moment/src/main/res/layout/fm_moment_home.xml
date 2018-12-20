@@ -38,9 +38,9 @@
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
+        android:paddingBottom="0dp"
         android:paddingStart="12dp"
-        android:paddingTop="10dp"
+        android:paddingTop="0dp"
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">

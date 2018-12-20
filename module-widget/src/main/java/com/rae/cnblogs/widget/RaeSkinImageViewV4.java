@@ -67,7 +67,7 @@ public class RaeSkinImageViewV4 extends ImageView implements SkinCompatSupportab
 
     public boolean isNight() {
         // 因为是先应用主题之后才会设置主题名称，所以这里取反。
-        return !ThemeCompat.isNight();
+        return ThemeCompat.isNight();
     }
 
 

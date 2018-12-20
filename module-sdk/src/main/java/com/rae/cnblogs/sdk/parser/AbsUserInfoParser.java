@@ -42,6 +42,10 @@ public abstract class AbsUserInfoParser<T> implements IHtmlParser<T> {
             }
 
         }
+        Element joinDateElement = document.selectFirst("span[title]");
+        if (joinDateElement != null && joinDateElement.attr("title").contains("入园")) {
+            result.setJoinDate(joinDateElement.text());
+        }
 
         result.setAvatar(ApiUtils.getUrl(document.select(".img_avatar").attr("src")));
         // 解析blogApp
@@ -51,6 +55,18 @@ public abstract class AbsUserInfoParser<T> implements IHtmlParser<T> {
         }
         result.setDisplayName(document.select(".display_name").text());
         result.setRemarkName(document.select("#remarkId").text());
+
+        // 解析园龄
+        Elements profileLi = document.select("#user_profile li");
+        for (Element element : profileLi) {
+            String text = element.text();
+            if (text.contains("自我介绍")) {
+                result.setIntroduce(text.replace("自我介绍：", "").trim());
+            }
+//            if (text.contains("园龄")) {
+//                result.setJoinDate(text.replace("园龄：", "").trim());
+//            }
+        }
     }
 
     /**

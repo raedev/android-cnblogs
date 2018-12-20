@@ -6,6 +6,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.rae.cnblogs.widget.SkinCardView;
+import com.rae.cnblogs.widget.SkinFitWindowsFrameLayout;
+import com.rae.cnblogs.widget.SkinFitWindowsLinearLayout;
+import com.rae.cnblogs.widget.SkinNestedScrollView;
 import com.rae.cnblogs.widget.SkinRoundedImageView;
 
 import skin.support.app.SkinLayoutInflater;
@@ -23,6 +26,12 @@ public class CnblogsLayoutInflater implements SkinLayoutInflater {
                 return new SkinRoundedImageView(context, attrs);
             case "android.support.v7.widget.CardView":
                 return new SkinCardView(context, attrs);
+            case "android.support.v7.widget.FitWindowsFrameLayout":
+                return new SkinFitWindowsFrameLayout(context, attrs);
+            case "android.support.v7.widget.FitWindowsLinearLayout":
+                return new SkinFitWindowsLinearLayout(context, attrs);
+            case "android.support.v4.widget.NestedScrollView":
+                return new SkinNestedScrollView(context, attrs);
         }
         return null;
     }

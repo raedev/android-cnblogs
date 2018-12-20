@@ -56,7 +56,7 @@ public class RaeSkinImageView extends SkinCompatImageView {
                 getDrawable().clearColorFilter();
             }
         } else {
-            setAlpha(isNight() ? getResources().getInteger(R.integer.imageAlpha_night) / 100.0f : 1f);
+            setAlpha(!isNight() ? getResources().getInteger(R.integer.imageAlpha_night) / 100.0f : 1f);
         }
     }
 

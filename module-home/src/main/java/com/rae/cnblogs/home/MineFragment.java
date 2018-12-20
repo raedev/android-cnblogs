@@ -32,6 +32,7 @@ import butterknife.OnClick;
 @Route(path = AppRoute.PATH_FRAGMENT_MINE)
 public class MineFragment extends BasicFragment implements MineContract.View {
 
+
     public static MineFragment newInstance() {
         return new MineFragment();
     }
@@ -46,6 +47,8 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     TextView mFollowCountView;
     @BindView(R2.id.tv_fans_count)
     TextView mFansCountView;
+    @BindView(R2.id.tv_join_date)
+    TextView mJoinDateView;
 
     @BindView(R2.id.ll_follow_fans)
     View mFansAndFollowLayout;
@@ -112,6 +115,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
         mFansAndFollowLayout.setVisibility(View.VISIBLE);
         AppImageLoader.displayAvatar(user.getAvatar(), mAvatarView);
         mDisplayNameView.setText(user.getDisplayName());
+        mJoinDateView.setText(user.getJoinDate());
     }
 
     @Override
@@ -151,10 +155,10 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     /**
      * 登录
      */
-    @OnClick({R2.id.img_blog_avatar, R2.id.tv_mine_name})
+    @OnClick({R2.id.rl_header})
     public void onLoginClick() {
         if (mPresenter.isLogin())
-            AppRoute.routeToBlogger(getContext(), UserProvider.getInstance().getLoginUserInfo().getBlogApp());
+            AppRoute.routeToUserCenter(getContext()); // 个人中心
         else
             AppRoute.routeToLogin(getContext());
     }
@@ -186,6 +190,17 @@ public class MineFragment extends BasicFragment implements MineContract.View {
         AppMobclickAgent.onClickEvent(getContext(), "SystemMessage");
         mSystemMessageBadgeView.setVisibility(View.INVISIBLE);
         AppRoute.routeToSystemMessage(this.getContext());
+    }
+
+    /**
+     * 我的博客
+     */
+    @OnClick(R2.id.ll_my_blog)
+    public void onMyBlogClick() {
+        if (mPresenter.isLogin())
+            AppRoute.routeToBlogger(getContext(), UserProvider.getInstance().getLoginUserInfo().getBlogApp());
+        else
+            AppRoute.routeToLogin(getContext());
     }
 
     /**

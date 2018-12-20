@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/basic_toolbar" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_divider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/boy"
+                app:riv_corner_radius="100dp" />
+
+            <Button
+                android:id="@+id/btn_preview"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="36dp"
+                android:background="@drawable/bg_btn_send"
+                android:text="查看头像"
+                android:textColor="@color/ph2" />
+
+            <Button
+                android:id="@+id/btn_media_selected"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="36dp"
+                android:background="@drawable/bg_btn_send"
+                android:text="从手机相册中选择"
+                android:textColor="@color/ph2" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ll_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_divider"
+            android:visibility="gone">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_user_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/boy"
+                app:riv_corner_radius="100dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="220dp"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/pb_loading"
+                    style="@style/ProgressBar"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="6dp"
+                    android:indeterminateDuration="1500" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="正在上传，请稍后.."
+                    android:textColor="@color/ph3"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </FrameLayout>
+</android.support.v7.widget.FitWindowsLinearLayout>

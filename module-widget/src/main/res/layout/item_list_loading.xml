@@ -6,10 +6,10 @@
     android:layout_marginBottom="4dp"
     android:background="@drawable/bg_blog_item_selector"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/default_margin"
     android:paddingLeft="@dimen/default_margin"
+    android:paddingTop="@dimen/default_margin"
     android:paddingRight="@dimen/default_margin"
-    android:paddingTop="@dimen/default_margin">
+    android:paddingBottom="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,9 +18,10 @@
         android:gravity="center_vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_avatar"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@color/background_divider"
+            android:src="@color/placeholder_background_divider"
             app:riv_corner_radius="32dp" />
 
 
@@ -28,37 +29,22 @@
             android:layout_width="100dp"
             android:layout_height="4dp"
             android:layout_marginLeft="9dp"
-            android:background="@color/background_divider" />
+            android:background="@color/placeholder_background_divider" />
 
     </LinearLayout>
 
     <View
-        android:layout_width="160dp"
+        android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginBottom="11dp"
-        android:background="@color/background_divider" />
+        android:background="@color/placeholder_background_divider" />
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_marginBottom="6dp"
-        android:background="@color/background_divider" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin">
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/default_background" />
-
-
-    </RelativeLayout>
+        android:background="@color/placeholder_background_divider" />
 
 
 </LinearLayout>

@@ -17,6 +17,7 @@ import com.rae.cnblogs.CnblogsApplication;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppMobclickAgent;
+import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.setting.SettingContract;
@@ -201,7 +202,16 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
     @OnClick(R2.id.ll_help_center)
     public void onHelpCenterClick() {
         AppMobclickAgent.onClickEvent(getContext(), "HelpCenter");
-        AppRoute.routeToWeb(this.getContext(), getString(R.string.url_help_center));
+        ContentEntity entity = new ContentEntity();
+        entity.setId("10131552");
+        entity.setTitle("博客园APP帮助中心");
+        entity.setDate("2018-12-17");
+        entity.setUrl("https://www.cnblogs.com/chenrui7/p/10131552.html");
+        entity.setSummary("博客园APP帮助中心");
+        entity.setAuthor("RAE");
+        entity.setAuthorId("chenrui7");
+        AppRoute.routeToContentDetail(getContext(), entity);
+//        AppRoute.routeToWeb(this.getContext(), getString(R.string.url_help_center));
     }
 
     @Override

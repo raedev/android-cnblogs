@@ -13,14 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.R;
 
 import butterknife.ButterKnife;
+import skin.support.SkinCompatManager;
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
 
 /**
  * 弹出对话框
  */
 public abstract class BasicDialogFragment extends AppCompatDialogFragment {
+
+    private SkinObserver mSkinObserver;
 
     @Nullable
     @Override
@@ -49,6 +55,29 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
         if (arguments != null) {
             onLoadData(arguments);
         }
+
+        // 皮肤切换监听
+        mSkinObserver = new SkinObserver() {
+            @Override
+            public void updateSkin(SkinObservable observable, Object o) {
+                if (getContext() == null) return;
+                int margin = (int) getContext().getResources().getDimension(R.dimen.default_dialog_margin);
+                int resId = R.drawable.bg_dialog_default;
+                if (ThemeCompat.isNight()) {
+                    resId = R.drawable.bg_dialog_default_night;
+                }
+                InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(getContext(), resId), margin, margin, margin, margin);
+                getDialog().getWindow().setBackgroundDrawable(drawable);
+            }
+        };
+        SkinCompatManager.getInstance().addObserver(mSkinObserver);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mSkinObserver != null)
+            SkinCompatManager.getInstance().deleteObserver(mSkinObserver);
     }
 
     @NonNull
@@ -66,8 +95,12 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             window.setDimAmount(0.3f);
             window.setGravity(Gravity.BOTTOM | Gravity.FILL_HORIZONTAL);
+            int resId = R.drawable.bg_dialog_default;
+            if (ThemeCompat.isNight()) {
+                resId = R.drawable.bg_dialog_default_night;
+            }
             int margin = (int) getContext().getResources().getDimension(R.dimen.default_dialog_margin);
-            InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(getContext(), R.drawable.bg_dialog_default), margin, margin, margin, margin);
+            InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(getContext(), resId), margin, margin, margin, margin);
             window.setWindowAnimations(R.style.SlideOverShootAnimation);
             window.setBackgroundDrawable(drawable);
         }

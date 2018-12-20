@@ -18,7 +18,7 @@ import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.FriendsInfoBean;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
-import com.rae.cnblogs.sdk.event.UserInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
@@ -92,7 +92,7 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
 
     @Override
     public void loadUserInfo() {
-        UserInfoBean userInfo = UserProvider.getInstance().getLoginUserInfo();
+        final UserInfoBean userInfo = UserProvider.getInstance().getLoginUserInfo();
 
         // 用户没有登录
         if (userInfo == null) {
@@ -139,7 +139,9 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
                     protected void accept(UserInfoBean userInfoBean) {
                         // 更新用户信息
                         if (!TextUtils.isEmpty(userInfoBean.getUserId())) {
+                            getView().onLoadUserInfo(userInfoBean);
                             UserProvider.getInstance().setLoginUserInfo(userInfoBean);
+                            EventBus.getDefault().post(new UserInfoChangedEvent(userInfoBean));
                         }
                     }
                 });
@@ -170,8 +172,10 @@ public class MinePresenterImpl extends BasicPresenter<MineContract.View> impleme
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(UserInfoEvent event) {
+    public void onEvent(UserInfoChangedEvent event) {
         // 重新加载数据
-        loadUserInfo();
+        if (event.isRefresh()) {
+            loadUserInfo();
+        }
     }
 }

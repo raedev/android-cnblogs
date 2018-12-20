@@ -4,6 +4,8 @@ import android.app.Application;
 
 import skin.support.SkinCompatManager;
 import skin.support.design.app.SkinMaterialViewInflater;
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
 
 /**
  * 主题管理器

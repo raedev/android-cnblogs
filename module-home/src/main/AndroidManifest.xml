@@ -36,7 +36,9 @@
 
         <activity
             android:name=".search.SearchActivity"
-            android:theme="@style/AppTheme.NoTranslucent"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".AboutMeActivity"
+            android:label="@string/about_me" />
     </application>
 </manifest>

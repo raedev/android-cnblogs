@@ -199,8 +199,10 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         if (!TextUtils.isEmpty(userInfo.getIntroduce())) {
             mIntroduceView.setText(userInfo.getIntroduce());
         }
-        if (!TextUtils.isEmpty(userInfo.getSnsAge())) {
-            mSnsAgeView.setText(userInfo.getSnsAge());
+
+        // 园龄
+        if (!TextUtils.isEmpty(userInfo.getJoinDate())) {
+            mSnsAgeView.setText(userInfo.getJoinDate());
         }
 
         // 如果是自己，则隐藏关注按钮

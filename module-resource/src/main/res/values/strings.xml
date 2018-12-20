@@ -166,4 +166,9 @@
     <string name="loading_blog_content">加载博客中</string>
     <string name="unfollow">取消关注</string>
     <string name="blogger_default_introduce">本宝宝暂时没有签名</string>
+    <string name="my_blog">我的博客</string>
+    <string name="avatar">头像</string>
+    <string name="account">账号</string>
+    <string name="nick_name">昵称</string>
+    <string name="save">保存</string>
 </resources>

@@ -23,8 +23,6 @@ import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.fragment.HotSearchFragment;
 import com.rae.cnblogs.home.fragment.SearchResultFragment;
 import com.rae.cnblogs.home.fragment.SearchSuggestFragment;
-import com.rae.cnblogs.sdk.db.DbFactory;
-import com.rae.cnblogs.sdk.db.DbSearch;
 import com.rae.cnblogs.sdk.event.SearchEvent;
 import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.friends.ISearchListener;
@@ -34,9 +32,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.observers.DefaultObserver;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * 搜索
@@ -59,8 +54,6 @@ public class SearchActivity extends BasicActivity {
     Fragment mSearchSuggestFragment; // 搜索建议
     @Nullable
     Fragment mSearchResultFragment; // 搜索结果
-
-    private final DbSearch mDbSearch = DbFactory.getInstance().getSearch();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,7 +141,7 @@ public class SearchActivity extends BasicActivity {
         UICompat.hideSoftInputFromWindow(this);
 
         // 保存搜索记录
-        saveHistory(text);
+//        saveHistory(text);
     }
 
     @OnClick(R2.id.img_edit_delete)
@@ -158,13 +151,9 @@ public class SearchActivity extends BasicActivity {
 
     @Subscribe
     public void onEvent(SearchEvent event) {
+        // 从热门搜索里面进来的
         UICompat.setText(mSearchView, event.getSearchText());
-
-        // 执行搜索
-        if (event.isFromUser()) {
-            performSearch(event.getSearchText());
-        }
-
+        onSearchClick();
     }
 
 
@@ -186,36 +175,9 @@ public class SearchActivity extends BasicActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("Suggest");
         if (fragment != null) return;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
 //        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.content, mSearchSuggestFragment, "Suggest");
         transaction.commit();
         Log.i("rae", "加载搜索建议");
-    }
-
-    public void saveHistory(String keyword) {
-
-        // 保存历史记录
-        Observable.just(keyword)
-                .subscribeOn(Schedulers.io())
-                .subscribe(new DefaultObserver<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        // 清除相同的记录
-                        mDbSearch.deleteSearchHistory(s);
-                        // 添加到历史中
-                        mDbSearch.addSearchHistory(s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 }

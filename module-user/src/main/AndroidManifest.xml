@@ -17,5 +17,12 @@
 
         </activity>
         <activity android:name=".activity.SearchFriendsActivity" />
+        <activity
+            android:name=".activity.PersonalActivity"
+            android:label="@string/label_personal" />
+        <activity
+            android:name=".activity.AvatarActivity"
+            android:label="修改头像" />
+        <activity android:name=".activity.PersonalDetailActivity" />
     </application>
 </manifest>
