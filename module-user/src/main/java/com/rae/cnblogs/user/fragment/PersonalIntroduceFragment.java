@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
+import com.rae.cnblogs.basic.rx.AndroidObservable;
+import com.rae.cnblogs.basic.rx.DefaultEmptyObserver;
 import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.R2;
@@ -16,8 +18,11 @@ import com.rae.cnblogs.web.WebViewFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /**
  * 个性签名
@@ -58,13 +63,16 @@ public class PersonalIntroduceFragment extends BasicFragment {
         FragmentActivity activity = getActivity();
         if (activity == null) return;
         activity.findViewById(R.id.btn_save).setVisibility(View.GONE);
-        mTipsLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mTipsLayout.setVisibility(View.VISIBLE);
-                UICompat.fadeIn(mTipsLayout);
-            }
-        }, 2000);
+        AndroidObservable.create(Observable.timer(2, TimeUnit.SECONDS))
+                .with(this)
+                .subscribe(new DefaultEmptyObserver<Long>() {
+                    @Override
+                    public void onNext(Long aLong) {
+                        mTipsLayout.setVisibility(View.VISIBLE);
+                        UICompat.fadeIn(mTipsLayout);
+                    }
+                });
+
     }
 
     @OnClick(R2.id.btn_ensure)

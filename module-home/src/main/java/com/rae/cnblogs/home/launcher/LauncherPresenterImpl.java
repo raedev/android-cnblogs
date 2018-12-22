@@ -63,6 +63,7 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                     @Override
                     public void onNext(AdvertBean advertBean) {
                         mAdvertBean = advertBean;
+                        AppMobclickAgent.onLaunchAdExposureEvent(getContext(), advertBean.getAdId(), advertBean.getAdName());
                         getView().onLoadImage(advertBean.getAdName(), advertBean.getImageUrl());
                     }
 
@@ -107,6 +108,8 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                         // 保存到数据，等待下一次加载
                         mDbAdvert.save(data);
                         mAdvertBean = data;
+
+                        AppMobclickAgent.onLaunchAdExposureEvent(getContext(), data.getAdId(), data.getAdName());
 
                         // 加载图片
                         if (!TextUtils.isEmpty(data.getImageUrl()))

@@ -64,7 +64,6 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                 .map(new Function<String, String>() {
                     @Override
                     public String apply(String content) throws Exception {
-
                         // 网络不可用、WIFI情况、 关闭智能无图模式
                         if (!networkIsOk() || isWIFI() || !mAppConfig.disableBlogImage())
                             return content;

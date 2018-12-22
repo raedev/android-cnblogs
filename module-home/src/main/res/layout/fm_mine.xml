@@ -181,7 +181,7 @@
             android:paddingEnd="12dp"
             android:paddingBottom="12dp">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:id="@+id/tv_favorites"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                 android:textColor="@color/ph1"
                 android:textSize="@dimen/h3" />
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:id="@+id/tv_history"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                         android:background="@drawable/bg_badge"
                         android:visibility="invisible" />
 
-                    <TextView
+                    <com.rae.cnblogs.widget.SkinDrawableTextView
                         android:id="@+id/tv_system_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                 </FrameLayout>
             </FrameLayout>
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:id="@+id/tv_night_mode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -9,15 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BasicFragment extends Fragment implements  IPresenterView {
+public abstract class BasicFragment extends Fragment implements IPresenterView {
 
     @Nullable
     private Unbinder mUnBinder;
+
+    private String mPageName = "Fragment";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPageName = getClass().getSimpleName();
+    }
 
     @Nullable
     @Override
@@ -44,6 +54,18 @@ public abstract class BasicFragment extends Fragment implements  IPresenterView 
             mUnBinder.unbind();
             mUnBinder = null;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(mPageName);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(mPageName);
     }
 
     /**

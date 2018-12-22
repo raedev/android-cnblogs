@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -86,6 +88,18 @@ public abstract class BasicActivity extends AppCompatActivity implements IPresen
         return 0;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

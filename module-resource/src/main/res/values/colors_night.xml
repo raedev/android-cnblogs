@@ -3,7 +3,7 @@
     <!--夜间模式-->
 
     <!--夜间模式主色调-->
-    <color name="nightIconColor">#ffffff</color>
+    <color name="nightIconColor">#ababab</color>
     <color name="nightColorPrimary">#1F1F21</color>
 
     <color name="colorPrimary_night">@color/nightColorPrimary</color>

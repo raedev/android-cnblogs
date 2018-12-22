@@ -1,5 +1,8 @@
 package com.rae.cnblogs;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.feedback.FeedbackThread;
 import com.rae.cnblogs.basic.AppDataManager;
@@ -35,7 +38,7 @@ public class CnblogsApplication extends BasicApplication {
                 BuildConfig.LEAN_CLOUD_APP_KEY);
         FeedbackThread.getInstance();
         // Bugly
-//        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
+        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
         initUMConfig();
     }
 
@@ -60,5 +63,7 @@ public class CnblogsApplication extends BasicApplication {
         PlatformConfig.setWeixin(BuildConfig.WECHAT_APP_ID, BuildConfig.WECHAT_APP_SECRET);
         PlatformConfig.setSinaWeibo(BuildConfig.WEIBO_APP_ID, BuildConfig.WEIBO_APP_SECRET, "http://www.raeblog.com/cnblogs/index.php/share/weibo/redirect");
         PlatformConfig.setQQZone(BuildConfig.QQ_APP_ID, BuildConfig.QQ_APP_SECRET);
+
+        
     }
 }

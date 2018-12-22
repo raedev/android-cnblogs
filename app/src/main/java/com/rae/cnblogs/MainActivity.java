@@ -11,6 +11,7 @@ import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -35,6 +36,7 @@ import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
 import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.widget.ITopScrollable;
+import com.umeng.commonsdk.UMConfigure;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -74,6 +76,10 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         startService(new Intent(this, CnblogsService.class));
         if (BuildConfig.DEBUG) {
             debugLogin();
+
+            String[] testDeviceInfo = UMConfigure.getTestDeviceInfo(this);
+
+            Log.i("rae", "测试信息：" + TextUtils.concat(testDeviceInfo));
         }
     }
 

@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,20 +19,6 @@ import java.util.Map;
  * Created by ChenRui on 2017/2/8 0008 11:44.
  */
 public final class AppMobclickAgent {
-
-    /**
-     * 初始化友盟统计
-     *
-     * @param applicationContext 上下文
-     * @param appKey             应用KEY
-     * @param channel            渠道名称
-     */
-    public static void init(Context applicationContext,
-                            String appKey,
-                            String channel) {
-        UMConfigure.setLogEnabled(false);
-        UMConfigure.init(applicationContext, appKey, channel, UMConfigure.DEVICE_TYPE_PHONE, null);
-    }
 
     /**
      * 统计打开时间

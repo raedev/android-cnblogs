@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -127,10 +128,12 @@ public class SearchActivity extends BasicActivity {
      * 执行搜索
      */
     private void performSearch(String text) {
+        if (TextUtils.isEmpty(text)) return;
         // 显示搜索结果页，由子Fragment处理
         if (mSearchResultFragment == null) {
             mSearchResultFragment = new SearchResultFragment();
         }
+        text = text.trim();
         Bundle args = new Bundle();
         args.putString(Intent.EXTRA_TEXT, text);
         mSearchResultFragment.setArguments(args);
@@ -140,6 +143,8 @@ public class SearchActivity extends BasicActivity {
         transaction.commit();
         UICompat.hideSoftInputFromWindow(this);
 
+        // 埋点
+        AppMobclickAgent.onSearchEvent(this, text);
         // 保存搜索记录
 //        saveHistory(text);
     }

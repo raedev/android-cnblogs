@@ -1,12 +1,10 @@
 package com.rae.cnblogs.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.rae.cnblogs.theme.ThemeCompat;
 
@@ -17,32 +15,34 @@ import skin.support.widget.SkinCompatTextView;
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
 public class SkinDrawableTextView extends SkinCompatTextView {
+
     public SkinDrawableTextView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public SkinDrawableTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public SkinDrawableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        apply();
     }
 
     @Override
-    public void setCompoundDrawables(@Nullable Drawable left, @Nullable Drawable top, @Nullable Drawable right, @Nullable Drawable bottom) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH && left != null) {
-            Drawable[] drawables = new Drawable[]{left, top, right, bottom};
-            Log.i("rae", "是否为夜间模式：" + ThemeCompat.isNight());
-            for (Drawable drawable : drawables) {
-                if (drawable == null) continue;
-                if (ThemeCompat.isNight()) {
-                    drawable.setTint(Color.RED);
-                } else {
-                    drawable.clearColorFilter();
-                }
-            }
+    public void applySkin() {
+        super.applySkin();
+        apply();
+    }
+
+    private void apply() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
+        if (ThemeCompat.isNight()) {
+            // 夜间模式的颜色
+            int nightColor = getResources().getColor(R.color.nightIconColor);
+            setCompoundDrawableTintList(ColorStateList.valueOf(nightColor));
+        } else {
+            setCompoundDrawableTintList(null);
         }
-        super.setCompoundDrawables(left, top, right, bottom);
     }
 }
