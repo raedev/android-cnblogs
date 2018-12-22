@@ -30,17 +30,6 @@ public class PersonalIntroduceFragment extends BasicFragment {
     @BindView(R2.id.ll_content_comment)
     ViewGroup mTipsLayout;
 
-    //    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        FragmentActivity activity = getActivity();
-//        if (activity == null) return;
-//        activity.findViewById(R.id.btn_save).setVisibility(View.GONE);
-//        UICompat.hideSoftInputFromWindow(activity);
-//        loadUrl("https://home.cnblogs.com/set/intro/");
-//        enablePullToRefresh(false);
-//    }
-//
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -84,76 +73,4 @@ public class PersonalIntroduceFragment extends BasicFragment {
         mTipsLayout.setVisibility(View.GONE);
     }
 
-    //    @BindView(R2.id.et_text)
-//    EditText mTextView;
-//
-//    TextView mSaveView;
-//
-//    private IUserApi mUserApi;
-//    private String mOldName;
-//
-//    @Override
-//    protected int getLayoutId() {
-//        return R.layout.fm_personal_account;
-//    }
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        mUserApi = CnblogsApiFactory.getInstance(getContext()).getUserApi();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        UserInfoBean userInfo = UserProvider.getInstance().getLoginUserInfo();
-//        if (userInfo != null) {
-//            mOldName = userInfo.getDisplayName();
-//            mTextView.setText(userInfo.getDisplayName());
-//            mTextView.setSelection(mTextView.length());
-//            mTextView.setHint("写下关于你的说明");
-//            mTextView.setMinHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics()));
-//        }
-//    }
-//
-//
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        FragmentActivity activity = getActivity();
-//        if (activity == null) return;
-//        mSaveView = activity.findViewById(R.id.btn_save);
-//        mSaveView.setOnClickListener(this);
-//
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
-//        String text = mTextView.getText().toString();
-//        if (TextUtils.isEmpty(text)) return;
-//        mSaveView.setEnabled(false);
-//        mSaveView.setText("保存中");
-//        AndroidObservable.create(mUserApi.updateNickName(mOldName, text))
-//                .with(this)
-//                .subscribe(new ApiDefaultObserver<String>() {
-//                    @Override
-//                    protected void onError(String message) {
-//                        mSaveView.setEnabled(true);
-//                        mSaveView.setText(R.string.save);
-//                        UICompat.toastInCenter(getContext(), message);
-//                    }
-//
-//                    @Override
-//                    protected void accept(String message) {
-//                        if (!message.contains("成功")) {
-//                            onError(message);
-//                            return;
-//                        }
-//                        EventBus.getDefault().post(new UserInfoChangedEvent());
-//                        UICompat.toastInCenter(getContext(), "昵称修改成功");
-//                        if (getActivity() != null)
-//                            getActivity().finish();
-//                    }
-//                });
-//    }
 }

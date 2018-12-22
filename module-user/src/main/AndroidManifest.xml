@@ -26,5 +26,8 @@
         <activity
             android:name=".activity.PersonalDetailActivity"
             android:windowSoftInputMode="stateHidden" />
+
+
     </application>
+
 </manifest>

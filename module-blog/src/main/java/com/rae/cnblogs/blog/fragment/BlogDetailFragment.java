@@ -19,6 +19,8 @@ import com.rae.cnblogs.blog.R2;
 import com.rae.cnblogs.blog.comm.IRefreshable;
 import com.rae.cnblogs.blog.detail.BlogDetailPresenterImpl;
 import com.rae.cnblogs.blog.detail.ContentDetailContract;
+import com.rae.cnblogs.blog.detail.KbDetailPresenterImpl;
+import com.rae.cnblogs.blog.detail.NewDetailPresenterImpl;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.EditCommentDialogFragment;
 import com.rae.cnblogs.dialog.ShareDialogFragment;
@@ -89,9 +91,20 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         if (arguments != null) {
             mContentEntity = arguments.getParcelable("entity");
         }
-        mPresenter = new BlogDetailPresenterImpl(this);
-        if ("NEWS".equalsIgnoreCase(mContentEntity.getType())) {
 
+        if (mContentEntity == null) {
+            return;
+        }
+
+        // 根据类型初始化不同的逻辑处理
+        BlogType type = BlogType.typeOf(mContentEntity.getType());
+
+        if (type == BlogType.NEWS) {
+            mPresenter = new NewDetailPresenterImpl(this);
+        } else if (type == BlogType.KB) {
+            mPresenter = new KbDetailPresenterImpl(this);
+        } else {
+            mPresenter = new BlogDetailPresenterImpl(this);
         }
 
         // 初始化WebView
@@ -106,13 +119,6 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FragmentActivity activity = getActivity();
-        // 找父类的控件
-//        if (activity != null) {
-//            mBackView = activity.findViewById(R.id.back);
-//            mMoreView = activity.findViewById(R.id.img_action_bar_more);
-//        }
-
 
         // 评论角标
         if (!TextUtils.equals(mContentEntity.getCommentCount(), "0")) {
@@ -129,11 +135,9 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
 
         // 知识库没有评论处理
         BlogType mBlogType = BlogType.typeOf(mContentEntity.getType());
-        if (mBlogType == BlogType.KB || (mBlogType == BlogType.NEWS && TextUtils.isEmpty(mContentEntity.getAuthor()))) {
-            mPostCommentView.setVisibility(View.GONE);
-            mViewCommentView.setVisibility(View.GONE);
-//            mAuthorView.setVisibility(View.GONE);
-//            mAvatarView.setVisibility(View.GONE);
+        if (mBlogType == BlogType.KB) {
+            mPostCommentView.setVisibility(View.INVISIBLE);
+            mViewCommentView.setVisibility(View.INVISIBLE);
         }
     }
 

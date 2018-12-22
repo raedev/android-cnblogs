@@ -17,6 +17,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -89,14 +90,12 @@ public interface INewsApi {
     /**
      * 删除新闻评论
      *
-     * @param newsId    新闻ID
      * @param commentId 评论ID
      */
-    @POST(ApiUrls.API_NEWS_COMMENT_DELETE)
-    @FormUrlEncoded
+    @DELETE(ApiUrls.API_NEWS_COMMENT_DELETE)
     @Headers({JsonBody.XHR, JsonBody.CONTENT_TYPE})
     @Parser(NewsDelCommentParser.class)
-    Observable<Empty> deleteNewsComment(@Field("contentID") String newsId, @Field("commentId") String commentId);
+    Observable<Empty> deleteNewsComment(@Query("commentId") String commentId);
 
 
     /**

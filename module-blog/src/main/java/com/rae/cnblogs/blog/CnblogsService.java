@@ -56,13 +56,14 @@ public class CnblogsService extends Service {
     @Subscribe
     public void onEvent(JobEvent event) {
         int action = event.getAction();
-        if (action == JobEvent.ACTION_JOB_BLOG_CONTENT) {
-            if (mBlogContentJob == null) {
-                mBlogContentJob = new BlogContentJob(this);
-            } else {
-                mBlogContentJob.run();
-            }
-        }
+        // TODO: 调试暂时关闭博文异步下载
+//        if (action == JobEvent.ACTION_JOB_BLOG_CONTENT) {
+//            if (mBlogContentJob == null) {
+//                mBlogContentJob = new BlogContentJob(this);
+//            } else {
+//                mBlogContentJob.run();
+//            }
+//        }
     }
 
     /**

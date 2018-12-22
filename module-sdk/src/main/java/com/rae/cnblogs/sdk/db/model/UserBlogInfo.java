@@ -3,8 +3,8 @@ package com.rae.cnblogs.sdk.db.model;
 import com.rae.cnblogs.sdk.bean.BlogType;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * 用户的博客信息
@@ -28,32 +28,27 @@ public class UserBlogInfo {
     private boolean isBookmarks;
 
     /**
-     * 内容
-     */
-    private String content;
-
-    /**
      * {@link BlogType#getTypeName()}
      */
 
     private String blogType; // 博客类型，如：博客、新闻、知识库
 
 
-    @Generated(hash = 20220642)
-    public UserBlogInfo() {
-    }
-
-    @Generated(hash = 869507996)
+    @Generated(hash = 1553554788)
     public UserBlogInfo(Long id, String blogId, boolean isRead, boolean isLiked,
-                        boolean isBookmarks, String content, String blogType) {
+            boolean isBookmarks, String blogType) {
         this.id = id;
         this.blogId = blogId;
         this.isRead = isRead;
         this.isLiked = isLiked;
         this.isBookmarks = isBookmarks;
-        this.content = content;
         this.blogType = blogType;
     }
+
+    @Generated(hash = 20220642)
+    public UserBlogInfo() {
+    }
+
 
     public Long getId() {
         return id;
@@ -61,22 +56,6 @@ public class UserBlogInfo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getBlogType() {
-        return blogType;
-    }
-
-    public void setBlogType(String blogType) {
-        this.blogType = blogType;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getBlogId() {
@@ -87,12 +66,12 @@ public class UserBlogInfo {
         this.blogId = blogId;
     }
 
-    public boolean isBookmarks() {
-        return isBookmarks;
+    public boolean isRead() {
+        return isRead;
     }
 
-    public void setBookmarks(boolean bookmarks) {
-        isBookmarks = bookmarks;
+    public void setRead(boolean read) {
+        isRead = read;
     }
 
     public boolean isLiked() {
@@ -103,12 +82,20 @@ public class UserBlogInfo {
         isLiked = liked;
     }
 
-    public boolean isRead() {
-        return isRead;
+    public boolean isBookmarks() {
+        return isBookmarks;
     }
 
-    public void setRead(boolean read) {
-        isRead = read;
+    public void setBookmarks(boolean bookmarks) {
+        isBookmarks = bookmarks;
+    }
+
+    public String getBlogType() {
+        return blogType;
+    }
+
+    public void setBlogType(String blogType) {
+        this.blogType = blogType;
     }
 
     public boolean getIsRead() {

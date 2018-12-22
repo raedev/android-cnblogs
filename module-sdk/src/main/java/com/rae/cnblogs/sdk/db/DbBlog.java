@@ -13,6 +13,7 @@ import com.rae.cnblogs.sdk.bean.DaoSession;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfoDao;
 
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.ByteArrayOutputStream;
@@ -112,10 +113,12 @@ public class DbBlog {
     @Nullable
     public UserBlogInfo get(String blogId) {
         if (TextUtils.isEmpty(blogId)) return null;
-        return mSession.getUserBlogInfoDao()
+        UserBlogInfo info =  mSession.getUserBlogInfoDao()
                 .queryBuilder()
                 .where(UserBlogInfoDao.Properties.BlogId.eq(blogId))
                 .unique();
+
+        return info;
     }
 
     /**
@@ -149,14 +152,15 @@ public class DbBlog {
             FileInputStream inputStream = new FileInputStream(path);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[128];
-            int len = 0;
+            int len;
             while ((len = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, len);
             }
+            String content = outputStream.toString();
             outputStream.flush();
             outputStream.close();
             inputStream.close();
-            return outputStream.toString();
+            return content;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -216,6 +220,13 @@ public class DbBlog {
      */
     public void updateBlog(BlogBean m) {
         mSession.getBlogBeanDao().update(m);
+    }
+
+    /**
+     * 更新博客信息
+     */
+    public void updateUserBlog(UserBlogInfo m) {
+        mSession.getUserBlogInfoDao().update(m);
     }
 
     /**

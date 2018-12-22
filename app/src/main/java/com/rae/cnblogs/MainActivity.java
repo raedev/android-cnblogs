@@ -73,7 +73,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
         if (BuildConfig.DEBUG) {
-//            debugLogin();
+            debugLogin();
         }
     }
 
@@ -83,8 +83,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
      */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "A688D6A0971A93007FF8221C60E8E0FDB2866B1DF923C14422B361049C34194A5B1B25A7B3F72A002E41D100226A7F046D16B88F97412A6182FC4BF94F220D4A9236941DE58BCEFDA575CF4E3EB25A9D97BB7601";
-        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNfOPU2k5nMET16IOYR6efcY_FO5y_VQp8XjUgDHWE5RRYwTjaP2ccyMxNewY4lzaOFKZVXbJ3iw1xroxqbUsPY3tOneapdybk-LE44YvlnpDtbq9OG3Ed4IAbj1mvlilS_JwslUTpLEjjAxWx9DvTqenfu1HV2fEgaca_B0X1gLUnt81lTwiukd5XwnRo_jRETZ4r4XH4p8nK6nOnMCb8tBMXkFyPQQ-_Q16LIgHzU_-xnLa_jxTUYedi4QCWoAmAUNz59-xiuOSj9m58xi61hiljfeTxl-E9qjAUokzBbkQ";
+        String cookie = "4F523B96A57E7D0C1165E5D565C89055A98E0CBF3C432EC7006BC69E47AD5CCEFD976EC972F44EB25C5AD9398A8B9D42371694EDE1C819943A1F57137A18D43E59B0184B954F96B38D4C76577E00B3B5F55ED4A8";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNKRTDax9L0rk-chKipr_j1ObB5W50Fzow96wDJSdsvW23yuwUWKk6ei0xEuESYMSfIBCEnt08OIwCzmXpjfKLSo4T82c9KyIHsyaSElcTQDs2eJKiZQTcfhYpxCXZ2nHV2IM1wxvojMAN_-kt5HPYxahwdeXsAxcBIcZJWCB6ng_bbnUIPQc9FIKdJZwx1GtzflDi4L4AhsDdWgS_H-dwkj97fzkdDfo-UYJmPUtKbW6tmW8dSHyF4p1_xdPaZxaI9OBYDT9ZTiDVTrmPQM_1-";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");

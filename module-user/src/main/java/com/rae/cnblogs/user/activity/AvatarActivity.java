@@ -3,10 +3,17 @@ package com.rae.cnblogs.user.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,6 +32,8 @@ import com.rae.cnblogs.user.personal.UserAvatarContract;
 import com.rae.cnblogs.user.personal.UserAvatarPresenterImpl;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -38,6 +47,7 @@ import butterknife.OnClick;
 public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatarContract.View {
 
     private static final int REQUEST_CODE_CROP = 1230;
+    private static final int REQUEST_CODE_CROP_FILE_PROVIDER = 1231;
     @BindView(R2.id.img_avatar)
     ImageView mAvatarView;
     @BindView(R2.id.img_user_avatar)
@@ -118,12 +128,33 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
         }
 
         // 图片裁剪返回
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_CROP && data != null && data.getData() != null) {
+        if (resultCode == RESULT_OK && (requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && data != null && data.getData() != null) {
             String path = data.getData().getPath();
-//            Log.i("rae", "路径为：" + path);
+            Log.i("rae", "路径为：" + data.getData());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                path = handleContentUri(data.getData());
+            }
             onAvatarImageChanged(path);
             handleUpload();
         }
+
+    }
+
+    private String handleContentUri(Uri uri) {
+        try {
+            ParcelFileDescriptor fileDescriptor = this.getContentResolver().openFileDescriptor(uri, "r");
+            if (fileDescriptor == null) return uri.toString();
+            File file = new File(getExternalCacheDir(), "avatar-upload-" + System.currentTimeMillis() + ".png");
+            OutputStream fileStream = new FileOutputStream(file);
+            BitmapFactory.decodeFileDescriptor(fileDescriptor.getFileDescriptor()).compress(Bitmap.CompressFormat.PNG, 100, fileStream);
+            return file.getPath();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String segment = uri.getLastPathSegment();
+        if (segment == null) return uri.getPath();
+        File file = new File(getExternalCacheDir(), segment);
+        return file.getPath();
     }
 
     /**
@@ -138,9 +169,17 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
     }
 
     private void routeToCrop(String url) {
+        Uri uri = Uri.fromFile(new File(url)); // 源头像位置
         String fileName = String.valueOf(("cnblogs-face-cropped" + System.currentTimeMillis()).hashCode());
+        Uri outputUri = Uri.fromFile(new File(getExternalCacheDir(), fileName)); // 输出头像位置
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            uri = resolveUrl(url);
+            outputUri = resolveUrl(new File(getExternalCacheDir(), fileName).getPath());
+        }
+
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
+        intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", true);
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
@@ -148,9 +187,14 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
         intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(getExternalCacheDir(), fileName)));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+        ResolveInfo resolveInfo = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfo != null) {
 
-        if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+            // 授权访问
+            this.grantUriPermission(resolveInfo.activityInfo.packageName, outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
             startActivityForResult(intent, REQUEST_CODE_CROP);
         } else {
             handleUpload();
@@ -158,9 +202,25 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
     }
 
     /**
+     * 解决android 4.4 以上系统，要使用FileProvider来共享文件
+     *
+     * @param path 文件路径
+     * @return
+     */
+    private Uri resolveUrl(String path) {
+        //  保存文件
+        File file = new File(path);
+        return FileProvider.getUriForFile(this, "share.cnblogs.com", file);
+    }
+
+    /**
      * 上传处理
      */
     private void handleUpload() {
+        if (!new File(getUploadPath()).exists()) {
+            UICompat.failed(this, "无法读取上传的头像文件");
+            return;
+        }
         showLoading();
         mPresenter.upload();
     }

@@ -11,6 +11,8 @@ import com.rae.cnblogs.sdk.api.ISearchApi;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -40,43 +42,14 @@ public class BlogHomePresenterImpl extends BasicPresenter<BlogHomeContract.View>
                     protected void onError(String message) {
                         // 发生错误至少加载首页这个分类
                         List<CategoryBean> data = new ArrayList<>();
-
-                        CategoryBean home = new CategoryBean();
-                        home.setCategoryId("808");
-                        home.setParentId("0");
-                        home.setName("首页");
-                        home.setType("SiteHome");
-
-                        CategoryBean recommend = new CategoryBean();
-                        recommend.setCategoryId("-2");
-                        recommend.setParentId("0");
-                        recommend.setName("推荐");
-                        recommend.setType("Picked");
-
-                        data.add(home);
-                        data.add(recommend);
-
+                        reorganizeData(data);
                         getView().onLoadCategory(data);
                     }
 
+
                     @Override
                     protected void accept(List<CategoryBean> data) {
-
-                        CategoryBean news = new CategoryBean();
-                        news.setCategoryId("0");
-                        news.setParentId("0");
-                        news.setName("新闻");
-                        news.setType("news");
-
-                        CategoryBean kb = new CategoryBean();
-                        kb.setCategoryId("0");
-                        kb.setParentId("0");
-                        kb.setName("知识库");
-                        kb.setType("kb");
-
-                        data.add(2, news);
-                        data.add(3, kb);
-
+                        reorganizeData(data);
                         getView().onLoadCategory(data);
                     }
                 });
@@ -97,5 +70,78 @@ public class BlogHomePresenterImpl extends BasicPresenter<BlogHomeContract.View>
                         }
                     }
                 });
+    }
+
+    /**
+     * 重新整理数据，添加默认的分类
+     */
+    @Override
+    public void reorganizeData(List<CategoryBean> data) {
+        boolean hasRecommented = false, hasHome = false, hasNews = false, hasKb = false;
+        for (CategoryBean item : data) {
+            String name = item.getName();
+            if ("首页".equals(name)) {
+                hasHome = true;
+                item.setOrderNo(-4);
+            }
+            if ("推荐".equals(name)) {
+                hasRecommented = true;
+                item.setOrderNo(-3);
+            }
+            if ("新闻".equals(name)) {
+                hasNews = true;
+                item.setOrderNo(-2);
+            }
+            if ("知识库".equals(name)) {
+                hasKb = true;
+                item.setOrderNo(-1);
+            }
+        }
+
+        if (!hasKb) {
+            CategoryBean kb = new CategoryBean();
+            kb.setCategoryId("0");
+            kb.setParentId("0");
+            kb.setName("知识库");
+            kb.setType("kb");
+            kb.setOrderNo(-1);
+            data.add(kb);
+        }
+        if (!hasNews) {
+            CategoryBean news = new CategoryBean();
+            news.setCategoryId("0");
+            news.setParentId("0");
+            news.setName("新闻");
+            news.setType("news");
+            news.setOrderNo(-2);
+            data.add(news);
+        }
+        if (!hasRecommented) {
+            CategoryBean recommend = new CategoryBean();
+            recommend.setCategoryId("-2");
+            recommend.setParentId("0");
+            recommend.setName("推荐");
+            recommend.setType("Picked");
+            recommend.setOrderNo(-3);
+            data.add(recommend);
+        }
+        if (!hasHome) {
+            CategoryBean home = new CategoryBean();
+            home.setCategoryId("808");
+            home.setParentId("0");
+            home.setName("首页");
+            home.setType("SiteHome");
+            home.setOrderNo(-4);
+            data.add(home);
+        }
+
+        // 重新排序
+        Collections.sort(data, new Comparator<CategoryBean>() {
+            @Override
+            public int compare(CategoryBean a, CategoryBean b) {
+                if (a.getOrderNo() == b.getOrderNo()) return 0;
+                return a.getOrderNo() > b.getOrderNo() ? 1 : -1;
+            }
+        });
     }
 }

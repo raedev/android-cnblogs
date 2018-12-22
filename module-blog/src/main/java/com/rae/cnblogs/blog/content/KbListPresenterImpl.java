@@ -23,7 +23,7 @@ public class KbListPresenterImpl extends BasicBlogPresenterImpl {
     private IBlogApi mBlogApi;
 
     public KbListPresenterImpl(ContentListContract.View view) {
-        super(view, BlogType.NEWS);
+        super(view, BlogType.KB);
         mBlogApi = CnblogsApiFactory.getInstance(getContext()).getBlogApi();
     }
 

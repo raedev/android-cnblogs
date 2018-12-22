@@ -3,6 +3,9 @@
     <cache-path
         name="cache_path"
         path="/" />
+    <external-path
+        name="avatar"
+        path="/" />
     <external-cache-path
         name="external-cache-path"
         path="/" />

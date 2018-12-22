@@ -110,9 +110,33 @@ public class RequestInterceptor implements Interceptor {
             newBuilder = convertParamToBody(request, newBuilder);
         }
 
+        if ("delete".equalsIgnoreCase(request.method())) {
+            newBuilder = rebuildDeleteRequest(request, newBuilder);
+        }
+
         // 发起请求
         request = newBuilder.build();
         return chain.proceed(request);
+    }
+
+    /**
+     * 重新构建DELETE请求
+     *
+     * @param request
+     * @param newBuilder
+     * @return
+     */
+    private Request.Builder rebuildDeleteRequest(Request request, Request.Builder newBuilder) {
+        HttpUrl url = request.url();
+        HttpUrl.Builder urlBuilder = url.newBuilder();
+        Set<String> parameterNames = url.queryParameterNames();
+        JsonBody.Builder bodyBuilder = new JsonBody.Builder();
+        for (String parameterName : parameterNames) {
+            bodyBuilder.add(parameterName, url.queryParameter(parameterName));
+            urlBuilder.removeAllQueryParameters(parameterName);
+        }
+
+        return newBuilder.url(urlBuilder.build()).delete(bodyBuilder.build());
     }
 
     /**

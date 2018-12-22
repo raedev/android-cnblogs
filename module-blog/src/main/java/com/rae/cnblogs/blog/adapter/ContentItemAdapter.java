@@ -34,6 +34,8 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
 
     private final int mViewType;
 
+    private boolean mEnableCountLayout = true; // 显示评论 喜欢 阅读数的布局
+
     public ContentItemAdapter() {
         this(VIEW_TYPE_NORMAL);
     }
@@ -57,6 +59,9 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
         return mViewType;
     }
 
+    public void setEnableCountLayout(boolean enableCountLayout) {
+        mEnableCountLayout = enableCountLayout;
+    }
 
     @Override
     public SimpleViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
@@ -90,6 +95,7 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
         holder.readerView.setText(m.getViewCount());
         holder.likeView.setText(m.getLikeCount());
         holder.commentView.setText(m.getCommentCount());
+        UICompat.setVisibility(holder.countLayout, mEnableCountLayout);
 
         // 显示头像
         AppImageLoader.displayAvatar(m.getAvatar(), holder.avatarView);

@@ -47,6 +47,7 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment implements B
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPlaceholderView.loading();
+        getAdapter().setEnableCountLayout(false);
         getAdapter().setOnItemClickListener(new BaseItemAdapter.onItemClickListener<ContentEntity>() {
             @Override
             public void onItemClick(Context context, ContentEntity item) {

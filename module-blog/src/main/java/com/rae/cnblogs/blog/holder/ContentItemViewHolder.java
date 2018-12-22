@@ -1,6 +1,8 @@
 package com.rae.cnblogs.blog.holder;
 
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +60,10 @@ public class ContentItemViewHolder extends SimpleViewHolder {
 
     @BindView(R2.id.img_blog_list_thumb_three)
     public ImageView thumbThreeView;
+
+    @BindView(R2.id.ll_count_layout)
+    @Nullable
+    public ViewGroup countLayout;
 
     public ContentItemViewHolder(View itemView) {
         super(itemView);

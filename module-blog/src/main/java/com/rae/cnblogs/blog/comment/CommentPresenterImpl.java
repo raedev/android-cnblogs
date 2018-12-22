@@ -8,6 +8,7 @@ import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.Empty;
+import com.rae.cnblogs.sdk.JsonBody;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IBlogApi;
 import com.rae.cnblogs.sdk.api.INewsApi;
@@ -55,8 +56,16 @@ public class CommentPresenterImpl extends BasicPresenter<CommentContract.View> i
 
     @Override
     public void onDeleteComment(final BlogCommentBean comment) {
+        ContentEntity entity = getView().getContentEntity();
+        Observable<Empty> observable;
+        if (BlogType.typeOf(entity.getType()) == BlogType.NEWS) {
+            observable = mNewsApi.deleteNewsComment(comment.getId());
+        } else {
+            observable = mBlogApi.deleteBlogComment(comment.getId());
+        }
+
         AndroidObservable
-                .create(mBlogApi.deleteBlogComment(comment.getId()))
+                .create(observable)
                 .with(this)
                 .subscribe(new ApiDefaultObserver<Empty>() {
                     @Override

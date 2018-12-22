@@ -261,7 +261,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_my_blog"
@@ -285,7 +285,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_font_small"
@@ -310,7 +310,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_feedback_small"
@@ -345,7 +345,7 @@
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_share_small"
@@ -369,7 +369,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_market_small"
@@ -395,7 +395,7 @@
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-            <TextView
+            <com.rae.cnblogs.widget.SkinDrawableTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/icon_settings_small"

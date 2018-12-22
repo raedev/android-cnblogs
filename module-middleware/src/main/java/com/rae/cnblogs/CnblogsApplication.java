@@ -35,7 +35,7 @@ public class CnblogsApplication extends BasicApplication {
                 BuildConfig.LEAN_CLOUD_APP_KEY);
         FeedbackThread.getInstance();
         // Bugly
-        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
+//        CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
         initUMConfig();
     }
 

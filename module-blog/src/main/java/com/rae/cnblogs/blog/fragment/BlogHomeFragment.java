@@ -182,6 +182,7 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
         if (requestCode == AppRoute.REQ_CODE_CATEGORY && resultCode == Activity.RESULT_OK && data != null) {
             CategoryBean category = data.getParcelableExtra("data");
             ArrayList<CategoryBean> dataSet = data.getParcelableArrayListExtra("dataSet");
+            mPresenter.reorganizeData(dataSet); // 重新整理数据
             reloadTab(dataSet, category, data.getBooleanExtra("enableReload", false));
         }
     }
@@ -214,12 +215,18 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
         // 销毁当前的
         FragmentManager fragmentManager = getChildFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        if (fragments == null) return;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         for (Fragment fragment : fragments) {
+            if (fragment.isAdded()) {
+                fragmentTransaction.detach(fragment);
+            }
             fragmentTransaction.remove(fragment);
         }
-        fragmentTransaction.commit();
+
+        fragmentTransaction.commitNow();
+
+        mAdapter.clear();
+        mAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R2.id.fl_search)
