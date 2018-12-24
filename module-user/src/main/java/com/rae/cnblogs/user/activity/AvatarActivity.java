@@ -13,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,9 @@ import com.rae.cnblogs.user.personal.UserAvatarContract;
 import com.rae.cnblogs.user.personal.UserAvatarPresenterImpl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -128,16 +131,51 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
         }
 
         // 图片裁剪返回
-        if (resultCode == RESULT_OK && (requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && data != null && data.getData() != null) {
-            String path = data.getData().getPath();
-            Log.i("rae", "路径为：" + data.getData());
+        if (resultCode == RESULT_OK && (requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && data != null) {
+            String path = getResultImageData(data);
+            if (TextUtils.isEmpty(path)) {
+                UICompat.failed(this, "头像获取失败");
+                return;
+            }
+            Log.i("rae", "路径为：" + path);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 path = handleContentUri(data.getData());
             }
+
             onAvatarImageChanged(path);
             handleUpload();
         }
 
+    }
+
+    @Nullable
+    private String getResultImageData(Intent data) {
+        Uri uri = data.getData();
+        if (uri != null) return uri.toString();
+        if (data.getExtras() == null) return null;
+        Object objData = data.getExtras().get("data");
+        if (objData instanceof String) return objData.toString();
+        if (objData instanceof Bitmap) {
+            Bitmap bitmap = (Bitmap) objData;
+            File file = new File(getExternalCacheDir(), "avatar-upload-" + System.currentTimeMillis() + ".png");
+            OutputStream fileStream = null;
+            try {
+                fileStream = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileStream);
+                return file.getPath();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } finally {
+                if (fileStream != null) {
+                    try {
+                        fileStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     private String handleContentUri(Uri uri) {
