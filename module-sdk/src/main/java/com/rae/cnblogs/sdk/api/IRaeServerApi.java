@@ -1,5 +1,6 @@
 package com.rae.cnblogs.sdk.api;
 
+import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.bean.AdvertBean;
 import com.rae.cnblogs.sdk.bean.SystemMessageBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
@@ -7,7 +8,10 @@ import com.rae.cnblogs.sdk.bean.VersionInfo;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -45,4 +49,8 @@ public interface IRaeServerApi {
      */
     @GET(ApiUrls.RAE_API_CHECK_VERSION)
     Observable<VersionInfo> versionInfo(@Path("versionCode") int versionCode, @Query("versionName") String versionName, @Query("channel") String channel, @Query("env") String env);
+
+    @POST(ApiUrls.RAE_API_SEARCH)
+    @FormUrlEncoded
+    Observable<Empty> search(@Field("keyword") String text);
 }

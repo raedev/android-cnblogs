@@ -1,6 +1,7 @@
 package com.rae.cnblogs.dialog;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -105,4 +106,5 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
             window.setBackgroundDrawable(drawable);
         }
     }
+
 }

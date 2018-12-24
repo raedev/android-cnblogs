@@ -25,6 +25,9 @@ import com.rae.cnblogs.theme.ThemeCompat;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import skin.support.SkinCompatManager;
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
 
 /**
  * 我的
@@ -33,6 +36,8 @@ import butterknife.OnClick;
 @Route(path = AppRoute.PATH_FRAGMENT_MINE)
 public class MineFragment extends BasicFragment implements MineContract.View {
 
+
+    private SkinObserver mSkinObserver;
 
     public static MineFragment newInstance() {
         return new MineFragment();
@@ -77,11 +82,21 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new MinePresenterImpl(this);
+        mSkinObserver = new SkinObserver() {
+            @Override
+            public void updateSkin(SkinObservable observable, Object o) {
+                onThemeChanged();
+            }
+        };
+        SkinCompatManager.getInstance().addObserver(mSkinObserver);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mSkinObserver != null) {
+            SkinCompatManager.getInstance().deleteObserver(mSkinObserver);
+        }
         mPresenter.destroy();
     }
 
@@ -89,7 +104,19 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     public void onStart() {
         super.onStart();
         // 夜间模式处理
-        mNightModeView.setSelected(ThemeCompat.isNight());
+        onThemeChanged();
+
+    }
+
+    // 夜间模式处理
+    private void onThemeChanged() {
+        if (ThemeCompat.isNight()) {
+            mNightModeView.setSelected(true);
+            mNightModeView.setText("日间模式");
+        } else {
+            mNightModeView.setSelected(false);
+            mNightModeView.setText("夜间模式");
+        }
     }
 
 

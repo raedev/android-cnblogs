@@ -49,9 +49,9 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
         setContentView(R.layout.activity_launcher);
         mPresenter = new LauncherPresenterImpl(this);
 
-        if (BuildConfig.DEBUG) {
-            onRouteToHome();
-        }
+//        if (BuildConfig.DEBUG) {
+//            onRouteToHome();
+//        }
     }
 
 

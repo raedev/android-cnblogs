@@ -179,6 +179,7 @@ final class ApiUrls {
     static final String RAE_API_AD_LAUNCHER = RAE_API_BASIC + "ad/launcher";
     // 检查更新
     static final String RAE_API_CHECK_VERSION = RAE_API_BASIC + "version/{versionCode}";
+    static final String RAE_API_SEARCH = RAE_API_BASIC + "search";
     static final String RAE_API_MESSAGE = RAE_API_BASIC + "messages/system";
     static final String RAE_API_MESSAGE_COUNT = RAE_API_BASIC + "messages/system/count";
     // 搜索-热搜

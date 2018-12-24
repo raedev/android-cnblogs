@@ -139,7 +139,7 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
             }
             Log.i("rae", "路径为：" + path);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                path = handleContentUri(data.getData());
+                path = handleContentUri(Uri.parse(path));
             }
 
             onAvatarImageChanged(path);

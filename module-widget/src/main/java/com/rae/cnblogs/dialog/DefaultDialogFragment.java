@@ -148,7 +148,7 @@ public class DefaultDialogFragment extends BasicDialogFragment {
 
         getDialog().setCanceledOnTouchOutside(canceledOnTouchOutside);
 
-        getDialog().setOnDismissListener(mOnDismissListener);
+//        getDialog().setOnDismissListener(mOnDismissListener);
 
         mDividerView.setVisibility(mCancelButton.getVisibility());
     }
@@ -171,5 +171,13 @@ public class DefaultDialogFragment extends BasicDialogFragment {
             return;
         }
         dismiss();
+    }
+
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (mOnDismissListener != null)
+            mOnDismissListener.onDismiss(dialog);
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:background="@color/background_divider"
+    android:fitsSystemWindows="false"
     android:orientation="vertical">
 
 
@@ -12,22 +13,87 @@
         style="@style/AppToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/about_me"
-        app:titleMargin="0dp" />
+        android:background="@color/colorPrimaryDark"
+        android:paddingTop="24dp"
+        app:navigationIcon="@drawable/ic_arrow_left_night"
+        app:titleMargin="0dp"
+        app:titleTextColor="@color/white" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="80dp"
-        android:src="@mipmap/ic_launcher" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="技术改变世界" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:src="@drawable/icon_logo_about_me" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="技术改变世界"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
 
+            <TextView
+                android:id="@+id/tv_version_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_category_lock"
+                android:paddingStart="28dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="28dp"
+                android:paddingBottom="2dp"
+                android:text=" "
+                android:textColor="@color/ph2"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="36dp"
+                android:lineSpacingMultiplier="1.5"
+                android:text="@string/app_content"
+
+                android:textColor="@color/ph4"
+                android:textSize="14dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center|bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_mine_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:text="- RAE -"
+                    android:textColor="#dddddd"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.v7.widget.FitWindowsLinearLayout>

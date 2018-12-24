@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_web_reader"
                     android:layout_marginTop="5dp"
-                    android:text="是否弹出自动优化博客提示框"
+                    android:text="是否弹出提示框"
                     android:textColor="@color/ph3"
                     android:textSize="12sp" />
 

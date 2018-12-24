@@ -22,7 +22,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.basic.AppFragmentAdapter;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
-import com.rae.cnblogs.basic.rx.DefaultEmptyObserver;
 import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
@@ -39,8 +38,6 @@ import com.rae.cnblogs.widget.ITopScrollable;
 import com.umeng.commonsdk.UMConfigure;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
@@ -66,12 +63,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         initTab();
 
         // 请求权限
-        AndroidObservable.create(io.reactivex.Observable.timer(3, TimeUnit.SECONDS)).with(this).subscribe(new DefaultEmptyObserver<Long>() {
-            @Override
-            public void onNext(Long aLong) {
-                requestPermissions();
-            }
-        });
+        requestPermissions();
+
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
         if (BuildConfig.DEBUG) {
@@ -187,9 +180,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
     private void requestPermissions() {
         // 检查权限
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
             new DefaultDialogFragment
                     .Builder()
                     .message(getString(R.string.permission_request_message))
@@ -200,7 +191,9 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
                         String[] permissionList = new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                 Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.CALL_PHONE,
+                                Manifest.permission.ACCESS_NETWORK_STATE,
+                                Manifest.permission.CAMERA,
+//                                Manifest.permission.CALL_PHONE,
                                 Manifest.permission.READ_LOGS,
                                 Manifest.permission.READ_PHONE_STATE,
                                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -211,7 +204,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
                         };
                         ActivityCompat.requestPermissions(MainActivity.this, permissionList, 100);
                     })
-                    .show(getSupportFragmentManager(), "permissionDialog");
+                    .show(getSupportFragmentManager());
 
         }
     }

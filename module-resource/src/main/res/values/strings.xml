@@ -42,6 +42,7 @@
     <string name="login_tips">登录遇到问题？</string>
     <string name="login_contract">博客园APP隐私说明</string>
     <string name="login_contract_content">博客园APP已经开源，登录过程我们会收集您遇到的错误信息以及您的博客名称，但我们不会收集您的帐号密码信息，请放心登录。\n\n您在登录过程如有任何问题请前往设置-帮助中心查找原因，或者联系博客园官方团队contact@cnblogs.com。</string>
+    <string name="app_content">\u3000\u3000博客园创立于2014年1月，一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。\n\u3000\u3000博客园APP已经开源，使用过程会做一些埋点统计，但不会收集您的个人信息，请您放心使用。\n\n联系方式：\n开发者：raedev@qq.com\n博客园官方团队：contact@cnblogs.com</string>
     <string name="login_user_name_hint">用户名</string>
     <string name="login_password_hint">密码</string>
     <string name="login">官网登录</string>

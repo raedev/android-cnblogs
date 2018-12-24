@@ -4,9 +4,9 @@ ext {
     // Android 扩展配置
     android = [
             versionCode      : 8, // 版本号
-            compileSdkVersion: 28,
-            targetSdkVersion : 28,
-            minSdkVersion    : 17,
+            compileSdkVersion: 28, // Android 9.0
+            targetSdkVersion : 28, // Android 9.0
+            minSdkVersion    : 19, // Android 4.4
             supportVersion   : '28.0.0'
     ]
 

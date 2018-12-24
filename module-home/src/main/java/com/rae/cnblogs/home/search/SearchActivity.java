@@ -24,6 +24,7 @@ import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.fragment.HotSearchFragment;
 import com.rae.cnblogs.home.fragment.SearchResultFragment;
 import com.rae.cnblogs.home.fragment.SearchSuggestFragment;
+import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.event.SearchEvent;
 import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.friends.ISearchListener;
@@ -145,8 +146,8 @@ public class SearchActivity extends BasicActivity {
 
         // 埋点
         AppMobclickAgent.onSearchEvent(this, text);
-        // 保存搜索记录
-//        saveHistory(text);
+        // raedev.io 记录热搜
+        CnblogsApiFactory.getInstance(this).getRaeServerApi().search(text).subscribe();
     }
 
     @OnClick(R2.id.img_edit_delete)
