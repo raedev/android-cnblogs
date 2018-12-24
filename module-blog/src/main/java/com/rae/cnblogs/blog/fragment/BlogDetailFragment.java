@@ -29,7 +29,11 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
+import com.rae.cnblogs.sdk.event.FontChangedEvent;
 import com.rae.cnblogs.widget.ImageLoadingView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -86,6 +90,7 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         // 初始化参数属性
         Bundle arguments = getArguments();
         if (arguments != null) {
@@ -114,6 +119,12 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
                 .replace(R.id.fl_content, mContentWebViewFragment)
                 .commitNow();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -383,5 +394,12 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         String desc = mContentEntity.getSummary();
         String imageUrl = mContentEntity.getAvatar();
         ShareDialogFragment.newInstance(url, title, desc, imageUrl).show(getChildFragmentManager(), "share");
+    }
+
+    @Subscribe
+    public void onEvent(FontChangedEvent event) {
+        if (mContentWebViewFragment != null) {
+            mContentWebViewFragment.onFontSizeChanged();
+        }
     }
 }

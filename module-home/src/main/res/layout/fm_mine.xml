@@ -32,7 +32,7 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/boy"
+                android:src="@drawable/default_avatar_placeholder"
                 app:riv_corner_radius="72dp" />
 
             <LinearLayout

@@ -25,6 +25,7 @@
     <color name="commentAvatarColor">#6293b3</color>
     <color name="blog_item_pressed">#F0F0F0</color>
     <color name="white">#FFFFFF</color>
+    <color name="follow_white">#FFFFFF</color>
     <color name="statusBarColor">@color/white</color>
     <color name="red">#F00000</color>
     <color name="badge_color">#fec63d</color>

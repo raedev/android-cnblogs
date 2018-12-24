@@ -161,7 +161,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
     public void onNotLogin() {
         // 没有登录的UI
         mDisplayNameView.setText(R.string.please_login);
-        mAvatarView.setImageResource(R.drawable.boy);
+        mAvatarView.setImageResource(R.drawable.default_avatar_placeholder);
         mFansAndFollowLayout.setVisibility(View.GONE);
         mFansCountView.setText("0");
         mFollowCountView.setText("0");

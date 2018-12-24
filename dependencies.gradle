@@ -3,7 +3,6 @@ ext {
 
     // Android 扩展配置
     android = [
-            versionCode      : 8, // 版本号
             compileSdkVersion: 28, // Android 9.0
             targetSdkVersion : 28, // Android 9.0
             minSdkVersion    : 19, // Android 4.4
@@ -59,9 +58,9 @@ ext {
             // IOS 切换按钮
             switchbutton       : 'com.kyleduo.switchbutton:library:1.4.6',
             // LeanCloud 基础包
-            avoscloudSdk       : 'cn.leancloud.android:avoscloud-sdk:v4.4.3',
+            avoscloudSdk       : 'cn.leancloud.android:avoscloud-sdk:v4.7.8',
             // LeanCloud 用户反馈包
-            avoscloudFeedback  : 'cn.leancloud.android:avoscloud-feedback:v4.4.3@aar',
+            avoscloudFeedback  : 'cn.leancloud.android:avoscloud-feedback:v4.7.8@aar',
             // 滑动返回
             swipebacklayout    : 'me.imid.swipebacklayout.lib:library:1.1.0',
             photoView          : 'com.github.chrisbanes:PhotoView:2.1.2',

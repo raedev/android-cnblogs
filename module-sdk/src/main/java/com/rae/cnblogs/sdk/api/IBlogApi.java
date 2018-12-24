@@ -24,6 +24,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -145,10 +146,10 @@ public interface IBlogApi {
      *
      * @param id 知识库ID
      */
-    @POST(ApiUrls.API_KB_LIKE)
+    @PUT(ApiUrls.API_KB_LIKE)
     @FormUrlEncoded
     @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
-    Observable<Empty> likeKb(@Field("contentId") String id);
+    Observable<Empty> likeKb(@Query("id") String id);
 
     /**
      * 发表博客评论

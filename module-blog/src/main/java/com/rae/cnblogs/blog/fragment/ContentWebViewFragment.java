@@ -216,4 +216,9 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
         return mRaeWebViewClient;
 
     }
+
+    public void onFontSizeChanged() {
+        initFontSize();
+        reload();
+    }
 }

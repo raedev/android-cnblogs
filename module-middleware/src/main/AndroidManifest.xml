@@ -31,11 +31,12 @@
         <activity android:name="com.rae.cnblogs.activity.ActionResultActivity" />
 
         <!--文件提供者-->
-        <provider
+        <provider xmlns:tools="http://schemas.android.com/tools"
             android:name="com.rae.cnblogs.basic.AppFileProvider"
             android:authorities="share.cnblogs.com"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/app_file_paths" />

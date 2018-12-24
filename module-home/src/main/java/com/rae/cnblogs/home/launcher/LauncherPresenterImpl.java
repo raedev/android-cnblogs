@@ -132,7 +132,6 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
     protected void onDestroy() {
         super.onDestroy();
         mCountDownTimer.cancel();
-        mCountDownTimer.onFinish();
     }
 
     @Override
@@ -141,7 +140,7 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
         // 统计
         AppMobclickAgent.onLaunchAdClickEvent(getContext(), mAdvertBean.getAdId(), mAdvertBean.getAdName());
         mCountDownTimer.cancel();
-        // 跳转网页
+        // 再跳转网页
         getView().onRouteToWeb(mAdvertBean.getAdUrl());
     }
 

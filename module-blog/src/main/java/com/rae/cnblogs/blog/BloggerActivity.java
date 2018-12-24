@@ -215,7 +215,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         GlideApp.with(this)
                 .load(userInfo.getAvatar())
                 .centerCrop()
-                .placeholder(R.drawable.boy)
+                .placeholder(R.drawable.default_avatar_placeholder)
                 .into(mAvatarView);
 
         showAvatar(userInfo.getBlogApp(), userInfo.getAvatar());

@@ -174,7 +174,7 @@ final class ApiUrls {
     // 服务端接口地址
     private static final String RAE_API_BASIC = "https://raedev.io/cnblogs/";
 
-    //    public static final String RAE_API_BASIC = "http://192.168.168.10/cnblogs/index.php/";
+//        public static final String RAE_API_BASIC = "http://192.168.1.7:8081/cnblogs/index.php/cnblogs/";
     // 启动页广告
     static final String RAE_API_AD_LAUNCHER = RAE_API_BASIC + "ad/launcher";
     // 检查更新

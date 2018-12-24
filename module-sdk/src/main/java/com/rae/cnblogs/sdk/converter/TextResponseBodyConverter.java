@@ -160,14 +160,14 @@ public class TextResponseBodyConverter<T> implements Converter<ResponseBody, T> 
             String message = parseMessage(obj);
             Object data = parseData(obj);
 
-            if (isSuccess && !obj.isNull("data") && data != null) {
+            if (isSuccess && type == Empty.class) {
+                return (T) Empty.value();
+            } else if (isSuccess && !obj.isNull("data") && data != null) {
                 text = data.toString();
                 JsonReader jsonReader = mGson.newJsonReader(new StringReader(text));
                 return mAdapter.read(jsonReader);
             } else if (isSuccess && type == Void.class) {
                 return null;
-            } else if (isSuccess && type == Empty.class) {
-                return (T) Empty.value();
             } else if (isSuccess && obj.isNull("data")) {
                 throw new CnblogsApiException("数据为空");
             } else {

@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.FitWindowsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_divider"
-    android:fitsSystemWindows="false"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tool_bar"
-        style="@style/AppToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:paddingTop="24dp"
-        app:navigationIcon="@drawable/ic_arrow_left_night"
-        app:titleMargin="0dp"
-        app:titleTextColor="@color/white" />
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/tool_bar"-->
+    <!--style="@style/AppToolBar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/colorPrimaryDark"-->
+    <!--android:paddingTop="24dp"-->
+    <!--app:navigationIcon="@drawable/ic_arrow_left_night"-->
+    <!--app:titleMargin="0dp"-->
+    <!--app:titleTextColor="@color/white" />-->
+
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/action_bar_height"
+        android:background="@color/background_divider">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,9 +71,19 @@
                 android:layout_marginEnd="36dp"
                 android:lineSpacingMultiplier="1.5"
                 android:text="@string/app_content"
-
                 android:textColor="@color/ph4"
+                android:textIsSelectable="true"
                 android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/btn_concat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="36dp"
+                android:background="@drawable/bg_btn_default"
+                android:text="加入讨论群" />
 
 
             <LinearLayout
@@ -96,4 +107,6 @@
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-</android.support.v7.widget.FitWindowsLinearLayout>
+
+    <include layout="@layout/basic_toolbar" />
+</android.support.v7.widget.FitWindowsFrameLayout>

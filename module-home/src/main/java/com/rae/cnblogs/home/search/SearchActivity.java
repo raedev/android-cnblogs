@@ -20,6 +20,7 @@ import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicActivity;
+import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.fragment.HotSearchFragment;
 import com.rae.cnblogs.home.fragment.SearchResultFragment;
@@ -147,7 +148,11 @@ public class SearchActivity extends BasicActivity {
         // 埋点
         AppMobclickAgent.onSearchEvent(this, text);
         // raedev.io 记录热搜
-        CnblogsApiFactory.getInstance(this).getRaeServerApi().search(text).subscribe();
+        AndroidObservable.create(CnblogsApiFactory.getInstance(this)
+                .getRaeServerApi()
+                .search(text))
+                .with(this)
+                .subscribe();
     }
 
     @OnClick(R2.id.img_edit_delete)

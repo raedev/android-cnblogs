@@ -37,7 +37,7 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_count_down"
             android:text="跳过"
-            android:textColor="@color/white"
+            android:textColor="#ffffff"
             android:textSize="12sp" />
 
     </RelativeLayout>
@@ -65,7 +65,7 @@
             android:layout_marginTop="12dp"
             android:text="@string/copyright"
             android:textColor="@color/ph3"
-            android:textSize="7sp" />
+            android:textSize="8sp" />
 
     </LinearLayout>
 

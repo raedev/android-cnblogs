@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -279,9 +280,6 @@ public final class AppRoute {
      */
     public static void routeToMain(Context context) {
         ARouter.getInstance().build(PATH_APP_HOME)
-//                .withFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
-//                        | Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
-//                        | Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .navigation(context);
     }
 
@@ -693,6 +691,25 @@ public final class AppRoute {
         return (DialogFragment) ARouter.getInstance().build(PATH_BLOG_ROUTE)
                 .withString("url", url)
                 .navigation(context);
+    }
+
+    /**
+     * 跳转到QQ群
+     * https://qun.qq.com/join.html
+     */
+    public static boolean routeToQQGroup(Context context) {
+        //
+        String key = "XzvBC6j47hkHx6x3f9KZT5413SBM-hGk"; // QQ群key
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+        // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        try {
+            context.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            return false;
+        }
     }
 
 

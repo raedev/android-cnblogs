@@ -56,17 +56,6 @@ public abstract class BasicFragment extends Fragment implements IPresenterView {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart(mPageName);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd(mPageName);
-    }
 
     /**
      * 实现类重写加载数据逻辑
@@ -85,4 +74,5 @@ public abstract class BasicFragment extends Fragment implements IPresenterView {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
+
 }

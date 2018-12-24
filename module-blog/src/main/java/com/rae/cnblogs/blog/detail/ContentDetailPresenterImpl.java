@@ -114,6 +114,12 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                         if (blogInfo == null) return;
                         blogInfo.setRead(true);
                         dbBlog.updateUserBlog(blogInfo);
+
+                        BlogBean blog = dbBlog.getBlog(contentEntity.getId());
+                        if (blog != null) {
+                            blog.setIsRead(true);
+                            dbBlog.updateBlog(blog);
+                        }
                     }
                 });
 

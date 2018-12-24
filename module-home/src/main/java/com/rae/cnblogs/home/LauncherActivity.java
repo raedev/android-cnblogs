@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.AppImageLoader;
-import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.home.launcher.LauncherContract;
 import com.rae.cnblogs.home.launcher.LauncherPresenterImpl;
@@ -97,7 +96,6 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
         finish();
     }
 
-
     @Override
     public void onEmptyImage() {
         // 加载默认
@@ -120,12 +118,6 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
 
     @OnClick(R2.id.tv_skip)
     public void onSkipClick() {
-        finish();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        onRouteToHome();
     }
 }

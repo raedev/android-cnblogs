@@ -1,5 +1,8 @@
 package com.rae.cnblogs.home;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.ApplicationCompat;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
@@ -49,5 +53,16 @@ public class AboutMeActivity extends SwipeBackBasicActivity {
                     }
                 })
                 .show(getSupportFragmentManager(), "aboutMe");
+    }
+
+    @OnClick(R2.id.btn_concat)
+    public void onConcatMeClick() {
+        boolean result = AppRoute.routeToQQGroup(this);
+        if (!result) {
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboardManager == null) return;
+            clipboardManager.setPrimaryClip(ClipData.newPlainText("text", "576571648"));
+            UICompat.failed(this, "跳转QQ失败，群号已复制，请前往QQ添加");
+        }
     }
 }

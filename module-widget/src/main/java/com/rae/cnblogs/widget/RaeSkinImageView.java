@@ -2,8 +2,10 @@ package com.rae.cnblogs.widget;
 
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
+import android.os.Build;
 import android.util.AttributeSet;
 
 import com.rae.cnblogs.theme.ThemeCompat;
@@ -33,36 +35,29 @@ public class RaeSkinImageView extends SkinCompatImageView {
             }
         }
         a.recycle();
-        init();
-    }
-
-    private void init() {
-        // 初始化的时候不用取反
-        boolean isNight = ThemeCompat.isNight();
-
-        if (isNight && mNightColor != 0 && getDrawable() != null) {
-            getDrawable().setColorFilter(mNightColor, PorterDuff.Mode.SRC_ATOP);
-        }
-        setAlpha(isNight ? getResources().getInteger(R.integer.imageAlpha_night) / 100.0f : 1f);
+        apply();
     }
 
     @Override
     public void applySkin() {
         super.applySkin();
-        if (mNightColor != 0 && getDrawable() != null) {
-            if (isNight()) {
-                getDrawable().setColorFilter(mNightColor, PorterDuff.Mode.SRC_ATOP);
-            } else {
-                getDrawable().clearColorFilter();
-            }
-        } else {
-            setAlpha(!isNight() ? getResources().getInteger(R.integer.imageAlpha_night) / 100.0f : 1f);
-        }
+        apply();
     }
 
 
-    public boolean isNight() {
-        // 因为是先应用主题之后才会设置主题名称，所以这里取反。
-        return !ThemeCompat.isNight();
+    private void apply() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
+        if (ThemeCompat.isNight()) {
+            // 夜间模式的颜色
+            if (mNightColor != 0) {
+                setImageTintList(ColorStateList.valueOf(mNightColor));
+                setImageTintMode(PorterDuff.Mode.SRC_IN);
+            }else{
+                setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.nightIconColor)));
+                setImageTintMode(PorterDuff.Mode.SRC_OVER);
+            }
+        } else {
+            setImageTintList(null);
+        }
     }
 }

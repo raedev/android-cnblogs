@@ -23,6 +23,7 @@ import com.rae.cnblogs.widget.AppLayout;
 import com.rae.cnblogs.widget.ITopScrollable;
 import com.rae.cnblogs.widget.PlaceholderView;
 import com.rae.cnblogs.widget.RaeRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -218,5 +219,19 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
 
     protected ContentItemAdapter getAdapter() {
         return mAdapter;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mCategory != null)
+            MobclickAgent.onPageStart(mCategory.getName());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mCategory != null)
+            MobclickAgent.onPageEnd(mCategory.getName());
     }
 }

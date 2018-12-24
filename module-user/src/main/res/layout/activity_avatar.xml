@@ -25,7 +25,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="80dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/boy"
+                android:src="@drawable/default_avatar_placeholder"
                 app:riv_corner_radius="100dp" />
 
             <Button
@@ -66,7 +66,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="80dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/boy"
+                android:src="@drawable/default_avatar_placeholder"
                 app:riv_corner_radius="100dp" />
 
             <LinearLayout
