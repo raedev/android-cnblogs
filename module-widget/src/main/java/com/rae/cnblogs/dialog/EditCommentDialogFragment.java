@@ -174,7 +174,7 @@ public class EditCommentDialogFragment extends BasicDialogFragment {
     protected void onLoadWindowAttr(@NonNull Window window) {
         super.onLoadWindowAttr(window);
         window.setDimAmount(0.5f);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             window.setElevation(0f);

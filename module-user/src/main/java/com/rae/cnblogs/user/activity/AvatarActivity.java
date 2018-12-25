@@ -38,6 +38,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -146,6 +147,10 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
             handleUpload();
         }
 
+        if ((requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && resultCode != RESULT_OK) {
+            UICompat.failed(this, "裁剪图片失败");
+        }
+
     }
 
     @Nullable
@@ -226,17 +231,17 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
         intent.putExtra("return-data", true);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
-        ResolveInfo resolveInfo = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        if (resolveInfo != null) {
-
-            // 授权访问
-            this.grantUriPermission(resolveInfo.activityInfo.packageName, outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-            startActivityForResult(intent, REQUEST_CODE_CROP);
-        } else {
+        List<ResolveInfo> resolveInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfoList == null || resolveInfoList.size() <= 0) {
             handleUpload();
+            return;
         }
+        for (ResolveInfo resolveInfo : resolveInfoList) {
+            // 授权访问
+            grantUriPermission(resolveInfo.activityInfo.packageName, outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+        startActivityForResult(intent, REQUEST_CODE_CROP);
     }
 
     /**

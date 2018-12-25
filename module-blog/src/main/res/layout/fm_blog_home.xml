@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingTop="@dimen/default_padding_top">
+    android:paddingTop="32dp">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -43,9 +43,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_nav_search"
                     android:paddingLeft="6dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="4dp"
                     android:paddingRight="6dp"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="4dp">
 
                     <TextView
                         android:id="@+id/tv_search"

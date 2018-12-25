@@ -17,6 +17,12 @@ public interface ContentDetailContract {
     interface Presenter extends IPresenter {
 
         /**
+         * 加载博客本地状态
+         * 已读、收藏状态
+         */
+        void loadBlogLocalStatus();
+
+        /**
          * 点赞
          *
          * @param selected 当前状态

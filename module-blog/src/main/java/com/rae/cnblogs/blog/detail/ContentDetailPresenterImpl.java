@@ -123,12 +123,17 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                     }
                 });
 
+        this.loadBlogLocalStatus();
+    }
+
+    @Override
+    public void loadBlogLocalStatus() {
         // 用户博客信息：点赞、收藏状态
         AndroidObservable.create(Observable
                 .create(new ObservableOnSubscribe<UserBlogInfo>() {
                     @Override
                     public void subscribe(ObservableEmitter<UserBlogInfo> e) {
-                        UserBlogInfo blogInfo = DbFactory.getInstance().getBlog().get(contentEntity.getId());
+                        UserBlogInfo blogInfo = DbFactory.getInstance().getBlog().get(getView().getContentEntity().getId());
                         if (blogInfo == null) {
                             e.onError(new NullPointerException("blog is null"));
                             return;

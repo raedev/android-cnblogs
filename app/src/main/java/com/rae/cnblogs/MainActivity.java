@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,9 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.statusBarColor));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
@@ -73,7 +77,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
 //        if (BuildConfig.DEBUG) {
-//            debugLogin();
+        debugLogin();
 //        }
     }
 

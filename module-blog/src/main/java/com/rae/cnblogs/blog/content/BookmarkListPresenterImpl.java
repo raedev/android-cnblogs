@@ -11,11 +11,14 @@ import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.bean.BookmarksBean;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
+import com.rae.cnblogs.sdk.db.DbBlog;
+import com.rae.cnblogs.sdk.db.DbFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by rae on 2018/6/1.
@@ -101,7 +104,22 @@ public class BookmarkListPresenterImpl extends BasicPresenter<BookmarkListContra
 
                     @Override
                     protected void accept(Empty empty) {
+                        // 删除本地收藏
+                        Observable.just(item).observeOn(Schedulers.newThread())
+                                .subscribe(new ApiDefaultObserver<ContentEntity>() {
+                                    @Override
+                                    protected void onError(String message) {
+                                    }
+
+                                    @Override
+                                    protected void accept(ContentEntity contentEntity) {
+                                        DbBlog db = DbFactory.getInstance().getBlog();
+                                        db.deleteBlogBookmark(item.getTitle().trim());
+                                    }
+                                });
+
                         getView().onDeleteBookmarksSuccess(item);
+
                     }
                 });
     }

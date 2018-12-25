@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingBottom="@dimen/default_margin"
-    android:paddingLeft="@dimen/default_margin"
-    android:paddingRight="@dimen/default_margin"
-    android:paddingTop="8dp">
+    android:paddingStart="@dimen/default_margin"
+    android:paddingTop="@dimen/default_margin"
+    android:paddingEnd="@dimen/default_margin"
+    android:paddingBottom="@dimen/default_margin">
 
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:gravity="start|center"
             android:paddingLeft="6dp"
             android:text="@string/cancel"
-            android:textColor="@color/ph3"
+            android:textColor="@color/dividerPrimary"
             android:textSize="@dimen/h2" />
 
         <Button
@@ -38,10 +38,11 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:gravity="center|end"
+            android:gravity="center"
             android:text="@string/send"
-            android:textColor="@color/ph1"
-            android:textSize="@dimen/h2" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/h2"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -57,12 +58,12 @@
             android:id="@+id/et_edit_comment_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background_divider"
+            android:background="@drawable/bg_comment_content"
             android:gravity="left|top"
             android:hint="@string/edit_comment_hint"
             android:maxLength="300"
             android:minHeight="80dp"
-            android:padding="6dp"
+            android:padding="12dp"
             android:textColor="@color/ph2"
             android:textColorHint="@color/ph3"
             android:textSize="@dimen/h2" />

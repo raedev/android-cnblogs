@@ -46,7 +46,7 @@
         android:layout_marginRight="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_default_user_avatar"
-        app:riv_corner_radius="4dp" />
+        app:riv_corner_radius="40dp" />
 
     <com.rae.cnblogs.widget.RaeTextView
         android:id="@+id/tv_blog_author"

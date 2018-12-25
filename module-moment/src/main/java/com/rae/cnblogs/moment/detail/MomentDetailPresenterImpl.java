@@ -48,11 +48,11 @@ public class MomentDetailPresenterImpl extends BasicPresenter<IMomentDetailContr
         MomentBean momentInfo = getView().getMomentInfo();
 
         // 如果自带有评论就不用再发起请求了
-        if (Rx.isEmpty(momentInfo.getCommentList()) || mRefresh) {
-            loaMomentDetail(momentInfo);
-        } else {
+        if (!Rx.isEmpty(momentInfo.getCommentList())) {
             notifyCommentSuccess(momentInfo.getCommentList());
         }
+        // 加载闪存详情
+        loaMomentDetail(momentInfo);
 
         boolean isLogin = UserProvider.getInstance().isLogin();
         if (!isLogin) {

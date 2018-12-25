@@ -1,5 +1,6 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -102,5 +103,7 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment implements B
         UICompat.success(getContext(), R.string.delete_bookmarks_success);
         getAdapter().remove(item);
         getAdapter().notifyDataSetChanged();
+        if (getActivity() != null)
+            getActivity().setResult(Activity.RESULT_OK);
     }
 }

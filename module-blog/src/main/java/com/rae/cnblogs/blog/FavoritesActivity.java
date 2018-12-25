@@ -22,7 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 首页博客
+ * 我的收藏
  * Created by rae on 2018/5/26.
  * Copyright (c) https://github.com/raedev All rights reserved.
  */

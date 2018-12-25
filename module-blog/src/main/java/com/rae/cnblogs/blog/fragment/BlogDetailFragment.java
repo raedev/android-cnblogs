@@ -1,6 +1,8 @@
 package com.rae.cnblogs.blog.fragment;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -395,6 +397,14 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         String desc = mContentEntity.getSummary();
         String imageUrl = mContentEntity.getAvatar();
         ShareDialogFragment.newInstance(url, title, desc, imageUrl).show(getChildFragmentManager(), "share");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppRoute.REQ_CODE_FAVORITES && resultCode == Activity.RESULT_OK) {
+            mPresenter.loadBlogLocalStatus(); // 重新加载数据
+        }
     }
 
     @Subscribe

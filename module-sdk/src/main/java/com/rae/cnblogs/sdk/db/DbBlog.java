@@ -13,7 +13,6 @@ import com.rae.cnblogs.sdk.bean.DaoSession;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfoDao;
 
-import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.ByteArrayOutputStream;
@@ -113,7 +112,7 @@ public class DbBlog {
     @Nullable
     public UserBlogInfo get(String blogId) {
         if (TextUtils.isEmpty(blogId)) return null;
-        UserBlogInfo info =  mSession.getUserBlogInfoDao()
+        UserBlogInfo info = mSession.getUserBlogInfoDao()
                 .queryBuilder()
                 .where(UserBlogInfoDao.Properties.BlogId.eq(blogId))
                 .unique();
@@ -227,6 +226,20 @@ public class DbBlog {
      */
     public void updateUserBlog(UserBlogInfo m) {
         mSession.getUserBlogInfoDao().update(m);
+    }
+
+    /**
+     * 根据标题删除本地收藏
+     */
+    public void deleteBlogBookmark(String title) {
+        List<BlogBean> list = mSession.getBlogBeanDao().queryBuilder().where(BlogBeanDao.Properties.Title.eq(title)).list();
+        if (list.size() <= 0) return;
+        BlogBean blogBean = list.get(0);
+        UserBlogInfo userBlogInfo = get(blogBean.getBlogId());
+        if (userBlogInfo == null) return;
+        userBlogInfo.setIsBookmarks(false);
+        userBlogInfo.setBookmarks(false);
+        updateUserBlog(userBlogInfo);
     }
 
     /**

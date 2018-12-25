@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 
 import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.R;
@@ -96,7 +95,6 @@ public abstract class BasicDialogFragment extends AppCompatDialogFragment {
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             window.setDimAmount(0.3f);
             window.setGravity(Gravity.BOTTOM | Gravity.FILL_HORIZONTAL);
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); // 状态栏透明
             int resId = R.drawable.bg_dialog_default;
             if (ThemeCompat.isNight()) {
                 resId = R.drawable.bg_dialog_default_night;

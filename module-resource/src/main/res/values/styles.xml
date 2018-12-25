@@ -5,7 +5,7 @@
 
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/statusBarColor</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="actionBarDivider">@color/transparent</item>
         <item name="actionBarStyle">@style/AppActionBar</item>
