@@ -25,6 +25,7 @@ import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.fragment.HotSearchFragment;
 import com.rae.cnblogs.home.fragment.SearchResultFragment;
 import com.rae.cnblogs.home.fragment.SearchSuggestFragment;
+import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.event.SearchEvent;
 import com.rae.cnblogs.user.R2;
@@ -147,12 +148,23 @@ public class SearchActivity extends BasicActivity {
 
         // 埋点
         AppMobclickAgent.onSearchEvent(this, text);
+
         // raedev.io 记录热搜
         AndroidObservable.create(CnblogsApiFactory.getInstance(this)
                 .getRaeServerApi()
                 .search(text))
                 .with(this)
-                .subscribe();
+                .subscribe(new ApiDefaultObserver<String>() {
+                    @Override
+                    protected void onError(String message) {
+                        Log.e("api", "保存搜索失败：" + message);
+                    }
+
+                    @Override
+                    protected void accept(String s) {
+
+                    }
+                });
     }
 
     @OnClick(R2.id.img_edit_delete)

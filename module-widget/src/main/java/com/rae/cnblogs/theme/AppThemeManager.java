@@ -4,13 +4,24 @@ import android.app.Application;
 
 import skin.support.SkinCompatManager;
 import skin.support.design.app.SkinMaterialViewInflater;
-import skin.support.observe.SkinObservable;
-import skin.support.observe.SkinObserver;
 
 /**
  * 主题管理器
  */
 public final class AppThemeManager {
+
+    public static class ThemeEvent {
+        private boolean isNight;
+
+        public ThemeEvent(boolean isNight) {
+            this.isNight = isNight;
+        }
+
+        public boolean isNight() {
+            return isNight;
+        }
+
+    }
 
     /**
      * 初始化皮肤

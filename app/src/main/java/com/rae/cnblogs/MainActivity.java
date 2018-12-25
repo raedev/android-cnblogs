@@ -11,7 +11,6 @@ import android.support.design.widget.RaeTabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -34,12 +33,14 @@ import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
 import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
+import com.rae.cnblogs.theme.AppThemeManager;
+import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.ITopScrollable;
-import com.umeng.commonsdk.UMConfigure;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
+import skin.support.SkinCompatManager;
 
 @Route(path = AppRoute.PATH_APP_HOME)
 public class MainActivity extends BasicActivity implements MainContract.View, RaeTabLayout.OnTabSelectedListener {
@@ -60,6 +61,10 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
+        SkinCompatManager.getInstance().addObserver((observable, o) -> {
+            EventBus.getDefault().post(new AppThemeManager.ThemeEvent(ThemeCompat.isNight()));
+        });
+
         initTab();
 
         // 请求权限
@@ -67,13 +72,9 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-        if (BuildConfig.DEBUG) {
-            debugLogin();
-
-            String[] testDeviceInfo = UMConfigure.getTestDeviceInfo(this);
-
-            Log.i("rae", "测试信息：" + TextUtils.concat(testDeviceInfo));
-        }
+//        if (BuildConfig.DEBUG) {
+//            debugLogin();
+//        }
     }
 
 

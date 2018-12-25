@@ -88,7 +88,7 @@
                 android:orientation="horizontal">
 
 
-                <TextView
+                <com.rae.cnblogs.widget.SkinDrawableTextView
                     android:id="@+id/tv_share_source"
                     style="@style/ShareIcon"
                     android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                     android:drawableTop="@drawable/ic_share_text"
                     android:text="@string/view_source" />
 
-                <TextView
+                <com.rae.cnblogs.widget.SkinDrawableTextView
                     android:id="@+id/tv_share_night"
                     style="@style/ShareIcon"
                     android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                     android:drawableTop="@drawable/ic_share_night"
                     android:text="@string/night_mode" />
 
-                <TextView
+                <com.rae.cnblogs.widget.SkinDrawableTextView
                     android:id="@+id/tv_share_font"
                     style="@style/ShareIcon"
                     android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                     android:drawableTop="@drawable/text_allshare_font"
                     android:text="@string/font_setting" />
 
-                <TextView
+                <com.rae.cnblogs.widget.SkinDrawableTextView
                     android:id="@+id/tv_share_browser"
                     style="@style/ShareIcon"
                     android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
                     android:drawableTop="@drawable/ic_share_browser"
                     android:text="@string/open_browser" />
 
-                <TextView
+                <com.rae.cnblogs.widget.SkinDrawableTextView
                     android:id="@+id/tv_share_link"
                     style="@style/ShareIcon"
                     android:layout_width="wrap_content"

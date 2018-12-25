@@ -30,6 +30,7 @@ import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.event.FontChangedEvent;
+import com.rae.cnblogs.theme.AppThemeManager;
 import com.rae.cnblogs.widget.ImageLoadingView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -400,6 +401,13 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     public void onEvent(FontChangedEvent event) {
         if (mContentWebViewFragment != null) {
             mContentWebViewFragment.onFontSizeChanged();
+        }
+    }
+
+    @Subscribe
+    public void onEvent(AppThemeManager.ThemeEvent event) {
+        if (mContentWebViewFragment != null) {
+            mContentWebViewFragment.reload();
         }
     }
 }

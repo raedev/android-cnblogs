@@ -46,7 +46,7 @@
         android:layout_marginBottom="11dp"
         android:text="@string/title"
         android:textColor="@color/ph1"
-        android:textSize="@dimen/h1"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:lineSpacingExtra="6sp"
         android:text="@string/title"
-        android:textColor="@color/ph2"
+        android:textColor="@color/ph4"
         android:textSize="@dimen/summary" />
 
     <ImageView
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:text="今天18:30"
             android:textAlignment="gravity"
-            android:textColor="@color/ph3"
+            android:textColor="@color/ph4"
             android:textSize="@dimen/h2" />
 
         <LinearLayout

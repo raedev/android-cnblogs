@@ -48,13 +48,12 @@ public class RaeSkinImageView extends SkinCompatImageView {
     private void apply() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
         if (ThemeCompat.isNight()) {
+            setImageTintMode(PorterDuff.Mode.MULTIPLY);
             // 夜间模式的颜色
             if (mNightColor != 0) {
                 setImageTintList(ColorStateList.valueOf(mNightColor));
-                setImageTintMode(PorterDuff.Mode.SRC_IN);
-            }else{
-                setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.nightIconColor)));
-                setImageTintMode(PorterDuff.Mode.SRC_OVER);
+            } else {
+                setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.nightMaskColor)));
             }
         } else {
             setImageTintList(null);

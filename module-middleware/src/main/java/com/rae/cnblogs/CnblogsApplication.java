@@ -1,6 +1,5 @@
 package com.rae.cnblogs;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.avos.avoscloud.AVOSCloud;
@@ -63,7 +62,11 @@ public class CnblogsApplication extends BasicApplication {
         PlatformConfig.setWeixin(BuildConfig.WECHAT_APP_ID, BuildConfig.WECHAT_APP_SECRET);
         PlatformConfig.setSinaWeibo(BuildConfig.WEIBO_APP_ID, BuildConfig.WEIBO_APP_SECRET, "http://www.raeblog.com/cnblogs/index.php/share/weibo/redirect");
         PlatformConfig.setQQZone(BuildConfig.QQ_APP_ID, BuildConfig.QQ_APP_SECRET);
+        Log.i("rae", "--- 初始化配置信息 ---");
+        Log.i("rae", String.format("--- 包名：%s ---", getPackageName()));
+        Log.i("rae", String.format("--- 版本号：%s ---", ApplicationCompat.getVersionCode(this)));
+        Log.i("rae", String.format("--- 版本名：%s ---", ApplicationCompat.getVersionName(this)));
+        Log.i("rae", String.format("--- 渠道名：%s ---", CnblogAppConfig.APP_CHANNEL));
 
-        
     }
 }

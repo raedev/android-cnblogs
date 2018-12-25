@@ -6,8 +6,8 @@
     android:layout_marginBottom="18dp"
     android:orientation="vertical"
     android:paddingLeft="@dimen/default_margin"
-    android:paddingRight="@dimen/default_margin"
-    android:paddingTop="@dimen/default_margin">
+    android:paddingTop="@dimen/default_margin"
+    android:paddingRight="@dimen/default_margin">
 
     <LinearLayout
         android:id="@+id/ll_blog_author_layout"
@@ -19,8 +19,6 @@
             android:id="@+id/img_blog_avatar"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:alpha="0.3"
-            android:background="@drawable/bg_user_avatar"
             android:scaleType="centerCrop"
             android:src="@drawable/default_avatar_placeholder"
             app:riv_corner_radius="32dp" />
@@ -38,8 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="RAE敲代码"
                 android:textColor="@color/ph4"
-                android:textSize="@dimen/h3"
-                android:textStyle="bold" />
+                android:textSize="@dimen/h3"/>
 
 
             <com.rae.cnblogs.widget.RaeTextView

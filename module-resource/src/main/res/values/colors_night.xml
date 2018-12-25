@@ -3,7 +3,11 @@
     <!--夜间模式-->
 
     <!--夜间模式主色调-->
-    <color name="nightIconColor">#64000000</color>
+    <!-- 夜间模式遮罩层颜色 -->
+    <color name="nightMaskColor">#e6e6e6</color>
+    <!-- 夜间模式图标颜色 -->
+    <color name="nightIconColor">#e6e6e6</color>
+    <!-- 夜间模式主颜色 -->
     <color name="nightColorPrimary">#1F1F21</color>
 
     <color name="colorPrimary_night">@color/nightColorPrimary</color>

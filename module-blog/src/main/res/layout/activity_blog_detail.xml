@@ -16,12 +16,11 @@
         android:layout_height="wrap_content">
 
 
-        <ImageView
+        <com.rae.cnblogs.widget.RaeSkinImageView
             android:id="@+id/img_action_bar_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_margin="10dp"
             android:scaleType="center"
             android:src="@drawable/ic_action_bar_more" />

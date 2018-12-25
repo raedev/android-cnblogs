@@ -47,10 +47,6 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
         }
         setContentView(R.layout.activity_launcher);
         mPresenter = new LauncherPresenterImpl(this);
-
-//        if (BuildConfig.DEBUG) {
-//            onRouteToHome();
-//        }
     }
 
 
@@ -62,11 +58,11 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
+        super.onPause();
         mPresenter.destroy();
         mCountDownTextView.stop();
         mCountDownTextView.reset();
-        super.onStop();
     }
 
     /**

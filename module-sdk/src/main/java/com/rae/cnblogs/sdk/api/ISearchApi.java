@@ -105,11 +105,4 @@ public interface ISearchApi {
     @GET(ApiUrls.API_SEARCH_HOT)
     Observable<List<String>> hotSearch();
 
-    /**
-     * 添加到热门搜索
-     *
-     * @param keyword 搜索关键字
-     */
-    @POST(ApiUrls.API_SEARCH_HOT)
-    Observable<List<String>> search(@Field("keyword") String keyword);
 }

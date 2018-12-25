@@ -21,7 +21,7 @@
             android:layout_marginBottom="12dp"
             android:text="标题"
             android:textColor="@color/ph1"
-            android:textSize="@dimen/h1"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <com.rae.cnblogs.widget.RaeTextView

@@ -52,5 +52,5 @@ public interface IRaeServerApi {
 
     @POST(ApiUrls.RAE_API_SEARCH)
     @FormUrlEncoded
-    Observable<Empty> search(@Field("keyword") String text);
+    Observable<String> search(@Field("keyword") String text);
 }
