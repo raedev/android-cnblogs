@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:paddingStart="@dimen/default_margin"
-    android:paddingTop="@dimen/default_margin"
+    android:paddingTop="8dp"
     android:paddingEnd="@dimen/default_margin"
-    android:paddingBottom="@dimen/default_margin">
+    android:paddingBottom="8dp">
 
 
     <RelativeLayout

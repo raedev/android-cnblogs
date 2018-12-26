@@ -43,9 +43,9 @@ dependencies {
     implementation rootProject.ext.dependencies.avoscloudSdk
     implementation rootProject.ext.dependencies.avoscloudFeedback
 
-    api(rootProject.ext.dependencies.swipebacklayout, {
-        exclude group: 'com.android.support'
-    })
+//    api(rootProject.ext.dependencies.swipebacklayout, {
+//        exclude group: 'com.android.support'
+//    })
     implementation project(':module-basic')
     implementation project(':module-resource')
     implementation project(':module-widget')

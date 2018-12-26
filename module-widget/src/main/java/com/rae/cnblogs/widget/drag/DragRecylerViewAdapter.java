@@ -38,6 +38,8 @@ public abstract class DragRecylerViewAdapter<T, VH extends RecyclerView.ViewHold
     }
 
     public T getDataItem(int position) {
+        if (mItems == null || mItems.size() <= 0) return null;
+        position = Math.min(mItems.size(), Math.max(0, position));
         return mItems.get(position);
     }
 

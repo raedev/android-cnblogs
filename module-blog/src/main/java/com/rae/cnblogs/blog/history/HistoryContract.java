@@ -12,6 +12,8 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 public interface HistoryContract {
     interface Presenter extends IPresenter {
         void onLoadMore();
+
+        void clear();
     }
 
     interface View extends IPresenterView, IPageView<BlogBean> {

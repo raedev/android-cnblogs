@@ -30,6 +30,8 @@ dependencies {
     implementation rootProject.ext.dependencies.rxlifecycle
     implementation rootProject.ext.dependencies.multidex
     implementation rootProject.ext.dependencies.walle
+    implementation project(':module-resource')
+    api 'com.qmuiteam:arch:0.2.2'
     api rootProject.ext.dependencies.glide
     // 友盟
     api rootProject.ext.dependencies.umengCommon

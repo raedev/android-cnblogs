@@ -48,4 +48,8 @@ dependencies {
     implementation(rootProject.ext.dependencies.design, {
         transitive = false
     })
+    // QMUI
+    api('com.qmuiteam:qmui:1.1.3', {
+        exclude group: 'com.android.support'
+    })
 }

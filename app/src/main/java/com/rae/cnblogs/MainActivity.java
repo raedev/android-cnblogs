@@ -37,6 +37,7 @@ import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.theme.AppThemeManager;
 import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.ITopScrollable;
+import com.umeng.socialize.UMShareAPI;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -77,7 +78,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
 //        if (BuildConfig.DEBUG) {
-        debugLogin();
+//        debugLogin();
 //        }
     }
 
@@ -257,12 +258,18 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
     }
 
     @Override
-    public void onBackPressed() {
+    protected void doOnBackPressed() {
         if ((System.currentTimeMillis() - mBackKeyDownTime) > 2000) {
             UICompat.toast(this, "再按一次退出");
             mBackKeyDownTime = System.currentTimeMillis();
             return;
         }
-        super.onBackPressed();
+        super.doOnBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

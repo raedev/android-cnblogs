@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.feedback.FeedbackThread;
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.rae.cnblogs.basic.AppDataManager;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.ApplicationCompat;
@@ -23,6 +24,7 @@ public class CnblogsApplication extends BasicApplication {
     @Override
     protected void onFirstCreate() {
         super.onFirstCreate();
+        QMUISwipeBackActivityManager.init(this);
         // 主题初始化
         AppThemeManager.init(this);
         // 路由初始化

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.text.TextUtils;
 
 import com.rae.cnblogs.AppRoute;
@@ -12,6 +13,8 @@ import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.blog.R;
+import com.rae.cnblogs.blog.adapter.ContentItemAdapter;
+import com.rae.cnblogs.blog.adapter.FavoriteItemAdapter;
 import com.rae.cnblogs.blog.comm.ContentListContract;
 import com.rae.cnblogs.blog.content.BookmarkListContract;
 import com.rae.cnblogs.blog.content.BookmarkListPresenterImpl;
@@ -37,6 +40,12 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment implements B
         FavoritesFragment fragment = new FavoritesFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+
+    @Override
+    protected ContentItemAdapter makeItemAdapter() {
+        return new FavoriteItemAdapter();
     }
 
     @Override
@@ -74,6 +83,8 @@ public class FavoritesFragment extends MultipleTypeBlogListFragment implements B
         getAdapter().setOnItemLongClickListener(new BaseItemAdapter.onItemLongClickListener<ContentEntity>() {
             @Override
             public void onItemLongClick(Context context, final ContentEntity item) {
+                BottomSheetDialogFragment bottomSheetDialogFragment = new BottomSheetDialogFragment();
+
                 new DefaultDialogFragment.Builder()
                         .message("确定要删除这条收藏吗")
                         .confirmText("删除")

@@ -13,6 +13,7 @@ import com.rae.cnblogs.sdk.bean.DaoSession;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfo;
 import com.rae.cnblogs.sdk.db.model.UserBlogInfoDao;
 
+import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.io.ByteArrayOutputStream;
@@ -90,6 +91,25 @@ public class DbBlog {
                 .offset(Math.max(0, page - 1) * 20)
                 .orderDesc(BlogBeanDao.Properties.UpdateTime)
                 .list();
+    }
+
+
+    /**
+     * 清除浏览记录
+     */
+    public void clearRecentHistory() {
+        Database database = mSession.getDatabase();
+        String tableName = BlogBeanDao.TABLENAME;
+        String columnName = BlogBeanDao.Properties.IsRead.columnName;
+        database.beginTransaction();
+        try {
+            database.execSQL(String.format("update %s set %s=0 where %s=1", tableName, columnName, columnName));
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            database.endTransaction();
+        }
     }
 
     /**
@@ -284,4 +304,5 @@ public class DbBlog {
         }
 
     }
+
 }

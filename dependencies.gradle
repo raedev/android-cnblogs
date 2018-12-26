@@ -62,7 +62,7 @@ ext {
             // LeanCloud 用户反馈包
             avoscloudFeedback  : 'cn.leancloud.android:avoscloud-feedback:v4.7.8@aar',
             // 滑动返回
-            swipebacklayout    : 'me.imid.swipebacklayout.lib:library:1.1.0',
+//            swipebacklayout    : 'me.imid.swipebacklayout.lib:library:1.1.0',
             photoView          : 'com.github.chrisbanes:PhotoView:2.1.2',
     ]
     // 注解配置

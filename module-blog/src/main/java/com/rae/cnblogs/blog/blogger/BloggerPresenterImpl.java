@@ -38,7 +38,9 @@ public class BloggerPresenterImpl extends BasicPresenter<BloggerContract.View> i
             getView().onLoginExpired();
             return;
         }
-        AndroidObservable.create(mFriendApi.getFriendsInfo(getView().getBlogApp())).subscribe(new ApiDefaultObserver<FriendsInfoBean>() {
+        AndroidObservable.create(mFriendApi.getFriendsInfo(getView().getBlogApp()))
+                .with(this)
+                .subscribe(new ApiDefaultObserver<FriendsInfoBean>() {
             @Override
             protected void onError(String msg) {
                 getView().onLoadBloggerInfoFailed(msg);
@@ -65,7 +67,7 @@ public class BloggerPresenterImpl extends BasicPresenter<BloggerContract.View> i
             observable = mFriendApi.follow(mBloggerInfo.getUserId());
         }
 
-        AndroidObservable.create(observable).subscribe(new ApiDefaultObserver<Empty>() {
+        AndroidObservable.create(observable).with(this).subscribe(new ApiDefaultObserver<Empty>() {
             @Override
             protected void onError(String message) {
                 getView().onFollowFailed(message);

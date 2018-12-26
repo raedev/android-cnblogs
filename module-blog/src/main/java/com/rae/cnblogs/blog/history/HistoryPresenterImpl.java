@@ -52,4 +52,10 @@ public class HistoryPresenterImpl extends BasicPresenter<HistoryContract.View> i
     public void onLoadMore() {
         mPageObservable.loadMore();
     }
+
+    @Override
+    public void clear() {
+        mDbBlog.clearRecentHistory();
+        start();
+    }
 }

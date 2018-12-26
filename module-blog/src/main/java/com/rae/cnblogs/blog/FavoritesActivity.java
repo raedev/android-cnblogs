@@ -10,12 +10,12 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
-import com.rae.cnblogs.basic.Rx;
 import com.rae.cnblogs.blog.adapter.FavoriteFragmentAdapter;
 import com.rae.cnblogs.blog.favorite.FavoriteContract;
 import com.rae.cnblogs.blog.favorite.FavoritePresenterImpl;
 import com.rae.cnblogs.sdk.bean.TagBean;
 import com.rae.cnblogs.widget.ITopScrollable;
+import com.rae.cnblogs.widget.PlaceholderView;
 
 import java.util.List;
 
@@ -30,6 +30,9 @@ import butterknife.BindView;
 public class FavoritesActivity extends SwipeBackBasicActivity implements RaeTabLayout.OnTabSelectedListener, FavoriteContract.View {
 
     private FavoriteFragmentAdapter mAdapter;
+
+    @BindView(R2.id.placeholder)
+    PlaceholderView mPlaceholderView;
 
     @BindView(R2.id.tab_category)
     RaeTabLayout mTabLayout;
@@ -51,6 +54,13 @@ public class FavoritesActivity extends SwipeBackBasicActivity implements RaeTabL
 
         // 获取标签
         mPresenter.start();
+
+        mPlaceholderView.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.start();
+            }
+        });
     }
 
     @Override
@@ -61,18 +71,17 @@ public class FavoritesActivity extends SwipeBackBasicActivity implements RaeTabL
 
     @Override
     public void onLoadTags(List<TagBean> data) {
-        // 没有任何标签
-        if (Rx.getCount(data) <= 0) {
-            mTabLayout.setVisibility(View.GONE);
-        } else {
-            mTabLayout.setVisibility(View.VISIBLE);
-        }
-        // 添加一个全部
-        data.add(0, new TagBean("全部"));
+        mTabLayout.setVisibility(View.VISIBLE);
+        mPlaceholderView.dismiss();
         mAdapter.setDataList(data);
         mViewPager.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public void onLoadFailed(String message) {
+        mPlaceholderView.retry(message);
     }
 
     @Override

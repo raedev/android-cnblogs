@@ -1,3 +1,68 @@
-# android-cnblogs
-the android application of the cnblogs website. https://www.cnblogs.com
+<p align="center">
+ <img src="https://pp.myapp.com/ma_icon/0/icon_52516848_1519986906/128" />
+</p>
+<p align="center">
+博客园第三方Android客户端
+</p>
+<p align="center">
+  <a href="https://sj.qq.com/myapp/detail.htm?apkName=com.rae.cnblogs">
+    <img src="https://img.shields.io/badge/download-v1.1.5-brightgreen.svg" alt="release">
+  </a>
+  <a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
+    <img src="https://img.shields.io/hexpm/l/plug.svg" alt="license">
+  </a>
+</p>
 
+## 简介
+
+- 界面净白风格，专注阅读，给你极简体验
+- 夜间模式同样很出色
+- 首页定制技术栏目，关心你所关注的
+- 信息流图文结合，让阅读不在单调
+- 博客园全站搜索，博客、博主、新闻、知识库一个也不落下
+- 热门搜索，时下热门技术一手掌控
+- 文章代码高亮，这才是真正的程序
+- 文章一键评论、点赞、收藏
+- 作者主页更加清爽
+- 时下热门IT新闻随时查看，还有知识库来补充
+- 闪存功能，园友的“段子”圈，个个都是人才，说话又好听
+- WIFI下自动缓存文章，离线也可阅读
+- 更多功能等你来发现
+
+## APP截图
+
+![](https://github.com/raee/android-cnblogs/blob/master/guide.jpg)
+
+## 版本更新记录
+
+> v1.1.5
+
+- 全新的个人中心，支持修改头像、账号、昵称、个性签名以及重置密码
+- 添加搜索历史记录、文章浏览记录、智能无图模式
+- 添加热门搜索、修复搜索不能用问题
+- 我的收藏支持分类查看
+- 自动优化网页版博客文章体验
+- 修复数学公式渲染问题
+- 调整UI卡片设计风格
+
+
+## 博客园介绍
+
+博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。
+
+
+## License
+
+Copyright 2018 RAE
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+> http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

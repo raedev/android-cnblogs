@@ -34,6 +34,7 @@ public class CategoryDragAdapter extends DragRecylerViewAdapter<CategoryBean, Ca
         CategoryHolder holder = (CategoryHolder) v.getTag();
         int position = holder.getAdapterPosition();
         CategoryBean item = getDataItem(position);
+        if (item == null) return;
         mCategoryItemListener.onItemClick(position, item);
     }
 
@@ -42,6 +43,7 @@ public class CategoryDragAdapter extends DragRecylerViewAdapter<CategoryBean, Ca
         CategoryHolder holder = (CategoryHolder) v.getTag();
         int position = holder.getAdapterPosition();
         CategoryBean item = getDataItem(position);
+        if (item == null) return false;
         mCategoryItemListener.onItemLongClick(position, item);
         return false;
     }

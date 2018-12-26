@@ -137,6 +137,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         mFeedListFragment = FeedListFragment.newInstance(getBlogApp());
         mBlogListFragment = BloggerListFragment.newInstance(getBlogApp());
 
+
         adapter.add(getString(R.string.feed), mFeedListFragment);
         adapter.add(getString(R.string.blog), mBlogListFragment);
 
@@ -229,20 +230,17 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     @Override
     public void onFollowSuccess() {
-//        mFollowProgressBar.setVisibility(ViewPager.GONE);
-        mFollowView.setVisibility(View.VISIBLE);
-
+        mFollowView.setEnabled(true);
         mFollowView.setText(mBloggerPresenter.isFollowed() ? R.string.cancel_follow : R.string.following);
         setResult(RESULT_OK);
-
         // 发送通知
         EventBus.getDefault().post(new UserInfoChangedEvent());
     }
 
     @Override
     public void onFollowFailed(String message) {
-//        mFollowProgressBar.setVisibility(ViewPager.GONE);
-        mFollowView.setVisibility(View.VISIBLE);
+        mFollowView.setEnabled(true);
+        mFollowView.setText(R.string.following);
         UICompat.toast(this, message);
     }
 
@@ -321,10 +319,8 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     @OnClick(R2.id.btn_blogger_follow)
     public void onFollowButtonClick() {
         if (mUserInfo == null) return;
-
-//        AppUI.loading(this);
-//        mFollowProgressBar.setVisibility(ViewPager.VISIBLE);
-        mFollowView.setVisibility(View.GONE);
+        mFollowView.setEnabled(false);
+        mFollowView.setText(R.string.loading);
         mBloggerPresenter.doFollow();
     }
 

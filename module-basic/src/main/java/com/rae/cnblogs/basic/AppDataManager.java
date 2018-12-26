@@ -118,7 +118,7 @@ public final class AppDataManager {
      * @param file 文件
      */
     public long getDirectorySize(File file) {
-        if (!file.exists() || !file.canRead()) {
+        if (file == null || !file.exists() || !file.canRead()) {
             return 0;
         }
 

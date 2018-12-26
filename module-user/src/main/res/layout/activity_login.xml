@@ -3,10 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_login"
-    android:orientation="vertical"
-    android:paddingBottom="200dp">
+    android:orientation="vertical">
 
     <!--头部-->
     <ImageButton
@@ -83,5 +82,9 @@
 
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="180dp" />
 
 </LinearLayout>

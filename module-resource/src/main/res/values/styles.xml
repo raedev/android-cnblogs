@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="AppBaseTheme" parent="QMUI.Compat.NoActionBar" />
 
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -12,7 +12,7 @@
         <item name="toolbarNavigationButtonStyle">@style/AppToolbarNavigationButtonStyle</item>
         <!--<item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>-->
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <!--<item name="android:windowAnimationStyle">@style/AppAnimation</item>-->
         <item name="android:windowBackground">@color/default_background</item>
         <item name="android:textColorPrimary">@color/ph1</item>

@@ -74,6 +74,9 @@ public class LoginPlaceholderView extends PlaceholderView implements Runnable {
     }
 
     public void dismissLoadingRetry() {
+        mRetryLayout.setVisibility(View.GONE);
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+        mLoadingTextView.setVisibility(View.VISIBLE);
         mRetryLayout.startAnimation(AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out));
         mRetryLayout.setVisibility(View.INVISIBLE);
     }
@@ -103,6 +106,6 @@ public class LoginPlaceholderView extends PlaceholderView implements Runnable {
      * 是否达到去登录的重试次数了
      */
     public boolean isRouteLogin() {
-        return mRetryCount > 1;
+        return mRetryCount > 2;
     }
 }

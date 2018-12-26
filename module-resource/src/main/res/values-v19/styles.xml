@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="AppBaseTheme" parent="QMUI.Compat.NoActionBar">
         <item name="android:fitsSystemWindows">false</item>
         <item name="android:buttonStyle">@style/AppButton</item>
         <item name="buttonStyle">@style/AppButton</item>
         <item name="editTextStyle">@style/AppEditTextStyle</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="AppTheme.Login" parent="Theme.AppCompat.Light.Dialog.Alert">

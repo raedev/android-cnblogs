@@ -21,6 +21,7 @@
             android:fitsSystemWindows="false"
             android:gravity="center">
 
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
@@ -33,14 +34,15 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+
         </android.support.v7.widget.Toolbar>
 
         <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
             android:id="@+id/tab_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:visibility="gone"
             app:tabBackground="@android:color/transparent"
             app:tabContentStart="0dp"
@@ -57,9 +59,14 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <com.rae.cnblogs.widget.PlaceholderView
+        android:id="@+id/placeholder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.rae.cnblogs.widget.PlaceholderView>
 </android.support.v7.widget.FitWindowsLinearLayout>

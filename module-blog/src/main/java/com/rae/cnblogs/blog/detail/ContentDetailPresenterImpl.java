@@ -99,31 +99,39 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
 
                     @Override
                     protected void accept(BlogBean content) {
+                        updateLocalBlogStatus(contentEntity);
                         getView().onLoadDataSuccess(content, AppGson.toJson(content));
                     }
                 });
 
-        // 更新博客为已读状态
+        this.loadBlogLocalStatus();
+    }
+
+    /**
+     * 更新博客为已读状态
+     *
+     * @param contentEntity
+     */
+    private void updateLocalBlogStatus(ContentEntity contentEntity) {
         Observable.just(contentEntity)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new DefaultEmptyObserver<ContentEntity>() {
                     @Override
                     public void onNext(ContentEntity contentEntity) {
                         DbBlog dbBlog = DbFactory.getInstance().getBlog();
-                        UserBlogInfo blogInfo = dbBlog.get(contentEntity.getId());
-                        if (blogInfo == null) return;
+                        UserBlogInfo blogInfo = getUserBlogInfo();
                         blogInfo.setRead(true);
+                        blogInfo.setIsRead(true);
                         dbBlog.updateUserBlog(blogInfo);
 
                         BlogBean blog = dbBlog.getBlog(contentEntity.getId());
                         if (blog != null) {
                             blog.setIsRead(true);
+                            blog.setUpdateTime(System.currentTimeMillis());
                             dbBlog.updateBlog(blog);
                         }
                     }
                 });
-
-        this.loadBlogLocalStatus();
     }
 
     @Override

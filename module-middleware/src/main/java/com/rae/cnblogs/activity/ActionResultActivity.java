@@ -39,8 +39,8 @@ public class ActionResultActivity extends SwipeBackBasicActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    protected void doOnBackPressed() {
+        super.doOnBackPressed();
         onHomeClick();
     }
 

@@ -35,6 +35,8 @@ dependencies {
     api(rootProject.ext.dependencies.skin, {
         exclude group: 'com.android.support'
     })
+
+
     // 主题切换-design package
     api(rootProject.ext.dependencies.skinDesign, {
         exclude group: 'com.android.support'

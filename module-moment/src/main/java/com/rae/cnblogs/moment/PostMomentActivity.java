@@ -246,7 +246,7 @@ public class PostMomentActivity extends BasicActivity implements IPostMomentCont
     }
 
     @Override
-    public void onBackPressed() {
+    protected void doOnBackPressed() {
         if (!TextUtils.isEmpty(getContent()) || !Rx.isEmpty(getImageUrls())) {
             // 提示
             new DefaultDialogFragment.Builder()
@@ -263,7 +263,7 @@ public class PostMomentActivity extends BasicActivity implements IPostMomentCont
             return;
         }
 
-        super.onBackPressed();
+        super.doOnBackPressed();
     }
 
     @Override

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'walle'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -37,7 +38,7 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-            applicationIdSuffix '.debug'
+//            applicationIdSuffix '.debug'
             signingConfig signingConfigs.release
         }
         release {
@@ -58,6 +59,16 @@ android {
     lintOptions {
         abortOnError false
     }
+}
+
+// 美团插件 - 渠道包
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = 'app-cnblogs-${channel}-${buildType}-d${versionCode}-v${versionName}.apk'
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
 }
 
 dependencies {

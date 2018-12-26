@@ -7,7 +7,7 @@ import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.bean.TagBean;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,11 +30,12 @@ public class FavoritePresenterImpl extends BasicPresenter<FavoriteContract.View>
                 .subscribe(new ApiDefaultObserver<List<TagBean>>() {
                     @Override
                     protected void onError(String message) {
-                        getView().onLoadTags(Collections.<TagBean>emptyList());
+                        getView().onLoadFailed(message);
                     }
 
                     @Override
                     protected void accept(List<TagBean> tagBeans) {
+                        tagBeans.add(0, new TagBean("全部"));
                         getView().onLoadTags(tagBeans);
                     }
                 });

@@ -20,5 +20,6 @@ public interface FavoriteContract {
 
         void onLoadTags(List<TagBean> data);
 
+        void onLoadFailed(String message);
     }
 }
