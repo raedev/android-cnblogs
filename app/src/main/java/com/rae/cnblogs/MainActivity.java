@@ -77,9 +77,9 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-//        if (BuildConfig.DEBUG) {
-//        debugLogin();
-//        }
+        if (BuildConfig.DEBUG) {
+            debugLogin();
+        }
     }
 
 
@@ -88,8 +88,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
      */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "4F523B96A57E7D0C1165E5D565C89055A98E0CBF3C432EC7006BC69E47AD5CCEFD976EC972F44EB25C5AD9398A8B9D42371694EDE1C819943A1F57137A18D43E59B0184B954F96B38D4C76577E00B3B5F55ED4A8";
-        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTNKRTDax9L0rk-chKipr_j1ObB5W50Fzow96wDJSdsvW23yuwUWKk6ei0xEuESYMSfIBCEnt08OIwCzmXpjfKLSo4T82c9KyIHsyaSElcTQDs2eJKiZQTcfhYpxCXZ2nHV2IM1wxvojMAN_-kt5HPYxahwdeXsAxcBIcZJWCB6ng_bbnUIPQc9FIKdJZwx1GtzflDi4L4AhsDdWgS_H-dwkj97fzkdDfo-UYJmPUtKbW6tmW8dSHyF4p1_xdPaZxaI9OBYDT9ZTiDVTrmPQM_1-";
+        String cookie = "5FE90D097CFB91482ACE15CCFD172395D08CD682B8C8C0B525E5D4DCCC8BE15F0B0352B53E79EB268B14E8CF84F14C5217B244B7E8C8DE7C55BCC4053AFEC35EB6F0BEF467E9DD91646C4D28EBEAD3849FEBF091";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTPAP02sPZIJTcqQlPvrtRt3ypNxuiLoZhRKsCikysmkCgLvhs3z8gmn-xxTwC8mguAg3zMcZVsMfSAVhq1OiInLG5JT8cDGjOsA5LT4ZlOju7SWXfuivJKlxVkkudJzk1EnjxbNJiilSAi-MmRwjqLyhwcCTAgUlHPljHSTRtAODNAiuXzLKTmSo6plpbWMyHU9PojakONa8JBhI84CtOgUYEqsYjQ9F01QbfG8IBkwkvwnMtKR7wzvPQj7VaFEyUrTlur_r_-JBCe_EkGV6HmX";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");
@@ -127,7 +127,7 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         // 初始化TAB
         addTab(mAdapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
         addTab(mAdapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());
-//        addTab(mAdapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newDiscoverFragment());
+        addTab(mAdapter, R.string.tab_discover, R.drawable.tab_library, AppRoute.newDiscoverFragment());
         addTab(mAdapter, R.string.tab_mine, R.drawable.tab_mine, AppRoute.newMineFragment());
 
         mViewPager.setOffscreenPageLimit(mAdapter.getCount());

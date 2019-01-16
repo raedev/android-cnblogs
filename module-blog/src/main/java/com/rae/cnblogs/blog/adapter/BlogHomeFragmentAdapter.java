@@ -40,10 +40,10 @@ public class BlogHomeFragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         CategoryBean m = mDataList.get(position);
-        if (TextUtils.equals("news", m.getType()))
-            return NewsListFragment.newInstance(m);
-        if (TextUtils.equals("kb", m.getType()))
-            return KbListFragment.newInstance(m);
+//        if (TextUtils.equals("news", m.getType()))
+//            return NewsListFragment.newInstance(m);
+//        if (TextUtils.equals("SiteHome", m.getType()))
+//            return KbListFragment.newInstance(m);
         return MultipleTypeBlogListFragment.newInstance(m);
     }
 

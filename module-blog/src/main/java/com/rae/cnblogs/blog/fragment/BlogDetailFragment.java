@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -239,6 +240,7 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onLoadDataFailed(String message) {
         UICompat.failed(getContext(), message);
+        Log.w("rae","load content failed");
         // 通知里面的Fragment处理
         mContentWebViewFragment.onLoadDataFailed(message);
     }
@@ -246,7 +248,9 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onLoadDataSuccess(BlogBean data, String jsonData) {
         // 加载网页
-        mContentWebViewFragment.loadWebData(jsonData);
+        Log.i("rae","load content success");
+        // 发送
+        mContentWebViewFragment.onLoadDataSuccess(jsonData);
     }
 
     @Override

@@ -147,7 +147,7 @@ public interface IBlogApi {
      * @param id 知识库ID
      */
     @PUT(ApiUrls.API_KB_LIKE)
-    @FormUrlEncoded
+//    @FormUrlEncoded
     @Headers({JsonBody.CONTENT_TYPE, JsonBody.XHR})
     Observable<Empty> likeKb(@Query("id") String id);
 

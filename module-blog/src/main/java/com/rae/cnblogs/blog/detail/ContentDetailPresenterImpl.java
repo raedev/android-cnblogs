@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.rae.cnblogs.ContentEntityConverter;
 import com.rae.cnblogs.basic.BasicPresenter;
@@ -342,6 +343,7 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                         String type = getView().getContentEntity().getType();
                         String content = DbFactory.getInstance().getBlog().getBlogContent(type, id);
                         if (TextUtils.isEmpty(content)) return null;
+                        Log.i("rae","读取本地内容！");
                         return content;
                     }
                 })
@@ -359,6 +361,7 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                 if (TextUtils.isEmpty(content))
                     return null;
                 updateContent(content); // 博客内容写入本地数据库
+                Log.i("rae","读取网络内容！");
                 return content;
             }
 

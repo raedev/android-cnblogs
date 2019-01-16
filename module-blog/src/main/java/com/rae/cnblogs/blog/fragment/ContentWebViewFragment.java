@@ -3,6 +3,7 @@ package com.rae.cnblogs.blog.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -69,6 +70,7 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
         super.onCreate(savedInstanceState);
         // 初始化属性操作
         mConfig = CnblogAppConfig.getInstance(getContext());
+
     }
 
     @Override
@@ -88,6 +90,12 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
         // 父接口
         if (getParentFragment() instanceof IBlogDetailFragment) {
             mBlogDetailFragment = (IBlogDetailFragment) getParentFragment();
+        }
+
+        // 加载数据
+        Bundle arguments = getArguments();
+        if (arguments != null && !TextUtils.isEmpty(arguments.getString("data"))) {
+            loadWebData(arguments.getString("data"));
         }
     }
 
@@ -156,6 +164,8 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
      */
     public void loadWebData(String webData) {
 
+        Log.i("rae", "加载网页内容拉！");
+
         mPlaceholderView.dismiss();
 
         try {
@@ -220,5 +230,14 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
     public void onFontSizeChanged() {
         initFontSize();
         reload();
+    }
+
+    /**
+     * 加载博文内容
+     *
+     * @param jsonData 数据
+     */
+    public void onLoadDataSuccess(String jsonData) {
+        this.loadWebData(jsonData);
     }
 }

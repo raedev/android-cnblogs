@@ -1,6 +1,7 @@
 package com.rae.cnblogs.blog.detail;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
@@ -37,6 +38,7 @@ public class BlogDetailPresenterImpl extends ContentDetailPresenterImpl {
                     @Override
                     public String apply(String content) {
                         updateContent(content);
+                        Log.i("rae","读取原文地址内容！");
                         return content;
                     }
                 });

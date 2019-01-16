@@ -37,18 +37,20 @@ dependencies {
 
     implementation rootProject.ext.dependencies.annotations
     implementation rootProject.ext.dependencies.appcompat
-    implementation rootProject.ext.dependencies.raeOkhttpExt
-    implementation rootProject.ext.dependencies.retrofit
+//    implementation rootProject.ext.dependencies.raeOkhttpExt
+//    implementation rootProject.ext.dependencies.retrofit
     implementation rootProject.ext.dependencies.greendao
 
-    api rootProject.ext.dependencies.rxjava
-    api rootProject.ext.dependencies.rxandroid
+
+    api 'com.antcode:sdk:1.0.0'
+//    api rootProject.ext.dependencies.rxjava
+//    api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.jsoup
-    api rootProject.ext.dependencies.retrofitRxAdapter
-    api rootProject.ext.dependencies.gson
+//    api rootProject.ext.dependencies.retrofitRxAdapter
+//    api rootProject.ext.dependencies.gson
     api rootProject.ext.dependencies.bugly
-    api(rootProject.ext.dependencies.raeSession, {
-        exclude group: 'com.android.support'
-    })
+//    api(rootProject.ext.dependencies.raeSession, {
+//        exclude group: 'com.android.support'
+//    })
 }
 

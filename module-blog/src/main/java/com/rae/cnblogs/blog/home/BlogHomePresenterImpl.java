@@ -88,34 +88,8 @@ public class BlogHomePresenterImpl extends BasicPresenter<BlogHomeContract.View>
                 hasRecommented = true;
                 item.setOrderNo(-3);
             }
-            if ("新闻".equals(name)) {
-                hasNews = true;
-                item.setOrderNo(-2);
-            }
-            if ("知识库".equals(name)) {
-                hasKb = true;
-                item.setOrderNo(-1);
-            }
         }
 
-        if (!hasKb) {
-            CategoryBean kb = new CategoryBean();
-            kb.setCategoryId("0");
-            kb.setParentId("0");
-            kb.setName("知识库");
-            kb.setType("kb");
-            kb.setOrderNo(-1);
-            data.add(kb);
-        }
-        if (!hasNews) {
-            CategoryBean news = new CategoryBean();
-            news.setCategoryId("0");
-            news.setParentId("0");
-            news.setName("新闻");
-            news.setType("news");
-            news.setOrderNo(-2);
-            data.add(news);
-        }
         if (!hasRecommented) {
             CategoryBean recommend = new CategoryBean();
             recommend.setCategoryId("-2");
