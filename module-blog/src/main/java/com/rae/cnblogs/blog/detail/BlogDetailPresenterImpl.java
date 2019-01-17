@@ -30,19 +30,8 @@ public class BlogDetailPresenterImpl extends ContentDetailPresenterImpl {
     }
 
     @Override
-    protected Observable<String> onFetchContentSource(Observable<String> local, Observable<String> network) {
-        // 数据源3： 从原文地址获取
-        Observable<String> source = mBlogApi
-                .getBlogContentSource(getView().getContentEntity().getUrl())
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String content) {
-                        updateContent(content);
-                        Log.i("rae","读取原文地址内容！");
-                        return content;
-                    }
-                });
-        return Observable.concat(local, network, source).take(1);
+    protected Observable<String> onCreateWebContentObservable(String id) {
+        return mBlogApi.getBlogContentSource(getView().getContentEntity().getUrl());
     }
 
     @Nullable

@@ -164,7 +164,7 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
      */
     public void loadWebData(String webData) {
 
-        Log.i("rae", "加载网页内容拉！");
+        Log.i("rae", "---- loadWebData");
 
         mPlaceholderView.dismiss();
 

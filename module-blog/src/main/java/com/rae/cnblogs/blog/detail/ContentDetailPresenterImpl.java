@@ -57,55 +57,137 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
 
     @Override
     protected void onStart() {
-        final ContentEntity contentEntity = getView().getContentEntity();
+        this.loadBlogLocalStatus();
+        final ContentEntity contentEntity = getView().getContentEntity(); // 内容实体
+        final BlogBean blog = ContentEntityConverter.convertToBlog(contentEntity); // 博客实体
+        Observable<String> observable; // 内容
+
+        if (isWIFI()) {
+            // 有网情况下从网络加载
+            observable = createNetworkContentObservable();
+        } else {
+            // 无网情况情况加载本地
+            observable = createLocalContentObservable();
+        }
+
+        // 无图模式处理
+        observable = withNotImageMode(observable);
+
+        // 内容转换成实体
+        Observable<BlogBean> blogObservable = observable.map(new Function<String, BlogBean>() {
+            @Override
+            public BlogBean apply(String content) {
+                blog.setContent(content);
+                return blog;
+            }
+        });
+
         // 请求内容
-        AndroidObservable.create(fetchContentSource())
-                .with(this)
-                // 离线模式下处理图片
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String content) throws Exception {
-                        // 网络不可用、WIFI情况、 关闭智能无图模式
-                        if (!networkIsOk() || isWIFI() || !mAppConfig.disableBlogImage())
-                            return content;
+        AndroidObservable.create(blogObservable).with(this).subscribe(new ApiDefaultObserver<BlogBean>() {
+            @Override
+            protected void onError(String message) {
+                getView().onLoadDataFailed(message);
+            }
 
-                        Document document = Jsoup.parse(content);
-                        Elements elements = document.select("img");
-                        for (Element element : elements) {
-                            element.attr("src", "file:///android_asset/images/placeholder.png");
-                        }
+            @Override
+            protected void accept(BlogBean content) {
+                updateLocalBlogStatus(contentEntity);
+                getView().onLoadDataSuccess(content, AppGson.toJson(content));
+            }
+        });
+    }
 
-                        return document.html();
-                    }
-                })
-                .map(new Function<String, BlogBean>() {
-                    @Override
-                    public BlogBean apply(String content) {
-                        // 从数据库查询，转换为博客对象
-                        BlogBean data = DbFactory.getInstance().getBlog().getBlog(contentEntity.getId());
-                        if (data == null) {
-                            // 没有查询到博客，可能没保存成功，或者缓存已经删除
-                            data = ContentEntityConverter.convertToBlog(contentEntity);
-                        }
-                        data.setContent(content); // 设置博客内容
-                        return data;
-                    }
-                })
-                // 没有找到博客的时候返回
-                .subscribe(new ApiDefaultObserver<BlogBean>() {
-                    @Override
-                    protected void onError(String message) {
-                        getView().onLoadDataFailed(message);
-                    }
 
+    /**
+     * 自动判断无图模式
+     */
+    private Observable<String> withNotImageMode(Observable<String> observable) {
+        return observable.map(new Function<String, String>() {
+            @Override
+            public String apply(String content) throws Exception {
+                // 网络不可用、WIFI情况、 关闭智能无图模式
+                if (!networkIsOk() || isWIFI() || !mAppConfig.disableBlogImage())
+                    return content;
+
+                Document document = Jsoup.parse(content);
+                Elements elements = document.select("img");
+                for (Element element : elements) {
+                    element.attr("src", "file:///android_asset/images/placeholder.png");
+                }
+
+                return document.html();
+            }
+        });
+    }
+
+
+    /**
+     * 读取本地的博客内容
+     *
+     * @return
+     */
+    private Observable<String> createLocalContentObservable() {
+        return Observable
+                .just(getView().getContentEntity())
+                .subscribeOn(Schedulers.newThread())
+                .map(new Function<ContentEntity, String>() {
                     @Override
-                    protected void accept(BlogBean content) {
-                        updateLocalBlogStatus(contentEntity);
-                        getView().onLoadDataSuccess(content, AppGson.toJson(content));
+                    public String apply(ContentEntity contentEntity) throws Exception {
+                        Log.i("rae", "读取本地内容！");
+                        // 根据ID和类型获取博文内容
+                        String content = DbFactory.getInstance().getBlog().getBlogContent(contentEntity.getType(), contentEntity.getId());
+                        if (TextUtils.isEmpty(content)) return null;
+                        return content;
                     }
                 });
+    }
 
-        this.loadBlogLocalStatus();
+    /**
+     * 读取网络的博客内容
+     *
+     * @return
+     */
+    private Observable<String> createNetworkContentObservable() {
+
+        /*
+         * 内容加载顺序
+         * 1. 接口获取
+         * 2. 网页获取
+         * 3. 本地获取
+         */
+        ContentEntity contentEntity = getView().getContentEntity();
+
+        // 接口获取
+        Observable<String> apiObservable = onCreateContentObservable(contentEntity.getId()).onErrorResumeNext(Observable.<String>empty());
+        // 网页获取
+        Observable<String> webObservable = onCreateWebContentObservable(contentEntity.getId()).onErrorResumeNext(Observable.<String>empty());
+        // 本地获取
+        Observable<String> localObservable = createLocalContentObservable().onErrorResumeNext(Observable.<String>empty());
+
+        // 保存到本地数据库
+        apiObservable = withSaveLocalContentObservable(apiObservable);
+        webObservable = withSaveLocalContentObservable(webObservable);
+
+        // 关联顺序
+        return Observable.concat(apiObservable, webObservable, localObservable).take(1);
+    }
+
+
+    /**
+     * 内容保存到本地
+     */
+    private Observable<String> withSaveLocalContentObservable(Observable<String> observable) {
+        return observable.map(new Function<String, String>() {
+            @Override
+            public String apply(String content) {
+                Log.i("rae", "保存内容: " + content.length());
+                // 博文内容接口也没有返回内容
+                if (TextUtils.isEmpty(content))
+                    return null;
+                updateContent(content); // 内容保存到本地数据库
+                return content;
+            }
+        });
     }
 
     /**
@@ -324,58 +406,6 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
 
     }
 
-
-    /**
-     * 请求数据源
-     */
-    private Observable<String> fetchContentSource() {
-
-        String id = getView().getContentEntity().getId();
-
-        // 数据源1： 本地数据库
-        Observable<String> local = Observable
-                .just(id)
-                .subscribeOn(Schedulers.io())
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(String id) {
-                        // 根据ID和类型获取博文内容
-                        String type = getView().getContentEntity().getType();
-                        String content = DbFactory.getInstance().getBlog().getBlogContent(type, id);
-                        if (TextUtils.isEmpty(content)) return null;
-                        Log.i("rae","读取本地内容！");
-                        return content;
-                    }
-                })
-                // 返回为空默认返回空的观察者，执行下个观察者
-                .onErrorResumeNext(Observable.<String>empty());
-
-        // 数据源2： 网络数据
-        // 根据不同的博客类型：博客、新闻、知识库来确定网络数据提供者
-        Observable<String> networkObservable = onCreateContentObservable(id);
-
-        Observable<String> network = networkObservable.map(new Function<String, String>() {
-            @Override
-            public String apply(String content) {
-                // 博文内容接口也没有返回内容
-                if (TextUtils.isEmpty(content))
-                    return null;
-                updateContent(content); // 博客内容写入本地数据库
-                Log.i("rae","读取网络内容！");
-                return content;
-            }
-
-        }).onErrorResumeNext(Observable.<String>empty());
-
-
-        return onFetchContentSource(local, network);
-    }
-
-
-    protected Observable<String> onFetchContentSource(Observable<String> local, Observable<String> network) {
-        return Observable.concat(local, network).take(1);
-    }
-
     /**
      * 异步更新博客内容
      *
@@ -422,6 +452,14 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
      */
     protected abstract Observable<String> onCreateContentObservable(String id);
 
+    /**
+     * 从原文地址获取内容
+     *
+     * @param id 内容id
+     */
+    protected Observable<String> onCreateWebContentObservable(String id) {
+        return Observable.empty();
+    }
 
     /**
      * 创建点赞的网络请求
