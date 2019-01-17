@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -106,7 +108,13 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
 
     @OnClick(R2.id.img_action_bar_more)
     public void onActionMenuMoreClick() {
-        mShareDialogFragment.show(getSupportFragmentManager(), "shareWeb");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        String tag = mShareDialogFragment.getTag();
+        if (!TextUtils.isEmpty(tag) && fragmentManager.findFragmentByTag(tag) != null) {
+            // 已经添加
+            fragmentManager.beginTransaction().remove(mShareDialogFragment).commit();
+        }
+        mShareDialogFragment.show(fragmentManager, "shareWeb");
     }
 
     public ImageView getShareView() {

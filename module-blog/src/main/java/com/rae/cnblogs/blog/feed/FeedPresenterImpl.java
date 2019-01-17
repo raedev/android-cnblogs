@@ -17,7 +17,7 @@ import java.util.List;
  * Created by dengmaohua on 2018/11/2 16:26.
  */
 public class FeedPresenterImpl extends BasicPresenter<FeedContract.View> implements FeedContract.Presenter {
-    private int mPage=1;
+    private int mPage = 1;
     private final List<UserFeedBean> mDataList = new ArrayList<>();
 
     public FeedPresenterImpl(FeedContract.View view) {
@@ -44,6 +44,7 @@ public class FeedPresenterImpl extends BasicPresenter<FeedContract.View> impleme
 
     private void loadData() {
         AndroidObservable.create(CnblogsApiFactory.getInstance(getContext()).getFriendApi().getFeeds(mPage, getView().getBlogApp()))
+                .with(this)
                 .subscribe(new ApiDefaultObserver<List<UserFeedBean>>() {
                     @Override
                     protected void onError(String message) {

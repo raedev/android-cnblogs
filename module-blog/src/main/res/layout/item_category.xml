@@ -20,17 +20,18 @@
         android:paddingRight="12dp"
         android:paddingBottom="10dp"
         android:singleLine="true"
-        android:text="@string/app_name"
+        android:text="@string/title"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/img_remove"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:contentDescription="@string/app_name"
-        android:scaleType="center"
+        android:scaleType="centerInside"
         android:src="@drawable/channel_edit_grid_item_del_icon"
-        android:tint="@color/ph3" />
+        android:tintMode="src_in"
+        android:tint="@color/black" />
 
 </RelativeLayout>

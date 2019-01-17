@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.rae.cnblogs.home.main.MainPresenterImpl;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.UserProvider;
+import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
@@ -42,6 +44,12 @@ import com.umeng.socialize.UMShareAPI;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.SchedulerSupport;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import skin.support.SkinCompatManager;
 
 @Route(path = AppRoute.PATH_APP_HOME)
@@ -99,7 +107,10 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         }
 
         // 获取用户信息
-        AndroidObservable.create(CnblogsApiFactory.getInstance(this).getUserApi().getUserInfo("393130"))
+        final IUserApi userApi = CnblogsApiFactory.getInstance(this).getUserApi();
+        Observable<UserInfoBean> userBlogAppInfo = userApi.getUserBlogAppInfo();
+        Observable<UserInfoBean> observable = userBlogAppInfo.flatMap((Function<UserInfoBean, ObservableSource<UserInfoBean>>) userInfoBean -> userApi.getUserInfo(userInfoBean.getBlogApp()).subscribeOn(Schedulers.io()));
+        AndroidObservable.create(observable)
                 .with(this)
                 .subscribe(new ApiDefaultObserver<UserInfoBean>() {
                     @Override

@@ -213,13 +213,15 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
 
     private void routeToCrop(String url) {
         Uri uri = Uri.fromFile(new File(url)); // 源头像位置
-        String fileName = String.valueOf(("cnblogs-face-cropped" + System.currentTimeMillis()).hashCode());
+        String fileName = String.valueOf(Math.abs(("cnblogs-face-cropped" + System.currentTimeMillis()).hashCode())) + ".jpg";
         Uri outputUri = Uri.fromFile(new File(getExternalCacheDir(), fileName)); // 输出头像位置
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             uri = resolveUrl(url);
             outputUri = resolveUrl(new File(getExternalCacheDir(), fileName).getPath());
         }
+
+        Log.i("Rae","路徑："+ uri);
 
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");

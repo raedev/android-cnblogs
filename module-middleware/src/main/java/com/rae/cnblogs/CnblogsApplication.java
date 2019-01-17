@@ -2,6 +2,7 @@ package com.rae.cnblogs;
 
 import android.util.Log;
 
+import com.antcode.sdk.AntCodeSDK;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.feedback.FeedbackThread;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
@@ -33,6 +34,7 @@ public class CnblogsApplication extends BasicApplication {
         DbCnblogs.init(this);
         // 用户管理
         UserProvider.init(this);
+        AntCodeSDK.init(this, "183dce1755ae94be8bd0ff7ec719e3b0");
         // LeanCloud用户反馈初始化，要在主线程
         AVOSCloud.initialize(this,
                 BuildConfig.LEAN_CLOUD_APP_ID,

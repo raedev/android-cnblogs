@@ -119,8 +119,8 @@ public class HotSearchPresenterImpl extends BasicPresenter<HotSearchContract.Vie
 
                     @Override
                     protected void accept(List<String> data) {
-                        if (Rx.getCount(data) > 8) {
-                            data = data.subList(0, 8);
+                        if (Rx.getCount(data) > 10) {
+                            data = data.subList(0, 10);
                         }
                         getView().onLoadHotSearchData(data);
 

@@ -36,6 +36,9 @@ dependencies {
     // 友盟
     api rootProject.ext.dependencies.umengCommon
     api rootProject.ext.dependencies.umengAnalytics
+    api('jp.wasabeef:glide-transformations:4.0.1', {
+        exclude group: 'om.github.bumptech.glide'
+    })
 
 //    api rootProject.ext.dependencies.umShareCore
 //    api rootProject.ext.dependencies.umShareQQ

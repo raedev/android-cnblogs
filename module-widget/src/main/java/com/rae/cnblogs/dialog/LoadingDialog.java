@@ -21,9 +21,9 @@ public class LoadingDialog extends DefaultDialog {
 
     @Override
     protected void init() {
+        super.init();
         setContentView(R.layout.dialog_loading);
         mLoadingTextView = findViewById(R.id.tv_view_loading_title);
-        super.init();
         Window window = getWindow();
         if (window != null) {
             window.setDimAmount(0);
