@@ -2,6 +2,7 @@ package com.rae.cnblogs.discover.home;
 
 import com.antcode.sdk.model.AntAdInfo;
 import com.antcode.sdk.model.AntColumnInfo;
+import com.antcode.sdk.model.AntTabInfo;
 import com.rae.cnblogs.basic.IPresenter;
 import com.rae.cnblogs.basic.IPresenterView;
 
@@ -18,5 +19,7 @@ public interface IDiscoverHomeContract {
         void onLoadAds(List<AntAdInfo> ads);
 
         void onLoadColumns(List<AntColumnInfo> columns);
+
+        void onLoadCategories(List<AntTabInfo> homeTabs);
     }
 }

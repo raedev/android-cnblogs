@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/icon_ranking"
+        android:gravity="center"
+        android:text="排行榜"
+        android:textColor="#3B3B3B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/icon_news"
+        android:gravity="center"
+        android:text="新闻"
+        android:textColor="#3B3B3B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/icon_kb"
+        android:gravity="center"
+        android:text="知识库"
+        android:textColor="#3B3B3B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/icon_question"
+        android:gravity="center"
+        android:text="博问"
+        android:textColor="#3B3B3B"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/icon_column"
+        android:gravity="center"
+        android:text="专题"
+        android:textColor="#3B3B3B"
+        android:textSize="12sp" />
+
+</LinearLayout>

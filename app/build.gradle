@@ -38,8 +38,8 @@ android {
         debug {
             minifyEnabled false
             debuggable true
-//            applicationIdSuffix '.debug'
-            signingConfig signingConfigs.release
+            applicationIdSuffix '.debug'
+//            signingConfig signingConfigs.release
         }
         release {
             minifyEnabled false

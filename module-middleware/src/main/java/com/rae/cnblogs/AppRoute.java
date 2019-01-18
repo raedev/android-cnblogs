@@ -15,12 +15,16 @@ import android.util.Log;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.rae.cnblogs.basic.ContentEntity;
+import com.rae.cnblogs.sdk.AppGson;
 import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.model.MomentMetaData;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 路由
@@ -718,5 +722,61 @@ public final class AppRoute {
      */
     public static void finish() {
         sAppActivityLifecycle.finish();
+    }
+
+    /**
+     * 根据类型自动跳转
+     *
+     * @param type 类型
+     * @param url  路径
+     * @param data 携带的数据，json格式
+     */
+    public static void autoRoute(Context context, @Nullable String type, @Nullable String url, @Nullable String data) {
+        try {
+            if (TextUtils.isEmpty(url)) {
+                Log.w("rae", "route url is empty!");
+                return;
+            }
+            // 跳网页
+            if ("url".equalsIgnoreCase(type)) {
+                AppRoute.routeToWeb(context, url);
+                return;
+            }
+            // 跳详情
+            if ("blog".equalsIgnoreCase(type) && !TextUtils.isEmpty(data)) {
+                AppRoute.routeToContentDetail(context, AppGson.get().fromJson(data, ContentEntity.class));
+                return;
+            }
+
+            // 跳通用路由
+            Postcard postcard = ARouter.getInstance().build(url);
+            if (TextUtils.isEmpty(data)) {
+                postcard.navigation(context);
+                return;
+            }
+            // 参数处理
+            JSONObject object = new JSONObject(data);
+            Iterator<String> keys = object.keys();
+            while (keys.hasNext()) {
+                String name = keys.next();
+                Object value = object.get(name);
+                if (value instanceof String)
+                    postcard = postcard.withString(name, value.toString());
+                else if (value instanceof Integer)
+                    postcard = postcard.withInt(name, (int) value);
+                else if (value instanceof Boolean)
+                    postcard = postcard.withBoolean(name, (boolean) value);
+                else if (value instanceof Long)
+                    postcard = postcard.withLong(name, (Long) value);
+                else if (value instanceof Double)
+                    postcard = postcard.withDouble(name, (Double) value);
+                else if (value instanceof Float)
+                    postcard = postcard.withFloat(name, (Float) value);
+                postcard.navigation(context);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            UICompat.failed(context, "跳转页面异常");
+        }
     }
 }

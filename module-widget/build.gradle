@@ -24,20 +24,17 @@ android {
 
 dependencies {
     annotationProcessor rootProject.ext.annotationProcessors.butterknife
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':module-resource')
     implementation rootProject.ext.dependencies.appcompat
     implementation rootProject.ext.dependencies.cardview
     implementation rootProject.ext.dependencies.butterknife
     implementation rootProject.ext.dependencies.design
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
-
     // 主题切换
     api(rootProject.ext.dependencies.skin, {
         exclude group: 'com.android.support'
     })
-
     // 主题切换-design package
     api(rootProject.ext.dependencies.skinDesign, {
         exclude group: 'com.android.support'
@@ -61,4 +58,5 @@ dependencies {
     api(rootProject.ext.dependencies.photoView, {
         exclude group: 'com.android.support'
     })
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
 }

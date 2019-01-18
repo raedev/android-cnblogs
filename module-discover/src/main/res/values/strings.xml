@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">发现模块</string>
+    <string name="article_num_format">%d讲</string>
+    <string name="sub_num_format">%d人加入学习</string>
 </resources>

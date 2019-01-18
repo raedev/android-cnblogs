@@ -106,6 +106,7 @@
     <string name="permission_granted">继续申请</string>
     <string name="feedback">意见反馈</string>
     <string name="view_now">立即查看</string>
+    <string name="view_more">查看更多</string>
     <string name="feedback_hint">请填写反馈信息</string>
     <string name="permission_request_message">博客园准备申请权限，用于博客缓存以及图片缓存，请允许申请权限。如果拒绝权限申请，部分功能将收到限制。</string>
     <string name="allow">允许申请</string>
