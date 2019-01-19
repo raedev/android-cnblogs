@@ -66,7 +66,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // init views
-        mAdapter = new DiscoverHomeAdapter(R.layout.item_discover_home_column, R.layout.item_discover_home_section, null);
+        mAdapter = new DiscoverHomeAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -128,6 +128,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         for (AntColumnInfo column : columns) {
             DiscoverItem item = new DiscoverItem(false, null);
             item.setData(column);
+            item.setItemType(DiscoverItem.TYPE_CONTENT_VERTICAL);
             data.add(item);
         }
 

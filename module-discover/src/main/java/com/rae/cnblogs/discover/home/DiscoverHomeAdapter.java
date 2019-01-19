@@ -4,30 +4,39 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.antcode.sdk.model.AntColumnInfo;
-import com.chad.library.adapter.base.BaseSectionQuickAdapter;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.discover.DiscoverItem;
 import com.rae.cnblogs.discover.R;
 
-import java.util.List;
-
-public class DiscoverHomeAdapter extends BaseSectionQuickAdapter<DiscoverItem, BaseViewHolder> {
+public class DiscoverHomeAdapter extends BaseMultiItemQuickAdapter<DiscoverItem, BaseViewHolder> {
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
-     *
-     * @param layoutResId      The layout resource id of each item.
-     * @param sectionHeadResId The section head layout id for each item
-     * @param data             A new list is created out of this one to avoid mutable list
      */
-    public DiscoverHomeAdapter(int layoutResId, int sectionHeadResId, List<DiscoverItem> data) {
-        super(layoutResId, sectionHeadResId, data);
+    public DiscoverHomeAdapter() {
+        super(null);
+        addItemType(DiscoverItem.TYPE_SESSION, R.layout.item_discover_home_section);
+        addItemType(DiscoverItem.TYPE_CONTENT_VERTICAL, R.layout.item_discover_home_column);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, DiscoverItem item) {
+
+        switch (helper.getItemViewType()) {
+            case DiscoverItem.TYPE_SESSION:
+                onBindSection(helper, item);
+                break;
+            case DiscoverItem.TYPE_CONTENT_VERTICAL:
+                onBindColumn(helper, item);
+                break;
+        }
+
+    }
+
+    private void onBindColumn(BaseViewHolder helper, DiscoverItem item) {
         AntColumnInfo data = (AntColumnInfo) item.getData();
         ImageView logoView = helper.itemView.findViewById(R.id.img_logo);
         TextView titleView = helper.itemView.findViewById(R.id.tv_title);
@@ -35,7 +44,6 @@ public class DiscoverHomeAdapter extends BaseSectionQuickAdapter<DiscoverItem, B
         TextView authorView = helper.itemView.findViewById(R.id.tv_author);
         TextView subNumView = helper.itemView.findViewById(R.id.tv_sub_num);
         TextView recommendationView = helper.itemView.findViewById(R.id.tv_recommendation);
-
         AppImageLoader.display(data.getLogo(), logoView);
         titleView.setText(data.getTitle());
         numberView.setText(numberView.getResources().getString(R.string.article_num_format, data.getArticleNum()));
@@ -44,9 +52,8 @@ public class DiscoverHomeAdapter extends BaseSectionQuickAdapter<DiscoverItem, B
         subNumView.setText(numberView.getResources().getString(R.string.sub_num_format, data.getSubnum()));
     }
 
-    @Override
-    protected void convertHead(BaseViewHolder helper, DiscoverItem item) {
-        TextView view = helper.itemView.findViewById(R.id.tv_title);
-        view.setText(item.header);
+    private void onBindSection(BaseViewHolder helper, DiscoverItem item) {
+        TextView textView = helper.itemView.findViewById(R.id.tv_title);
+        textView.setText(item.header);
     }
 }
