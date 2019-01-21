@@ -1,2 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rae.cnblogs.discover" />
+    package="com.rae.cnblogs.discover">
+
+    <application>
+        <activity
+            android:name=".AntUserAuthActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AntUserContractActivity"
+            android:label="@string/label_ant_user_contract" />
+    </application>
+</manifest>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +56,7 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
             return;
         }
 
-        mShareDialogFragment = ShareDialogFragment.newInstance(null, null, null, null);
+        mShareDialogFragment = ShareDialogFragment.newInstance(null, null, null, null, false);
         // 夜间模式显示遮罩层
         UICompat.setVisibility(mNightView, ThemeCompat.isNight());
         mWebViewFragment = getWebViewFragment(url);

@@ -32,6 +32,10 @@ import java.util.Iterator;
  */
 public final class AppRoute {
 
+    // 绑定手机号码
+    public static final String PATH_DISCOVER_USER_AUTH = "/discover/user/auth";
+    // 用户协议
+    public static final String PATH_DISCOVER_USER_CONTRACT = "/discover/user/contract";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -246,6 +250,13 @@ public final class AppRoute {
      */
     public static void routeToWeb(Context context, String url) {
         ARouter.getInstance().build(PATH_WEB).withString("url", url).navigation(context);
+    }
+
+    /**
+     * 用户协议
+     */
+    public static void routeToAntUserContract(Context context) {
+        ARouter.getInstance().build(PATH_DISCOVER_USER_CONTRACT).navigation(context);
     }
 
     /**
@@ -642,6 +653,13 @@ public final class AppRoute {
     }
 
     /**
+     * 绑定手机号码
+     */
+    public static void routeToAntUserAuth(Context context) {
+        route(context, PATH_DISCOVER_USER_AUTH);
+    }
+
+    /**
      * 浏览记录
      */
     public static void routeToHistory(Context context) {
@@ -696,6 +714,7 @@ public final class AppRoute {
                 .withString("url", url)
                 .navigation(context);
     }
+
 
     /**
      * 跳转到QQ群

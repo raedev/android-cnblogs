@@ -8,7 +8,7 @@ import com.antcode.sdk.model.AntAdInfo;
 import com.antcode.sdk.model.AntAppConfigInfo;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.rae.cnblogs.discover.AntCodeBasicPresenter;
-import com.rae.cnblogs.sdk.ApiDefaultObserver;
+import com.rae.cnblogs.discover.AntSdkDefaultObserver;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class DiscoverHomePresenterImpl extends AntCodeBasicPresenter<IDiscoverHo
     protected void onStart() {
         // load category
         mUserApi.getAppConfig().with(this)
-                .subscribe(new ApiDefaultObserver<AntAppConfigInfo>() {
+                .subscribe(new AntSdkDefaultObserver<AntAppConfigInfo>() {
                     @Override
                     protected void onError(String message) {
                     }
@@ -45,7 +45,7 @@ public class DiscoverHomePresenterImpl extends AntCodeBasicPresenter<IDiscoverHo
         // load home ads
         mAdApi.getHomePageAds()
                 .with(this)
-                .subscribe(new ApiDefaultObserver<List<AntAdInfo>>() {
+                .subscribe(new AntSdkDefaultObserver<List<AntAdInfo>>() {
                     @Override
                     protected void onError(String message) {
                     }
@@ -58,7 +58,7 @@ public class DiscoverHomePresenterImpl extends AntCodeBasicPresenter<IDiscoverHo
 
         // load home columns
 
-        mColumnApi.getHomeColumns().with(this).subscribe(new ApiDefaultObserver<List<AntColumnInfo>>() {
+        mColumnApi.getHomeColumns().with(this).subscribe(new AntSdkDefaultObserver<List<AntColumnInfo>>() {
             @Override
             protected void onError(String message) {
             }

@@ -2,4 +2,6 @@
     <string name="app_name">发现模块</string>
     <string name="article_num_format">%d讲</string>
     <string name="sub_num_format">%d人加入学习</string>
+    <string name="send_sms">发送验证码</string>
+    <string name="label_ant_user_contract">用户协议</string>
 </resources>
