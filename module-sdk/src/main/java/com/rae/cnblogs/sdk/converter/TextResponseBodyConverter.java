@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonReader;
 import com.rae.cnblogs.sdk.ApiErrorCode;
 import com.rae.cnblogs.sdk.ApiOptions;
 import com.rae.cnblogs.sdk.CnblogsApiException;
+import com.rae.cnblogs.sdk.DefaultJsonParser;
 import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.JsonParser;
 import com.rae.cnblogs.sdk.Parser;
@@ -134,6 +135,13 @@ public class TextResponseBodyConverter<T> implements Converter<ResponseBody, T> 
 
         // 交给自定义的JSON解析
         if (mJsonParser != null) {
+
+            // 解析默认类型
+            if (mJsonParser instanceof DefaultJsonParser) {
+                DefaultJsonParser<T> parser = new DefaultJsonParser<>(type);
+                return parser.parse(text);
+            }
+
             return mJsonParser.parse(text);
         }
 

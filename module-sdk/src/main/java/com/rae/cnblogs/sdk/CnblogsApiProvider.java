@@ -11,6 +11,7 @@ import com.rae.cnblogs.sdk.api.IMomentApi;
 import com.rae.cnblogs.sdk.api.INewsApi;
 import com.rae.cnblogs.sdk.api.IPostApi;
 import com.rae.cnblogs.sdk.api.IRaeServerApi;
+import com.rae.cnblogs.sdk.api.IRankingApi;
 import com.rae.cnblogs.sdk.api.ISearchApi;
 import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.converter.ConverterFactory;
@@ -124,6 +125,11 @@ public abstract class CnblogsApiProvider {
      * 获取闪存接口
      */
     public abstract IPostApi getPostApi();
+
+    /**
+     * 排行榜接口
+     */
+    public abstract IRankingApi getRankingApi();
 
     /**
      * 个人的接口

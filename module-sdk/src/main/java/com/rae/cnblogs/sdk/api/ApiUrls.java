@@ -6,11 +6,15 @@ package com.rae.cnblogs.sdk.api;
  */
 final class ApiUrls {
 
+
+    //region 博客园官方接口
+
     // 修改密码
     static final String API_USER_PASSWORD = "https://home.cnblogs.com/user/ChangPwd";
 
     // 更新头像
     static final String API_USER_AVATAR = "https://upload.cnblogs.com/avatar/crop";
+
 
     // 修改昵称
     static final String API_USER_NICKNAME = "https://home.cnblogs.com/user/ChangeDisplayName";
@@ -147,6 +151,7 @@ final class ApiUrls {
 
     // 闪存-删除
     static final String API_MOMENT_DEL = "https://ing.cnblogs.com/ajax/ing/del";
+
     // 闪存-评论删除
     static final String API_MOMENT_COMMENT_DEL = "https://ing.cnblogs.com/ajax/ing/DeleteComment";
 
@@ -171,26 +176,69 @@ final class ApiUrls {
     // 上传头像图片
     static final String API_UPLOAD_AVATAR_IMAGE = "https://upload.cnblogs.com/ImageUploader/TemporaryAvatarUpload";
 
+    // 博客园开通状态
+    static final String API_BLOG_CHECK_OPEN = "https://passport.cnblogs.com/BlogApply.aspx";
+
+    //endregion
+
+    //region RAE 博客园服务端接口
+
+    /*
+     * 该接口下面是个人服务端接口，暂不开放
+     * */
+
     // 服务端接口地址
     private static final String RAE_API_BASIC = "https://raedev.io/cnblogs/";
-
-//        public static final String RAE_API_BASIC = "http://192.168.1.7:8081/cnblogs/index.php/cnblogs/";
-    // 启动页广告
+    // 启动页
     static final String RAE_API_AD_LAUNCHER = RAE_API_BASIC + "ad/launcher";
     // 检查更新
     static final String RAE_API_CHECK_VERSION = RAE_API_BASIC + "version/{versionCode}";
+    // 热门搜索
     static final String RAE_API_SEARCH = RAE_API_BASIC + "search";
+    // 系统消息
     static final String RAE_API_MESSAGE = RAE_API_BASIC + "messages/system";
+    // 消息个数
     static final String RAE_API_MESSAGE_COUNT = RAE_API_BASIC + "messages/system/count";
     // 搜索-热搜
     static final String API_SEARCH_HOT = RAE_API_BASIC + "search/keyword/hot";
+
+    //endregion
+
+
+    //region RAE 博客园代理接口
+
+    /*
+     * 该接口下完全开放，为了优化客户端的用户体验，补充部分博客园接口的缺陷
+     * 服务器资源有限，并且没有做任何限制，请各位按需调用。
+     * 服务端抓取数据的原理同客户端，都是通过HTML解析来实现。
+     * 开源地址：https://github.com/raedev/cnblogs-gateway-sdk
+     * @author RAE
+     * @date 2019-01-29
+     * */
+
+    // 基础路径
+    private static final String RAE_CNBLOGS_BASE_URL = "http://raedev.io:8071";
+
+    // 热门搜索榜单
+    static final String RAE_CNBLOGS_RANKING_SEARCH = RAE_CNBLOGS_BASE_URL + "/ranking/search";
+    // 阅读榜单
+    static final String RAE_CNBLOGS_RANKING_READ = RAE_CNBLOGS_BASE_URL + "/ranking/read";
+    // 收藏榜单
+    static final String RAE_CNBLOGS_RANKING_FAVORITE = RAE_CNBLOGS_BASE_URL + "/ranking/favorite";
+    // 大神榜单
+    static final String RAE_CNBLOGS_RANKING_AUTHOR = RAE_CNBLOGS_BASE_URL + "/ranking/author";
+
+
+    //endregion
+
+    //region 辅助接口
 
     /**
      * 新浪短链接接口
      * https://www.douban.com/note/249723561/
      */
-    public static final String API_SINA_SHORTEN = "http://api.t.sina.com.cn/short_url/shorten.json";
+    static final String API_SINA_SHORTEN = "http://api.t.sina.com.cn/short_url/shorten.json";
 
-    // 博客园开通状态
-    public static final String API_BLOG_CHECK_OPEN = "https://passport.cnblogs.com/BlogApply.aspx";
+    //endregion
+
 }

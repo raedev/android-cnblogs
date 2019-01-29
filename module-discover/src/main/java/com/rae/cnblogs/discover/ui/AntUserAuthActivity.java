@@ -14,8 +14,8 @@ import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
-import com.rae.cnblogs.discover.auth.AntUserAuthContract;
-import com.rae.cnblogs.discover.auth.AntUserAuthPresenterImpl;
+import com.rae.cnblogs.discover.presenter.IAntUserAuthContract;
+import com.rae.cnblogs.discover.presenter.AntUserAuthPresenterImpl;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * 手机号码登录
  */
 @Route(path = AppRoute.PATH_DISCOVER_USER_AUTH)
-public class AntUserAuthActivity extends SwipeBackBasicActivity implements AntUserAuthContract.View {
+public class AntUserAuthActivity extends SwipeBackBasicActivity implements IAntUserAuthContract.View {
 
     @BindView(R2.id.tv_hello)
     TextView mHelloView;
@@ -38,7 +38,7 @@ public class AntUserAuthActivity extends SwipeBackBasicActivity implements AntUs
     @BindView(R2.id.btn_send)
     Button mSendButton;
 
-    private AntUserAuthContract.Presenter mPresenter;
+    private IAntUserAuthContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

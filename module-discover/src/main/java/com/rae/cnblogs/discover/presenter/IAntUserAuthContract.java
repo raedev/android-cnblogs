@@ -1,9 +1,9 @@
-package com.rae.cnblogs.discover.auth;
+package com.rae.cnblogs.discover.presenter;
 
 import com.rae.cnblogs.basic.IPresenter;
 import com.rae.cnblogs.basic.IPresenterView;
 
-public interface AntUserAuthContract {
+public interface IAntUserAuthContract {
 
     interface Presenter extends IPresenter {
         void send();

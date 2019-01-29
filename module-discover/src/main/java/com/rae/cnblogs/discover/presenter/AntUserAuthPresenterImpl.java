@@ -1,4 +1,4 @@
-package com.rae.cnblogs.discover.auth;
+package com.rae.cnblogs.discover.presenter;
 
 import android.support.annotation.Nullable;
 
@@ -9,13 +9,13 @@ import com.antcode.sdk.model.AntEmptyInfo;
 import com.rae.cnblogs.discover.AntCodeBasicPresenter;
 import com.rae.cnblogs.discover.AntSdkDefaultObserver;
 
-public class AntUserAuthPresenterImpl extends AntCodeBasicPresenter<AntUserAuthContract.View> implements AntUserAuthContract.Presenter {
+public class AntUserAuthPresenterImpl extends AntCodeBasicPresenter<IAntUserAuthContract.View> implements IAntUserAuthContract.Presenter {
 
     private IAntUserApi mAntUserApi;
     @Nullable
     private AntAppConfigInfo mAntAppConfigInfo;
 
-    public AntUserAuthPresenterImpl(AntUserAuthContract.View view) {
+    public AntUserAuthPresenterImpl(IAntUserAuthContract.View view) {
         super(view);
         mAntUserApi = AntCodeSDK.getInstance().getUserApi();
     }

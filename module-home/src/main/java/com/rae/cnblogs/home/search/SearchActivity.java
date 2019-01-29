@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
+import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
@@ -43,7 +44,7 @@ import butterknife.OnClick;
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
 @Route(path = AppRoute.PATH_SEARCH)
-public class SearchActivity extends BasicActivity {
+public class SearchActivity extends SwipeBackBasicActivity {
 
     @BindView(R2.id.et_search)
     EditText mSearchView;
@@ -70,6 +71,12 @@ public class SearchActivity extends BasicActivity {
         mHotSearchFragment = new HotSearchFragment();
         mSearchSuggestFragment = new SearchSuggestFragment();
         showHotSearchFragment();
+        String keyword = getIntent().getStringExtra("keyword");
+        if (!TextUtils.isEmpty(keyword)) {
+            mSearchView.setText(keyword);
+            mSearchView.setSelection(keyword.length());
+            onSearchClick();
+        }
     }
 
     @Override

@@ -9,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.umeng.analytics.MobclickAgent;
-
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -27,6 +25,19 @@ public abstract class BasicFragment extends Fragment implements IPresenterView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPageName = getClass().getSimpleName();
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            onReceiveArguments(arguments);
+        }
+    }
+
+    /**
+     * 接收参数
+     *
+     * @param arguments 参数
+     */
+    protected void onReceiveArguments(@NonNull Bundle arguments) {
+
     }
 
     @Nullable

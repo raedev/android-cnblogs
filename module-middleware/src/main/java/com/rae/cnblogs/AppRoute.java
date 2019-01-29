@@ -38,6 +38,7 @@ public final class AppRoute {
     // 用户协议
     public static final String PATH_DISCOVER_USER_CONTRACT = "/discover/user/contract";
     public static final String PATH_DISCOVER_SMS_CODE = "/discover/user/smscode";
+    public static final String PATH_DISCOVER_RANKING = "/discover/ranking/index";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -212,7 +213,7 @@ public final class AppRoute {
     // 用户详情
     public static final String PATH_PERSONAL_DETAIL = "/user/info/detail";
     public static final String PATH_ACTION_RESULT = "/middleware/action/result";
-    public  static final int REQ_CODE_ANT_LOGIN = 112;
+    public static final int REQ_CODE_ANT_LOGIN = 112;
 
     /**
      * 初始化
@@ -505,12 +506,18 @@ public final class AppRoute {
         routeToSearch(context, 3);
     }
 
+
+    private static void routeToSearch(Context context, int position) {
+        routeToSearch(context, position, null);
+    }
+
     /**
      * 搜索
      */
-    private static void routeToSearch(Context context, int position) {
+    public static void routeToSearch(Context context, int position, @Nullable String keyword) {
         ARouter.getInstance().build(PATH_SEARCH)
                 .withInt("position", position)
+                .withString("keyword", keyword)
                 .navigation(context);
     }
 

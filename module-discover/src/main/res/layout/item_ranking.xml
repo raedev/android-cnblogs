@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_divider_while_primary"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingTop="18dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="18dp">
+
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_badge_ranking"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="js面向对象"
+        android:textColor="@color/ph1"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_sub_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawableStart="@drawable/icon_hot_ranking_fire"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:text="200"
+        android:textColor="#FFD3D3D3"
+        android:textSize="12sp" />
+
+
+</LinearLayout>

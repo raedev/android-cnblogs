@@ -21,5 +21,7 @@ public @interface JsonParser {
     /**
      * JSON解析器
      */
-    Class<? extends IJsonParser> value();
+    Class<? extends IJsonParser> value() default DefaultJsonParser.class;
+
+
 }
