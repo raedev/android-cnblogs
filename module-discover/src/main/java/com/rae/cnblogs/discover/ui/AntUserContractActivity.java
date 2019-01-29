@@ -1,4 +1,4 @@
-package com.rae.cnblogs.discover;
+package com.rae.cnblogs.discover.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,10 +10,16 @@ import com.antcode.sdk.model.AntAppConfigInfo;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
+import com.rae.cnblogs.discover.AntSdkDefaultObserver;
+import com.rae.cnblogs.discover.R;
+import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.web.WebViewFragment;
 
 import butterknife.OnClick;
 
+/**
+ * 用户协议界面
+ */
 @Route(path = AppRoute.PATH_DISCOVER_USER_CONTRACT)
 public class AntUserContractActivity extends SwipeBackBasicActivity {
 

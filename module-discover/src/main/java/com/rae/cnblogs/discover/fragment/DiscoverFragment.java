@@ -1,4 +1,4 @@
-package com.rae.cnblogs.discover;
+package com.rae.cnblogs.discover.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +20,10 @@ import com.antcode.sdk.model.AntTabInfo;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.BasicFragment;
+import com.rae.cnblogs.discover.BannerImageLoader;
+import com.rae.cnblogs.discover.holder.DiscoverItem;
+import com.rae.cnblogs.discover.R;
+import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.discover.home.DiscoverHomeAdapter;
 import com.rae.cnblogs.discover.home.DiscoverHomePresenterImpl;
 import com.rae.cnblogs.discover.home.IDiscoverHomeContract;

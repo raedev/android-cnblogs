@@ -187,6 +187,12 @@ public final class UICompat {
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+    public static void showSoftInputFromWindow(@NonNull View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null)
+            imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
 
     public static void hideSoftInputFromWindow(@NonNull Activity context) {
         hideSoftInputFromWindow(context, context.getWindow().getDecorView());

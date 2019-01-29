@@ -7,7 +7,7 @@ import com.antcode.sdk.model.AntColumnInfo;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rae.cnblogs.basic.AppImageLoader;
-import com.rae.cnblogs.discover.DiscoverItem;
+import com.rae.cnblogs.discover.holder.DiscoverItem;
 import com.rae.cnblogs.discover.R;
 
 public class DiscoverHomeAdapter extends BaseMultiItemQuickAdapter<DiscoverItem, BaseViewHolder> {

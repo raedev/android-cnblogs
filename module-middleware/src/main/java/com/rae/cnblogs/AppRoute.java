@@ -34,8 +34,10 @@ public final class AppRoute {
 
     // 绑定手机号码
     public static final String PATH_DISCOVER_USER_AUTH = "/discover/user/auth";
+    public static final String PATH_DISCOVER_AUTH_RESULT = "/discover/user/result";
     // 用户协议
     public static final String PATH_DISCOVER_USER_CONTRACT = "/discover/user/contract";
+    public static final String PATH_DISCOVER_SMS_CODE = "/discover/user/smscode";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -210,6 +212,7 @@ public final class AppRoute {
     // 用户详情
     public static final String PATH_PERSONAL_DETAIL = "/user/info/detail";
     public static final String PATH_ACTION_RESULT = "/middleware/action/result";
+    public  static final int REQ_CODE_ANT_LOGIN = 112;
 
     /**
      * 初始化
@@ -257,6 +260,13 @@ public final class AppRoute {
      */
     public static void routeToAntUserContract(Context context) {
         ARouter.getInstance().build(PATH_DISCOVER_USER_CONTRACT).navigation(context);
+    }
+
+    /**
+     * 验证码
+     */
+    public static void routeToAntSmsCode(Activity context, String phone) {
+        ARouter.getInstance().build(PATH_DISCOVER_SMS_CODE).withString("phone", phone).navigation(context, REQ_CODE_ANT_LOGIN);
     }
 
     /**
@@ -657,6 +667,13 @@ public final class AppRoute {
      */
     public static void routeToAntUserAuth(Context context) {
         route(context, PATH_DISCOVER_USER_AUTH);
+    }
+
+    /**
+     * 绑定手机号码成功
+     */
+    public static void routeToAntAuthResult(Activity context, String phone) {
+        ARouter.getInstance().build(PATH_DISCOVER_AUTH_RESULT).withString("phone", phone).navigation(context, REQ_CODE_ANT_LOGIN);
     }
 
     /**

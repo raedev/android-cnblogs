@@ -1,4 +1,4 @@
-package com.rae.cnblogs.discover;
+package com.rae.cnblogs.discover.holder;
 
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
