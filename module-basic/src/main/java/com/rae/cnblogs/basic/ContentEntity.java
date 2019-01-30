@@ -120,6 +120,7 @@ public class ContentEntity implements Parcelable {
         return mCommentCount == null ? "0" : mCommentCount;
     }
 
+
     public void setCommentCount(String commentCount) {
         mCommentCount = commentCount;
     }

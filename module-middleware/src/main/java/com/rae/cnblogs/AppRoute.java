@@ -39,6 +39,12 @@ public final class AppRoute {
     public static final String PATH_DISCOVER_USER_CONTRACT = "/discover/user/contract";
     public static final String PATH_DISCOVER_SMS_CODE = "/discover/user/smscode";
     public static final String PATH_DISCOVER_RANKING = "/discover/ranking/index";
+    public static final String PATH_FRAGMENT_NEWS = "/fragment/news";
+    public static final String PATH_FRAGMENT_KB = "/fragment/kb";
+    public static final String PATH_DISCOVER_NEWS = "/discover/news/index";
+    public static final String PATH_DISCOVER_KB = "/discover/kb/index";
+    public static final String PATH_DISCOVER_BLOG_QUESTION = "/discover/question/index";
+    public static final String PATH_DISCOVER_BLOG_QUESTION_DETAIL = "/discover/question/detail";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -243,6 +249,17 @@ public final class AppRoute {
     public static void routeToContentDetail(Context context, ContentEntity entity) {
         ARouter.getInstance().build(PATH_CONTENT_DETAIL)
                 .withParcelable("entity", entity)
+                .navigation(context);
+    }
+
+    /**
+     * 博客正文界面
+     *
+     * @param url 博文路径
+     */
+    public static void routeToContentDetail(Context context, String url) {
+        ARouter.getInstance().build(PATH_CONTENT_DETAIL)
+                .withString("url", url)
                 .navigation(context);
     }
 
@@ -694,6 +711,15 @@ public final class AppRoute {
         route(context, PATH_AVATAR);
     }
 
+    /**
+     * 博问详情
+     */
+    public static void routeToQuestionDetail(Context context, String url) {
+        ARouter.getInstance().build(PATH_DISCOVER_BLOG_QUESTION_DETAIL)
+                .withString("url", url)
+                .navigation(context);
+    }
+
     public static Fragment newMineFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_MINE).navigation();
     }
@@ -711,6 +737,14 @@ public final class AppRoute {
 
     public static Fragment newHomeFragment() {
         return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_HOME).navigation();
+    }
+
+    public static Fragment newNewsFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_NEWS).navigation();
+    }
+
+    public static Fragment newKbFragment() {
+        return (Fragment) ARouter.getInstance().build(PATH_FRAGMENT_KB).navigation();
     }
 
     /**

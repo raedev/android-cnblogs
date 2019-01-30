@@ -17,7 +17,16 @@
             android:name=".ui.AntUserSmsCodeActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".ui.AntAuthResultActivity" />
+        <activity android:name=".ui.RankingActivity" />
         <activity
-            android:name=".ui.RankingActivity"/>
+            android:name=".ui.NewsActivity"
+            android:label="@string/tab_news" />
+        <activity
+            android:name=".ui.KbActivity"
+            android:label="@string/label_kb" />
+        <activity android:name=".ui.BlogQuestionActivity" />
+        <activity
+            android:name=".ui.BlogQuestionDetailActivity"
+            android:label="@string/label_question_detail" />
     </application>
 </manifest>

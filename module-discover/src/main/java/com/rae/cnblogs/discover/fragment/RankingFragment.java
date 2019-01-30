@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
@@ -39,10 +40,6 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
         fragment.setArguments(args);
         return fragment;
     }
-
-
-//    @BindView(R2.id.refresh_layout)
-//    AppLayout mRefreshLayout;
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -86,22 +83,7 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
             }
         }, mRecyclerView);
         mAdapter.setOnItemClickListener(this);
-//        mRefreshLayout.setEnabled(false);
-
-//        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mPresenter.start();
-//            }
-//        });
-
-//        mRefreshLayout.setPtrHandler(new PtrDefaultHandler() {
-//            @Override
-//            public void onRefreshBegin(PtrFrameLayout frame) {
-//                mPresenter.start();
-//            }
-//        });
-
+        mAdapter.setShowHotIcon(mType != IRankingContract.TYPE_TOP_AUTHOR);
     }
 
     @Override
@@ -117,8 +99,6 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
 
     @Override
     public void onNoMoreData() {
-//        mRefreshLayout.setRefreshing(false);
-//        mRefreshLayout.refreshComplete();
         mAdapter.loadMoreEnd();
     }
 
@@ -131,9 +111,6 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
     @Override
     public void onLoadData(List<HotSearchBean> data) {
         mAdapter.replaceData(data);
-
-//        mRefreshLayout.refreshComplete();
-//        mRefreshLayout.setRefreshing(false);
         mAdapter.loadMoreComplete();
     }
 
@@ -149,16 +126,32 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
         HotSearchBean item = mAdapter.getItem(position);
         if (item == null) return;
 
+        // 热搜点击
         if (type == IRankingContract.TYPE_HOT_SEARCH) {
             AppRoute.routeToSearch(getContext(), 0, item.getName());
         }
+        // 大神点击
+        else if (type == IRankingContract.TYPE_TOP_AUTHOR){
+            AppRoute.routeToBlogger(getContext(), item.getId());
+        }
+        else{
+            // 调整博客详情
+            AppRoute.routeToContentDetail(getContext(), item.getId());
+        }
+
 
     }
 
     private class RankingAdapter extends RaeBaseQuickAdapter<HotSearchBean, BaseViewHolder> {
 
+        private boolean showHotIcon = true;
+
         RankingAdapter(Context context) {
             super(context, R.layout.item_ranking, null);
+        }
+
+        public void setShowHotIcon(boolean showHotIcon) {
+            this.showHotIcon = showHotIcon;
         }
 
         @Override
@@ -170,6 +163,7 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) helper.itemView.getLayoutParams();
             params.topMargin = position == 0 ? QMUIDisplayHelper.dp2px(helper.itemView.getContext(), 12) : 0;
             positionView.setSelected(position < 3);
+            UICompat.setVisibility(rankingView, showHotIcon);
 
             positionView.setText(String.valueOf(position + 1));
             titleView.setText(item.getName());

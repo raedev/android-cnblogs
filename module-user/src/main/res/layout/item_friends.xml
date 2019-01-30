@@ -19,6 +19,7 @@
             android:id="@+id/img_user_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:src="@drawable/default_avatar_placeholder"
             android:scaleType="centerCrop"
             app:riv_corner_radius="48dp" />
 

@@ -85,7 +85,9 @@ public class PlaceholderView extends FrameLayout implements SkinCompatSupportabl
         mEmptyMessageView = mContentView.findViewById(R.id.tv_placeholder_empty_message);
         mRetryView = mContentView.findViewById(R.id.btn_placeholder_retry);
         mLoginBtn = mContentView.findViewById(R.id.btn_placeholder_login);
-        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
+        if (getBackground() == null) {
+            setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
+        }
     }
 
     private void initAttr(AttributeSet attrs) {

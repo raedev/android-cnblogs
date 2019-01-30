@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/default_background"
     android:fitsSystemWindows="true">
 
 
@@ -12,6 +16,7 @@
         android:layout_height="match_parent" />
 
     <RelativeLayout
+        android:id="@+id/ll_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,4 +31,37 @@
             android:src="@drawable/ic_action_bar_more" />
 
     </RelativeLayout>
-</FrameLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/pb_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:id="@+id/layout_blog_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include layout="@layout/fm_blog_detail" />
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="@style/ProgressBar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignStart="@id/tv_loading"
+            app:layout_constraintBottom_toTopOf="@+id/layout_blog_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

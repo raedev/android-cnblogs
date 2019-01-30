@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -28,6 +29,7 @@ public class BlogBean implements Parcelable {
 
     private String title;
 
+    @SerializedName(value = "url", alternate = {"sourceUrl"})
     private String url;
 
     private String avatar;
@@ -40,10 +42,11 @@ public class BlogBean implements Parcelable {
 
     private String comment;
 
+    @SerializedName(value = "views", alternate = {"readCount"})
     private String views;
 
+    @SerializedName(value = "postDate", alternate = {"createdAt"})
     private String postDate;
-
 
     private String blogApp;
 
@@ -66,6 +69,7 @@ public class BlogBean implements Parcelable {
 
     @Transient
     private List<String> mThumbList;
+
 
     public String getBlogType() {
         return blogType;
@@ -109,6 +113,8 @@ public class BlogBean implements Parcelable {
         this.likes = likes;
     }
 
+
+    @SerializedName(value = "likes", alternate = {"likeCount"})
     private String likes; // 点赞
 
     public String getTitle() {

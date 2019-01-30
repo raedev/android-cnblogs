@@ -3,6 +3,7 @@ package com.rae.cnblogs.sdk;
 import android.content.Context;
 
 import com.rae.cnblogs.sdk.api.IBlogApi;
+import com.rae.cnblogs.sdk.api.IBlogQuestionApi;
 import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.api.ICategoryApi;
 import com.rae.cnblogs.sdk.api.IFriendsApi;
@@ -80,6 +81,11 @@ public class DefaultCnblogsApiProvider extends CnblogsApiProvider {
     @Override
     public IRankingApi getRankingApi() {
         return getRetrofit().create(IRankingApi.class);
+    }
+
+    @Override
+    public IBlogQuestionApi getBlogQuestionApi() {
+        return getRetrofit().create(IBlogQuestionApi.class);
     }
 
     @Override

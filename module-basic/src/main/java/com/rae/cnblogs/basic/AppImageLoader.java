@@ -60,11 +60,11 @@ public final class AppImageLoader {
 
         GlideApp.with(view)
                 .load(url)
-                .centerCrop()
-//                .placeholder(resId)
+                .placeholder(resId)
                 .error(resId)
-                // 渐变动画
-                .transition(DrawableTransitionOptions.withCrossFade(300))
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade(300)) // 渐变动画
+                .circleCrop()
                 .into(view);
     }
 

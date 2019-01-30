@@ -2,6 +2,8 @@ package com.rae.cnblogs.blog.fragment;
 
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.blog.comm.ContentListContract;
 import com.rae.cnblogs.blog.content.KbListPresenterImpl;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
@@ -11,6 +13,7 @@ import com.rae.cnblogs.sdk.bean.CategoryBean;
  * Created by rae on 2018/5/28.
  * Copyright (c) https://github.com/raedev All rights reserved.
  */
+@Route(path = AppRoute.PATH_FRAGMENT_KB)
 public class KbListFragment extends MultipleTypeBlogListFragment {
 
     public static KbListFragment newInstance(CategoryBean category) {

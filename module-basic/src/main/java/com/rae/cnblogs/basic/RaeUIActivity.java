@@ -20,7 +20,7 @@ public class RaeUIActivity extends QMUIActivity {
     @Nullable
     Toolbar mToolbar;
 
-    TextView mTitleView;
+   protected TextView mTitleView;
 
 
     private boolean mIsTranslucentFull = true; // 是否为沉浸式

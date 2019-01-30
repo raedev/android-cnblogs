@@ -7,8 +7,11 @@
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateTint">@color/colorPrimary</item>
-        <item name="android:indeterminateTintMode">src_in</item>
+        <item name="android:indeterminateDrawable">@drawable/default_loading</item>
+        <item name="android:indeterminateDuration">800</item>
+        <item name="android:indeterminate">true</item>
+        <!--<item name="android:indeterminateTint">@color/colorPrimary</item>-->
+        <!--<item name="android:indeterminateTintMode">src_in</item>-->
     </style>
 
     <style name="AppTheme.NoTranslucent">

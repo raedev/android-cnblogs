@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,8 +45,6 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.SchedulerSupport;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import skin.support.SkinCompatManager;
@@ -96,8 +93,8 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
      */
     protected void debugLogin() {
         String url = "cnblogs.com";
-        String cookie = "5FE90D097CFB91482ACE15CCFD172395D08CD682B8C8C0B525E5D4DCCC8BE15F0B0352B53E79EB268B14E8CF84F14C5217B244B7E8C8DE7C55BCC4053AFEC35EB6F0BEF467E9DD91646C4D28EBEAD3849FEBF091";
-        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTPAP02sPZIJTcqQlPvrtRt3ypNxuiLoZhRKsCikysmkCgLvhs3z8gmn-xxTwC8mguAg3zMcZVsMfSAVhq1OiInLG5JT8cDGjOsA5LT4ZlOju7SWXfuivJKlxVkkudJzk1EnjxbNJiilSAi-MmRwjqLyhwcCTAgUlHPljHSTRtAODNAiuXzLKTmSo6plpbWMyHU9PojakONa8JBhI84CtOgUYEqsYjQ9F01QbfG8IBkwkvwnMtKR7wzvPQj7VaFEyUrTlur_r_-JBCe_EkGV6HmX";
+        String cookie = "C2233C4672D83E274F6855541518CC64234BD6435653410D10A93ABB386C31B2B63EE915CF0AC11A146D49479D241685754BC7481AA33380CE931CC08BCA790A3AA8920B0E9B9DA29C27396EA39EADC6BE41B2BD";
+        String netCoreCookie = "CfDJ8KlpyPucjmhMuZTmH8oiYTPjMAwCN7fxq5On8NXtiPH1soexQVsDurq8ZBzzXvihmlBKmvwaktbI6djETf6LcgZnKGemP8imggPdaBBKh7D0g3fbKKDt429KA5YxhsxSbqLbs8O6D_Thom1ErthQWCVIUXGFwfbeL4o-CShi0B3wswbHC-f3EG33pINydgs6XTdCQ2I1lP-PpV53K-1KEpcjNO4Dj3pxyKPbxlGWCPY3WOlzywS0D8DFhGyoM8QnTcqhHEFfDXlgilOhIk2BGLS0jj-W-GWW9Mjc2gI9_qsm-h8E-moxc_c_iOprixSVmg";
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         cookieManager.setCookie(url, ".CNBlogsCookie=" + cookie + "; domain=.cnblogs.com; path=/; HttpOnly");

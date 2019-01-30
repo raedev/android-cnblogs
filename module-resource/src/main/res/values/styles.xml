@@ -60,6 +60,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TabTextAppearance.Question">
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="TabTextAppearance.Simple">
         <item name="android:textSize">14sp</item>
     </style>
@@ -137,8 +141,9 @@
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateDrawable">@drawable/progress_bar_loading</item>
+        <item name="android:indeterminateDrawable">@drawable/default_loading</item>
         <item name="android:indeterminateDuration">800</item>
+        <item name="android:indeterminate">true</item>
     </style>
 
     <style name="AppToolBar" parent="Widget.AppCompat.Toolbar">

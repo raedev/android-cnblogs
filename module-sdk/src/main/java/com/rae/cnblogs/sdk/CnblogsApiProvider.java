@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.rae.cnblogs.sdk.api.IBlogApi;
+import com.rae.cnblogs.sdk.api.IBlogQuestionApi;
 import com.rae.cnblogs.sdk.api.IBookmarksApi;
 import com.rae.cnblogs.sdk.api.ICategoryApi;
 import com.rae.cnblogs.sdk.api.IFriendsApi;
@@ -130,6 +131,11 @@ public abstract class CnblogsApiProvider {
      * 排行榜接口
      */
     public abstract IRankingApi getRankingApi();
+
+    /**
+     * 博问接口
+     */
+    public abstract IBlogQuestionApi getBlogQuestionApi();
 
     /**
      * 个人的接口

@@ -253,8 +253,6 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                        // 如果没有这张封面图就展示默认的
-                        createAvatarGlide(url).into(mBackgroundView);
                         return true;
                     }
 
@@ -267,6 +265,8 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
                         return false;
                     }
                 })
+                // 如果没有这张封面图就展示默认的
+//                .error(createAvatarGlide(url))
                 .into(mBackgroundView);
     }
 

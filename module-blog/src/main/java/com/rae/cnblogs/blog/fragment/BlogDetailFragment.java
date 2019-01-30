@@ -242,7 +242,9 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         UICompat.failed(getContext(), message);
         Log.w("rae","load content failed");
         // 通知里面的Fragment处理
-        mContentWebViewFragment.onLoadDataFailed(message);
+//        mContentWebViewFragment.onLoadDataFailed(message);
+        // 加载错误直接加载原文链接
+        mContentWebViewFragment.loadUrl(mContentEntity.getUrl());
     }
 
     @Override

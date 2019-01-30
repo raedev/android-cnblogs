@@ -227,7 +227,13 @@ final class ApiUrls {
     static final String RAE_CNBLOGS_RANKING_FAVORITE = RAE_CNBLOGS_BASE_URL + "/ranking/favorite";
     // 大神榜单
     static final String RAE_CNBLOGS_RANKING_AUTHOR = RAE_CNBLOGS_BASE_URL + "/ranking/author";
+    // 博客详情
+    static final String RAE_CNBLOGS_BLOG_DETAIL = RAE_CNBLOGS_BASE_URL + "/blog/detail";
 
+    // 博问 - 未解决
+    static final String RAE_CNBLOGS_QUESTION_UNSOLVED = RAE_CNBLOGS_BASE_URL + "/question/unsolved";
+    static final String RAE_CNBLOGS_QUESTION_HIGH_SCORE = RAE_CNBLOGS_BASE_URL + "/question/highscore";
+    static final String RAE_CNBLOGS_QUESTION_MY = RAE_CNBLOGS_BASE_URL + "/question/my";
 
     //endregion
 

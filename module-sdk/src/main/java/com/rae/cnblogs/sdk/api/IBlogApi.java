@@ -37,12 +37,24 @@ public interface IBlogApi {
 
     /**
      * 根据链接获取博客信息
+     * 已过期，参考{@link #getBlogDetail(String)}
      *
      * @param url 链接地址
      */
     @GET
     @Parser(BlogInfoParser.class)
+    @Deprecated
     Observable<BlogBean> getBlog(@Url String url);
+
+    /**
+     * 根据链接获取博客信息
+     *
+     * @param url 链接地址
+     */
+    @GET(ApiUrls.RAE_CNBLOGS_BLOG_DETAIL)
+    @JsonParser
+    Observable<BlogBean> getBlogDetail(@Query("url") String url);
+
 
     /**
      * 获取分类博客列表

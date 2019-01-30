@@ -158,15 +158,15 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
         ContentEntity contentEntity = getView().getContentEntity();
 
         // 接口获取
-        Observable<String> apiObservable = onCreateContentObservable(contentEntity.getId()).onErrorResumeNext(Observable.<String>empty());
+        Observable<String> apiObservable = onCreateContentObservable(contentEntity.getId());
         // 网页获取
-        Observable<String> webObservable = onCreateWebContentObservable(contentEntity.getId()).onErrorResumeNext(Observable.<String>empty());
+        Observable<String> webObservable = onCreateWebContentObservable(contentEntity.getId());
         // 本地获取
         Observable<String> localObservable = createLocalContentObservable().onErrorResumeNext(Observable.<String>empty());
 
         // 保存到本地数据库
-        apiObservable = withSaveLocalContentObservable(apiObservable);
-        webObservable = withSaveLocalContentObservable(webObservable);
+        apiObservable = withSaveLocalContentObservable(apiObservable).onErrorResumeNext(Observable.<String>empty());
+        webObservable = withSaveLocalContentObservable(webObservable).onErrorResumeNext(Observable.<String>empty());
 
         // 关联顺序
         return Observable.concat(apiObservable, webObservable, localObservable).take(1);
@@ -180,10 +180,10 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
         return observable.map(new Function<String, String>() {
             @Override
             public String apply(String content) {
-                Log.i("rae", "保存内容: " + content.length());
+//                Log.i("rae", "保存内容: " + content.length());
                 // 博文内容接口也没有返回内容
                 if (TextUtils.isEmpty(content))
-                    return null;
+                    throw new NullPointerException("blog content is null!");
                 updateContent(content); // 内容保存到本地数据库
                 return content;
             }

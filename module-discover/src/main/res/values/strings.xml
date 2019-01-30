@@ -4,4 +4,6 @@
     <string name="sub_num_format">%d人加入学习</string>
     <string name="send_sms">发送验证码</string>
     <string name="label_ant_user_contract">用户协议</string>
+    <string name="label_kb">知识库</string>
+    <string name="label_question_detail">博问详情</string>
 </resources>
