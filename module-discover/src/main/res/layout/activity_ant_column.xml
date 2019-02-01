@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.FitWindowsLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.FitWindowsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_divider"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp" />
 
     <android.support.v7.widget.FitWindowsFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FF4A90E2"
-        android:fitsSystemWindows="true">
-
+        android:layout_height="56dp"
+        android:background="@drawable/tab_channel_background">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -20,7 +26,7 @@
             android:layout_gravity="center"
             android:fitsSystemWindows="true"
             android:gravity="center"
-            app:navigationIcon="@drawable/icon_back_white"
+            app:navigationIcon="@drawable/icon_back_black"
             app:titleTextColor="@android:color/transparent" />
 
         <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
@@ -29,26 +35,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="52dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="52dp"
+            android:layout_marginBottom="4dp"
             app:tabBackground="@android:color/transparent"
             app:tabGravity="center"
-            app:tabIndicatorColor="#FFFFFF"
+            app:tabIndicatorColor="@color/black"
             app:tabIndicatorHeight="4dp"
             app:tabIndicatorRadius="2dp"
-            app:tabIndicatorWidth="20dp"
+            app:tabIndicatorWidth="14dp"
             app:tabMinWidth="52dp"
             app:tabMode="fixed"
             app:tabPaddingEnd="12dp"
             app:tabPaddingStart="12dp"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@style/TabTextAppearance.Question"
-            app:tabTextColor="#99FFFFFF" />
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextAppearance="@style/TabTextAppearance.Ant"
+            app:tabTextColor="#FF4A4A4A" />
 
     </android.support.v7.widget.FitWindowsFrameLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-</android.support.v7.widget.FitWindowsLinearLayout>
+</android.support.v7.widget.FitWindowsFrameLayout>

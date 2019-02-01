@@ -2,6 +2,7 @@ package com.rae.cnblogs.sdk;
 
 import android.text.TextUtils;
 
+import java.net.ConnectException;
 import java.net.UnknownHostException;
 
 import io.reactivex.observers.DisposableObserver;
@@ -39,6 +40,10 @@ public abstract class ApiDefaultObserver<T> extends DisposableObserver<T> {
                 return;
             }
             onError(ex);
+            return;
+        }
+        if (e instanceof ConnectException) {
+            onError("无法连接到服务器");
             return;
         }
         if (e instanceof HttpException) {

@@ -15,22 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
-        android:id="@+id/ll_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/ll_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
 
-        <com.rae.cnblogs.widget.RaeSkinImageView
-            android:id="@+id/img_action_bar_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:scaleType="center"
-            android:src="@drawable/ic_action_bar_more" />
+        <!--<com.rae.cnblogs.widget.RaeSkinImageView-->
+            <!--android:id="@+id/img_action_bar_more"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:scaleType="center"-->
+            <!--android:src="@drawable/ic_action_bar_more" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/pb_loading"

@@ -22,12 +22,13 @@ import com.rae.cnblogs.discover.RaeBaseQuickAdapter;
 import com.rae.cnblogs.discover.presenter.IRankingContract;
 import com.rae.cnblogs.discover.presenter.RankingPresenterImpl;
 import com.rae.cnblogs.sdk.bean.HotSearchBean;
+import com.rae.cnblogs.widget.ITopScrollable;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class RankingFragment extends BasicFragment implements IRankingContract.View, BaseQuickAdapter.OnItemClickListener {
+public class RankingFragment extends BasicFragment implements IRankingContract.View, BaseQuickAdapter.OnItemClickListener, ITopScrollable {
 
 
     /**
@@ -131,15 +132,19 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
             AppRoute.routeToSearch(getContext(), 0, item.getName());
         }
         // 大神点击
-        else if (type == IRankingContract.TYPE_TOP_AUTHOR){
+        else if (type == IRankingContract.TYPE_TOP_AUTHOR) {
             AppRoute.routeToBlogger(getContext(), item.getId());
-        }
-        else{
+        } else {
             // 调整博客详情
             AppRoute.routeToContentDetail(getContext(), item.getId());
         }
 
 
+    }
+
+    @Override
+    public void scrollToTop() {
+        UICompat.scrollToTop(mRecyclerView);
     }
 
     private class RankingAdapter extends RaeBaseQuickAdapter<HotSearchBean, BaseViewHolder> {

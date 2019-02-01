@@ -20,7 +20,6 @@ import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppMobclickAgent;
-import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.home.R;
 import com.rae.cnblogs.home.fragment.HotSearchFragment;
@@ -31,6 +30,7 @@ import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.event.SearchEvent;
 import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.friends.ISearchListener;
+import com.rae.session.SessionManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -127,6 +127,13 @@ public class SearchActivity extends SwipeBackBasicActivity {
     @OnClick(R2.id.btn_search)
     public void onSearchClick() {
         UICompat.hideSoftInputFromWindow(this);
+        // 检查登录状态
+        if (!SessionManager.getDefault().isLogin()) {
+            UICompat.toastInCenter(getContext(), "请登录后再搜索");
+            AppRoute.routeToLogin(getContext());
+            return;
+        }
+
         if (mSearchView.length() > 0)
             // 执行搜索
             performSearch(mSearchView.getText().toString());

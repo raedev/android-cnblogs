@@ -16,6 +16,7 @@ import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.discover.fragment.RankingFragment;
 import com.rae.cnblogs.discover.presenter.IRankingContract;
+import com.rae.cnblogs.widget.RaeScrollTopTabListener;
 import com.rae.session.SessionManager;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class RankingActivity extends SwipeBackBasicActivity {
         mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.addOnTabSelectedListener(new RaeScrollTopTabListener(mViewPager, getSupportFragmentManager()));
     }
 
 

@@ -64,6 +64,10 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="TabTextAppearance.Ant">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="TabTextAppearance.Simple">
         <item name="android:textSize">14sp</item>
     </style>

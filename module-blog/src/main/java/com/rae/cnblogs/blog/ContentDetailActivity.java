@@ -20,7 +20,6 @@ import com.rae.cnblogs.sdk.bean.BlogBean;
 import com.umeng.socialize.UMShareAPI;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 内容详情
@@ -86,17 +85,17 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
     }
 
 
-    /**
-     * 点击更多按钮弹出分享
-     */
-    @OnClick(R2.id.img_action_bar_more)
-    public void onActionMenuMoreClick() {
-        BlogDetailFragment fragment = (BlogDetailFragment) getSupportFragmentManager().findFragmentByTag("detail");
-        if (fragment != null) {
-            // 传到Fragment处理
-            fragment.onActionMenuMoreClick();
-        }
-    }
+//    /**
+//     * 点击更多按钮弹出分享
+//     */
+//    @OnClick(R2.id.img_action_bar_more)
+//    public void onActionMenuMoreClick() {
+////        BlogDetailFragment fragment = (BlogDetailFragment) getSupportFragmentManager().findFragmentByTag("detail");
+////        if (fragment != null) {
+////            // 传到Fragment处理
+////            fragment.onActionMenuMoreClick();
+////        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

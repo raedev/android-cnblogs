@@ -47,35 +47,6 @@ public class BlogQuestionDetailActivity extends SwipeBackBasicActivity {
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             enablePullToRefresh(false);
-
-//            // 获取HTML，重新解析
-//            if (getArguments() == null) return;
-//            String url = getArguments().getString("webUrl");
-//            if (url == null) return;
-//            AndroidObservable.create(Observable.just(url).subscribeOn(Schedulers.io())
-//                    .map(new Function<String, String>() {
-//                        @Override
-//                        public String apply(String url) throws Exception {
-//                            Document document = Jsoup.parse(new URL(url), 30000);
-//                            return document.toString();
-//                        }
-//                    }))
-//                    .with(this)
-//                    .subscribe(new ApiDefaultObserver<String>() {
-//                        @Override
-//                        protected void onError(String message) {
-//                            UICompat.failed(getContext(), message);
-//                        }
-//
-//                        @Override
-//                        protected void accept(String html) {
-//                            getWebView().loadData(html, "text/html", "GBK2312");
-//                            UICompat.toastInCenter(getContext(), "重新加载网页啦！");
-//                        }
-//                    });
-
         }
-
-
     }
 }

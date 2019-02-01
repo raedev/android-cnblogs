@@ -240,7 +240,7 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onLoadDataFailed(String message) {
         UICompat.failed(getContext(), message);
-        Log.w("rae","load content failed");
+        Log.w("rae", "load content failed");
         // 通知里面的Fragment处理
 //        mContentWebViewFragment.onLoadDataFailed(message);
         // 加载错误直接加载原文链接
@@ -250,7 +250,7 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     @Override
     public void onLoadDataSuccess(BlogBean data, String jsonData) {
         // 加载网页
-        Log.i("rae","load content success");
+        Log.i("rae", "load content success");
         // 发送
         mContentWebViewFragment.onLoadDataSuccess(jsonData);
     }
@@ -397,6 +397,7 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
     /**
      * 点击更多按钮弹出分享
      */
+    @OnClick(R2.id.ll_content_share)
     public void onActionMenuMoreClick() {
         String url = mContentEntity.getUrl();
         String title = mContentEntity.getTitle();

@@ -13,22 +13,17 @@ import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
-import com.rae.cnblogs.discover.fragment.BlogQuestionFragment;
-import com.rae.cnblogs.discover.presenter.IBlogQuestionContract;
+import com.rae.cnblogs.discover.fragment.AntColumnFragment;
+import com.rae.cnblogs.discover.presenter.IAntColumnContract;
 import com.rae.cnblogs.widget.RaeScrollTopTabListener;
-import com.rae.session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * 博问列表
- */
-@Route(path = AppRoute.PATH_DISCOVER_BLOG_QUESTION)
-public class BlogQuestionActivity extends SwipeBackBasicActivity {
-
+@Route(path = AppRoute.PATH_DISCOVER_COLUMN)
+public class AntColumnActivity extends SwipeBackBasicActivity {
     @BindView(R2.id.view_pager)
     ViewPager mViewPager;
 
@@ -38,30 +33,25 @@ public class BlogQuestionActivity extends SwipeBackBasicActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blog_question);
+        setContentView(R.layout.activity_ant_column);
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setAdapter(new QuestionAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new AntColumnAdapter(getSupportFragmentManager()));
         mRaeTabLayout.setupWithViewPager(mViewPager);
         mRaeTabLayout.addOnTabSelectedListener(new RaeScrollTopTabListener(mViewPager, getSupportFragmentManager()));
         setTitle(" ");
     }
 
-    class QuestionAdapter extends FragmentPagerAdapter {
+    class AntColumnAdapter extends FragmentPagerAdapter {
         private final List<String> titles = new ArrayList<>();
         private final List<Integer> mTypes = new ArrayList<>();
 
-        QuestionAdapter(FragmentManager fm) {
+        AntColumnAdapter(FragmentManager fm) {
             super(fm);
-            titles.add("待解决");
-            mTypes.add(IBlogQuestionContract.TYPE_UNSOLVED);
+            titles.add("推荐");
+            mTypes.add(IAntColumnContract.TYPE_RECOMMEND);
 
-            titles.add("高分题");
-            mTypes.add(IBlogQuestionContract.TYPE_HIGH_SCORE);
-
-            if (SessionManager.getDefault().isLogin()) {
-                titles.add("我的");
-                mTypes.add(IBlogQuestionContract.TYPE_MY);
-            }
+            titles.add("我的");
+            mTypes.add(IAntColumnContract.TYPE_MY);
         }
 
         @Nullable
@@ -72,7 +62,7 @@ public class BlogQuestionActivity extends SwipeBackBasicActivity {
 
         @Override
         public Fragment getItem(int i) {
-            return BlogQuestionFragment.newInstance(mTypes.get(i));
+            return AntColumnFragment.newInstance(mTypes.get(i));
         }
 
         @Override

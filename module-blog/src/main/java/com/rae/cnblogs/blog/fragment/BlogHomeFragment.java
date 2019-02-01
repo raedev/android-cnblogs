@@ -23,7 +23,6 @@ import com.rae.cnblogs.blog.R2;
 import com.rae.cnblogs.blog.adapter.BlogHomeFragmentAdapter;
 import com.rae.cnblogs.blog.home.BlogHomeContract;
 import com.rae.cnblogs.blog.home.BlogHomePresenterImpl;
-import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.widget.ITopScrollable;
 
@@ -232,10 +231,6 @@ public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.
 
     @OnClick(R2.id.fl_search)
     public void onSearchClick() {
-        if (UserProvider.getInstance().isLogin()) {
-            AppRoute.routeToSearch(getContext());
-        } else {
-            AppRoute.routeToLogin(getContext());
-        }
+        AppRoute.routeToSearch(getContext());
     }
 }

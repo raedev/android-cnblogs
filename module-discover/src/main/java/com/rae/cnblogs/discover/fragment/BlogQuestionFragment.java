@@ -24,6 +24,7 @@ import com.rae.cnblogs.discover.presenter.BlogQuestionPresenterImpl;
 import com.rae.cnblogs.discover.presenter.IBlogQuestionContract;
 import com.rae.cnblogs.sdk.bean.BlogQuestionBean;
 import com.rae.cnblogs.widget.AppLayout;
+import com.rae.cnblogs.widget.ITopScrollable;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class BlogQuestionFragment extends BasicFragment implements IBlogQuestionContract.View {
+public class BlogQuestionFragment extends BasicFragment implements ITopScrollable, IBlogQuestionContract.View {
 
     @BindView(R2.id.refresh_layout)
     AppLayout mAppLayout;
@@ -118,6 +119,7 @@ public class BlogQuestionFragment extends BasicFragment implements IBlogQuestion
     public void onEmptyData(String msg) {
         mAppLayout.refreshComplete();
         mAdapter.loadMoreComplete();
+        mAdapter.showEmpty(msg);
         onNoMoreData();
     }
 
@@ -131,6 +133,15 @@ public class BlogQuestionFragment extends BasicFragment implements IBlogQuestion
     @Override
     public void onLoginExpired() {
         // 不处理
+    }
+
+    @Override
+    public void scrollToTop() {
+        if (!mRecyclerView.canScrollVertically(-1)) {
+            mAppLayout.autoRefresh();
+            return;
+        }
+        UICompat.scrollToTop(mRecyclerView);
     }
 
     class BlogQuestionViewHolder extends BaseViewHolder {

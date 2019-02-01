@@ -31,8 +31,8 @@
             android:id="@+id/tv_edit_comment"
             android:layout_width="160dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/bg_write_comment"
             android:gravity="start|center"
             android:paddingLeft="21dp"
@@ -113,6 +113,21 @@
                     android:layout_height="32dp"
                     android:scaleType="center"
                     android:src="@drawable/ic_favorite" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_content_share"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.rae.cnblogs.widget.ImageLoadingView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_share_small" />
 
             </LinearLayout>
 

@@ -45,6 +45,8 @@ public final class AppRoute {
     public static final String PATH_DISCOVER_KB = "/discover/kb/index";
     public static final String PATH_DISCOVER_BLOG_QUESTION = "/discover/question/index";
     public static final String PATH_DISCOVER_BLOG_QUESTION_DETAIL = "/discover/question/detail";
+    public static final String PATH_DISCOVER_COLUMN = "/discover/column/index";
+    public static final String PATH_DISCOVER_COLUMN_DETAIL = "/discover/column/detail";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -711,12 +713,25 @@ public final class AppRoute {
         route(context, PATH_AVATAR);
     }
 
+    public static void routeToAntColumn(Context context) {
+        route(context, PATH_DISCOVER_COLUMN);
+    }
+
     /**
      * 博问详情
      */
     public static void routeToQuestionDetail(Context context, String url) {
         ARouter.getInstance().build(PATH_DISCOVER_BLOG_QUESTION_DETAIL)
                 .withString("url", url)
+                .navigation(context);
+    }
+
+    /**
+     * 详情
+     */
+    public static void routeToAntColumnDetail(Context context, int id) {
+        ARouter.getInstance().build(PATH_DISCOVER_COLUMN_DETAIL)
+                .withInt("id", id)
                 .navigation(context);
     }
 

@@ -17,13 +17,16 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.antcode.sdk.model.AntAdInfo;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.antcode.sdk.model.AntTabInfo;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.loadmore.LoadMoreView;
+import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.discover.BannerImageLoader;
-import com.rae.cnblogs.discover.holder.DiscoverItem;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
+import com.rae.cnblogs.discover.holder.DiscoverItem;
 import com.rae.cnblogs.discover.home.DiscoverHomeAdapter;
 import com.rae.cnblogs.discover.home.DiscoverHomePresenterImpl;
 import com.rae.cnblogs.discover.home.IDiscoverHomeContract;
@@ -71,6 +74,15 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         super.onActivityCreated(savedInstanceState);
         // init views
         mAdapter = new DiscoverHomeAdapter();
+        mAdapter.setEnableLoadMore(true);
+        LoadMoreView loadMoreView = new SimpleLoadMoreView();
+        mAdapter.setLoadMoreView(loadMoreView);
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+
+            }
+        }, mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -81,6 +93,23 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         });
         initTabs();
         mPresenter.start();
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                DiscoverItem item = mAdapter.getItem(position);
+                if (item == null) return;
+                int viewType = item.getItemType();
+                // 查看更多
+                if (viewType == DiscoverItem.TYPE_SESSION) {
+                    AppRoute.routeToAntColumn(view.getContext());
+                }
+                Object data = item.getData();
+                if (data instanceof AntColumnInfo) {
+                    AppRoute.routeToAntColumnDetail(view.getContext(), ((AntColumnInfo) data).getId());
+                }
+            }
+        });
     }
 
     private void initTabs() {
@@ -136,10 +165,8 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             data.add(item);
         }
 
-        mAdapter.setNewData(data);
-
-
-        mAdapter.notifyDataSetChanged();
+        mAdapter.replaceData(data);
+        mAdapter.loadMoreEnd();
     }
 
     @Override

@@ -127,24 +127,30 @@ public final class UICompat {
     /**
      * 滚动到顶部
      */
-    public static void scrollToTop(RecyclerView recyclerView) {
+    public static void scrollToTop(final RecyclerView recyclerView) {
         if (recyclerView == null) return;
-
-
         //先从RecyclerView的LayoutManager中获取第一项和最后一项的Position
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        if (layoutManager == null) return;
         int firstItem = layoutManager.findFirstVisibleItemPosition();
         int lastItem = layoutManager.findLastVisibleItemPosition();
         int visibleCount = lastItem - firstItem;
 
-        // 已经处于顶部
-        if (firstItem <= 1) {
-            return;
-        }
+//        // 已经处于顶部
+//        if (firstItem <= 1) {
+//            return;
+//        }
 
         // 超过一屏
         if (lastItem > visibleCount) {
-            layoutManager.scrollToPosition(visibleCount + 3);
+            recyclerView.scrollToPosition(visibleCount + 3);
+            recyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.smoothScrollToPosition(0);
+                }
+            }, 50);// 避免发生错位
+            return;
         }
 
         recyclerView.smoothScrollToPosition(0);

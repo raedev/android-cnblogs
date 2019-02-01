@@ -70,4 +70,9 @@ public abstract class RaeBaseQuickAdapter<T, K extends BaseViewHolder> extends B
         mPlaceholderView.loading();
     }
 
+    public void showEmpty(String message) {
+        if (mData != null) mData.clear();
+        mPlaceholderView.empty(message);
+        notifyDataSetChanged();
+    }
 }
