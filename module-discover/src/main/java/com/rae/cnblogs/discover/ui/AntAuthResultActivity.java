@@ -2,6 +2,7 @@ package com.rae.cnblogs.discover.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -22,6 +23,8 @@ public class AntAuthResultActivity extends SwipeBackBasicActivity {
 
     @BindView(R2.id.tv_hello)
     TextView mMessageView;
+    @BindView(R2.id.btn_send)
+    Button mButton;
 
 
     @Override
@@ -30,9 +33,9 @@ public class AntAuthResultActivity extends SwipeBackBasicActivity {
         setContentView(R.layout.activity_ant_auth_result);
         setTitle(" ");
         String phone = getIntent().getStringExtra("phone");
-        mMessageView.setText(String.format("恭喜%s，登录成功！", phone));
-        UICompat.fadeIn(mMessageView, 2500);
+        mMessageView.setText(String.format("欢迎 %s", phone));
         UICompat.scaleIn(mMessageView);
+        UICompat.scaleIn(mButton);
     }
 
     @OnClick(R2.id.btn_send)

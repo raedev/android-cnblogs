@@ -12,7 +12,7 @@
     <color name="transparent">#00000000</color>
     <color name="navBar">@color/white</color>
     <color name="dividerPrimary">#b2b2b2</color>
-    <color name="dividerColor">#F1F1F1</color>
+    <color name="dividerColor">#FFDDDDDD</color>
     <color name="ph1">#2d2d2d</color>
     <color name="ant_h1">#3b3b3b</color>
     <color name="ant_hint">#FF878C97</color>

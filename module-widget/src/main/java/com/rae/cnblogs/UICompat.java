@@ -187,6 +187,11 @@ public final class UICompat {
         return fm.findFragmentByTag("android:switcher:" + viewPager.getId() + ":" + viewPager.getCurrentItem());
     }
 
+    @Nullable
+    public static Fragment findFragment(FragmentManager fm, ViewPager viewPager, int index) {
+        return fm.findFragmentByTag("android:switcher:" + viewPager.getId() + ":" + index);
+    }
+
     public static void hideSoftInputFromWindow(@NonNull Context context, @NonNull View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null)

@@ -21,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.discover.BannerImageLoader;
@@ -75,8 +76,6 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         // init views
         mAdapter = new DiscoverHomeAdapter();
         mAdapter.setEnableLoadMore(true);
-        LoadMoreView loadMoreView = new SimpleLoadMoreView();
-        mAdapter.setLoadMoreView(loadMoreView);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -102,7 +101,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
                 int viewType = item.getItemType();
                 // 查看更多
                 if (viewType == DiscoverItem.TYPE_SESSION) {
-                    AppRoute.routeToAntColumn(view.getContext());
+                    AppRoute.routeToAntColumn(view.getContext(), 1);
                 }
                 Object data = item.getData();
                 if (data instanceof AntColumnInfo) {
@@ -136,7 +135,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    AntAdInfo adInfo = ads.get(position);
+                    AntAdInfo adInfo = ads.get(position % ads.size());
                     AppRoute.autoRoute(getContext(), adInfo.getType(), adInfo.getUrl(), adInfo.getData());
                 }
             });
@@ -147,6 +146,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             mBanner = banner;
         }
 
+        UICompat.setVisibility(mBanner, ads.size() > 0);
         mBanner.setImages(ads).start();
     }
 

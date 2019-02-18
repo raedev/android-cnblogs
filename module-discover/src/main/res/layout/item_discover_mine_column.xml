@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/item_divider_while_primary"
+    android:orientation="horizontal"
+    android:paddingBottom="20dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_logo"
+        android:layout_width="110dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_discover_column_card"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_placeholder_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="4dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Python之路"
+            android:textColor="@color/ant_h1"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_article_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_text_badge"
+                android:paddingStart="5dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="2dp"
+                android:text="18讲"
+                android:textColor="#FF9B9B9B"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_text_badge"
+                android:paddingStart="5dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="2dp"
+                android:text="金角大王·知名博主"
+                android:textColor="#FF9B9B9B"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_recommendation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:lineSpacingMultiplier="1.2"
+            android:text="--"
+            android:textColor="#FF878C97"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author" />
+
+        <TextView
+            android:id="@+id/tv_sub_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="--人订阅"
+            android:textColor="#FF9B9B9B"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

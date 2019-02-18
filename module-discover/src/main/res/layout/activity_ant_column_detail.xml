@@ -1,98 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_blogger_blur"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.v7.widget.FitWindowsFrameLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:paddingStart="6dp"
-        android:paddingEnd="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:gravity="center"
-            app:navigationIcon="@drawable/icon_back_white" />
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-        <ImageView
-            android:layout_width="wrap_content"
+            <!--底图-->
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_blogger_blur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--黑色遮罩层-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#3C000000" />
+
+
+            <!--返回-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:gravity="center"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/icon_back_white">
+
+                <!--分享-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/icon_share" />
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <!--标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="1dp"
+                    android:text="Android开发高手课"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:id="@+id/tv_sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Android开发高手课"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/icon_share" />
-    </android.support.v7.widget.FitWindowsFrameLayout>
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="1dp"
-        android:text="Android开发高手课"
-        android:textColor="#FFFFFFFF"
-        android:textSize="21sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_sub_title"
-        app:layout_constraintStart_toStartOf="parent" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
 
-    <TextView
-        android:id="@+id/tv_sub_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        android:text="Android开发高手课"
-        android:textColor="#FFFFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_logo"
-        app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/tv_article_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-    <LinearLayout
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_article_num"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tv_article_num"
+                    android:text="讲"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_article_num"
+                    android:text="总讲数"
+                    android:textColor="#FF9B9B9B"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#FFF0F0F0" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_sub_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_sub_num"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tv_sub_num"
+                    android:text="人"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_sub_num"
+                    android:text="订阅数"
+                    android:textColor="#FF9B9B9B"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo">
+        android:src="@color/dividerPrimary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="43"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="讲"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="讲"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -22,6 +22,10 @@ import java.util.List;
 
 import butterknife.BindView;
 
+
+/**
+ * 专栏列表
+ */
 @Route(path = AppRoute.PATH_DISCOVER_COLUMN)
 public class AntColumnActivity extends SwipeBackBasicActivity {
     @BindView(R2.id.view_pager)
@@ -34,11 +38,16 @@ public class AntColumnActivity extends SwipeBackBasicActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ant_column);
+        setTitle(" ");
+
+        AntColumnAdapter adapter = new AntColumnAdapter(getSupportFragmentManager());
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setAdapter(new AntColumnAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(adapter);
         mRaeTabLayout.setupWithViewPager(mViewPager);
         mRaeTabLayout.addOnTabSelectedListener(new RaeScrollTopTabListener(mViewPager, getSupportFragmentManager()));
-        setTitle(" ");
+
+        int position = getIntent().getIntExtra("position", 0);
+        mViewPager.setCurrentItem(position);
     }
 
     class AntColumnAdapter extends FragmentPagerAdapter {
@@ -47,11 +56,11 @@ public class AntColumnActivity extends SwipeBackBasicActivity {
 
         AntColumnAdapter(FragmentManager fm) {
             super(fm);
-            titles.add("推荐");
-            mTypes.add(IAntColumnContract.TYPE_RECOMMEND);
-
             titles.add("我的");
             mTypes.add(IAntColumnContract.TYPE_MY);
+
+            titles.add("推荐");
+            mTypes.add(IAntColumnContract.TYPE_RECOMMEND);
         }
 
         @Nullable
@@ -62,12 +71,14 @@ public class AntColumnActivity extends SwipeBackBasicActivity {
 
         @Override
         public Fragment getItem(int i) {
-            return AntColumnFragment.newInstance(mTypes.get(i));
+            Integer type = mTypes.get(i);
+            return AntColumnFragment.newInstance(type);
         }
 
         @Override
         public int getCount() {
             return titles.size();
         }
+
     }
 }

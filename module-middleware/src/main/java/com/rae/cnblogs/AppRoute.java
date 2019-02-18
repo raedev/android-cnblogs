@@ -713,8 +713,10 @@ public final class AppRoute {
         route(context, PATH_AVATAR);
     }
 
-    public static void routeToAntColumn(Context context) {
-        route(context, PATH_DISCOVER_COLUMN);
+    public static void routeToAntColumn(Context context, int position) {
+        ARouter.getInstance().build(PATH_DISCOVER_COLUMN)
+                .withInt("position", position)
+                .navigation(context);
     }
 
     /**

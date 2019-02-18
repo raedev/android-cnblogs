@@ -14,6 +14,9 @@ import butterknife.ButterKnife;
 
 public class AntColumnHolder {
 
+    public static int TYPE_NORMAL = 0;
+    public static int TYPE_MINE = 1;
+
     @BindView(R2.id.img_logo)
     ImageView logoView;
     @BindView(R2.id.tv_title)
@@ -27,13 +30,24 @@ public class AntColumnHolder {
     @BindView(R2.id.tv_recommendation)
     TextView recommendationView;
 
+    private int itemType;
+
 
     public AntColumnHolder(BaseViewHolder holder) {
+        this(holder, TYPE_NORMAL);
+    }
+
+    public AntColumnHolder(BaseViewHolder holder, int itemType) {
         ButterKnife.bind(this, holder.itemView);
+        this.itemType = itemType;
     }
 
     public void bindData(AntColumnInfo data) {
-        AppImageLoader.display(data.getLogo(), logoView);
+        if (itemType == TYPE_MINE) {
+            AppImageLoader.display(data.getAvatar(), logoView);
+        } else {
+            AppImageLoader.display(data.getLogo(), logoView);
+        }
         titleView.setText(data.getTitle());
         numberView.setText(numberView.getResources().getString(R.string.article_num_format, data.getArticleNum()));
         authorView.setText(String.format("%s %s", data.getAntAuthor().getNickname(), data.getAntAuthor().getTitle()));

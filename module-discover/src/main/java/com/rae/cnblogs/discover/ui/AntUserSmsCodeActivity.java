@@ -19,6 +19,8 @@ import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.widget.CodeEditText;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.ObservableSource;
@@ -59,7 +61,7 @@ public class AntUserSmsCodeActivity extends SwipeBackBasicActivity implements Co
         mMessageView.setText("正在校验，请稍后...");
         mCodeEditText.setEnabled(false);
 
-        // 校验
+        // 校验Token
         mUserApi.getToken(mPhoneNumber, text.toString())
                 .with(this)
                 .flatMap(new Function<AntTokenInfo, ObservableSource<AntUserInfo>>() {
@@ -89,6 +91,8 @@ public class AntUserSmsCodeActivity extends SwipeBackBasicActivity implements Co
                         AntSessionManager.getDefault().setUser(antUserInfo);
                         AppRoute.routeToAntAuthResult(AntUserSmsCodeActivity.this, antUserInfo.getMobile());
                         setResult(Activity.RESULT_OK);
+                        // 通知
+                        EventBus.getDefault().post(antUserInfo);
                         finish();
                     }
                 });

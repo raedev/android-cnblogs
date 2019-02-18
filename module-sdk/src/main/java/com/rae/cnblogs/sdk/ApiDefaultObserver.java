@@ -108,6 +108,6 @@ public abstract class ApiDefaultObserver<T> extends DisposableObserver<T> {
     protected abstract void accept(T t);
 
     protected void onEmpty(T t) {
-        onError("没有数据");
+        onError("暂无数据");
     }
 }

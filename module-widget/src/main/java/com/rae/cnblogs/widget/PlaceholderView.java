@@ -332,4 +332,15 @@ public class PlaceholderView extends FrameLayout implements SkinCompatSupportabl
             mContentView.setOnClickListener(l);
     }
 
+    @Override
+    public void setBackgroundColor(int color) {
+        super.setBackgroundColor(color);
+        mContentView.setBackgroundColor(color);
+    }
+
+    @Override
+    public void setBackgroundResource(int resid) {
+        super.setBackgroundResource(resid);
+        mContentView.setBackgroundResource(resid);
+    }
 }

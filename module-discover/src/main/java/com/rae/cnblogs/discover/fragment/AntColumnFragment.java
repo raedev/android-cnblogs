@@ -4,14 +4,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.antcode.sdk.model.AntColumnInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
@@ -27,6 +30,8 @@ import butterknife.BindView;
 public class AntColumnFragment extends BasicFragment implements IAntColumnContract.View {
 
     private int mType;
+    @Nullable
+    private AntLoginPlaceHolderFragment mLoginFragment;
 
     public static AntColumnFragment newInstance(int type) {
 
@@ -42,6 +47,9 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
 
     @BindView(R2.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
+
+    @BindView(R2.id.placeholder)
+    FrameLayout mPlaceholderLayout;
 
     AntColumnAdapter mAdapter;
 
@@ -67,7 +75,8 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAdapter = new AntColumnAdapter(getContext(), R.layout.item_discover_home_column);
+        int itemLayoutId = mType == IAntColumnContract.TYPE_MY ? R.layout.item_discover_mine_column : R.layout.item_discover_home_column;
+        mAdapter = new AntColumnAdapter(getContext(), itemLayoutId);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -94,6 +103,15 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.destroy();
+            mPresenter = null;
+        }
+    }
+
+    @Override
     public int getType() {
         return mType;
     }
@@ -113,14 +131,35 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
 
     @Override
     public void onLoadData(List<AntColumnInfo> data) {
+        dismissLogin();
         mRefreshLayout.setRefreshing(false);
         mAdapter.loadMoreComplete();
         mAdapter.replaceData(data);
     }
 
+    private void dismissLogin() {
+        UICompat.setVisibility(mPlaceholderLayout, false);
+    }
+
     @Override
     public void onLoginExpired() {
-        // 显示登录提示
+        UICompat.setVisibility(mPlaceholderLayout, true);
+        mRefreshLayout.setRefreshing(false);
+        mAdapter.dismissLoading();
+
+        // 登录失败，切换Fragment显示
+        if (mLoginFragment == null) {
+            mLoginFragment = AntLoginPlaceHolderFragment.newInstance();
+        }
+
+        if (mLoginFragment != null) {
+            getChildFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .replace(R.id.placeholder, mLoginFragment)
+                    .commitNow();
+        }
+
     }
 
 
@@ -131,8 +170,15 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
         }
 
         @Override
+        protected void initView(Context context) {
+            super.initView(context);
+            mPlaceholderView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        }
+
+        @Override
         protected void convert(BaseViewHolder helper, AntColumnInfo item) {
-            AntColumnHolder holder = new AntColumnHolder(helper);
+            int itemType = getLayoutId() == R.layout.item_discover_mine_column ? AntColumnHolder.TYPE_MINE : AntColumnHolder.TYPE_NORMAL;
+            AntColumnHolder holder = new AntColumnHolder(helper, itemType);
             holder.bindData(item);
         }
     }

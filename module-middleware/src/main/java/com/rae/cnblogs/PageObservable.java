@@ -74,38 +74,57 @@ public abstract class PageObservable<T> {
         this.mView.onNoMoreData();
     }
 
+
     protected void onLoadData(int page) {
         AndroidObservable
                 .create(onCreateObserver(page))
                 .with(mProvider)
-                .subscribe(new ApiDefaultObserver<List<T>>() {
-                    protected void onError(String message) {
-                        if (mView == null) return;
-                        if (mPage > PageObservable.startPageIndex) {
-                            mView.onNoMoreData();
-                        } else {
-                            mView.onEmptyData(message);
-                        }
-                    }
+                .subscribe(createObserver());
+    }
 
-                    protected void onEmpty(List<T> data) {
-                        this.onError("暂无记录");
-                    }
+    /**
+     * 创建回调监听
+     */
+    protected ApiDefaultObserver<List<T>> createObserver() {
+        return new ApiDefaultObserver<List<T>>() {
+            protected void onError(String message) {
+                notifyError(message);
+            }
 
-                    protected void accept(List<T> data) {
-                        if (mView == null) return;
-                        if (Rx.isEmpty(data)) {
-                            this.onEmpty(data);
-                        } else {
-                            complete(data);
-                        }
-                    }
+            protected void accept(List<T> data) {
+                notifyData(data);
+            }
 
-                    protected void onLoginExpired() {
-                        if (mView == null) return;
-                        mView.onLoginExpired();
-                    }
-                });
+            protected void onLoginExpired() {
+                notifyLoginExpired();
+            }
+        };
+    }
+
+    /**
+     * 通知错误消息
+     */
+    protected void notifyError(String message) {
+        if (mView == null) return;
+        if (mPage > PageObservable.startPageIndex) {
+            mView.onNoMoreData();
+        } else {
+            mView.onEmptyData(message);
+        }
+    }
+
+    protected void notifyData(List<T> data) {
+        if (mView == null) return;
+        if (Rx.isEmpty(data)) {
+            notifyError("暂无数据");
+        } else {
+            complete(data);
+        }
+    }
+
+    protected void notifyLoginExpired() {
+        if (mView == null) return;
+        mView.onLoginExpired();
     }
 
     protected abstract Observable<List<T>> onCreateObserver(int page);
