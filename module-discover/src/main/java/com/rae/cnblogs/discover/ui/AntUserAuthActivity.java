@@ -3,7 +3,8 @@ package com.rae.cnblogs.discover.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,8 +15,8 @@ import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
-import com.rae.cnblogs.discover.presenter.IAntUserAuthContract;
 import com.rae.cnblogs.discover.presenter.AntUserAuthPresenterImpl;
+import com.rae.cnblogs.discover.presenter.IAntUserAuthContract;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,11 +48,20 @@ public class AntUserAuthActivity extends SwipeBackBasicActivity implements IAntU
         setTitle(" ");
         mPresenter = new AntUserAuthPresenterImpl(this);
         mPresenter.start();
-        mPhoneView.addTextChangedListener(new PhoneNumberFormattingTextWatcher() {
+        mPhoneView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                super.onTextChanged(s, start, before, count);
                 mSendButton.setEnabled(s.length() > 12);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
