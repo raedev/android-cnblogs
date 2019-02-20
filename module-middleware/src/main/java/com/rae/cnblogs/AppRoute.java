@@ -733,7 +733,7 @@ public final class AppRoute {
      */
     public static void routeToAntColumnDetail(Context context, int id) {
         ARouter.getInstance().build(PATH_DISCOVER_COLUMN_DETAIL)
-                .withInt("id", id)
+                .withString("id", String.valueOf(id))
                 .navigation(context);
     }
 

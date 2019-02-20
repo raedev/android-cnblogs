@@ -58,7 +58,7 @@
         android:imeActionLabel="@string/send"
         android:imeOptions="actionGo"
         android:inputType="phone"
-        android:maxLength="13"
+        android:maxLength="11"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:singleLine="true"

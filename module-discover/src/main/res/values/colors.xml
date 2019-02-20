@@ -2,4 +2,5 @@
 <resources>
     <color name="ant_color_primary">#FFFB9C00</color>
     <color name="ant_color_press">#E08C01</color>
+    <color name="ant_color_desc">#FF878C97</color>
 </resources>

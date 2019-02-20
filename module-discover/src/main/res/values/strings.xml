@@ -6,5 +6,7 @@
     <string name="label_ant_user_contract">用户协议</string>
     <string name="label_kb">知识库</string>
     <string name="label_question_detail">博问详情</string>
-    <string name="subscribe_now">加入学习</string>
+    <string name="subscribe_now">立即订阅</string>
+    <string name="view_category">查看目录</string>
+    <string name="subscribe_success">订阅成功</string>
 </resources>

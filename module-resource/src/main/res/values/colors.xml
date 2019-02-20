@@ -16,6 +16,7 @@
     <color name="ph1">#2d2d2d</color>
     <color name="ant_h1">#3b3b3b</color>
     <color name="ant_hint">#FF878C97</color>
+    <color name="ant_divider_color">#FFF6F6F6</color>
     <color name="ph2">#595959</color>
     <color name="moment_author">#576b95</color>
     <color name="ph3">#FF919191</color>

@@ -56,7 +56,7 @@ public class AntUserAuthActivity extends SwipeBackBasicActivity implements IAntU
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mSendButton.setEnabled(s.length() > 12);
+                mSendButton.setEnabled(s.length() >= 11);
             }
 
             @Override

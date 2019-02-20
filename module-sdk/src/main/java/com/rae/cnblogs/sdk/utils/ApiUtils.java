@@ -258,4 +258,8 @@ public final class ApiUtils {
         }
         return text;
     }
+
+    public static String formatNumber(int articleNum) {
+        return String.valueOf(articleNum);
+    }
 }

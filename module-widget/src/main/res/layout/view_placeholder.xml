@@ -103,7 +103,6 @@
 
         <ProgressBar
             android:id="@+id/pb_loading"
-            style="@style/ProgressBar"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:indeterminateDuration="1500" />

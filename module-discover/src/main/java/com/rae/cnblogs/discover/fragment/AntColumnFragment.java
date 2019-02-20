@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.discover.R;
@@ -93,6 +94,15 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
                 mPresenter.loadMore();
             }
         }, mRecyclerView);
+
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                AntColumnInfo item = mAdapter.getItem(position);
+                if (item == null) return;
+                AppRoute.routeToAntColumnDetail(view.getContext(), item.getId());
+            }
+        });
 
     }
 
