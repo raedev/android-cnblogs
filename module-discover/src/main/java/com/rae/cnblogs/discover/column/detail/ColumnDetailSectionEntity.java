@@ -12,10 +12,28 @@ public class ColumnDetailSectionEntity implements MultiItemEntity {
 
     private String content;
 
+    private boolean enableTopDivider;
+    private boolean enableBottomDivider;
+
     public String getTitle() {
         return title;
     }
 
+    public boolean isEnableTopDivider() {
+        return enableTopDivider;
+    }
+
+    public void setEnableTopDivider(boolean enableTopDivider) {
+        this.enableTopDivider = enableTopDivider;
+    }
+
+    public boolean isEnableBottomDivider() {
+        return enableBottomDivider;
+    }
+
+    public void setEnableBottomDivider(boolean enableBottomDivider) {
+        this.enableBottomDivider = enableBottomDivider;
+    }
 
     public String getContent() {
         return content;

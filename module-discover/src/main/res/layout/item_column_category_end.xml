@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_send"
+        android:id="@+id/btn_catalog"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginStart="62dp"
@@ -23,10 +23,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:background="@color/ant_divider_color" />
 
 
 </LinearLayout>

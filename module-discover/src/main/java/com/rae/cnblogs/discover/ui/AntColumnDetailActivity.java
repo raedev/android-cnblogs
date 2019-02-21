@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.antcode.sdk.AntSessionManager;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.antcode.sdk.model.AntIntroArticlesInfo;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
@@ -114,6 +115,18 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
                 }
             }
         });
+
+        // 点击事件
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                // 查看目录大纲图片
+                if (view.getId() == R.id.btn_catalog && mAdapter.getColumnInfo() != null) {
+                    AppRoute.routeToImagePreview(getContext(), mAdapter.getColumnInfo().getOutlineImgOriginal());
+                }
+            }
+        });
+
         mPresenter.start();
     }
 
@@ -149,8 +162,19 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
         // 头部数据
         data.add(new ColumnDetailHeaderEntity(columnInfo));
 
-        // 区块数据
+        // 课程简介
         data.add(new ColumnDetailSectionEntity("课程简介", columnInfo.getIntro()));
+
+        // 作者介绍
+        if (columnInfo.getAntAuthor() != null && !TextUtils.isEmpty(columnInfo.getAntAuthor().getIntro())) {
+            data.add(new ColumnDetailSectionEntity("作者简介", columnInfo.getAntAuthor().getIntro()));
+        }
+
+        // 适合人群
+        if (!TextUtils.isEmpty(columnInfo.getConsumer())) {
+            data.add(new ColumnDetailSectionEntity("适合人群", columnInfo.getConsumer()));
+        }
+
 
         // -----------------   目录解析 开始 --------------------- //
 
@@ -179,17 +203,23 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
             if (TextUtils.isEmpty(parentId)) continue;
 //             找到一级目录，然后添加到子列表中
             ColumnDetailCatalogEntity entity = mRootCatalogMap.get(parentId);
-//            ColumnDetailCatalogEntity entity = mRootCatalogMap.get("1");
             if (entity == null) continue;
             ColumnDetailCatalogEntity levelEntity = new ColumnDetailCatalogEntity(1, ColumnDetailCatalogEntity.TYPE_LEVEL_1, article);
             entity.addSubItem(levelEntity);
         }
-        data.add(new ColumnDetailCatalogEntity(0, ColumnDetailCatalogEntity.TYPE_LEVEL_END, null));
+        if (!TextUtils.isEmpty(columnInfo.getOutlineImgOriginal())) {
+            data.add(new ColumnDetailCatalogEntity(0, ColumnDetailCatalogEntity.TYPE_LEVEL_END, null));
+        }
 
         // -----------------   目录解析 结束 --------------------- //
 
+
         // 订阅须知
-        data.add(new ColumnDetailSectionEntity("订阅须知", columnInfo.getNotice()));
+        ColumnDetailSectionEntity subEntity = new ColumnDetailSectionEntity("订阅须知", columnInfo.getNotice());
+        subEntity.setEnableTopDivider(true);
+        data.add(subEntity);
+
+
         mAdapter.setNewData(data);
         mBottomLayout.setVisibility(View.VISIBLE);
 
@@ -237,10 +267,14 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     }
 
+    @Override
+    public void onColumnSubscribe(boolean subscribe) {
+        UICompat.setVisibility(mBottomLayout, !subscribe);
+    }
+
     @OnClick(R2.id.btn_sub)
     public void onSubscribeClick() {
         if (!AntSessionManager.getDefault().isLogin()) {
-            UICompat.failed(this, "请登录后再订阅");
             AppRoute.routeToAntUserAuth(this);
             return;
         }

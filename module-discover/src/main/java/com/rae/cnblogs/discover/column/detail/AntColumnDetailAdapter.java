@@ -56,7 +56,17 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
             case ColumnDetailCatalogEntity.TYPE_LEVEL_1:
                 bindRootLevel1View(helper, (ColumnDetailCatalogEntity) item);
                 break;
+            case ColumnDetailCatalogEntity.TYPE_LEVEL_END:
+                bindCatalogView(helper, (ColumnDetailCatalogEntity) item);
+                break;
         }
+    }
+
+    /**
+     * 绑定目录视图
+     */
+    private void bindCatalogView(BaseViewHolder helper, ColumnDetailCatalogEntity item) {
+        helper.addOnClickListener(R.id.btn_catalog);
     }
 
     /**
@@ -77,6 +87,8 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
     private void bindSectionView(BaseViewHolder helper, ColumnDetailSectionEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
         helper.setText(R.id.tv_desc, item.getContent());
+        helper.setVisible(R.id.view_divider_top, item.isEnableTopDivider());
+        helper.setVisible(R.id.view_divider_bottom, item.isEnableBottomDivider());
     }
 
     /**

@@ -30,5 +30,8 @@ public interface IAntColumnDetailContract {
 
         // 订阅成功
         void onSubscribeSuccess();
+
+        // 专栏是否订阅
+        void onColumnSubscribe(boolean subscribe);
     }
 }

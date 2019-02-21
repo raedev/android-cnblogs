@@ -36,6 +36,22 @@ public class AntColumnDetailPresenterImpl extends AntCodeBasicPresenter<IAntColu
                 getView().onLoadColumnDetail(columnInfo);
             }
         });
+
+        // 查询是否已经订阅
+        mColumnApi.getUserColumnDetail(columnId)
+                .with(this)
+                .subscribe(new AntSdkDefaultObserver<AntColumnInfo>() {
+                    @Override
+                    protected void onError(String message) {
+                        // 不处理
+                        getView().onColumnSubscribe(false);
+                    }
+
+                    @Override
+                    protected void accept(AntColumnInfo antColumnInfo) {
+                        getView().onColumnSubscribe(true);
+                    }
+                });
     }
 
     @Override
