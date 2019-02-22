@@ -58,6 +58,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
     private Banner mBanner;
     private ViewGroup mTabLayout;
     private int mCurrentBannerPosition;
+    private List<AntAdInfo> mAdInfoList;
 
     @Override
     protected int getLayoutId() {
@@ -117,7 +118,8 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
     }
 
     @Override
-    public void onLoadAds(final List<AntAdInfo> ads) {
+    public void onLoadAds(List<AntAdInfo> ads) {
+        mAdInfoList = ads;
         mRefreshLayout.setRefreshing(false);
 
         if (mBanner == null) {
@@ -135,7 +137,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             banner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    AntAdInfo adInfo = ads.get(position % ads.size());
+                    AntAdInfo adInfo = mAdInfoList.get(position % mAdInfoList.size());
                     AppRoute.autoRoute(getContext(), adInfo.getType(), adInfo.getUrl(), adInfo.getData());
                 }
             });
@@ -147,6 +149,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         }
 
         UICompat.setVisibility(mBanner, ads.size() > 0);
+
         mBanner.setImages(ads).start();
     }
 

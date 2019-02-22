@@ -9,4 +9,7 @@
     <string name="subscribe_now">立即订阅</string>
     <string name="view_category">查看目录</string>
     <string name="subscribe_success">订阅成功</string>
+    <string name="study_now">立即学习</string>
+    <string name="format_article_updated">已更新%d篇文章</string>
+    <string name="unsubscribe_success">取消订阅成功</string>
 </resources>

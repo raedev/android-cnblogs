@@ -87,6 +87,10 @@ public final class UICompat {
         view.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
+    public static void loading(Context context) {
+        loading(context, context.getString(R.string.loading));
+    }
+
     public static LoadingDialog loading(Context context, String msg) {
         LoadingDialog dialog;
         if (sDialogWeakReference == null || sDialogWeakReference.get() == null) {

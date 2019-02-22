@@ -4,73 +4,90 @@ import android.support.annotation.Nullable;
 
 import com.antcode.sdk.AntCodeSDK;
 import com.antcode.sdk.IAntColumnApi;
+import com.antcode.sdk.model.AntArticleInfo;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.antcode.sdk.model.AntEmptyInfo;
 import com.rae.cnblogs.discover.AntCodeBasicPresenter;
+import com.rae.cnblogs.discover.AntPageObservable;
 import com.rae.cnblogs.discover.AntSdkDefaultObserver;
 import com.rae.cnblogs.discover.SubscribeColumnMessage;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class AntColumnDetailPresenterImpl extends AntCodeBasicPresenter<IAntColumnDetailContract.View> implements IAntColumnDetailContract.Presenter {
+import java.util.List;
+
+import io.reactivex.Observable;
+
+public class AntUserColumnDetailPresenterImpl extends AntCodeBasicPresenter<IAntUserColumnDetailContract.View> implements IAntUserColumnDetailContract.Presenter {
 
     private final IAntColumnApi mColumnApi;
+
     @Nullable
     private AntColumnInfo mColumnInfo;
 
-    public AntColumnDetailPresenterImpl(IAntColumnDetailContract.View view) {
+    private AntPageObservable<AntArticleInfo> mPageObservable;
+
+    public AntUserColumnDetailPresenterImpl(IAntUserColumnDetailContract.View view) {
         super(view);
         AntCodeSDK antCodeSDK = AntCodeSDK.getInstance();
         mColumnApi = antCodeSDK.getColumnApi();
+        mPageObservable = new AntPageObservable<AntArticleInfo>(view, this) {
+            @Override
+            protected Observable<List<AntArticleInfo>> onCreateObserver(int page) {
+                final String columnId = getView().getColumnId();
+                return mColumnApi.getColumnArticles(columnId, page);
+            }
+        };
     }
 
     @Override
     protected void onStart() {
         final String columnId = getView().getColumnId();
-        mColumnApi.getColumnDetail(columnId).with(this).subscribe(new AntSdkDefaultObserver<AntColumnInfo>() {
+        mColumnApi.getUserColumnDetail(columnId).with(this).subscribe(new AntSdkDefaultObserver<AntColumnInfo>() {
             @Override
             protected void onError(String message) {
                 getView().onLoadDataError(message);
-                getView().onColumnSubscribe(false);
             }
 
             @Override
             protected void accept(AntColumnInfo columnInfo) {
                 mColumnInfo = columnInfo;
-                getView().onColumnSubscribe(columnInfo.isSubscribe());
                 getView().onLoadColumnDetail(columnInfo);
             }
+
+            @Override
+            protected void onLoginExpired() {
+                super.onLoginExpired();
+                getView().onLoginExpired();
+            }
         });
+    }
 
 
+    @Override
+    public void loadData() {
+        mPageObservable.start();
     }
 
     @Override
-    public void subscribe() {
-        if (mColumnInfo == null) {
-            getView().onSubscribeError("数据尚未加载完毕，请稍后再试");
-            return;
-        }
-        mColumnApi.subscribe(String.valueOf(mColumnInfo.getId()))
+    public void loadMore() {
+        mPageObservable.loadMore();
+    }
+
+    @Override
+    public void unsubscribe() {
+        mColumnApi.unsubscribe(getView().getColumnId())
                 .with(this)
                 .subscribe(new AntSdkDefaultObserver<AntEmptyInfo>() {
                     @Override
                     protected void onError(String message) {
-                        getView().onSubscribeError(message);
-                        getView().onColumnSubscribe(false);
+                        getView().onUnsubscribeError(message);
                     }
 
                     @Override
                     protected void accept(AntEmptyInfo antEmptyInfo) {
                         EventBus.getDefault().post(new SubscribeColumnMessage(getView().getColumnId()));
-                        getView().onSubscribeSuccess();
-                        getView().onColumnSubscribe(true);
-                    }
-
-                    @Override
-                    protected void onLoginExpired() {
-                        super.onLoginExpired();
-                        getView().onLoginExpired();
+                        getView().onUnsubscribeSuccess();
                     }
                 });
     }

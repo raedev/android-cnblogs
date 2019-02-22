@@ -27,8 +27,11 @@
         <activity android:name=".ui.BlogQuestionActivity" />
         <activity
             android:name=".ui.BlogQuestionDetailActivity"
-            android:label="@string/label_question_detail"/>
+            android:label="@string/label_question_detail" />
         <activity android:name=".ui.AntColumnActivity" />
-        <activity android:name=".ui.AntColumnDetailActivity" />
+        <activity
+            android:name=".ui.AntColumnDetailActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".ui.AntUserColumnDetailActivity" />
     </application>
 </manifest>

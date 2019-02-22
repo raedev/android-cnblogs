@@ -100,7 +100,11 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 AntColumnInfo item = mAdapter.getItem(position);
                 if (item == null) return;
-                AppRoute.routeToAntColumnDetail(view.getContext(), item.getId());
+                if (getType() == IAntColumnContract.TYPE_MY) {
+                    AppRoute.routeToAntUserColumnDetail(view.getContext(), item.getId());
+                } else {
+                    AppRoute.routeToAntColumnDetail(view.getContext(), item.getId());
+                }
             }
         });
 

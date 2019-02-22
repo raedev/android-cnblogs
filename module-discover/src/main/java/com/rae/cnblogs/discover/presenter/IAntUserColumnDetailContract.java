@@ -1,20 +1,21 @@
 package com.rae.cnblogs.discover.presenter;
 
+import com.antcode.sdk.model.AntArticleInfo;
 import com.antcode.sdk.model.AntColumnInfo;
+import com.rae.cnblogs.basic.IPageView;
 import com.rae.cnblogs.basic.IPresenter;
 import com.rae.cnblogs.basic.IPresenterView;
 
-public interface IAntColumnDetailContract {
+public interface IAntUserColumnDetailContract {
 
     interface Presenter extends IPresenter {
+        void loadData();
+        void loadMore();
 
-        /**
-         * 订阅
-         */
-        void subscribe();
+        void unsubscribe();
     }
 
-    interface View extends IPresenterView {
+    interface View extends IPageView<AntArticleInfo>, IPresenterView {
 
         // 获取专栏ID
         String getColumnId();
@@ -25,15 +26,10 @@ public interface IAntColumnDetailContract {
         // 加载数据失败
         void onLoadDataError(String message);
 
-        // 订阅失败
-        void onSubscribeError(String message);
-
-        // 订阅成功
-        void onSubscribeSuccess();
-
-        // 专栏是否订阅
-        void onColumnSubscribe(boolean subscribe);
-
         void onLoginExpired();
+
+        void onUnsubscribeSuccess();
+
+        void onUnsubscribeError(String message);
     }
 }

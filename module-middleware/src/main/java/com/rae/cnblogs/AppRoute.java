@@ -47,6 +47,7 @@ public final class AppRoute {
     public static final String PATH_DISCOVER_BLOG_QUESTION_DETAIL = "/discover/question/detail";
     public static final String PATH_DISCOVER_COLUMN = "/discover/column/index";
     public static final String PATH_DISCOVER_COLUMN_DETAIL = "/discover/column/detail";
+    public static final String PATH_DISCOVER_USER_COLUMN_DETAIL = "/discover/user/column/detail";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -733,6 +734,15 @@ public final class AppRoute {
      */
     public static void routeToAntColumnDetail(Context context, int id) {
         ARouter.getInstance().build(PATH_DISCOVER_COLUMN_DETAIL)
+                .withString("id", String.valueOf(id))
+                .navigation(context);
+    }
+
+    /**
+     * 用户订阅的专栏详情
+     */
+    public static void routeToAntUserColumnDetail(Context context, int id) {
+        ARouter.getInstance().build(PATH_DISCOVER_USER_COLUMN_DETAIL)
                 .withString("id", String.valueOf(id))
                 .navigation(context);
     }

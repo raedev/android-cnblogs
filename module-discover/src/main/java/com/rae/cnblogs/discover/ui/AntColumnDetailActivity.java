@@ -1,6 +1,5 @@
 package com.rae.cnblogs.discover.ui;
 
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -14,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +26,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
-import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.ShareDialogFragment;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
@@ -53,6 +52,10 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
     ImageView mShareView;
     @BindView(R2.id.tv_title)
     TextView mTitleView;
+    @BindView(R2.id.btn_study)
+    Button mStudyButton;
+    @BindView(R2.id.btn_sub)
+    TextView mSubscribeButton;
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -154,6 +157,7 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     @Override
     public void onLoadColumnDetail(AntColumnInfo columnInfo) {
+        mBottomLayout.setVisibility(View.VISIBLE);
         // 拆分以及组装数据
         mTitleView.setText(columnInfo.getTitle());
         mAdapter.setColumnInfo(columnInfo);
@@ -218,10 +222,7 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
         ColumnDetailSectionEntity subEntity = new ColumnDetailSectionEntity("订阅须知", columnInfo.getNotice());
         subEntity.setEnableTopDivider(true);
         data.add(subEntity);
-
-
         mAdapter.setNewData(data);
-        mBottomLayout.setVisibility(View.VISIBLE);
 
         // 默认展开
         int expandCount = 0;
@@ -243,33 +244,26 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     @Override
     public void onSubscribeError(String message) {
+        mSubscribeButton.setText(R.string.subscribe_now);
+        mSubscribeButton.setEnabled(true);
         UICompat.failed(this, message);
-        UICompat.dismiss();
     }
 
     @Override
     public void onSubscribeSuccess() {
-        mBottomLayout.setVisibility(View.GONE);
-        UICompat.dismiss();
-
-        new DefaultDialogFragment.Builder()
-                .message(getString(R.string.subscribe_success))
-                .cancelable(true)
-                .confirmText("查看我的订阅")
-                .confirm(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        AppRoute.routeToAntColumn(getContext(), 0);
-                    }
-                })
-                .show(getSupportFragmentManager());
-
+        UICompat.toast(this, getString(R.string.subscribe_success));
+        UICompat.scaleIn(mStudyButton);
     }
 
     @Override
     public void onColumnSubscribe(boolean subscribe) {
-        UICompat.setVisibility(mBottomLayout, !subscribe);
+        UICompat.setVisibility(mSubscribeButton, !subscribe);
+        UICompat.setVisibility(mStudyButton, subscribe);
+    }
+
+    @Override
+    public void onLoginExpired() {
+        AppRoute.routeToAntUserAuth(this);
     }
 
     @OnClick(R2.id.btn_sub)
@@ -278,8 +272,22 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
             AppRoute.routeToAntUserAuth(this);
             return;
         }
-        UICompat.loading(this, "正在订阅");
+
+        mSubscribeButton.setText("订阅中...");
+        mSubscribeButton.setEnabled(false);
+
         mPresenter.subscribe();
+
+    }
+
+    @OnClick(R2.id.btn_study)
+    public void onStudyClick() {
+        if (mAdapter.getColumnInfo() == null) {
+            UICompat.failed(this, "数据尚未准备好");
+            return;
+        }
+        AppRoute.routeToAntUserColumnDetail(this, mAdapter.getColumnInfo().getId());
+        finish();
     }
 
     @OnClick(R2.id.img_share)

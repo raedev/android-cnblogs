@@ -76,7 +76,7 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
         AntColumnInfo columnInfo = item.getColumnInfo();
         helper.setText(R.id.tv_title, columnInfo.getTitle());
         helper.setText(R.id.tv_sub_title, columnInfo.getRecommendation());
-        helper.setText(R.id.tv_article_num, ApiUtils.formatNumber(columnInfo.getArticleNum()));
+        helper.setText(R.id.tv_article_num, ApiUtils.formatNumber(columnInfo.getArticleCount()));
         helper.setText(R.id.tv_sub_num, ApiUtils.formatNumber(columnInfo.getSubnum()));
         AppImageLoader.display(columnInfo.getLogo(), (ImageView) helper.getView(R.id.img_logo));
     }

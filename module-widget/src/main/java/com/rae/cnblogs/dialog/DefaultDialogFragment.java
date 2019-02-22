@@ -1,13 +1,20 @@
 package com.rae.cnblogs.dialog;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.InsetDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.R;
 import com.rae.cnblogs.widget.R2;
 
@@ -88,8 +95,8 @@ public class DefaultDialogFragment extends BasicDialogFragment {
     @BindView(R2.id.tv_message)
     TextView mTitleView;
 
-    @BindView(R2.id.view_divider)
-    View mDividerView;
+//    @BindView(R2.id.view_divider)
+//    View mDividerView;
 
     @BindView(R2.id.btn_ensure)
     Button mConfirmButton;
@@ -150,7 +157,7 @@ public class DefaultDialogFragment extends BasicDialogFragment {
 
 //        getDialog().setOnDismissListener(mOnDismissListener);
 
-        mDividerView.setVisibility(mCancelButton.getVisibility());
+//        mDividerView.setVisibility(mCancelButton.getVisibility());
     }
 
     @OnClick(R2.id.btn_cancel)
@@ -173,6 +180,23 @@ public class DefaultDialogFragment extends BasicDialogFragment {
         dismiss();
     }
 
+    @Override
+    protected void onLoadWindowAttr(@NonNull Window window) {
+//        super.onLoadWindowAttr(window);
+        window.setDimAmount(0.45f);
+        window.setGravity(Gravity.CENTER | Gravity.FILL_HORIZONTAL);
+        window.setWindowAnimations(R.style.Animation_Design_BottomSheetDialog);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            window.setElevation(0);
+        }
+        int resId = R.drawable.bg_dialog_default;
+        if (ThemeCompat.isNight()) {
+            resId = R.drawable.bg_dialog_default_night;
+        }
+        int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 36, window.getContext().getResources().getDisplayMetrics());
+        InsetDrawable drawable = new InsetDrawable(ContextCompat.getDrawable(window.getContext(), resId), margin, margin, margin, margin);
+        window.setBackgroundDrawable(drawable);
+    }
 
     @Override
     public void onDismiss(DialogInterface dialog) {

@@ -49,7 +49,7 @@ public class AntColumnHolder {
             AppImageLoader.display(data.getLogo(), logoView);
         }
         titleView.setText(data.getTitle());
-        numberView.setText(numberView.getResources().getString(R.string.article_num_format, data.getArticleNum()));
+        numberView.setText(numberView.getResources().getString(R.string.article_num_format, data.getArticleCount()));
         authorView.setText(String.format("%s %s", data.getAntAuthor().getNickname(), data.getAntAuthor().getTitle()));
         recommendationView.setText(data.getRecommendation());
         subNumView.setText(numberView.getResources().getString(R.string.sub_num_format, data.getSubnum()));

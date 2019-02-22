@@ -7,6 +7,7 @@ import com.antcode.sdk.model.AntUserInfo;
 import com.rae.cnblogs.PageObservable;
 import com.rae.cnblogs.discover.AntCodeBasicPresenter;
 import com.rae.cnblogs.discover.AntPageObservable;
+import com.rae.cnblogs.discover.SubscribeColumnMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,6 +52,14 @@ public class AntColumnPresenterImpl extends AntCodeBasicPresenter<IAntColumnCont
     public void OnLoginChanged(AntUserInfo userInfo) {
         // 登录状态改变，重新加载数据
         onStart();
+    }
+
+    @Subscribe
+    public void onUnsubscribeColumnEvent(SubscribeColumnMessage msg) {
+        // 取消订阅
+        if (getView().getType() == IAntColumnContract.TYPE_MY) {
+            onStart();
+        }
     }
 
     @Override
