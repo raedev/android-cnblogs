@@ -58,9 +58,9 @@ ext {
             // IOS 切换按钮
             switchbutton       : 'com.kyleduo.switchbutton:library:1.4.6',
             // LeanCloud 基础包
-            avoscloudSdk       : 'cn.leancloud.android:avoscloud-sdk:v4.7.8',
+            avoscloudSdk       : 'cn.leancloud.android:avoscloud-sdk:v4.7.9',
             // LeanCloud 用户反馈包
-            avoscloudFeedback  : 'cn.leancloud.android:avoscloud-feedback:v4.7.8@aar',
+            avoscloudFeedback  : 'cn.leancloud.android:avoscloud-feedback:v4.7.9@aar',
             // 滑动返回
 //            swipebacklayout    : 'me.imid.swipebacklayout.lib:library:1.1.0',
             photoView          : 'com.github.chrisbanes:PhotoView:2.1.2',
