@@ -21,5 +21,15 @@ public interface IDiscoverHomeContract {
         void onLoadColumns(List<AntColumnInfo> columns);
 
         void onLoadCategories(List<AntTabInfo> homeTabs);
+
+        /**
+         * 加载错误
+         */
+        void onLoadColumnError(String message);
+
+        /**
+         * 加载错误
+         */
+        void onLoadAdError(String message);
     }
 }

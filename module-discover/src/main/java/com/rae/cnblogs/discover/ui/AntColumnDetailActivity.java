@@ -43,6 +43,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 专栏详情
+ */
 @Route(path = AppRoute.PATH_DISCOVER_COLUMN_DETAIL)
 public class AntColumnDetailActivity extends SwipeBackBasicActivity implements IAntColumnDetailContract.View {
 
@@ -87,7 +90,6 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
                 LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (lm == null) return;
                 int firstCompletelyVisibleItemPosition = lm.findFirstCompletelyVisibleItemPosition();
-//                int lastCompletelyVisibleItemPosition = lm.findLastCompletelyVisibleItemPosition();
 
                 if (firstCompletelyVisibleItemPosition == 0) {
                     mHeaderView = lm.getChildAt(0);
@@ -211,9 +213,9 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
             ColumnDetailCatalogEntity levelEntity = new ColumnDetailCatalogEntity(1, ColumnDetailCatalogEntity.TYPE_LEVEL_1, article);
             entity.addSubItem(levelEntity);
         }
-        if (!TextUtils.isEmpty(columnInfo.getOutlineImgOriginal())) {
-            data.add(new ColumnDetailCatalogEntity(0, ColumnDetailCatalogEntity.TYPE_LEVEL_END, null));
-        }
+//        if (!TextUtils.isEmpty(columnInfo.getOutlineImgOriginal())) {
+        data.add(new ColumnDetailCatalogEntity(0, ColumnDetailCatalogEntity.TYPE_LEVEL_END, null));
+//        }
 
         // -----------------   目录解析 结束 --------------------- //
 

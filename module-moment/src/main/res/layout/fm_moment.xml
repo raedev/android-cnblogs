@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.rae.cnblogs.widget.AppLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ptr_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,8 @@
     <com.rae.cnblogs.widget.PlaceholderView
         android:id="@+id/placeholder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:app_background="@color/background_divider">
 
         <com.rae.cnblogs.widget.RaeRecyclerView
             android:id="@+id/recycler_view"

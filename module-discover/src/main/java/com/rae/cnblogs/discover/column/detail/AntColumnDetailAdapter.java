@@ -3,6 +3,7 @@ package com.rae.cnblogs.discover.column.detail;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -86,7 +87,7 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
      */
     private void bindSectionView(BaseViewHolder helper, ColumnDetailSectionEntity item) {
         helper.setText(R.id.tv_title, item.getTitle());
-        helper.setText(R.id.tv_desc, item.getContent());
+        helper.setText(R.id.tv_desc, Html.fromHtml(item.getContent()));
         helper.setVisible(R.id.view_divider_top, item.isEnableTopDivider());
         helper.setVisible(R.id.view_divider_bottom, item.isEnableBottomDivider());
     }
@@ -131,7 +132,7 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
         }
     }
 
-    public void setColumnInfo(AntColumnInfo columnInfo) {
+    public void setColumnInfo(@Nullable AntColumnInfo columnInfo) {
         mColumnInfo = columnInfo;
     }
 

@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -184,6 +185,7 @@ public class DefaultDialogFragment extends BasicDialogFragment {
     protected void onLoadWindowAttr(@NonNull Window window) {
 //        super.onLoadWindowAttr(window);
         window.setDimAmount(0.45f);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER | Gravity.FILL_HORIZONTAL);
         window.setWindowAnimations(R.style.Animation_Design_BottomSheetDialog);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {

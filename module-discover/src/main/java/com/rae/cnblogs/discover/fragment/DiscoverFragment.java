@@ -1,11 +1,14 @@
 package com.rae.cnblogs.discover.fragment;
 
+import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -18,8 +21,6 @@ import com.antcode.sdk.model.AntAdInfo;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.antcode.sdk.model.AntTabInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.loadmore.LoadMoreView;
-import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.AppImageLoader;
@@ -54,10 +55,8 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
 
     IDiscoverHomeContract.Presenter mPresenter;
     private DiscoverHomeAdapter mAdapter;
-    @Nullable
     private Banner mBanner;
     private ViewGroup mTabLayout;
-    private int mCurrentBannerPosition;
     private List<AntAdInfo> mAdInfoList;
 
     @Override
@@ -91,7 +90,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
                 mPresenter.start();
             }
         });
-        initTabs();
+        initViews();
         mPresenter.start();
 
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -112,44 +111,35 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         });
     }
 
-    private void initTabs() {
+    private void initViews() {
+        // 初始化分类Tab
         mTabLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.view_discover_category, (ViewGroup) getView(), false);
         mAdapter.addHeaderView(mTabLayout);
+
+        // 初始化头部Banner
+        mBanner = (Banner) getLayoutInflater().inflate(R.layout.view_discover_banner, (ViewGroup) getView(), false);
+        mBanner.setImageLoader(new BannerImageLoader());
+        mBanner.setIndicatorGravity(Gravity.CENTER);
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                AntAdInfo adInfo = mAdInfoList.get(position % mAdInfoList.size());
+                AppRoute.autoRoute(getContext(), adInfo.getType(), adInfo.getUrl(), adInfo.getData());
+            }
+        });
+
+        ViewPager viewPager = mBanner.findViewById(R.id.bannerViewPager);
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -35, getResources().getDisplayMetrics()));
+        mAdapter.addHeaderView(mBanner, 0);
+
+
     }
 
     @Override
     public void onLoadAds(List<AntAdInfo> ads) {
         mAdInfoList = ads;
         mRefreshLayout.setRefreshing(false);
-
-        if (mBanner == null) {
-            Banner banner = (Banner) getLayoutInflater().inflate(R.layout.view_discover_banner, (ViewGroup) getView(), false);
-            banner.setImageLoader(new BannerImageLoader());
-            banner.setIndicatorGravity(Gravity.CENTER);
-            mAdapter.addHeaderView(banner, 0);
-            banner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-                @Override
-                public void onPageSelected(int position) {
-                    super.onPageSelected(position);
-                    mCurrentBannerPosition = position;
-                }
-            });
-            banner.setOnBannerListener(new OnBannerListener() {
-                @Override
-                public void OnBannerClick(int position) {
-                    AntAdInfo adInfo = mAdInfoList.get(position % mAdInfoList.size());
-                    AppRoute.autoRoute(getContext(), adInfo.getType(), adInfo.getUrl(), adInfo.getData());
-                }
-            });
-
-            ViewPager viewPager = banner.findViewById(R.id.bannerViewPager);
-            viewPager.setOffscreenPageLimit(4);
-            viewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -35, getResources().getDisplayMetrics()));
-            mBanner = banner;
-        }
-
-        UICompat.setVisibility(mBanner, ads.size() > 0);
-
         mBanner.setImages(ads).start();
     }
 
@@ -194,6 +184,30 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             view.setOnClickListener(new TabClickListener(homeTab));
             mTabLayout.addView(view);
         }
+    }
+
+    @Override
+    public void onLoadColumnError(String message) {
+        mRefreshLayout.setRefreshing(false);
+        UICompat.failed(getContext(), message);
+    }
+
+    @Override
+    public void onLoadAdError(String message) {
+        // 为空
+        Resources resources = getResources();
+        int resId = R.drawable.default_placeholder_normal;
+        String imageUrl = TextUtils.concat(ContentResolver.SCHEME_ANDROID_RESOURCE, "://",
+                resources.getResourcePackageName(resId), "/",
+                resources.getResourceTypeName(resId), "/",
+                resources.getResourceName(resId))
+                .toString();
+
+        mAdInfoList = new ArrayList<>();
+        AntAdInfo item = new AntAdInfo();
+        item.setImageUrl(imageUrl);
+        mAdInfoList.add(item);
+        mBanner.setImages(mAdInfoList).start();
     }
 
     class TabClickListener implements View.OnClickListener {

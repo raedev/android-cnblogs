@@ -3,10 +3,8 @@ package com.rae.cnblogs.blog.adapter;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.ContentEntity;
@@ -27,7 +25,7 @@ import java.util.List;
 public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleViewHolder> {
 
     /* 正常类型 */
-    public static final int VIEW_TYPE_NORMAL = 0;
+    private static final int VIEW_TYPE_NORMAL = 0;
 
     /*新闻类型*/
     public static final int VIEW_TYPE_NEWS = 1;
@@ -88,28 +86,31 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
      * 绑定内容项目
      */
     private void onBindContentItemViewHolder(ContentItemViewHolder holder, ContentEntity m) {
-        holder.authorView.setText(m.getAuthor());
-        holder.titleView.setText(m.getTitle());
-        holder.summaryView.setText(m.getSummary());
-        holder.dateView.setText(m.getDate());
-        holder.readerView.setText(m.getViewCount());
-        holder.likeView.setText(m.getLikeCount());
-        holder.commentView.setText(m.getCommentCount());
-        UICompat.setVisibility(holder.countLayout, mEnableCountLayout);
+        holder.setText(holder.authorView, m.getAuthor());
+        holder.setText(holder.titleView, m.getTitle());
+        holder.setText(holder.summaryView, m.getSummary());
+        holder.setText(holder.dateView, m.getDate());
+        holder.setText(holder.readerView, m.getViewCount());
+        holder.setText(holder.likeView, m.getLikeCount());
+        holder.setText(holder.commentView, m.getCommentCount());
+        holder.setVisibility(holder.countLayout, mEnableCountLayout);
 
-        // 显示头像
-        AppImageLoader.displayAvatar(m.getAvatar(), holder.avatarView);
-        // 隐藏没有头像地址
-        UICompat.setVisibility(holder.authorLayout, !TextUtils.isEmpty(m.getAvatar()));
+        if (mViewType == VIEW_TYPE_NEWS) {
+            AppImageLoader.display(m.getAvatar(), holder.avatarView);
+            holder.setVisibility(holder.authorLayout, !TextUtils.isEmpty(m.getAvatar()));
+        } else {
+            // 显示头像
+            AppImageLoader.displayAvatar(m.getAvatar(), holder.avatarView);
+        }
 
         // 显示预览图
         showThumbImages(m.getThumbs(), holder);
 
+        // 设置已读颜色
         int titleColor = m.isRead() ? getColor("ph4") : getColor("ph1");
         int summaryColor = m.isRead() ? getColor("ph4") : getColor("ph2");
-
-        holder.titleView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), titleColor));
-        holder.summaryView.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), summaryColor));
+        holder.setTextColor(holder.titleView, ContextCompat.getColor(holder.itemView.getContext(), titleColor));
+        holder.setTextColor(holder.summaryView, ContextCompat.getColor(holder.itemView.getContext(), summaryColor));
         holder.itemView.setTag(m);
 
     }
@@ -124,23 +125,23 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
     private void showThumbImages(List<String> thumbs, ContentItemViewHolder holder) {
         if (Rx.isEmpty(thumbs)) {
             //  没有预览图
-            holder.largeThumbView.setVisibility(View.GONE);
-            holder.thumbLayout.setVisibility(View.GONE);
+            holder.setVisibility(holder.largeThumbView, false);
+            holder.setVisibility(holder.thumbLayout, false);
         } else if (thumbs.size() < 3 && thumbs.size() > 0) {
             // 一张预览图
-            holder.largeThumbView.setVisibility(View.VISIBLE);
-            holder.thumbLayout.setVisibility(View.GONE);
+            holder.setVisibility(holder.largeThumbView, true);
+            holder.setVisibility(holder.thumbLayout, false);
             AppImageLoader.display(thumbs.get(0), holder.largeThumbView);
         } else if (thumbs.size() >= 3) {
-            holder.largeThumbView.setVisibility(View.GONE);
-            holder.thumbLayout.setVisibility(View.VISIBLE);
+            holder.setVisibility(holder.largeThumbView, false);
+            holder.setVisibility(holder.thumbLayout, true);
             // 取三张预览图
             AppImageLoader.display(thumbs.get(0), holder.thumbOneView);
             AppImageLoader.display(thumbs.get(1), holder.thumbTwoView);
             AppImageLoader.display(thumbs.get(2), holder.thumbThreeView);
         } else {
-            holder.largeThumbView.setVisibility(View.GONE);
-            holder.thumbLayout.setVisibility(View.GONE);
+            holder.setVisibility(holder.largeThumbView, false);
+            holder.setVisibility(holder.thumbLayout, false);
         }
     }
 }

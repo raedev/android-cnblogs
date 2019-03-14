@@ -125,7 +125,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
                 // 根据类型进行跳转
                 if ("URL".equalsIgnoreCase(type)) {
                     // 跳转Web
-                    AppRoute.routeToWeb(getContext(), item.getSourceUrl());
+                    AppRoute.routeToAntColumnWeb(getContext(), item.getSourceUrl());
                 } else if ("BLOG".equalsIgnoreCase(type)) {
                     // 跳转博客
                     AppRoute.routeToContentDetail(getContext(), item.getSourceUrl());
@@ -222,10 +222,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
     public void onUnsubscribeSuccess() {
         UICompat.dismiss();
         UICompat.success(this, R.string.unsubscribe_success);
-        if (mColumnInfo != null) {
-            AppRoute.routeToAntColumnDetail(getContext(), mColumnInfo.getId());
-            finish();
-        }
+        finish();
     }
 
     @Override

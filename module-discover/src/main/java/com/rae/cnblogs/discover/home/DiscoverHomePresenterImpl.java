@@ -48,6 +48,7 @@ public class DiscoverHomePresenterImpl extends AntCodeBasicPresenter<IDiscoverHo
                 .subscribe(new AntSdkDefaultObserver<List<AntAdInfo>>() {
                     @Override
                     protected void onError(String message) {
+                        getView().onLoadAdError(message);
                     }
 
                     @Override
@@ -61,6 +62,7 @@ public class DiscoverHomePresenterImpl extends AntCodeBasicPresenter<IDiscoverHo
         mColumnApi.getHomeColumns().with(this).subscribe(new AntSdkDefaultObserver<List<AntColumnInfo>>() {
             @Override
             protected void onError(String message) {
+                getView().onLoadColumnError(message);
             }
 
             @Override

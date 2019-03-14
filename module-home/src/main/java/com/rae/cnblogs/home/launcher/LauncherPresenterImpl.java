@@ -12,6 +12,7 @@ import com.rae.cnblogs.sdk.api.IRaeServerApi;
 import com.rae.cnblogs.sdk.bean.AdvertBean;
 import com.rae.cnblogs.sdk.db.DbAdvert;
 import com.rae.cnblogs.sdk.db.DbFactory;
+import com.rae.cnblogs.sdk.utils.ApiUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
@@ -64,7 +65,12 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                     public void onNext(AdvertBean advertBean) {
                         mAdvertBean = advertBean;
                         AppMobclickAgent.onLaunchAdExposureEvent(getContext(), advertBean.getAdId(), advertBean.getAdName());
-                        getView().onLoadImage(advertBean.getAdName(), advertBean.getImageUrl());
+                        // 过期时间判断
+                        if (System.currentTimeMillis() < ApiUtils.parseDate(advertBean.getMAdEndDate()).getTime()) {
+                            getView().onLoadImage(advertBean.getAdName(), advertBean.getImageUrl());
+                        } else {
+                            getView().onEmptyImage();
+                        }
                     }
 
                     @Override
@@ -91,7 +97,7 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                 .subscribe(new ApiDefaultObserver<AdvertBean>() {
                     @Override
                     protected void onError(String message) {
-                        // 不处理
+                        getView().onEmptyImage();
                     }
 
                     @Override
@@ -112,8 +118,12 @@ public class LauncherPresenterImpl extends BasicPresenter<LauncherContract.View>
                         AppMobclickAgent.onLaunchAdExposureEvent(getContext(), data.getAdId(), data.getAdName());
 
                         // 加载图片
-                        if (!TextUtils.isEmpty(data.getImageUrl()))
+                        // 过期时间判断
+                        if (!TextUtils.isEmpty(data.getImageUrl()) && System.currentTimeMillis() < ApiUtils.parseDate(data.getMAdEndDate()).getTime()) {
                             getView().onLoadImage(data.getAdName(), data.getImageUrl());
+                        } else {
+                            getView().onEmptyImage();
+                        }
                     }
                 });
     }

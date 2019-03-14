@@ -40,8 +40,6 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        onRouteToHome();
-
         // 非栈顶的时候，点击首页图标不跳转到这里
         if (!isTaskRoot()) {
             finish();

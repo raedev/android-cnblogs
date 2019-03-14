@@ -16,18 +16,29 @@ import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.db.DbCnblogs;
 import com.rae.cnblogs.sdk.db.DbFactory;
 import com.rae.cnblogs.theme.AppThemeManager;
+import com.rae.cnblogs.theme.ThemeCompat;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
-public class CnblogsApplication extends BasicApplication {
+import org.greenrobot.eventbus.EventBus;
+
+import skin.support.SkinCompatManager;
+import skin.support.observe.SkinObservable;
+import skin.support.observe.SkinObserver;
+
+public class CnblogsApplication extends BasicApplication implements SkinObserver {
     @Override
     protected void onFirstCreate() {
         super.onFirstCreate();
+
         QMUISwipeBackActivityManager.init(this);
+
         // 主题初始化
         AppThemeManager.init(this);
+        SkinCompatManager.getInstance().addObserver(this);
+
         // 路由初始化
         AppRoute.init(this, BuildConfig.DEBUG);
         // 初始化数据库
@@ -40,6 +51,7 @@ public class CnblogsApplication extends BasicApplication {
                 BuildConfig.LEAN_CLOUD_APP_ID,
                 BuildConfig.LEAN_CLOUD_APP_KEY);
         FeedbackThread.getInstance();
+
         // Bugly
         CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
         initUMConfig();
@@ -66,11 +78,15 @@ public class CnblogsApplication extends BasicApplication {
         PlatformConfig.setWeixin(BuildConfig.WECHAT_APP_ID, BuildConfig.WECHAT_APP_SECRET);
         PlatformConfig.setSinaWeibo(BuildConfig.WEIBO_APP_ID, BuildConfig.WEIBO_APP_SECRET, "http://www.raeblog.com/cnblogs/index.php/share/weibo/redirect");
         PlatformConfig.setQQZone(BuildConfig.QQ_APP_ID, BuildConfig.QQ_APP_SECRET);
-        Log.i("rae", "--- 初始化配置信息 ---");
-        Log.i("rae", String.format("--- 包名：%s ---", getPackageName()));
-        Log.i("rae", String.format("--- 版本号：%s ---", ApplicationCompat.getVersionCode(this)));
-        Log.i("rae", String.format("--- 版本名：%s ---", ApplicationCompat.getVersionName(this)));
-        Log.i("rae", String.format("--- 渠道名：%s ---", CnblogAppConfig.APP_CHANNEL));
+        Log.d("rae", "--- 初始化配置信息 ---");
+        Log.d("rae", String.format("--- 包名：%s ---", getPackageName()));
+        Log.d("rae", String.format("--- 版本号：%s ---", ApplicationCompat.getVersionCode(this)));
+        Log.d("rae", String.format("--- 版本名：%s ---", ApplicationCompat.getVersionName(this)));
+        Log.d("rae", String.format("--- 渠道名：%s ---", CnblogAppConfig.APP_CHANNEL));
+    }
 
+    @Override
+    public void updateSkin(SkinObservable observable, Object o) {
+        EventBus.getDefault().post(new AppThemeManager.ThemeEvent(ThemeCompat.isNight()));
     }
 }

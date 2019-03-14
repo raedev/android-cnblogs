@@ -48,6 +48,7 @@ public final class AppRoute {
     public static final String PATH_DISCOVER_COLUMN = "/discover/column/index";
     public static final String PATH_DISCOVER_COLUMN_DETAIL = "/discover/column/detail";
     public static final String PATH_DISCOVER_USER_COLUMN_DETAIL = "/discover/user/column/detail";
+    public static final String PATH_DISCOVER_COLUMN_WEB = "/discover/column/web";
     private static final AppActivityLifecycle sAppActivityLifecycle = new AppActivityLifecycle();
 
     // WEB 登录
@@ -274,6 +275,15 @@ public final class AppRoute {
      */
     public static void routeToWeb(Context context, String url) {
         ARouter.getInstance().build(PATH_WEB).withString("url", url).navigation(context);
+    }
+
+    /**
+     * 网页
+     *
+     * @param url 路径
+     */
+    public static void routeToAntColumnWeb(Context context, String url) {
+        ARouter.getInstance().build(PATH_DISCOVER_COLUMN_WEB).withString("url", url).navigation(context);
     }
 
     /**

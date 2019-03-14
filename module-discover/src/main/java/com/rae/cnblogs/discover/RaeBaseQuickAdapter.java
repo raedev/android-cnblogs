@@ -3,6 +3,7 @@ package com.rae.cnblogs.discover;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -40,6 +41,7 @@ public abstract class RaeBaseQuickAdapter<T, K extends BaseViewHolder> extends B
 
     protected void initView(Context context) {
         mPlaceholderView = new PlaceholderView(context);
+        mPlaceholderView.setBackgroundColor(ContextCompat.getColor(context, R.color.background_divider));
         mPlaceholderView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         setEmptyView(mPlaceholderView);
     }

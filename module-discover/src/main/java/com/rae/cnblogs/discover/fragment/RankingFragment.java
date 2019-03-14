@@ -28,6 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * 榜单
+ */
 public class RankingFragment extends BasicFragment implements IRankingContract.View, BaseQuickAdapter.OnItemClickListener, ITopScrollable {
 
 
@@ -105,7 +108,7 @@ public class RankingFragment extends BasicFragment implements IRankingContract.V
 
     @Override
     public void onEmptyData(String msg) {
-        mAdapter.setNewData(null);
+        mAdapter.showEmpty(msg);
         onNoMoreData();
     }
 

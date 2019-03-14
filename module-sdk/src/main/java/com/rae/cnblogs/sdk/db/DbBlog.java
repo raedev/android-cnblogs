@@ -269,7 +269,8 @@ public class DbBlog {
      * @param blogType 博客类型
      * @param content  博客内容
      */
-    public void updateBlogContent(@NonNull String blogId, @NonNull String blogType, @NonNull String content) {
+    public void updateBlogContent(@NonNull String blogId, @NonNull String blogType, @Nullable String content) {
+        if (TextUtils.isEmpty(content)) return;
         try {
             // 找到博客信息
             BlogBean blogInfo = mSession.getBlogBeanDao()

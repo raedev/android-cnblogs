@@ -48,6 +48,7 @@
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="10dp"
+                android:background="@drawable/default_placeholder_normal"
                 android:scaleType="centerCrop"
                 android:src="@drawable/bg_blogger_blur"
                 app:riv_corner_radius="4dp" />

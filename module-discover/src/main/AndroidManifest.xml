@@ -33,5 +33,6 @@
             android:name=".ui.AntColumnDetailActivity"
             android:launchMode="singleTop" />
         <activity android:name=".ui.AntUserColumnDetailActivity" />
+        <activity android:name=".web.AntColumnWebViewActivity" />
     </application>
 </manifest>

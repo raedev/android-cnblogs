@@ -44,11 +44,15 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
 
     private ShareDialogFragment mShareDialogFragment;
 
+    protected int getLayoutId() {
+        return R.layout.activity_web;
+    }
+
     @SuppressLint("InvalidR2Usage")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(getLayoutId());
         String url = getUrl();
         if (TextUtils.isEmpty(url)) {
             UICompat.toast(this, "网页路径为空！");

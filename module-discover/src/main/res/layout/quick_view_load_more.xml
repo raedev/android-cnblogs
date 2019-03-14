@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/no_more_tips"
+            android:text="码蚁专栏提供技术支持"
             android:textColor="@color/dividerColor" />
     </FrameLayout>
 </FrameLayout>

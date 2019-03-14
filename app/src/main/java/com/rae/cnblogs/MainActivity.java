@@ -71,9 +71,6 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
-        SkinCompatManager.getInstance().addObserver((observable, o) -> {
-            EventBus.getDefault().post(new AppThemeManager.ThemeEvent(ThemeCompat.isNight()));
-        });
 
         initTab();
 
@@ -82,9 +79,10 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
         // 启动服务
         startService(new Intent(this, CnblogsService.class));
-        if (BuildConfig.DEBUG) {
-            debugLogin();
-        }
+
+//        if (BuildConfig.DEBUG) {
+//            debugLogin();
+//        }
     }
 
 

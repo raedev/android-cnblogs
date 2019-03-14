@@ -38,5 +38,7 @@ public final class AppThemeManager {
                 .addInflater(new SkinMaterialViewInflater());
 
         SkinCompatManager.getInstance().loadSkin();
+
+
     }
 }
