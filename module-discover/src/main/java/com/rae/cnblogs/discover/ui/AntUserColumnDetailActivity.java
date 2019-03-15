@@ -83,7 +83,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (lm == null) return;
+                if (lm == null || mColumnInfo == null) return;
                 int firstCompletelyVisibleItemPosition = lm.findFirstCompletelyVisibleItemPosition();
                 if (firstCompletelyVisibleItemPosition == 0) {
                     mHeaderView = lm.getChildAt(0);
@@ -135,8 +135,13 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
             }
         });
 
-        mPresenter.start();
-        mPresenter.loadData();
+
+        mHeaderView = View.inflate(this, R.layout.item_user_column_detail_header, null);
+        mAdapter.addHeaderView(mHeaderView);
+        mAdapter.setHeaderAndEmpty(true);
+
+        mPresenter.start(); // 获取专栏详情
+        mPresenter.loadData(); // 获取文章数据
     }
 
     // 状态栏收起状态
@@ -159,9 +164,9 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
 
     @Override
     public void onLoadColumnDetail(AntColumnInfo columnInfo) {
+        onNavigateExpand();
         mColumnInfo = columnInfo;
         // 初始化头部视图
-        mHeaderView = View.inflate(this, R.layout.item_user_column_detail_header, null);
         ImageView coverImageView = mHeaderView.findViewById(R.id.img_cover);
         ImageView blurImageView = mHeaderView.findViewById(R.id.img_logo);
         TextView titleView = mHeaderView.findViewById(R.id.tv_title);
@@ -185,8 +190,6 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         articleCountView.setText(ApiUtils.formatNumber(columnInfo.getArticleCount()));
         subNumView.setText(ApiUtils.formatNumber(columnInfo.getSubnum()));
 
-        mAdapter.addHeaderView(mHeaderView);
-        mAdapter.setHeaderAndEmpty(true);
         mAdapter.notifyDataSetChanged();
     }
 

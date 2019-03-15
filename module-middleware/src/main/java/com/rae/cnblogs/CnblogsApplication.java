@@ -45,7 +45,9 @@ public class CnblogsApplication extends BasicApplication implements SkinObserver
         DbCnblogs.init(this);
         // 用户管理
         UserProvider.init(this);
-        AntCodeSDK.init(this, "183dce1755ae94be8bd0ff7ec719e3b0");
+        // 码蚁专栏SDK
+//        AntCodeSDK.init(this, "91f8cc0325f8d228d37bd1c9c4ef7e84");
+        AntCodeSDK.init(new AntCodeSDK.Builder(this).clientId("91f8cc0325f8d228d37bd1c9c4ef7e84").url("http://192.168.1.7:8081/antcode/index.php/"));
         // LeanCloud用户反馈初始化，要在主线程
         AVOSCloud.initialize(this,
                 BuildConfig.LEAN_CLOUD_APP_ID,

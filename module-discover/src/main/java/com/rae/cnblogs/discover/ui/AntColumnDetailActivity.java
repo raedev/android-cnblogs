@@ -88,7 +88,7 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager lm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (lm == null) return;
+                if (lm == null || mAdapter.getColumnInfo() == null) return;
                 int firstCompletelyVisibleItemPosition = lm.findFirstCompletelyVisibleItemPosition();
 
                 if (firstCompletelyVisibleItemPosition == 0) {
@@ -159,6 +159,7 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     @Override
     public void onLoadColumnDetail(AntColumnInfo columnInfo) {
+        onNavigateExpand();
         mBottomLayout.setVisibility(View.VISIBLE);
         // 拆分以及组装数据
         mTitleView.setText(columnInfo.getTitle());
@@ -240,7 +241,9 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     @Override
     public void onLoadDataError(String message) {
+        onNavigateCollapse();
         mAdapter.showEmpty(message);
+        mShareView.setVisibility(View.GONE);
         mBottomLayout.setVisibility(View.GONE);
     }
 

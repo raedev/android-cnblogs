@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.google.gson.Gson;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.ContentEntityConverter;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
@@ -38,6 +40,7 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
         setContentView(R.layout.activity_blog_detail);
         // 加载内容区域
         ContentEntity entity = getIntent().getParcelableExtra("entity");
+        Log.i("rae", new Gson().toJson(entity));
         // 支持路径跳转
         String url = getIntent().getStringExtra("url");
         if (entity == null && !TextUtils.isEmpty(url)) {
