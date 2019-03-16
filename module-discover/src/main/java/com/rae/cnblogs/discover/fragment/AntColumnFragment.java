@@ -77,7 +77,7 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int itemLayoutId = mType == IAntColumnContract.TYPE_MY ? R.layout.item_discover_mine_column : R.layout.item_discover_home_column;
-        mAdapter = new AntColumnAdapter(getContext(), itemLayoutId);
+        mAdapter = new AntColumnAdapter(getContext(), itemLayoutId, mType);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -179,8 +179,11 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
 
     class AntColumnAdapter extends RaeBaseQuickAdapter<AntColumnInfo, BaseViewHolder> {
 
-        AntColumnAdapter(Context context, int layoutId) {
+        private final int mItemType;
+
+        AntColumnAdapter(Context context, int layoutId, int itemType) {
             super(context, layoutId, null);
+            this.mItemType = itemType;
         }
 
         @Override
@@ -191,8 +194,7 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
 
         @Override
         protected void convert(BaseViewHolder helper, AntColumnInfo item) {
-            int itemType = getLayoutId() == R.layout.item_discover_mine_column ? AntColumnHolder.TYPE_MINE : AntColumnHolder.TYPE_NORMAL;
-            AntColumnHolder holder = new AntColumnHolder(helper, itemType);
+            AntColumnHolder holder = new AntColumnHolder(helper, mItemType);
             holder.bindData(item);
         }
     }

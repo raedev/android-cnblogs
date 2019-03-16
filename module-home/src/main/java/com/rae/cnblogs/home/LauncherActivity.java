@@ -69,7 +69,7 @@ public class LauncherActivity extends BasicActivity implements LauncherContract.
      * 显示图片
      */
     private void showImage(String url) {
-        Log.i("Rae", "加载图片：" + url);
+//        Log.i("Rae", "加载图片：" + url);
         AppImageLoader.displayWithoutPlaceHolder(url, mDisplayView);
     }
 

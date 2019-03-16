@@ -35,7 +35,7 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
     TextView mTitleView;
 
     @BindView(R2.id.img_action_bar_more)
-    ImageView mShareView;
+    public ImageView mShareView;
 
     @BindView(R2.id.view_holder)
     View mNightView;

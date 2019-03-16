@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_margin"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_share_black" />
+                android:src="@drawable/icon_share_black"
+                android:tint="@color/black" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
