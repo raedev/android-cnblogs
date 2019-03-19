@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 /**
@@ -48,6 +49,11 @@ public class AntColumnActivity extends SwipeBackBasicActivity {
 
         int position = getIntent().getIntExtra("position", 0);
         mViewPager.setCurrentItem(position);
+    }
+
+    @OnClick(R2.id.img_question)
+    public void onQuestionClick() {
+        AppRoute.routeToAntColumnWeb(this, getString(R.string.url_antcode_about));
     }
 
     class AntColumnAdapter extends FragmentPagerAdapter {

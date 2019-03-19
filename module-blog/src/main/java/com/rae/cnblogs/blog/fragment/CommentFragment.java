@@ -246,16 +246,20 @@ public class CommentFragment extends BasicFragment implements CommentContract.Vi
      * @param comment 引用的评论，可为空
      */
     private void showCommentDialog(@Nullable BlogCommentBean comment) {
-        EditCommentDialogFragment.Entry<BlogCommentBean> entry = null;
-        if (comment != null) {
-            entry = new EditCommentDialogFragment.Entry<>();
-            entry.setAuthorName(comment.getAuthorName());
-            entry.setContent(comment.getBody());
-            entry.setSource(comment);
-        }
+        try {
+            EditCommentDialogFragment.Entry<BlogCommentBean> entry = null;
+            if (comment != null) {
+                entry = new EditCommentDialogFragment.Entry<>();
+                entry.setAuthorName(comment.getAuthorName());
+                entry.setContent(comment.getBody());
+                entry.setSource(comment);
+            }
 
-        mEditCommentDialogFragment = EditCommentDialogFragment.newInstance(EditCommentDialogFragment.FROM_TYPE_BLOG, entry);
-        mEditCommentDialogFragment.show(getChildFragmentManager(), "EditCommentDialogFragment");
+            mEditCommentDialogFragment = EditCommentDialogFragment.newInstance(EditCommentDialogFragment.FROM_TYPE_BLOG, entry);
+            mEditCommentDialogFragment.show(getChildFragmentManager(), "EditCommentDialogFragment");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

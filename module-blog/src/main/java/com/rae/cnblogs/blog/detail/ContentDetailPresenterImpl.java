@@ -226,7 +226,6 @@ public abstract class ContentDetailPresenterImpl extends BasicPresenter<ContentD
                     public void subscribe(ObservableEmitter<UserBlogInfo> e) {
                         UserBlogInfo blogInfo = DbFactory.getInstance().getBlog().get(getView().getContentEntity().getId());
                         if (blogInfo == null) {
-                            e.onError(new NullPointerException("blog is null"));
                             return;
                         }
                         e.onNext(blogInfo);

@@ -12,4 +12,5 @@
     <string name="study_now">立即学习</string>
     <string name="format_article_updated">已更新%d篇文章</string>
     <string name="unsubscribe_success">取消订阅成功</string>
+    <string name="url_antcode_about">https://app.mayizhuanlan.com/about</string>
 </resources>

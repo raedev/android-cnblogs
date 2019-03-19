@@ -1,7 +1,6 @@
 package com.rae.cnblogs.user.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.rae.cnblogs.AppRoute;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
@@ -146,19 +146,21 @@ public abstract class FriendsFragment extends BasicFragment implements FriendsCo
 
     @Override
     public void onLoginExpired() {
-        new DefaultDialogFragment.Builder()
-                .message(getString(R.string.login_expired))
-                .confirmText(getString(R.string.go_login))
-                .confirm(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        AppRoute.routeToLogin(getContext());
-                        getActivity().finish();
-                    }
-                })
-                .build()
-                .show(getChildFragmentManager(), "dialog");
+        UICompat.failed(getContext(), getString(R.string.login_expired));
+
+//        new DefaultDialogFragment.Builder()
+//                .message(getString(R.string.login_expired))
+//                .confirmText(getString(R.string.go_login))
+//                .confirm(new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        AppRoute.routeToLogin(getContext());
+//                        getActivity().finish();
+//                    }
+//                })
+//                .build()
+//                .show(getChildFragmentManager(), "dialog");
     }
 
     @Override

@@ -52,6 +52,14 @@
             app:tabTextAppearance="@style/TabTextAppearance.Ant"
             app:tabTextColor="#FF4A4A4A" />
 
+        <ImageView
+            android:id="@+id/img_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/icon_column_question" />
+
     </android.support.v7.widget.FitWindowsFrameLayout>
 
 

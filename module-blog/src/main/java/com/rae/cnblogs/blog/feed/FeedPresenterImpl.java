@@ -1,10 +1,7 @@
 package com.rae.cnblogs.blog.feed;
 
-import android.support.annotation.NonNull;
-
 import com.rae.cnblogs.basic.BasicPresenter;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
-import com.rae.cnblogs.basic.rx.LifecycleProvider;
 import com.rae.cnblogs.sdk.ApiDefaultObserver;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.bean.UserFeedBean;
@@ -23,13 +20,6 @@ public class FeedPresenterImpl extends BasicPresenter<FeedContract.View> impleme
     public FeedPresenterImpl(FeedContract.View view) {
         super(view);
     }
-
-    @NonNull
-    @Override
-    public LifecycleProvider getLifecycleProvider() {
-        return null;
-    }
-
 
     @Override
     protected void onStart() {

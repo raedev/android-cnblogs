@@ -3,7 +3,14 @@
     <cache-path
         name="cache_path"
         path="/" />
-    <external-path name="external_files" path="."/>
+    <external-path
+        name="external_files"
+        path="." />
+
+    <root-path
+        name="camera_photos"
+        path="." />
+
     <external-cache-path
         name="external-cache-path"
         path="/" />

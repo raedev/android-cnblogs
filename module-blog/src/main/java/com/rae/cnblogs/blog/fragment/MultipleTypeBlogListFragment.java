@@ -210,6 +210,8 @@ public class MultipleTypeBlogListFragment extends BasicFragment implements Conte
 
     @Override
     public void scrollToTop() {
+        if (mRecyclerView == null) return;
+
         if (mRecyclerView.isOnTop()) {
             mAppLayout.autoRefresh();
         } else {

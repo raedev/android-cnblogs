@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.gson.Gson;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.ContentEntityConverter;
+import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
@@ -80,6 +81,10 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
     }
 
     private void initBlogFragment(ContentEntity entity) {
+        if (entity == null) {
+            UICompat.failed(this, "博客实体为空");
+            return;
+        }
         BlogDetailFragment fragment = BlogDetailFragment.newInstance(entity);
         getSupportFragmentManager()
                 .beginTransaction()

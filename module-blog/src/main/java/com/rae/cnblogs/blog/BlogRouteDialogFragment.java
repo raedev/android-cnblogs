@@ -58,9 +58,13 @@ public class BlogRouteDialogFragment extends BasicDialogFragment implements Blog
 
     @Override
     public void onLoadDataFailed(String message) {
-        // 失败后，自动跳转网页
-        AppRoute.routeToWeb(getContext(), mUrl);
-        dismiss();
+        try {
+            // 失败后，自动跳转网页
+            AppRoute.routeToWeb(getContext(), mUrl);
+            dismiss();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

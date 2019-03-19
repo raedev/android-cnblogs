@@ -53,7 +53,7 @@
                 android:paddingBottom="2dp"
                 android:text="18讲"
                 android:textColor="#FF9B9B9B"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_author"
@@ -79,7 +79,9 @@
             android:layout_height="0dp"
             android:layout_marginTop="7dp"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:lineSpacingMultiplier="1.2"
+            android:lines="2"
             android:text="--"
             android:textColor="#FF878C97"
             android:textSize="13sp"

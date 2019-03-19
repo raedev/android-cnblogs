@@ -187,8 +187,6 @@ public abstract class BasicBlogPresenterImpl extends BasicPresenter<ContentListC
                     public void onNext(List<BlogBean> blogBeans) {
                         // 入库
                         DbFactory.getInstance().getBlog().addAll(blogBeans);
-                        // 入库完成后，清除数据
-                        blogBeans.clear();
                     }
 
                     @Override

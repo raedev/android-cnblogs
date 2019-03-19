@@ -138,6 +138,7 @@ public class AntColumnFragment extends BasicFragment implements IAntColumnContra
 
     @Override
     public void onEmptyData(String msg) {
+        dismissLogin();
         mRefreshLayout.setRefreshing(false);
         mAdapter.showEmpty(msg);
         mAdapter.loadMoreComplete();

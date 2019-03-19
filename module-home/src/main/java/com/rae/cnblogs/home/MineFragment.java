@@ -181,6 +181,7 @@ public class MineFragment extends BasicFragment implements MineContract.View {
 
     @OnClick(R2.id.layout_account_follow)
     public void onFollowClick() {
+        if (UserProvider.getInstance().isNotLogin()) return;
         AppRoute.routeToFollow(this.getContext(), getString(R.string.me), UserProvider.getInstance().getLoginUserInfo().getBlogApp());
     }
 

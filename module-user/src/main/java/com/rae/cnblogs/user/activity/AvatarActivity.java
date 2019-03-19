@@ -31,6 +31,7 @@ import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.personal.UserAvatarContract;
 import com.rae.cnblogs.user.personal.UserAvatarPresenterImpl;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -121,34 +122,40 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == AppRoute.REQ_IMAGE_SELECTION && data != null) {
-            ArrayList<String> images = data.getStringArrayListExtra("selectedImages");
-            if (images != null && images.size() > 0) {
-                String path = images.get(0);
+        try {
+            if (resultCode == Activity.RESULT_OK && requestCode == AppRoute.REQ_IMAGE_SELECTION && data != null) {
+                ArrayList<String> images = data.getStringArrayListExtra("selectedImages");
+                if (images != null && images.size() > 0) {
+                    String path = images.get(0);
+                    onAvatarImageChanged(path);
+                    // 跳转图片处理
+                    routeToCrop(path);
+                }
+            }
+
+            // 图片裁剪返回
+            if (resultCode == RESULT_OK && (requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && data != null) {
+                String path = getResultImageData(data);
+                if (TextUtils.isEmpty(path)) {
+                    UICompat.failed(this, "头像获取失败");
+                    return;
+                }
+                Log.i("rae", "路径为：" + path);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    path = handleContentUri(Uri.parse(path));
+                }
+
                 onAvatarImageChanged(path);
-                // 跳转图片处理
-                routeToCrop(path);
-            }
-        }
-
-        // 图片裁剪返回
-        if (resultCode == RESULT_OK && (requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && data != null) {
-            String path = getResultImageData(data);
-            if (TextUtils.isEmpty(path)) {
-                UICompat.failed(this, "头像获取失败");
-                return;
-            }
-            Log.i("rae", "路径为：" + path);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                path = handleContentUri(Uri.parse(path));
+                handleUpload();
             }
 
-            onAvatarImageChanged(path);
-            handleUpload();
-        }
-
-        if ((requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && resultCode != RESULT_OK) {
-            UICompat.failed(this, "裁剪图片失败");
+            if ((requestCode == REQUEST_CODE_CROP || requestCode == REQUEST_CODE_CROP_FILE_PROVIDER) && resultCode != RESULT_OK) {
+                UICompat.failed(this, "裁剪图片失败");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            CrashReport.postCatchedException(new RuntimeException("头像回调onActivityResult处理异常", ex)); // 手动上传异常
+            UICompat.failed(this, "未知的异常导致头像获取失败！");
         }
 
     }
@@ -221,7 +228,7 @@ public class AvatarActivity extends SwipeBackBasicActivity implements UserAvatar
             outputUri = resolveUrl(new File(getExternalCacheDir(), fileName).getPath());
         }
 
-        Log.i("Rae","路徑："+ uri);
+        Log.i("Rae", "路徑：" + uri);
 
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");

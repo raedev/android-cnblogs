@@ -1,5 +1,6 @@
 package com.rae.cnblogs;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.antcode.sdk.AntCodeSDK;
@@ -33,6 +34,8 @@ public class CnblogsApplication extends BasicApplication implements SkinObserver
     protected void onFirstCreate() {
         super.onFirstCreate();
 
+        startCnblogServices();
+
         QMUISwipeBackActivityManager.init(this);
 
         // 主题初始化
@@ -57,6 +60,18 @@ public class CnblogsApplication extends BasicApplication implements SkinObserver
         // Bugly
         CrashReport.initCrashReport(this, BuildConfig.BUGLY_APP_ID, BuildConfig.DEBUG);
         initUMConfig();
+
+    }
+
+    // 启动博客园服务
+    private void startCnblogServices() {
+        try {
+            Intent serviceIntent = new Intent();
+            serviceIntent.setClassName(getPackageName(), "com.rae.cnblogs.blog.CnblogsService");
+            startService(serviceIntent);
+        } catch (Exception ex) {
+            Log.e("Rae", "启动博客园服务失败", ex);
+        }
     }
 
     public void clearCache() {

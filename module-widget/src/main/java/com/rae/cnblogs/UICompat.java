@@ -91,25 +91,28 @@ public final class UICompat {
         loading(context, context.getString(R.string.loading));
     }
 
-    public static LoadingDialog loading(Context context, String msg) {
-        LoadingDialog dialog;
-        if (sDialogWeakReference == null || sDialogWeakReference.get() == null) {
-            sDialogWeakReference = new WeakReference<>(new LoadingDialog(context));
-        }
-        dialog = sDialogWeakReference.get();
-        // 不是当前的处理
-        if (!((ContextWrapper) dialog.getContext()).getBaseContext().equals(context)) {
-            if (dialog.getWindow() != null && dialog.getWindow().getDecorView() != null) {
-                dialog.dismiss();
+    public static void loading(Context context, String msg) {
+        try {
+            LoadingDialog dialog;
+            if (sDialogWeakReference == null || sDialogWeakReference.get() == null) {
+                sDialogWeakReference = new WeakReference<>(new LoadingDialog(context));
             }
-            sDialogWeakReference.clear();
-            sDialogWeakReference = null;
-            sDialogWeakReference = new WeakReference<>(new LoadingDialog(context));
-        }
+            dialog = sDialogWeakReference.get();
+            // 不是当前的处理
+            if (!((ContextWrapper) dialog.getContext()).getBaseContext().equals(context)) {
+                if (dialog.getWindow() != null) {
+                    dialog.dismiss();
+                }
+                sDialogWeakReference.clear();
+                sDialogWeakReference = null;
+                sDialogWeakReference = new WeakReference<>(new LoadingDialog(context));
+            }
 
-        dialog.setMessage(msg);
-        dialog.show();
-        return dialog;
+            dialog.setMessage(msg);
+            dialog.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void dismiss() {

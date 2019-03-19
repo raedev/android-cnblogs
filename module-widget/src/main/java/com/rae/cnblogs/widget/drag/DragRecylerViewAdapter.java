@@ -2,7 +2,6 @@ package com.rae.cnblogs.widget.drag;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -29,7 +28,7 @@ public abstract class DragRecylerViewAdapter<T, VH extends RecyclerView.ViewHold
     }
 
     public void remove(int position) {
-        Log.i("Rae", "移除：" + position);
+        if (position < 0 || position > mItems.size()) return;
         mItems.remove(position);
     }
 

@@ -42,7 +42,7 @@ dependencies {
     implementation rootProject.ext.dependencies.greendao
 
 
-    api 'com.antcode:sdk:1.0.1'
+    api 'com.antcode:sdk:1.0.2'
 //    api rootProject.ext.dependencies.rxjava
 //    api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.jsoup

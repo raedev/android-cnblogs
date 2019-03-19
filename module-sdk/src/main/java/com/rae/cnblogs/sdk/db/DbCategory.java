@@ -25,8 +25,12 @@ public class DbCategory {
      * @param list 数据
      */
     public void reset(final List<CategoryBean> list) {
-        mSession.getCategoryBeanDao().deleteAll();
-        mSession.getCategoryBeanDao().insertInTx(list);
+        try {
+            mSession.getCategoryBeanDao().deleteAll();
+            mSession.getCategoryBeanDao().insertInTx(list);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 

@@ -20,6 +20,7 @@ import com.rae.cnblogs.sdk.bean.BlogType;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
 import com.rae.cnblogs.sdk.bean.MomentBean;
 import com.rae.cnblogs.sdk.model.MomentMetaData;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONObject;
 
@@ -251,9 +252,14 @@ public final class AppRoute {
      * 博客正文界面
      */
     public static void routeToContentDetail(Context context, ContentEntity entity) {
-        ARouter.getInstance().build(PATH_CONTENT_DETAIL)
-                .withParcelable("entity", entity)
-                .navigation(context);
+        try {
+            ARouter.getInstance().build(PATH_CONTENT_DETAIL)
+                    .withParcelable("entity", entity)
+                    .navigation(context);
+        } catch (Exception ex) {
+            CrashReport.postCatchedException(new RuntimeException("跳转到博文详情异常", ex));
+            UICompat.failed(context, "跳转异常");
+        }
     }
 
     /**

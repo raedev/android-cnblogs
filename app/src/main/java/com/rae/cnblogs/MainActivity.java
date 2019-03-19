@@ -22,7 +22,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.basic.AppFragmentAdapter;
 import com.rae.cnblogs.basic.BasicActivity;
 import com.rae.cnblogs.basic.rx.AndroidObservable;
-import com.rae.cnblogs.blog.CnblogsService;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.dialog.VersionDialogFragment;
 import com.rae.cnblogs.home.main.MainContract;
@@ -35,8 +34,6 @@ import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.bean.VersionInfo;
 import com.rae.cnblogs.sdk.event.PostMomentEvent;
 import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
-import com.rae.cnblogs.theme.AppThemeManager;
-import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.widget.ITopScrollable;
 import com.umeng.socialize.UMShareAPI;
 
@@ -47,7 +44,6 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import skin.support.SkinCompatManager;
 
 @Route(path = AppRoute.PATH_APP_HOME)
 public class MainActivity extends BasicActivity implements MainContract.View, RaeTabLayout.OnTabSelectedListener {
@@ -71,18 +67,9 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPresenter = new MainPresenterImpl(this);
-
         initTab();
-
         // 请求权限
         requestPermissions();
-
-        // 启动服务
-        startService(new Intent(this, CnblogsService.class));
-
-//        if (BuildConfig.DEBUG) {
-//            debugLogin();
-//        }
     }
 
 
