@@ -54,6 +54,7 @@ public class AntColumnActivity extends SwipeBackBasicActivity {
     @OnClick(R2.id.img_question)
     public void onQuestionClick() {
         AppRoute.routeToAntColumnWeb(this, getString(R.string.url_antcode_about));
+//        AppRoute.routeToAntColumnWeb(this, "http://192.168.1.112:8088/about");
     }
 
     class AntColumnAdapter extends FragmentPagerAdapter {

@@ -24,11 +24,16 @@ import com.rae.cnblogs.middleware.BuildConfig;
 import com.rae.cnblogs.middleware.R;
 import com.rae.cnblogs.theme.ThemeCompat;
 import com.rae.cnblogs.web.client.AppJavaScript;
+import com.rae.cnblogs.web.client.JavaScriptConfig;
 import com.rae.cnblogs.web.client.RaeJavaScriptBridge;
 import com.rae.cnblogs.web.client.RaeWebChromeClient;
 import com.rae.cnblogs.web.client.RaeWebViewClient;
 import com.rae.cnblogs.widget.AppLayout;
 import com.rae.cnblogs.widget.RaeWebView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -59,6 +64,7 @@ public class WebViewFragment extends BasicFragment {
             mRawUrl = getArguments().getString("url");
             mUrl = mRawUrl;
         }
+        EventBus.getDefault().register(this);
     }
 
 
@@ -130,6 +136,7 @@ public class WebViewFragment extends BasicFragment {
 
     @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         if (mContentLayout != null) {
             mContentLayout.removeAllViews();
         }
@@ -161,6 +168,11 @@ public class WebViewFragment extends BasicFragment {
         } else {
             mEnablePullToRefresh = enable;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(JavaScriptConfig config) {
+        enablePullToRefresh(config.enablePullToRefresh);
     }
 
     public AppLayout getAppLayout() {
@@ -263,5 +275,13 @@ public class WebViewFragment extends BasicFragment {
 
     public void reload() {
         mWebView.reload();
+    }
+
+    public boolean doOnBackPressed() {
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+            return true;
+        }
+        return false;
     }
 }

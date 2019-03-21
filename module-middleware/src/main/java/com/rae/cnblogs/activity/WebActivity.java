@@ -40,7 +40,7 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
     @BindView(R2.id.view_holder)
     View mNightView;
 
-    WebViewFragment mWebViewFragment;
+    protected WebViewFragment mWebViewFragment;
 
     private ShareDialogFragment mShareDialogFragment;
 

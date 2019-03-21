@@ -6,16 +6,23 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.webkit.JavascriptInterface;
 
+import com.antcode.sdk.AntSessionManager;
+import com.antcode.sdk.model.AntTokenInfo;
+import com.antcode.sdk.model.AntUserInfo;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.ContentEntityConverter;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.basic.ContentEntity;
 import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.middleware.R;
+import com.rae.cnblogs.sdk.AppGson;
+import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.BlogBean;
+import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.parser.BlogInfoParser;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -79,4 +86,39 @@ public class AppJavaScript extends RaeJavaScriptBridge {
                 .show(mFragmentManager);
     }
 
+
+    @JavascriptInterface
+    public void config(String text) {
+        JavaScriptConfig config = AppGson.get().fromJson(text, JavaScriptConfig.class);
+        if (config != null) {
+            EventBus.getDefault().post(config);
+        }
+    }
+
+    @JavascriptInterface
+    public String getUser() {
+        try {
+            UserJsonObj obj = new UserJsonObj();
+            obj.cbUser = UserProvider.getInstance().getLoginUserInfo();
+            obj.antUser = AntSessionManager.getDefault().getUser();
+            return AppGson.toJson(obj);
+        } catch (Exception ex) {
+            return "{}";
+        }
+    }
+
+    @JavascriptInterface
+    public String getToken() {
+        try {
+            AntTokenInfo antUserInfo = AntSessionManager.getDefault().getUserToken();
+            return AppGson.toJson(antUserInfo);
+        } catch (Exception ex) {
+            return "{}";
+        }
+    }
+
+    private class UserJsonObj {
+        UserInfoBean cbUser;
+        AntUserInfo antUser;
+    }
 }

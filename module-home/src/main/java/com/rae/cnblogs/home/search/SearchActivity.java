@@ -127,13 +127,6 @@ public class SearchActivity extends SwipeBackBasicActivity {
     @OnClick(R2.id.btn_search)
     public void onSearchClick() {
         UICompat.hideSoftInputFromWindow(this);
-        // 检查登录状态
-        if (!SessionManager.getDefault().isLogin()) {
-            UICompat.toastInCenter(getContext(), "请登录后再搜索");
-            AppRoute.routeToLogin(getContext());
-            return;
-        }
-
         if (mSearchView.length() > 0)
             // 执行搜索
             performSearch(mSearchView.getText().toString());
@@ -145,6 +138,13 @@ public class SearchActivity extends SwipeBackBasicActivity {
      * 执行搜索
      */
     private void performSearch(String text) {
+        // 检查登录状态
+        if (!SessionManager.getDefault().isLogin()) {
+            UICompat.toastInCenter(getContext(), "请登录后再搜索");
+            AppRoute.routeToLogin(getContext());
+            return;
+        }
+
         if (TextUtils.isEmpty(text)) return;
         // 显示搜索结果页，由子Fragment处理
         if (mSearchResultFragment == null) {
