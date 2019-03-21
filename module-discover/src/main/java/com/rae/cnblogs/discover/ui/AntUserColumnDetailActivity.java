@@ -64,7 +64,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         setContentView(R.layout.activity_ant_user_column_detail);
         setTitle(" ");
         mPresenter = new AntUserColumnDetailPresenterImpl(this);
-        mAdapter = new AntUserColumnDetailAdapter(this, null);
+        mAdapter = new AntUserColumnDetailAdapter(this,  null);
         mAdapter.setEnableLoadMore(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -176,13 +176,15 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         TextView articleCountView = mHeaderView.findViewById(R.id.tv_article_count);
         mHeaderView.findViewById(R.id.fl_header).setOnClickListener(this);
         mHeaderView.findViewById(R.id.btn_unsubscribe).setOnClickListener(this);
+        mHeaderView.findViewById(R.id.btn_mode).setOnClickListener(this);
 
         AppImageLoader.display(columnInfo.getAvatar(), coverImageView);
         GlideApp.with(this)
                 .load(columnInfo.getLogo())
                 .apply(bitmapTransform(new BlurTransformation(25, 3)))
                 .into(blurImageView);
-        String articleNumText = getString(R.string.format_article_updated, columnInfo.getArticleNum());
+//        String articleNumText = getString(R.string.format_article_updated, columnInfo.getArticleNum());
+        String articleNumText = String.valueOf(columnInfo.getArticleNum());
         mTitleView.setText(columnInfo.getTitle());
         titleView.setText(columnInfo.getTitle());
         subtitleView.setText(columnInfo.getRecommendation());
@@ -240,10 +242,24 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         if (v.getId() == R.id.fl_header && mColumnInfo != null)
             AppRoute.routeToAntColumnDetail(this, mColumnInfo.getId());
 
+        if (v.getId() == R.id.btn_mode) {
+            onModeClick();
+        }
+
         // 取消订阅
         if (v.getId() == R.id.btn_unsubscribe) {
             onUnsubscribeClick();
         }
+    }
+
+    /**
+     * 模式切换
+     */
+    private void onModeClick() {
+//        int viewType = mAdapter.getViewType();
+//        viewType = viewType == 1 ? 0 : 1;
+//        mAdapter.setViewType(viewType);
+//        mAdapter.notifyDataSetChanged();
     }
 
     /**

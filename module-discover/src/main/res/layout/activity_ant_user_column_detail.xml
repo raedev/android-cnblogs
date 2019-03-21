@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ll_bottom"
-        android:background="#F8F8F8"
+        android:background="@color/background_divider"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:navigationIcon="@drawable/icon_back_white" >
+        app:navigationIcon="@drawable/icon_back_white">
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"

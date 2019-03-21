@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -30,13 +31,6 @@ public abstract class RaeBaseQuickAdapter<T, K extends BaseViewHolder> extends B
     public RaeBaseQuickAdapter(Context context, int layoutResId) {
         super(layoutResId);
         initView(context);
-    }
-
-    @NonNull
-    @Override
-    public K onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return super.onCreateViewHolder(parent, viewType);
     }
 
     protected void initView(Context context) {

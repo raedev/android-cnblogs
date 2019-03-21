@@ -127,6 +127,25 @@
                     android:textColor="@color/white"
                     android:textSize="12sp" />
 
+                <TextView
+                    android:id="@+id/tv_article_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:text="--"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_article_num"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/tv_article_num"
+                    android:text="篇"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_sub_num"
@@ -144,9 +163,11 @@
                     android:layout_alignBaseline="@+id/tv_article_num"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/tv_article_num"
-                    android:text="人已学习"
+                    android:text="人学习"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+
+
             </LinearLayout>
 
 
@@ -158,16 +179,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fl_header"
+        android:background="@drawable/public_divider_while_primary"
         android:paddingStart="24dp"
         android:paddingEnd="24dp">
 
-        <TextView
-            android:id="@+id/tv_article_num"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btn_mode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="已完结"
-            android:textColor="#FF878C97" />
+            android:background="@android:color/transparent"
+            android:text="详细模式"
+            android:textColor="#FFBBBBBB" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btn_unsubscribe"
