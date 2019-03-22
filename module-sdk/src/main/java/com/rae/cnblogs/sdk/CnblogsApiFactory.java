@@ -85,7 +85,16 @@ public final class CnblogsApiFactory {
                 Log.e(TAG, "======== 热补丁文件不存在：" + filePath);
                 return null;
             }
-            String outputPath = context.getFilesDir().getAbsolutePath();
+            if (!file.canRead()) {
+                Log.e(TAG, "======== 补丁文件不可读：" + filePath);
+                return null;
+            }
+
+            String outputPath = context.getDir("code", Context.MODE_PRIVATE).getAbsolutePath();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                outputPath = context.getCodeCacheDir().getAbsolutePath();
+            }
+
             Log.d(TAG, "======== 补丁文件：" + filePath);
             DexClassLoader dexClassLoader = new DexClassLoader(filePath, outputPath, outputPath, context.getClassLoader());
             Class<?> cls = dexClassLoader.loadClass("com.rae.cnblogs.sdk.PatchCnblogsApiProvider");
