@@ -132,7 +132,7 @@
         <item name="android:drawableRight">@drawable/default_right_arrow</item>
     </style>
 
-    <style name="SettingItemStyle" parent="ItemStyle">s
+    <style name="SettingItemStyle" parent="ItemStyle">
         <item name="android:paddingEnd">24dp</item>
         <item name="android:paddingStart">36dp</item>
     </style>

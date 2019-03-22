@@ -59,6 +59,7 @@ android {
     lintOptions {
         abortOnError false
     }
+
 }
 
 // 美团插件 - 渠道包

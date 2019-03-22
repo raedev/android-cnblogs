@@ -1,6 +1,7 @@
 package com.rae.cnblogs.sdk;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.rae.cnblogs.sdk.api.IBlogApi;
 import com.rae.cnblogs.sdk.api.IBlogQuestionApi;
@@ -93,4 +94,14 @@ public class DefaultCnblogsApiProvider extends CnblogsApiProvider {
         return getRetrofit().create(IRaeServerApi.class);
     }
 
+    @Override
+    public String getDownloadUrl() {
+        return "http://img.raeblog.com/cnblogs/patch/hotfix.patch";
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "default cnblogs sdk provider. version is " + getApiVersion();
+    }
 }

@@ -50,6 +50,12 @@ public class MainPresenterImpl extends BasicPresenter<MainContract.View> impleme
                     @Override
                     protected void onError(String message) {
                         // 更新出错不提示
+//                        VersionInfo versionInfo = new VersionInfo();
+//                        versionInfo.setVersionName("v2.0.1");
+//                        versionInfo.setAppDesc("测试更新");
+//                        versionInfo.setDownloadUrl("https://www.baidu.com");
+//                        versionInfo.setVersionCode("12");
+//                        getView().onNewVersion(versionInfo);
                     }
 
                     @Override

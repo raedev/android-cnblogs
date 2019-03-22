@@ -22,7 +22,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="24dp"
             android:background="@color/background_divider"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:src="@drawable/default_placeholder_normal" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:maxLines="2"
             android:text="TextView限制多行,超出内容时用省略号显示TextView限制多行,超出内容时用省略号显示"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

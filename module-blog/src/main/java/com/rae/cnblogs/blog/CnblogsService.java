@@ -10,10 +10,21 @@ import com.rae.cnblogs.basic.AppDataManager;
 import com.rae.cnblogs.blog.job.BlogContentJob;
 import com.rae.cnblogs.blog.job.IJob;
 import com.rae.cnblogs.blog.job.JobEvent;
+import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.db.DbFactory;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * 博客园服务
@@ -35,14 +46,42 @@ public class CnblogsService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i("rae", "博客园服务启动了");
         EventBus.getDefault().register(this);
+        checkCacheSize(); // 检查缓存空间大小
+        // 下载补丁包
+        downloadSdkPatch();
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("rae", "博客园服务启动了");
-        checkCacheSize(); // 检查缓存空间大小
-        return super.onStartCommand(intent, flags, startId);
+    private void downloadSdkPatch() {
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+//                .connectTimeout(5, TimeUnit.MINUTES)
+//                .readTimeout(5, TimeUnit.MINUTES)
+//                .writeTimeout(5, TimeUnit.MINUTES)
+                .build();
+
+        // 默认补丁包下载地址
+        String downloadUrl = CnblogsApiFactory.getInstance(this).getDownloadUrl();
+        Request request = new Request.Builder().url(downloadUrl).build();
+        Log.d("CnblogsService", "下载SDK补丁包：" + downloadUrl);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("CnblogsService", "下载sdk补丁包失败", e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                ResponseBody body = response.body();
+                if (body == null) {
+                    Log.e("CnblogsService", "下载sdk补丁包失败，响应内容为空！");
+                    return;
+                }
+                InputStream inputStream = body.byteStream();
+                CnblogsApiFactory.savePatchFile(CnblogsService.this, inputStream);
+            }
+        });
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.rae.cnblogs.sdk;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import com.rae.cnblogs.sdk.api.IBlogApi;
 import com.rae.cnblogs.sdk.api.IBlogQuestionApi;
@@ -19,7 +18,6 @@ import com.rae.cnblogs.sdk.converter.ConverterFactory;
 import com.rae.cnblogs.sdk.interceptor.RequestInterceptor;
 import com.squareup.okhttp3.OkHttpExtBuilder;
 
-import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -33,10 +31,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 public abstract class CnblogsApiProvider {
 
     private final Retrofit mRetrofit;
-    private final WeakReference<Context> mContext;
+    private final Context mContext; // application context
 
     CnblogsApiProvider(Context context) {
-        mContext = new WeakReference<>(context.getApplicationContext());
+        mContext = context.getApplicationContext();
         OkHttpExtBuilder builder = new OkHttpExtBuilder();
 
         // 调试模式启用接口日志打印
@@ -70,9 +68,8 @@ public abstract class CnblogsApiProvider {
         return mRetrofit;
     }
 
-    @Nullable
     protected Context getContext() {
-        return mContext.get();
+        return mContext;
     }
 
     /**
@@ -143,4 +140,8 @@ public abstract class CnblogsApiProvider {
     public abstract IRaeServerApi getRaeServerApi();
 
 
+    /**
+     * 获取接口下载地址
+     */
+    public abstract String getDownloadUrl();
 }

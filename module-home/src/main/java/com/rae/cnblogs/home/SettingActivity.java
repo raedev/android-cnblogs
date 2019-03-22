@@ -1,6 +1,7 @@
 package com.rae.cnblogs.home;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -249,6 +250,16 @@ public class SettingActivity extends SwipeBackBasicActivity implements SettingCo
     @OnClick(R2.id.ll_about_me)
     public void onAboutMeClick() {
         AppRoute.routeToAboutMe(this);
+    }
+
+
+    /**
+     * 长按进入开发工具
+     */
+    @OnLongClick(R2.id.ll_about_me)
+    public boolean onAboutMeLongClick() {
+        startActivity(new Intent(this, ToolActivity.class));
+        return true;
     }
 
     @OnLongClick(R2.id.tv_check_update)

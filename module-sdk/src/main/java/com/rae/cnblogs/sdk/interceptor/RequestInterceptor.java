@@ -11,6 +11,7 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import com.rae.cnblogs.sdk.BuildConfig;
+import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.JsonBody;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
@@ -70,6 +71,7 @@ public class RequestInterceptor implements Interceptor {
         Request request = chain.request();
 
         Request.Builder newBuilder = request.newBuilder();
+        newBuilder.addHeader("SDK-VERSION", String.valueOf(CnblogsApiFactory.getVersion()));
 
         // 添加版本号
         if (request.url().host().contains("rae")) {

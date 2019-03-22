@@ -102,6 +102,9 @@ public class ContentItemAdapter extends BaseItemAdapter<ContentEntity, SimpleVie
             // 显示头像
             AppImageLoader.displayAvatar(m.getAvatar(), holder.avatarView);
         }
+        if ("kb".equalsIgnoreCase(m.getType())) {
+            holder.setVisibility(holder.authorLayout, false);
+        }
 
         // 显示预览图
         showThumbImages(m.getThumbs(), holder);

@@ -6,16 +6,15 @@
     android:layout_marginBottom="10dp"
     android:background="@drawable/bg_blog_item_selector"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/default_margin"
     android:paddingLeft="@dimen/default_margin"
+    android:paddingTop="@dimen/default_margin"
     android:paddingRight="@dimen/default_margin"
-    android:paddingTop="@dimen/default_margin">
+    android:paddingBottom="@dimen/default_margin">
 
     <LinearLayout
         android:id="@+id/ll_blog_author_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:gravity="center_vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -43,6 +42,7 @@
         android:id="@+id/tv_blog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="11dp"
         android:text="@string/title"
         android:textColor="@color/ph1"

@@ -34,6 +34,7 @@ import com.rae.cnblogs.sdk.utils.ApiUtils;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
@@ -64,7 +65,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         setContentView(R.layout.activity_ant_user_column_detail);
         setTitle(" ");
         mPresenter = new AntUserColumnDetailPresenterImpl(this);
-        mAdapter = new AntUserColumnDetailAdapter(this,  null);
+        mAdapter = new AntUserColumnDetailAdapter(this, null);
         mAdapter.setEnableLoadMore(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -243,7 +244,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
             AppRoute.routeToAntColumnDetail(this, mColumnInfo.getId());
 
         if (v.getId() == R.id.btn_mode) {
-            onModeClick();
+            onModeClick((TextView) v);
         }
 
         // 取消订阅
@@ -255,11 +256,19 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
     /**
      * 模式切换
      */
-    private void onModeClick() {
-//        int viewType = mAdapter.getViewType();
-//        viewType = viewType == 1 ? 0 : 1;
-//        mAdapter.setViewType(viewType);
-//        mAdapter.notifyDataSetChanged();
+    private void onModeClick(TextView view) {
+        int viewType = mAdapter.getViewType();
+        viewType = viewType == 1 ? 0 : 1;
+        mAdapter.setViewType(viewType);
+        mAdapter.notifyDataSetChanged();
+        mRecyclerView.setAdapter(mAdapter);
+        view.setText(viewType == 0 ? R.string.detail_mode : R.string.title_mode);
+    }
+
+
+    @OnClick(R2.id.tool_bar)
+    public void onToolbarClick() {
+        UICompat.scrollToTop(mRecyclerView);
     }
 
     /**

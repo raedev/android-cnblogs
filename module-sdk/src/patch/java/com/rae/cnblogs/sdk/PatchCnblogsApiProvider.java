@@ -1,6 +1,7 @@
 package com.rae.cnblogs.sdk;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 /**
  * 用于动态下发的接口工厂提供者
@@ -17,8 +18,9 @@ public class PatchCnblogsApiProvider extends DefaultCnblogsApiProvider {
         return 3;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "this is cnblogs patch api provider! version is " + getApiVersion();
+        return "patch cnblogs sdk provider. version is " + getApiVersion();
     }
 }

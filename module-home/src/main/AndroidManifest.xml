@@ -40,5 +40,8 @@
         <activity
             android:name=".AboutMeActivity"
             android:label="@string/about_me" />
+        <activity
+            android:name=".ToolActivity"
+            android:label="@string/label_tool" />
     </application>
 </manifest>

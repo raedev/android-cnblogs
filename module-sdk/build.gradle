@@ -19,6 +19,9 @@ android {
             buildConfigField "boolean", "API_LOG_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        patch {
+            initWith release
+        }
     }
     greendao {
         schemaVersion 1

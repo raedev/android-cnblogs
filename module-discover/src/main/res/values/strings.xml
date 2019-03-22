@@ -13,4 +13,6 @@
     <string name="format_article_updated">已更新%d篇文章</string>
     <string name="unsubscribe_success">取消订阅成功</string>
     <string name="url_antcode_about">http://app.mayizhuanlan.com/about</string>
+    <string name="detail_mode">详细模式</string>
+    <string name="title_mode">标题模式</string>
 </resources>

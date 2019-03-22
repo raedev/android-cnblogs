@@ -35,6 +35,9 @@ public final class AppImageLoader {
         if (DEFAULT_PLACE_HOLDER_ERROR_ID == -1) {
             DEFAULT_PLACE_HOLDER_ERROR_ID = context.getResources().getIdentifier("default_placeholder_error", "drawable", context.getPackageName());
         }
+        if (DEFAULT_AVATAR_PLACE_HOLDER_ID == -1) {
+            DEFAULT_AVATAR_PLACE_HOLDER_ID = context.getResources().getIdentifier("default_avatar_placeholder", "drawable", context.getPackageName());
+        }
     }
 
     /**
@@ -48,24 +51,21 @@ public final class AppImageLoader {
         if (view == null)
             return;
 
-        Context context = view.getContext();
-        if (resId == -1) {
-            resId = context.getResources().getIdentifier("default_avatar_placeholder", "drawable", context.getPackageName());
-        }
-
         if (TextUtils.isEmpty(url)) {
             view.setImageResource(resId);
             return;
         }
 
+        checkPlaceHolder(view.getContext());
         GlideApp.with(view)
                 .load(url)
                 .placeholder(resId)
                 .error(resId)
                 .centerCrop()
-                .transition(DrawableTransitionOptions.withCrossFade(300)) // 渐变动画
                 .circleCrop()
+                .transition(DrawableTransitionOptions.withCrossFade(600)) // 渐变动画
                 .into(view);
+
     }
 
     /**
@@ -74,15 +74,9 @@ public final class AppImageLoader {
     public static void display(@Nullable String url, @Nullable ImageView view) {
         if (view == null)
             return;
-        if (TextUtils.isEmpty(url)) {
-            view.setImageResource(DEFAULT_PLACE_HOLDER_ID);
-            return;
-        }
-
         checkPlaceHolder(view.getContext());
         GlideApp.with(view)
                 .load(url)
-                .transition(DrawableTransitionOptions.withCrossFade(300))
                 .placeholder(DEFAULT_PLACE_HOLDER_ID)
                 .error(DEFAULT_PLACE_HOLDER_ERROR_ID)
                 .into(view);

@@ -1,5 +1,6 @@
 package com.rae.cnblogs.dialog;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,6 +67,16 @@ public class VersionDialogFragment extends BasicDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         mContentView.setText(Html.fromHtml(versionDesc));
         mVersionNameView.setText(versionName);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setCancelable(false);
+        }
     }
 
     public void show(FragmentManager manager) {

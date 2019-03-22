@@ -179,9 +179,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fl_header"
-        android:background="@drawable/public_divider_while_primary"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp">
+        android:background="@drawable/public_divider_while_primary">
 
         <Button
             android:id="@+id/btn_mode"
