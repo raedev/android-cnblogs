@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class RaeJavaScriptBridge {
 
     private WeakReference<Context> mReference;
+    protected boolean mEnableWebBlog = true; // 是否允许自动优化博文
 
     public RaeJavaScriptBridge(Context context) {
         mReference = new WeakReference<>(context);
@@ -88,5 +89,9 @@ public class RaeJavaScriptBridge {
 
     public String getString(int resId, Object... args) {
         return getContext().getString(resId, args);
+    }
+
+    public void setEnableWebBlog(boolean value) {
+        mEnableWebBlog = value;
     }
 }

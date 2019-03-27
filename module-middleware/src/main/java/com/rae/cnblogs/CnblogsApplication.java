@@ -12,6 +12,7 @@ import com.rae.cnblogs.basic.AppImageLoader;
 import com.rae.cnblogs.basic.ApplicationCompat;
 import com.rae.cnblogs.basic.BasicApplication;
 import com.rae.cnblogs.resource.BuildConfig;
+import com.rae.cnblogs.sdk.CnblogsApiFactory;
 import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 import com.rae.cnblogs.sdk.db.DbCnblogs;
@@ -48,6 +49,7 @@ public class CnblogsApplication extends BasicApplication implements SkinObserver
         DbCnblogs.init(this);
         // 用户管理
         UserProvider.init(this);
+        CnblogsApiFactory.getInstance(this);
         // 码蚁专栏SDK
         AntCodeSDK.init(this, "91f8cc0325f8d228d37bd1c9c4ef7e84");
 //        AntCodeSDK.init(new AntCodeSDK.Builder(this).clientId("91f8cc0325f8d228d37bd1c9c4ef7e84").url("http://192.168.1.7:8081/antcode/index.php/"));

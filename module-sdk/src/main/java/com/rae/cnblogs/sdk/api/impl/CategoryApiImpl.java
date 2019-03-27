@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.rae.cnblogs.sdk.AppGson;
 import com.rae.cnblogs.sdk.Empty;
 import com.rae.cnblogs.sdk.api.ICategoryApi;
 import com.rae.cnblogs.sdk.bean.CategoryBean;
@@ -32,16 +33,15 @@ public class CategoryApiImpl implements ICategoryApi {
     private final Gson mGson;
 
     public CategoryApiImpl(Context context) {
-        this.mContext = context.getApplicationContext();
+        this.mContext = context;
         GsonBuilder builder = new GsonBuilder();
         builder.excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC);
-        mGson = builder.create();
+        mGson = AppGson.get();
     }
 
     private List<CategoryBean> getFromAssets() {
-        String json = readString("category.json").replace("\r\n", "");
-        if (json == null) return null;
         try {
+            String json = readString().replace("\r\n", "");
             return mGson.fromJson(json, new TypeToken<List<CategoryBean>>() {
             }.getType());
         } catch (Exception e) {
@@ -50,9 +50,10 @@ public class CategoryApiImpl implements ICategoryApi {
         }
     }
 
-    private String readString(String fileName) {
+    private String readString() {
         try {
-            InputStream stream = mContext.getAssets().open(fileName);
+            if (mContext == null) return "";
+            InputStream stream = mContext.getAssets().open("category.json");
             BufferedInputStream bis = new BufferedInputStream(stream);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             byte[] buffer = new byte[128];
@@ -70,7 +71,7 @@ public class CategoryApiImpl implements ICategoryApi {
             e.printStackTrace();
         }
 
-        return null;
+        return "";
     }
 
     @Override

@@ -56,6 +56,7 @@ public class AppJavaScript extends RaeJavaScriptBridge {
         // 当网页加载完毕的时候，自动检查是否为博文，跳转到对应的博文界面
         Document document = Jsoup.parse(html);
         final String title = document.title();
+        if (!mEnableWebBlog) return;
 
         Elements elements = document.select(".postBody");
         if (elements.size() <= 0) {

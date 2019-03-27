@@ -53,7 +53,7 @@ public class WebViewFragment extends BasicFragment {
     AppLayout mAppLayout;
     private String mUrl;
     private String mRawUrl;
-    private RaeJavaScriptBridge mJavaScriptApi;
+    protected RaeJavaScriptBridge mJavaScriptApi;
     private WebViewClient mRaeWebViewClient;
     private boolean mEnablePullToRefresh = true;
 

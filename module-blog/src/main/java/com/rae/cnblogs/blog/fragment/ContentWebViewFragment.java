@@ -80,6 +80,8 @@ public class ContentWebViewFragment extends WebViewFragment implements ITopScrol
         mSourceTextZoom = getWebView().getSettings().getTextZoom();
         initWebView();
         initFontSize();
+        mJavaScriptApi.setEnableWebBlog(false);
+
 
         // 可刷新接口
         if (getParentFragment() instanceof IRefreshable) {
