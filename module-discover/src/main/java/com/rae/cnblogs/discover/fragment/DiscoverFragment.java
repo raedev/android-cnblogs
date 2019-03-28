@@ -32,6 +32,7 @@ import com.rae.cnblogs.discover.holder.DiscoverItem;
 import com.rae.cnblogs.discover.home.DiscoverHomeAdapter;
 import com.rae.cnblogs.discover.home.DiscoverHomePresenterImpl;
 import com.rae.cnblogs.discover.home.IDiscoverHomeContract;
+import com.rae.cnblogs.widget.ITopScrollable;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -45,7 +46,7 @@ import butterknife.BindView;
  * Created by ChenRui on 2018/6/13 10:22.
  */
 @Route(path = AppRoute.PATH_FRAGMENT_DISCOVER)
-public class DiscoverFragment extends BasicFragment implements IDiscoverHomeContract.View {
+public class DiscoverFragment extends BasicFragment implements IDiscoverHomeContract.View, ITopScrollable {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -208,6 +209,16 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         item.setImageUrl(imageUrl);
         mAdInfoList.add(item);
         mBanner.setImages(mAdInfoList).start();
+    }
+
+    @Override
+    public void scrollToTop() {
+        if (mRecyclerView.canScrollVertically(-1)) {
+            UICompat.scrollToTop(mRecyclerView);
+        } else if (!mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.setRefreshing(true);
+            mPresenter.start();
+        }
     }
 
     class TabClickListener implements View.OnClickListener {

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         mPlaceholderView = new LoginPlaceholderView(view.getContext());
         mPlaceholderView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mPlaceholderView.dismiss();
+        mPlaceholderView.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.background_divider));
         // 重试按钮
         mPlaceholderView.setOnRetryClickListener(new View.OnClickListener() {
             @Override

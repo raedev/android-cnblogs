@@ -1,5 +1,6 @@
 package com.rae.cnblogs.home.setting;
 
+import com.antcode.sdk.AntSessionManager;
 import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.ApplicationCompat;
 import com.rae.cnblogs.basic.BasicPresenter;
@@ -30,7 +31,8 @@ public class SettingPresenterImpl extends BasicPresenter<SettingContract.View> i
 
     @Override
     protected void onStart() {
-        if (!UserProvider.getInstance().isLogin()) {
+        boolean isLogin = UserProvider.getInstance().isLogin() || AntSessionManager.getDefault().isLogin();
+        if (!isLogin) {
             getView().onNotLogin();
         }
         getView().onLoadVersionInfo("v" + ApplicationCompat.getVersionName(getContext()));
@@ -41,6 +43,7 @@ public class SettingPresenterImpl extends BasicPresenter<SettingContract.View> i
         getView().onNotLogin();
         AppMobclickAgent.onProfileSignOff();
         UserProvider.getInstance().logout();
+        AntSessionManager.getDefault().clear(); // 退出专栏
         EventBus.getDefault().post(new LoginInfoEvent());
         getView().onLogout();
     }

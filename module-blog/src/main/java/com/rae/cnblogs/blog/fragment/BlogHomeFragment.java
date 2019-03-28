@@ -40,9 +40,9 @@ import butterknife.OnClick;
 @Route(path = AppRoute.PATH_FRAGMENT_HOME)
 public class BlogHomeFragment extends BasicFragment implements BlogHomeContract.View, RaeTabLayout.OnTabSelectedListener, ITopScrollable {
 
-    public static BlogHomeFragment newInstance() {
-        return new BlogHomeFragment();
-    }
+//    public static BlogHomeFragment newInstance() {
+//        return new BlogHomeFragment();
+//    }
 
 
     private BlogHomeFragmentAdapter mAdapter;

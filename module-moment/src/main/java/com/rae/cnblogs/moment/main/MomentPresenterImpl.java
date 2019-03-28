@@ -96,7 +96,6 @@ public class MomentPresenterImpl extends BasicPresenter<IMomentContract.View> im
     public void destroy() {
         super.destroy();
         EventBus.getDefault().unregister(this);
-        mPageObservable.destroy();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -19,12 +19,9 @@ public abstract class BasicFragment extends Fragment implements IPresenterView {
     @Nullable
     private Unbinder mUnBinder;
 
-    private String mPageName = "Fragment";
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageName = getClass().getSimpleName();
         Bundle arguments = getArguments();
         if (arguments != null) {
             onReceiveArguments(arguments);
@@ -80,7 +77,6 @@ public abstract class BasicFragment extends Fragment implements IPresenterView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         List<Fragment> fragments = getChildFragmentManager().getFragments();
-        if (fragments == null) return;
         for (Fragment fragment : fragments) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }

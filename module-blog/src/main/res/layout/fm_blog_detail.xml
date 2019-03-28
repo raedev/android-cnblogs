@@ -127,7 +127,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:scaleType="center"
-                    android:src="@drawable/icon_share_small" />
+                    android:src="@drawable/icon_blog_share" />
 
             </LinearLayout>
 

@@ -79,6 +79,7 @@ public class BlogContentJob extends AsyncDownloadJob {
                     @Override
                     public void onNext(BlogBean blog) {
                         // 开始执行任务
+                        if ("BLOGGER".equalsIgnoreCase(blog.getBlogType())) return;
                         execute(new BlogContentTask(mConnectivityManager, mBlogApi, mNewsApi, mDbBlog, blog.getBlogId()));
                     }
 

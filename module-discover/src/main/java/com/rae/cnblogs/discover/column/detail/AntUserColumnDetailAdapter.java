@@ -15,12 +15,12 @@ import java.util.List;
 
 public class AntUserColumnDetailAdapter extends RaeBaseQuickAdapter<AntArticleInfo, BaseViewHolder> {
 
-    private int mViewType;
+    private int mViewType = 1;
 
     /**
      */
     public AntUserColumnDetailAdapter(Context context, @Nullable List<AntArticleInfo> data) {
-        super(context, R.layout.item_user_column_detail, data);
+        super(context, R.layout.item_user_column_title, data);
     }
 
     public void setViewType(int type) {

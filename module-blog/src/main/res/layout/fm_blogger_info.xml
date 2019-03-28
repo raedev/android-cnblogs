@@ -70,6 +70,7 @@
                         android:layout_width="62dp"
                         android:layout_height="62dp"
                         android:src="@color/white"
+                        android:visibility="gone"
                         app:riv_corner_radius="74dp" />
 
                     <com.makeramen.roundedimageview.RoundedImageView
@@ -78,6 +79,7 @@
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/default_avatar_placeholder"
+                        android:visibility="gone"
                         app:riv_corner_radius="70dp" />
 
                     <TextView
@@ -268,7 +270,7 @@
         <!--TAB-->
         <com.rae.cnblogs.widget.RaeSkinDesignTabLayout
             android:id="@+id/tab_category"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -278,9 +280,11 @@
             app:layout_collapseParallaxMultiplier="0.75"
             app:layout_scrollFlags="scroll"
             app:tabBackground="@android:color/transparent"
-            app:tabIndicatorColor="@color/blogger_indicator_color"
-            app:tabIndicatorHeight="2dp"
-            app:tabIndicatorWidth="12dp"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorHeight="4dp"
+            app:tabIndicatorRadius="4dp"
+            app:tabIndicatorWidth="14dp"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/homeTabSelectedTextColor"
             app:tabTextAppearance="@style/TabTextAppearance"

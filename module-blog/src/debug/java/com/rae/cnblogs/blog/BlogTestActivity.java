@@ -16,7 +16,7 @@ public class BlogTestActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, BlogHomeFragment.newInstance())
+                .replace(R.id.content, new BlogHomeFragment())
                 .commit();
     }
 }

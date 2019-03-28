@@ -18,16 +18,14 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.jcodecraeer.xrecyclerview.AppBarStateChangeListener;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
-import com.rae.cnblogs.basic.AppMobclickAgent;
 import com.rae.cnblogs.basic.GlideApp;
-import com.rae.cnblogs.basic.GlideRequest;
 import com.rae.cnblogs.blog.blogger.BloggerContract;
 import com.rae.cnblogs.blog.blogger.BloggerPresenterImpl;
 import com.rae.cnblogs.blog.fragment.BloggerListFragment;
@@ -49,6 +47,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 
 /**
  * blogger info
@@ -248,43 +247,30 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
         if (TextUtils.isEmpty(url) || url.endsWith("simple_avatar.gif")) return;
         // 封面图
         final String coverUrl = String.format("https://files.cnblogs.com/files/%s/app-cover.bmp", blogApp);
-
-        createAvatarGlide(coverUrl)
+        int alphaColor = ContextCompat.getColor(getContext(), R.color.blogger_image_alpha_color);
+        // 自定义头像
+        GlideApp.with(this)
+                .load(coverUrl)
                 .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         return true;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
-                        // 如果有封面图，则设置进去
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         mBackgroundView.setContentDescription(coverUrl);
-                        // 统计
-                        AppMobclickAgent.onClickEvent(getContext(), "BloggerCover");
                         return false;
                     }
                 })
-                // 如果没有这张封面图就展示默认的
-//                .error(createAvatarGlide(url))
+                .error(GlideApp
+                        .with(this)
+                        .load(url)
+                        .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(alphaColor)))
+                )
+                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(alphaColor)))
                 .into(mBackgroundView);
-    }
 
-    /**
-     * 创建头像显示的Glide
-     *
-     * @param url 头像地址
-     */
-    private GlideRequest<Drawable> createAvatarGlide(String url) {
-        int alphaColor = ContextCompat.getColor(getContext(), R.color.blogger_image_alpha_color);
-        return GlideApp.with(this)
-                .load(url)
-                .centerCrop()
-//                .apply(RequestOptions.bitmapTransform(new MultiTransformation<>(
-//                        new BlurTransformation(20),    // 高斯模糊
-//                        new ColorFilterTransformation(alphaColor)) // 遮罩层
-//                ))
-                .transition(DrawableTransitionOptions.withCrossFade());
     }
 
     //    @Override
@@ -332,12 +318,10 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
     public void onAvatarClick(View view) {
         if (mUserInfo == null) return;
         ArrayList<String> images = new ArrayList<>();
-
         if (view.getId() == R.id.img_background && !TextUtils.isEmpty(view.getContentDescription())) {
             images.add(view.getContentDescription().toString());
-        } else {
-            images.add(mUserInfo.getAvatar());
         }
+        images.add(mUserInfo.getAvatar());
         AppRoute.routeToImagePreview(this, images, 0);
     }
 

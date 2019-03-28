@@ -13,8 +13,8 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public abstract class PageObservable<T> {
-    public static int startPageIndex = 1;
-    protected int mPage;
+     private static int startPageIndex = 1;
+    private int mPage;
     private IPageView<T> mView;
     private final List<T> mDataList = new ArrayList<>();
     private LifecycleProvider mProvider;

@@ -262,7 +262,7 @@ public class AntUserColumnDetailActivity extends SwipeBackBasicActivity implemen
         mAdapter.setViewType(viewType);
         mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
-        view.setText(viewType == 0 ? R.string.detail_mode : R.string.title_mode);
+        view.setText(viewType == 1 ? R.string.detail_mode : R.string.title_mode);
     }
 
 

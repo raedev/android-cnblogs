@@ -48,6 +48,7 @@ public class LifecycleProvider {
      * 释放所有，生命周期会自动释放
      */
     public void dispose() {
+        mCompositeDisposable.dispose();
         mCompositeDisposable.clear();
     }
 }

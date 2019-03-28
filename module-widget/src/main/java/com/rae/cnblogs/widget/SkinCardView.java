@@ -2,8 +2,11 @@ package com.rae.cnblogs.widget;
 
 import android.content.Context;
 import android.support.annotation.DrawableRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+
+import com.rae.cnblogs.theme.ThemeCompat;
 
 import skin.support.widget.SkinCompatBackgroundHelper;
 import skin.support.widget.SkinCompatSupportable;
@@ -33,7 +36,14 @@ public class SkinCardView extends CardView implements SkinCompatSupportable {
         if (this.mBackgroundTintHelper != null) {
             this.mBackgroundTintHelper.onSetBackgroundResource(resId);
         }
+    }
 
+    @Override
+    public void setCardBackgroundColor(int color) {
+        if (ThemeCompat.isNight()) {
+            color = ContextCompat.getColor(getContext(), R.color.nightColorPrimary);
+        }
+        super.setCardBackgroundColor(color);
     }
 
     private void init(AttributeSet attrs, int defStyle) {
@@ -45,6 +55,10 @@ public class SkinCardView extends CardView implements SkinCompatSupportable {
     public void applySkin() {
         if (this.mBackgroundTintHelper != null) {
             this.mBackgroundTintHelper.applySkin();
+        }
+        if (ThemeCompat.isNight()) {
+            int color = ContextCompat.getColor(getContext(), R.color.nightColorPrimary);
+            setCardBackgroundColor(color);
         }
     }
 }

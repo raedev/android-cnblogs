@@ -15,22 +15,33 @@ import java.util.List;
  */
 public abstract class BasicActivity extends RaeUIActivity implements IPresenterView {
 
+    private boolean mDisabeMobclickAgent; // 是否禁止统计
+
+
     @NonNull
     @Override
     public Context getContext() {
         return this;
     }
 
+    public void setDisabeMobclickAgent(boolean disabeMobclickAgent) {
+        mDisabeMobclickAgent = disabeMobclickAgent;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        if (!mDisabeMobclickAgent) {
+            MobclickAgent.onResume(this);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        if (!mDisabeMobclickAgent) {
+            MobclickAgent.onPause(this);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.rae.cnblogs.discover.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.UICompat;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
+import com.rae.cnblogs.dialog.DefaultDialogFragment;
 import com.rae.cnblogs.discover.R;
 import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.discover.presenter.AntUserAuthPresenterImpl;
@@ -69,14 +71,30 @@ public class AntUserAuthActivity extends SwipeBackBasicActivity implements IAntU
     @OnClick(R2.id.btn_send)
     public void onSendClick() {
         UICompat.hideSoftInputFromWindow(this);
-        mSendButton.setEnabled(false);
-        mSendButton.setText(R.string.loading);
-        mPresenter.send();
+        new DefaultDialogFragment.Builder()
+                .cancelable(true)
+                .canceledOnTouchOutside(false)
+                .message(getString(R.string.ant_user_contract_message))
+                .confirmText("继续登录")
+                .confirm(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        mSendButton.setEnabled(false);
+                        mSendButton.setText(R.string.loading);
+                        mPresenter.send();
+                    }
+                })
+                .show(getSupportFragmentManager());
+
     }
 
     @OnClick(R2.id.ll_contract)
     public void onContractClick() {
-        AppRoute.routeToAntUserContract(this);
+
+        AppRoute.routeToAntUserContract(AntUserAuthActivity.this);
+
+
     }
 
     @Override

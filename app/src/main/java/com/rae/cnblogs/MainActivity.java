@@ -116,7 +116,6 @@ public class MainActivity extends BasicActivity implements MainContract.View, Ra
 
     private void initTab() {
         mAdapter = new AppFragmentAdapter(getSupportFragmentManager());
-
         // 初始化TAB
         addTab(mAdapter, R.string.tab_home, R.drawable.tab_home, AppRoute.newHomeFragment());
         addTab(mAdapter, R.string.tab_sns, R.drawable.tab_news, AppRoute.newMomentFragment());

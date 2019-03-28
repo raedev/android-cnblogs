@@ -5,4 +5,5 @@
     <string name="recommend_category">推荐分类</string>
     <string name="click_add_category">点击添加分类</string>
     <string name="title_blogger">博主信息页</string>
+    <string name="loading_blog_url">正在从源地址解析..</string>
 </resources>

@@ -123,7 +123,10 @@ public class DbBlog {
      * 获取没有内容的列表
      */
     public List<BlogBean> findAllWithoutBlogContent() {
-        return mSession.getBlogBeanDao().queryBuilder().where(BlogBeanDao.Properties.Content.isNull()).list();
+        return mSession.getBlogBeanDao()
+                .queryBuilder()
+                .where(BlogBeanDao.Properties.Content.isNull())
+                .list();
     }
 
     /**

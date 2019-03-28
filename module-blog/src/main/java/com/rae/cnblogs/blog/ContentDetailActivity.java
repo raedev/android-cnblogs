@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.gson.Gson;
@@ -35,6 +36,9 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
     @BindView(R2.id.pb_loading)
     View mProgressBar;
 
+    @BindView(R2.id.tv_loading)
+    TextView mLoadingTextView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
     private void loadBlogDetail(final String url) {
         IBlogApi blogApi = CnblogsApiFactory.getInstance(this).getBlogApi();
         mProgressBar.setVisibility(View.VISIBLE);
+        mLoadingTextView.setText(R.string.loading_blog_url);
         AndroidObservable.create(blogApi.getBlogDetail(url))
                 .with(this)
                 .subscribe(new ApiDefaultObserver<BlogBean>() {
@@ -73,7 +78,6 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
 
                     @Override
                     protected void accept(BlogBean blogBean) {
-                        mProgressBar.setVisibility(View.GONE);
                         ContentEntity entity = ContentEntityConverter.convert(blogBean);
                         initBlogFragment(entity);
                     }
@@ -85,6 +89,7 @@ public class ContentDetailActivity extends SwipeBackBasicActivity {
             UICompat.failed(this, "博客实体为空");
             return;
         }
+        mProgressBar.setVisibility(View.GONE);
         BlogDetailFragment fragment = BlogDetailFragment.newInstance(entity);
         getSupportFragmentManager()
                 .beginTransaction()

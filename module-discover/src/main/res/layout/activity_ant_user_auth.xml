@@ -2,7 +2,6 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -84,6 +83,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_phone" />
 
+
     <LinearLayout
         android:id="@+id/ll_contract"
         android:layout_width="wrap_content"
@@ -93,6 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
+
 
         <TextView
             android:id="@+id/text"
@@ -110,6 +111,7 @@
             android:text="《用户协议》"
             android:textColor="@color/ant_color_primary"
             android:textSize="12sp" />
+
 
     </LinearLayout>
 

@@ -103,11 +103,11 @@ public class WebActivity extends BasicActivity implements ShareDialogFragment.On
         mTitleView.setText(title);
     }
 
-    @Override
-    protected int getHomeAsUpIndicator() {
-        if (ThemeCompat.isNight()) return R.drawable.ic_back_closed_night;
-        return R.drawable.ic_back_closed;
-    }
+//    @Override
+//    protected int getHomeAsUpIndicator() {
+//        if (ThemeCompat.isNight()) return R.drawable.ic_back_closed_night;
+//        return R.drawable.ic_back_closed;
+//    }
 
     @OnClick(R2.id.img_action_bar_more)
     public void onActionMenuMoreClick() {

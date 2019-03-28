@@ -308,6 +308,7 @@
             style="@style/ItemStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/public_divider_while_primary"
             android:orientation="horizontal">
 
             <com.rae.cnblogs.widget.SkinDrawableTextView
@@ -367,6 +368,7 @@
             style="@style/ItemStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/public_divider_while_primary"
             android:orientation="horizontal">
 
             <com.rae.cnblogs.widget.SkinDrawableTextView
@@ -393,6 +395,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:background="@drawable/public_divider_while_primary"
             android:orientation="horizontal">
 
             <com.rae.cnblogs.widget.SkinDrawableTextView
