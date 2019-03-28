@@ -69,7 +69,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         mPlaceholderView = new LoginPlaceholderView(view.getContext());
         mPlaceholderView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mPlaceholderView.dismiss();
-        mPlaceholderView.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.background_divider));
+
         // 重试按钮
         mPlaceholderView.setOnRetryClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
                 String cookie = CookieManager.getInstance().getCookie(url);
                 // 登录成功
                 if (cookie != null && cookie.contains(".CNBlogsCookie")) {
-                    // 请求用户信息 每一步的改变都不平凡
+                    // 请求用户信息
 //                    mPlaceholderView.loadingWithTimer(getString(R.string.loading_blog_app));
                     mPlaceholderView.loadingWithTimer("每一步的改变都不平凡");
                     mPresenter.loadUserInfo();

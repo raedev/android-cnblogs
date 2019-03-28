@@ -98,8 +98,8 @@
     <string name="praises">给个好评</string>
     <string name="praises_error">您似乎没有安装应用市场</string>
     <string name="share_app_url">http://www.raeblog.com/cnblogs/app/share</string>
-    <string name="share_app_title">分享「博客园」Android客户端</string>
-    <string name="share_app_desc">博客园，一个面向开发者的知识分享社区，一个纯净的技术交流社区。</string>
+    <string name="share_app_title">博客园Android客户端</string>
+    <string name="share_app_desc">一个面向开发者的知识分享社区，一个纯净的技术交流社区。UI风格简洁，给你极致流畅的体验。</string>
     <string name="market_url">market://details?id=com.rae.cnblogs</string>
     <string name="service_name">博客园服务</string>
     <string name="permission_tips_message">博客园需要读取/写入您的存储卡，禁止后大部分功能将受到限制，是否再次申请？</string>

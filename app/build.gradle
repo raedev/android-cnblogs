@@ -42,7 +42,10 @@ android {
 //            signingConfig signingConfigs.release
         }
         release {
-            minifyEnabled false
+            //混淆
+//            minifyEnabled false
+            // 移除无用的resource文件
+//            shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
