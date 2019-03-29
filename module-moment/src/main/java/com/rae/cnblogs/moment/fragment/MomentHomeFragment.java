@@ -233,7 +233,7 @@ public class MomentHomeFragment extends BasicFragment implements ITopScrollable 
             new DefaultDialogFragment
                     .Builder()
                     .confirmText("立即查看")
-                    .message("发布闪存失败")
+                    .message("闪存发布失败！" + event.getMessage())
                     .confirm(new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

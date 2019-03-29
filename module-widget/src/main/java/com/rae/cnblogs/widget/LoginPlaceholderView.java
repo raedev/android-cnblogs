@@ -1,6 +1,7 @@
 package com.rae.cnblogs.widget;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,7 @@ public class LoginPlaceholderView extends PlaceholderView implements Runnable {
     }
 
     public void loadingWithTimer(String msg) {
+        setBackgroundColor(Color.WHITE);
         loading(msg);
         // 定时器
         removeCallbacks(this);

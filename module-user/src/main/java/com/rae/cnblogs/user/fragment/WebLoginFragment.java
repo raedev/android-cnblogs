@@ -2,10 +2,10 @@ package com.rae.cnblogs.user.fragment;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.rae.cnblogs.basic.AppMobclickAgent;
+import com.rae.cnblogs.basic.rx.AndroidObservable;
 import com.rae.cnblogs.sdk.CnblogsApiException;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.user.R;
@@ -23,6 +24,11 @@ import com.rae.cnblogs.web.WebViewFragment;
 import com.rae.cnblogs.web.client.RaeWebViewClient;
 import com.rae.cnblogs.widget.LoginPlaceholderView;
 import com.tencent.bugly.crashreport.CrashReport;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * 网页登录
@@ -74,6 +80,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         mPlaceholderView.setOnRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPlaceholderView.setBackgroundColor(Color.TRANSPARENT);
                 if (mPlaceholderView.isRouteLogin()) {
                     mPlaceholderView.dismiss();
                     // 重新加载登录页面
@@ -116,8 +123,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
                 // 登录成功
                 if (cookie != null && cookie.contains(".CNBlogsCookie")) {
                     // 请求用户信息
-//                    mPlaceholderView.loadingWithTimer(getString(R.string.loading_blog_app));
-                    mPlaceholderView.loadingWithTimer("每一步的改变都不平凡");
+                    mPlaceholderView.loadingWithTimer(getString(R.string.loading_blog_app));
                     mPresenter.loadUserInfo();
                 }
             }
@@ -145,10 +151,25 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
     @Override
     public void onLoginSuccess(UserInfoBean data) {
         mPlaceholderView.loadingWithTimer(getString(R.string.loading_user_info, data.getDisplayName()));
-        if (getActivity() == null) return;
-        getActivity().setResult(Activity.RESULT_OK);
-        getActivity().finish();
-        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        AndroidObservable.create(Observable.timer(3000, TimeUnit.MILLISECONDS))
+                .with(this)
+                .subscribe(new DisposableObserver<Long>() {
+                    @Override
+                    public void onNext(Long aLong) {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (getActivity() == null) return;
+                        getActivity().setResult(Activity.RESULT_OK);
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }
+                });
     }
 
 
@@ -156,5 +177,6 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
     public void onLoginFailed(String message) {
         mPlaceholderView.loadingWithTimer(message);
         mPlaceholderView.dismissLoadingRetry();
+        mPlaceholderView.setBackgroundColor(Color.TRANSPARENT);
     }
 }

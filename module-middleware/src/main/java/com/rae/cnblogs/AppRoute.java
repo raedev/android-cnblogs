@@ -34,7 +34,7 @@ import java.util.Iterator;
 public final class AppRoute {
 
     // 绑定手机号码
-    public static final String PATH_DISCOVER_USER_AUTH = "/discover/user/auth";
+    public static final String PATH_DISCOVER_USER_AUTH = "/discover/user/token";
     public static final String PATH_DISCOVER_AUTH_RESULT = "/discover/user/result";
     // 用户协议
     public static final String PATH_DISCOVER_USER_CONTRACT = "/discover/user/contract";
@@ -90,7 +90,7 @@ public final class AppRoute {
     /**
      * 博主主页
      */
-    public static final String PATH_BLOGGER = "/blog/author";
+    public static final String PATH_BLOGGER = "/blog/auth/author";
 
     /**
      * 网页
@@ -751,6 +751,15 @@ public final class AppRoute {
     public static void routeToAntColumnDetail(Context context, int id) {
         ARouter.getInstance().build(PATH_DISCOVER_COLUMN_DETAIL)
                 .withString("id", String.valueOf(id))
+                .navigation(context);
+    }
+
+    /**
+     * 排行榜
+     */
+    public static void routeToRanking(Context context, int position) {
+        ARouter.getInstance().build(PATH_DISCOVER_RANKING)
+                .withInt("position", position)
                 .navigation(context);
     }
 

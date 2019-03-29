@@ -95,7 +95,7 @@ public class WebViewFragment extends BasicFragment {
         settings.setAllowFileAccess(true);
 
 
-        File cacheDir = getContext().getExternalCacheDir();
+        File cacheDir = requireContext().getExternalCacheDir();
 
         if (cacheDir != null && cacheDir.canRead() && cacheDir.canWrite()) {
             settings.setAppCacheEnabled(true);
@@ -211,7 +211,7 @@ public class WebViewFragment extends BasicFragment {
 
         // 夜间模式
         if (ThemeCompat.isNight()) {
-            mWebView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_night));
+            mWebView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white_night));
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && BuildConfig.DEBUG) {

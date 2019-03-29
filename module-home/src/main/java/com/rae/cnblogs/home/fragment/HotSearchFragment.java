@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.basic.BaseItemAdapter;
 import com.rae.cnblogs.basic.BasicFragment;
 import com.rae.cnblogs.home.R;
@@ -134,5 +135,10 @@ public class HotSearchFragment extends BasicFragment implements HotSearchContrac
     @OnClick(R2.id.img_delete)
     public void onClearHistoryClick() {
         mPresenter.clearSearchHistory();
+    }
+
+    @OnClick(R2.id.tv_more)
+    public void onMoreClick() {
+        AppRoute.routeToRanking(getContext(), 1);
     }
 }

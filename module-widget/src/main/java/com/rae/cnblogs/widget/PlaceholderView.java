@@ -172,6 +172,7 @@ public class PlaceholderView extends FrameLayout implements SkinCompatSupportabl
 
     public void loading(String text) {
         loading();
+        mLoadingTextView.setVisibility(View.VISIBLE);
         mLoadingTextView.setText(text);
     }
 

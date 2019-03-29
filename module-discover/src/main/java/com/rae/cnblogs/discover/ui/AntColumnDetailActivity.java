@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.antcode.sdk.AntSessionManager;
 import com.antcode.sdk.model.AntColumnInfo;
 import com.antcode.sdk.model.AntIntroArticlesInfo;
+import com.antcode.sdk.model.AntShareInfo;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.rae.cnblogs.AppRoute;
@@ -317,6 +318,8 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
     public void onShareClick() {
         if (mAdapter == null || mAdapter.getColumnInfo() == null) return;
         AntColumnInfo columnInfo = mAdapter.getColumnInfo();
-        ShareDialogFragment.newInstance("http://www.baidu.com", columnInfo.getTitle(), columnInfo.getRecommendation(), columnInfo.getAvatar(), false).show(getSupportFragmentManager(), "share");
+        AntShareInfo shareInfo = columnInfo.getShareInfo();
+        if (shareInfo == null) return;
+        ShareDialogFragment.newInstance(shareInfo.getUrl(), shareInfo.getTitle(), shareInfo.getDesc(), shareInfo.getImageUrl(), false).show(getSupportFragmentManager(), "share");
     }
 }

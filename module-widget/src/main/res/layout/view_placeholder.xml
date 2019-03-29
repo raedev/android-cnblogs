@@ -82,8 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
             android:layout_marginTop="52dp"
+            android:layout_marginRight="12dp"
             android:background="@drawable/public_button_login"
             android:text="@string/go_login"
             android:textColor="@android:color/white"
@@ -112,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:text="@string/loading"
             android:textColor="@color/ph4"
             android:textSize="12sp"
             android:visibility="gone" />

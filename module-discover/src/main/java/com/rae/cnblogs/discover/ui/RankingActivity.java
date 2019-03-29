@@ -17,7 +17,6 @@ import com.rae.cnblogs.discover.R2;
 import com.rae.cnblogs.discover.fragment.RankingFragment;
 import com.rae.cnblogs.discover.presenter.IRankingContract;
 import com.rae.cnblogs.widget.RaeScrollTopTabListener;
-import com.rae.session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +41,19 @@ public class RankingActivity extends SwipeBackBasicActivity {
         TabFragmentAdapter adapter = new TabFragmentAdapter(getSupportFragmentManager())
                 .Add(IRankingContract.TYPE_TOP_READ, "周阅榜")
                 .Add(IRankingContract.TYPE_HOT_SEARCH, "热搜榜")
-                .Add(IRankingContract.TYPE_TOP_AUTHOR, "大神榜");
+                .Add(IRankingContract.TYPE_TOP_AUTHOR, "大神榜")
+                .Add(IRankingContract.TYPE_TOP_FAVORITE, "收藏榜");
 
-        // 收藏榜要登录之后才能查看
-        if (SessionManager.getDefault().isLogin()) {
-            adapter.Add(IRankingContract.TYPE_TOP_FAVORITE, "收藏榜");
-        }
+        int position = getIntent().getIntExtra("position", -1);
 
         mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.addOnTabSelectedListener(new RaeScrollTopTabListener(mViewPager, getSupportFragmentManager()));
+
+        if (position > 0) {
+            mViewPager.setCurrentItem(position);
+        }
     }
 
 

@@ -31,6 +31,11 @@ public class WebLoginActivity extends WebActivity {
         return WebLoginFragment.newInstance(url);
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        title = "博客园官网登录";
+        super.setTitle(title);
+    }
 
     @Override
     @NonNull
