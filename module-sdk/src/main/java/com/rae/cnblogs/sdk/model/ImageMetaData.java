@@ -14,6 +14,14 @@ public class ImageMetaData implements Parcelable {
     // 远程路径
     public String remoteUrl;
 
+    public void setLocalPath(String localPath) {
+        this.localPath = localPath;
+    }
+
+    public void setRemoteUrl(String remoteUrl) {
+        this.remoteUrl = remoteUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;

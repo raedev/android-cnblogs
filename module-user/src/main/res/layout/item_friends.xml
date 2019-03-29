@@ -19,8 +19,8 @@
             android:id="@+id/img_user_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/default_avatar_placeholder"
             android:scaleType="centerCrop"
+            android:src="@drawable/default_avatar_placeholder"
             app:riv_corner_radius="48dp" />
 
         <LinearLayout
@@ -59,7 +59,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@color/dividerColor" />

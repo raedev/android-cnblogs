@@ -39,24 +39,18 @@ a{
 #author{
     margin-top: 72px;
     border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 12px;
+    padding-bottom: 24px;
 }
 .author_right{
     float: left;
     margin-top: 8px;
 }
-.btn_author{
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    -webkit-tap-highlight-color: transparent;
-    white-space:nowrap;
-    letter-spacing:-1px;
-    box-sizing:inherit;
-    text-shadow:none;
-    box-shadow: none;
-    outline: none;
-    display: block;
-    float: right;
-    margin-top: 12px;
+#btn_author{
+    display: float;
+    float:right;
+    width: 90px;
+    font-size: 14px;
+    top: 10px;
 }
 #author_name{
     font-weight: bold;
@@ -69,6 +63,7 @@ a{
     box-shadow: none;
     max-width:120px;
     max-height:120px;
+    background: #f2f2f2;
 }
 #blog_date{
     display: block;

@@ -34,7 +34,7 @@ public class FriendsListParser implements IHtmlParser<List<UserInfoBean>> {
             m.setBlogApp(ApiUtils.getBlogApp(li.select("a[title]").attr("href")));
             m.setDisplayName(li.select("a[title]").attr("title"));
             m.setRemarkName(li.select(".remark_name a").eq(1).text());
-            m.setHasFollow(li.select(".edit").hasText());
+            m.setHasFollow(li.select(".edit").text().contains("取消"));
         }
         return result;
     }

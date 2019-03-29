@@ -27,7 +27,7 @@ public final class ContentEntityConverter {
         m.setViews(b.getViewCount());
         m.setComment(b.getCommentCount());
         m.setLikes(b.getLikeCount());
-        m.setBlogApp(b.getAuthor());
+        m.setBlogApp(b.getAuthorId());
         m.setUrl(b.getUrl());
         m.setThumbUrls(AppGson.toJson(b.getThumbs()));
         return m;

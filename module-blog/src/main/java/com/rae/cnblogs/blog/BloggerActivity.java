@@ -41,6 +41,7 @@ import com.rae.swift.app.RaeFragmentAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -275,7 +276,7 @@ public class BloggerActivity extends SwipeBackBasicActivity implements BloggerCo
 
     //    @Override
     public String getBlogApp() {
-        return mBlogApp;
+        return URLDecoder.decode(mBlogApp);
     }
 
     @Override

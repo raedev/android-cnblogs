@@ -223,7 +223,6 @@ public class MomentFragment extends BasicFragment implements IMomentContract.Vie
      */
     @Override
     public void scrollToTop() {
-        UICompat.scrollToTop(mRecyclerView);
         if (mRecyclerView != null && mRecyclerView.isOnTop()) {
             mAppLayout.post(new Runnable() {
                 @Override
@@ -231,6 +230,8 @@ public class MomentFragment extends BasicFragment implements IMomentContract.Vie
                     mAppLayout.autoRefresh();
                 }
             });
+        } else {
+            UICompat.scrollToTop(mRecyclerView);
         }
     }
 

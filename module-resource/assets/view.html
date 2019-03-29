@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="css/shCore.css"/>
     <link rel="stylesheet" type="text/css" href="css/blog-common.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
     <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css" id="CodeStyle"/>
     <link rel="stylesheet" type="text/css" href="css/rae-common.css">
@@ -152,9 +153,9 @@ try{
 					$("#news_date").text(blog.postDate);
 					$("#news_author").text(blog.author);
 
-					if(!blog.avatar||  blog.avatar==null ||  blog.avatar==""){
-					    $("#blog_avatar").hide();
-					}
+					<!--if(!blog.avatar||  blog.avatar==null ||  blog.avatar==""){-->
+					    <!--$("#blog_avatar").hide();-->
+					<!--}-->
 
 					$("#blog_avatar").attr("src", blog.avatar);
 					$("#author").attr("blogApp", blog.blogApp);
@@ -205,6 +206,7 @@ try{
         }
 
 
+
     </script>
 
     <!--支持数学公式渲染 MathJax-->
@@ -217,6 +219,7 @@ try{
         'HTML-CSS': { linebreaks: { automatic: true } },
         SVG: { linebreaks: { automatic: true } }
         });
+
     </script>
     <script src="https://mathjax.cnblogs.com/2_7_2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
@@ -226,12 +229,14 @@ try{
 
         <div id="author" class="clearfix">
             <img id="blog_avatar" class="img-circle img-thumbnail" border=0
+                 src="https://tvax4.sinaimg.cn/default/images/default_avatar_male_50.gif"
                  style="width:52px; height:52px; padding:0;"/>
             <div class="author_right">
                 <span id="author_name">作者昵称</span>
                 <span id="blog_date">发布时间</span>
             </div>
-            <button id="btn_author" type="button" class="btn btn_author btn-default">作者主页</button>
+            <button id="btn_author" type="button" class="weui-btn weui-btn_default">作者主页
+            </button>
         </div>
 
 
@@ -258,6 +263,7 @@ try{
                 }
             }
         }
+
 
 
     </script>

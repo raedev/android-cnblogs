@@ -107,7 +107,7 @@ class FriendsPresenterImpl extends BasicPresenter<FriendsContract.View> implemen
                 .subscribe(new ApiDefaultObserver<Empty>() {
                     @Override
                     protected void onError(String message) {
-                        getView().onFollowError("添加关注失败，可能你已经关注过" + m.getDisplayName());
+                        getView().onFollowError("添加关注失败，可能你已经关注过" + m.getDisplayName() + "，请以我的关注列表为准。");
                     }
 
                     @Override

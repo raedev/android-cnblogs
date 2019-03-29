@@ -125,10 +125,24 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AntColumnInfo columnInfo = mAdapter.getColumnInfo();
+                if (columnInfo == null) return;
+
                 // 查看目录大纲图片
-                if (view.getId() == R.id.btn_catalog && mAdapter.getColumnInfo() != null) {
-                    AppRoute.routeToImagePreview(getContext(), mAdapter.getColumnInfo().getOutlineImgOriginal());
+                if (view.getId() == R.id.btn_catalog && columnInfo != null) {
+                    AppRoute.routeToImagePreview(getContext(), columnInfo.getOutlineImgOriginal());
                 }
+
+                // 点击目录标题
+                if (view.getId() == R.id.tv_title) {
+                    if (columnInfo.isSubscribe()) {
+                        // 已订阅的话跳掉详情
+                        AppRoute.routeToAntUserColumnDetail(getContext(), columnInfo.getId());
+                    } else {
+                        UICompat.toastInCenter(getContext(), "请先订阅专栏");
+                    }
+                }
+
             }
         });
 
@@ -256,6 +270,10 @@ public class AntColumnDetailActivity extends SwipeBackBasicActivity implements I
 
     @Override
     public void onSubscribeSuccess() {
+        AntColumnInfo columnInfo = mAdapter.getColumnInfo();
+        if (columnInfo != null) {
+            columnInfo.setSubscribe(true);
+        }
         UICompat.toast(this, getString(R.string.subscribe_success));
         UICompat.scaleIn(mStudyButton);
     }

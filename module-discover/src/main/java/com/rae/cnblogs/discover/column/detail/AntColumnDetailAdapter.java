@@ -119,6 +119,7 @@ public class AntColumnDetailAdapter extends BaseMultiItemQuickAdapter<MultiItemE
         AntIntroArticlesInfo info = item.getIntroArticlesInfo();
         TextView textView = helper.getView(R.id.tv_title);
         Context context = helper.itemView.getContext();
+        helper.addOnClickListener(R.id.tv_title);
 
         // 说明
         if (item.isDesc()) {

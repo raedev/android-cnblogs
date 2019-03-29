@@ -33,6 +33,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -103,25 +104,52 @@ public class MomentIntentService extends IntentService {
                 .observeOn(AndroidSchedulers.mainThread())
                 // 压缩图片
                 .map(new Function<ImageMetaData, ImageMetaData>() {
+
                     @Override
                     public ImageMetaData apply(ImageMetaData imageMetaData) throws Exception {
-                        imageMetaData.localPath = composeImage(imageMetaData.localPath);
+                        // 压缩图片
+                        imageMetaData.setLocalPath(composeImage(imageMetaData.localPath));
                         return imageMetaData;
                     }
 
                     /**
                      * 压缩图片小于2M
                      */
-                    private String composeImage(String output) throws IOException {
+                    private String composeImage(String filePath) throws IOException {
+                        // 复制图片
+                        String output = new File(getExternalCacheDir(), "temp" + System.currentTimeMillis() + ".jpg").getAbsolutePath();
+                        FileOutputStream fileOutputStream = new FileOutputStream(output);
+                        FileInputStream fileInputStream = new FileInputStream(filePath);
+                        int len;
+                        byte[] buffer = new byte[128];
+                        while ((len = fileInputStream.read(buffer)) != -1) {
+                            fileOutputStream.write(buffer, 0, len);
+                        }
+                        fileOutputStream.flush();
+                        fileInputStream.close();
+                        fileOutputStream.close();
+
+                        Log.d(TAG, "复制图片：" + filePath + " 到 " + output);
+
                         BitmapFactory.Options opt = new BitmapFactory.Options();
                         opt.inJustDecodeBounds = true;
                         BitmapFactory.decodeFile(output, opt);
 
-                        if (opt.outWidth > opt.outHeight) {
-                            opt.inSampleSize = opt.outWidth / 320;
-                        } else {
-                            opt.inSampleSize = opt.outHeight / 680;
+//                        if (opt.outWidth > opt.outHeight) {
+//                            opt.inSampleSize = opt.outWidth / 320;
+//                        } else {
+//                            opt.inSampleSize = opt.outHeight / 680;
+//                        }
+
+                        final int reqWidth = 720;
+                        final int reqHeight = 1280;
+
+                        if (opt.outHeight > reqHeight || opt.outWidth > reqWidth) {
+                            final int heightRatio = Math.round((float) opt.outHeight / (float) reqHeight);
+                            final int widthRatio = Math.round((float) opt.outWidth / (float) reqHeight);
+                            opt.inSampleSize = heightRatio > widthRatio ? heightRatio : widthRatio;//用最大
                         }
+
 
                         //避免出现内存溢出的情况，进行相应的属性设置。
                         opt.inPreferredConfig = Bitmap.Config.RGB_565;
@@ -134,13 +162,10 @@ public class MomentIntentService extends IntentService {
                             throw new IOException("图片加载失败，可能由于图片太大了");
                         }
                         Log.d(TAG, "图片压缩前大小：" + output + "--> " + bmp.getByteCount());
-                        Bitmap result = BitmapCompressor.compressBitmap(bmp, 2048);
+                        Bitmap result = BitmapCompressor.compressBitmap(bmp, 4096);
                         File file = new File(output);
-                        if (file.exists()) {
-                            file.delete();
-                        }
                         FileOutputStream stream = new FileOutputStream(file);
-                        result.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+                        result.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         stream.close();
                         stream.flush();
 
@@ -175,6 +200,11 @@ public class MomentIntentService extends IntentService {
                     @Override
                     public ObservableSource<String> apply(final ImageMetaData data) {
                         Log.d(TAG, "正在转换短连接：" + data.remoteUrl);
+
+                        // 到这里图片上传成功，删除临时图片
+                        boolean delete = new File(data.localPath).delete();
+                        Log.d(TAG, "删除图片：[" + delete + "] " + data.localPath);
+
                         return mPostApi.shotUrl(BuildConfig.WEIBO_APP_ID, data.remoteUrl)
                                 .map(new Function<String, String>() {
                                     @Override
