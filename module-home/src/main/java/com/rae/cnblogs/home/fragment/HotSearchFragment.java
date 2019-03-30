@@ -36,6 +36,8 @@ public class HotSearchFragment extends BasicFragment implements HotSearchContrac
 
     @BindView(R2.id.tv_hot_search)
     TextView mHotSearchView;
+    @BindView(R2.id.ll_hot_search)
+    View mHotSearchLayout;
     @BindView(R2.id.recycler_view_hot_search)
     RecyclerView mHotSearchRecyclerView;
 
@@ -96,7 +98,7 @@ public class HotSearchFragment extends BasicFragment implements HotSearchContrac
     }
 
     private void setHotSearchLayoutVisibility(int visibility) {
-        mHotSearchView.setVisibility(visibility);
+        mHotSearchLayout.setVisibility(visibility);
         mHotSearchRecyclerView.setVisibility(visibility);
     }
 

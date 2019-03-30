@@ -12,20 +12,22 @@ ext {
             keyPassword    : properties.getProperty("keystore.password", "cnblogs"),
             storePassword  : properties.getProperty("keystore.storePassword", "cnblogs"),
             // 友盟
-            umengAppKey    : properties.getProperty("umengAppKey", "you_key"),
+            umengAppKey    : properties.getProperty("umengAppKey", "替换成你的配置"),
             // 腾讯Bugly
-            buglyAppId     : properties.getProperty("buglyAppId", "you_key"),
+            buglyAppId     : properties.getProperty("buglyAppId", "替换成你的配置"),
             // 友盟
-            leancloudAppId : properties.getProperty("leancloudAppId", "you_key"),
-            leancloudAppKey: properties.getProperty("leancloudAppKey", "you_key"),
+            leancloudAppId : properties.getProperty("leancloudAppId", "替换成你的配置"),
+            leancloudAppKey: properties.getProperty("leancloudAppKey", "替换成你的配置"),
             // 微信分享
-            wechatAppId    : properties.getProperty("wechatAppId", "you_key"),
-            wechatAppSecret: properties.getProperty("wechatAppSecret", "you_key"),
+            wechatAppId    : properties.getProperty("wechatAppId", "替换成你的配置"),
+            wechatAppSecret: properties.getProperty("wechatAppSecret", "替换成你的配置"),
             // 微博分享
-            weiboAppId     : properties.getProperty("weiboAppId", "you_key"),
-            weiboAppSecret : properties.getProperty("weiboAppSecret", "you_key"),
+            weiboAppId     : properties.getProperty("weiboAppId", "替换成你的配置"),
+            weiboAppSecret : properties.getProperty("weiboAppSecret", "替换成你的配置"),
             // QQ分享
-            qqAppId        : properties.getProperty("qqAppId", "you_key"),
-            qqAppSecret    : properties.getProperty("qqAppSecret", "you_key")
+            qqAppId        : properties.getProperty("qqAppId", "替换成你的配置"),
+            qqAppSecret    : properties.getProperty("qqAppSecret", "替换成你的配置"),
+            // SDK补丁包上传地址
+            uploadUrl      : properties.getProperty("uploadUrl", "替换成你的配置")
     ]
 }

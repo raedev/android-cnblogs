@@ -8,6 +8,7 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'http://raedev.io:8081/repository/maven-public/' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "https://plugins.gradle.org/m2/" }
         google()
         jcenter()
     }
@@ -19,6 +20,8 @@ buildscript {
         classpath 'com.meituan.android.walle:plugin:1.1.6'
         // greenDAO
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+        // SDK HTTP上传文件，用不到可以注释掉
+        classpath "gradle.plugin.io.github.http-builder-ng:http-plugin:0.1.1"
     }
 }
 

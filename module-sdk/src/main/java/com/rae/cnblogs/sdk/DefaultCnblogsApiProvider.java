@@ -96,7 +96,7 @@ public class DefaultCnblogsApiProvider extends CnblogsApiProvider {
 
     @Override
     public String getDownloadUrl() {
-        return "http://img.raeblog.com/cnblogs/patch/hotfix.dex";
+        return "http://img.raeblog.com/cnblogs/patch/hotfix.dex?t=" + System.currentTimeMillis();
     }
 
     @NonNull
