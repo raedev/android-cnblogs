@@ -14,8 +14,8 @@ import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.api.IUserApi;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
-import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.rae.cnblogs.sdk.event.LoginInfoEvent;
+import com.rae.cnblogs.sdk.event.UserInfoChangedEvent;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,8 +65,6 @@ public class LoginPresenterImpl extends BasicPresenter<LoginContract.View> imple
 
     @Override
     public void loadUserInfo() {
-        // 1、同步COOKIE
-        UserProvider.getInstance().cookieManager2CookieJar();
         AndroidObservable
                 // 2、获取blogApp
                 .create(mUserApi.getUserBlogAppInfo())
@@ -115,7 +113,7 @@ public class LoginPresenterImpl extends BasicPresenter<LoginContract.View> imple
                         // 友盟统计用户
                         AppMobclickAgent.onProfileSignIn(data.getBlogApp());
                         // [重要] 同步Cookie登录信息
-                        UserProvider.getInstance().cookieJar2CookieManager();
+                        CnblogsApiFactory.getInstance(getContext()).javaCookie2WebCookie();
                         // 发送用户登录事件
                         EventBus.getDefault().post(new LoginInfoEvent(true, data));
                         EventBus.getDefault().post(new UserInfoChangedEvent(data));

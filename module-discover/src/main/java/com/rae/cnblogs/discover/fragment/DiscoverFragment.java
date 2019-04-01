@@ -59,6 +59,9 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
     private Banner mBanner;
     private ViewGroup mTabLayout;
     private List<AntAdInfo> mAdInfoList;
+    private int mBannerPosition;
+    private ViewPager mBannerViewPager;
+    private ViewPager.SimpleOnPageChangeListener mSimpleOnPageChangeListener;
 
     @Override
     protected int getLayoutId() {
@@ -121,6 +124,17 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
         mBanner = (Banner) getLayoutInflater().inflate(R.layout.view_discover_banner, (ViewGroup) getView(), false);
         mBanner.setImageLoader(new BannerImageLoader());
         mBanner.setIndicatorGravity(Gravity.CENTER);
+        mBanner.setOffscreenPageLimit(4);
+        mBannerViewPager = mBanner.findViewById(R.id.bannerViewPager);
+        mBannerViewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -35, getResources().getDisplayMetrics()));
+        mSimpleOnPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mBannerPosition = position;
+            }
+        };
+
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -128,20 +142,33 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
                 AppRoute.autoRoute(getContext(), adInfo.getType(), adInfo.getUrl(), adInfo.getData());
             }
         });
-
-        ViewPager viewPager = mBanner.findViewById(R.id.bannerViewPager);
-        viewPager.setOffscreenPageLimit(4);
-        viewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, -35, getResources().getDisplayMetrics()));
         mAdapter.addHeaderView(mBanner, 0);
-
-
     }
 
     @Override
-    public void onLoadAds(List<AntAdInfo> ads) {
+    public void onPause() {
+        super.onPause();
+        if (mBanner != null) mBanner.stopAutoPlay();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mBanner != null) mBanner.startAutoPlay();
+    }
+
+    @Override
+    public void onLoadAds(final List<AntAdInfo> ads) {
         mAdInfoList = ads;
         mRefreshLayout.setRefreshing(false);
+        mBannerViewPager.removeOnPageChangeListener(mSimpleOnPageChangeListener);
         mBanner.setImages(ads).start();
+        mBannerViewPager.addOnPageChangeListener(mSimpleOnPageChangeListener);
+        if (mBannerPosition > 0 && ads.size() > 0) {
+            int position = mBannerPosition % ads.size();
+            mBannerViewPager.setCurrentItem(position);
+        }
+
     }
 
     @Override
@@ -175,7 +202,7 @@ public class DiscoverFragment extends BasicFragment implements IDiscoverHomeCont
             if (iconUrl.startsWith("res")) {
                 try {
                     iconUrl = iconUrl.replace("res/", "");
-                    logo.setImageResource(getResources().getIdentifier(iconUrl, "drawable", getContext().getPackageName()));
+                    logo.setImageResource(getResources().getIdentifier(iconUrl, "drawable", mTabLayout.getContext().getPackageName()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

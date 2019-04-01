@@ -7,13 +7,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
 
 import com.rae.cnblogs.sdk.BuildConfig;
 import com.rae.cnblogs.sdk.CnblogsApiFactory;
+import com.rae.cnblogs.sdk.CnblogsCookieManager;
 import com.rae.cnblogs.sdk.JsonBody;
-import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.config.CnblogAppConfig;
 
 import java.io.IOException;
@@ -41,14 +39,15 @@ public class RequestInterceptor implements Interceptor {
     private String versionName;
     private String packageName;
     private int versionCode;
+    private final CnblogsCookieManager mCookieManager;
 
-    public static RequestInterceptor create(Context context) {
-        return new RequestInterceptor(context);
+    public static RequestInterceptor create(Context context, CnblogsCookieManager cookieManager) {
+        return new RequestInterceptor(context, cookieManager);
     }
 
-    RequestInterceptor(Context context) {
+    private RequestInterceptor(Context context, CnblogsCookieManager cookieManager) {
         mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        CookieSyncManager.createInstance(context.getApplicationContext());
+        mCookieManager = cookieManager;
         try {
             this.packageName = context.getPackageName();
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA);
@@ -90,16 +89,12 @@ public class RequestInterceptor implements Interceptor {
                 .addHeader("Accept-Language", " zh-CN,zh;q=0.8");
 
         // [重要] 带上COOKIE，保持登录需要用到
-        String cookie = CookieManager.getInstance().getCookie("http://www.cnblogs.com");
-        if (!TextUtils.isEmpty(cookie)) {
-            // 同步WebKit Cookie 到 JavaNetCookieJar
-            UserProvider.getInstance().cookieManager2CookieJar();
-        }
+        mCookieManager.webCookie2JavaCookie();
 
         // 同步手动设置的cookie
-        cookie = request.header("Cookie");
+        String cookie = request.header("Cookie");
         if (!TextUtils.isEmpty(cookie)) {
-            UserProvider.getInstance().cookieManager2CookieJar(cookie);
+            mCookieManager.saveCookie2JavaCookie(cookie);
         }
 
         // 首页列表缓存特殊处理

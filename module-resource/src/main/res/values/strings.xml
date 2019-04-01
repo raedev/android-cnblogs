@@ -25,9 +25,9 @@
     <string name="copyright">Copyright © 2004–2018 cnblogs.com All Rights Reserved</string>
     <string name="loading">请稍后…</string>
     <string name="signing">正在登录…</string>
-    <string name="loading_web_user_info">正在进行身份认证..</string>
+    <string name="loading_web_user_info">正在进行用户认证..</string>
     <string name="loading_user_info">「%s」· 技术改变世界</string>
-    <string name="loading_blog_app">你的每一步改变都不平凡</string>
+    <string name="loading_blog_app">正在获取用户信息..</string>
     <string name="loading_user_info_finish">技术改变世界</string>
     <string name="login_retry_error">多次登录失败？试试官方网页登录吧！</string>
     <string name="login_retry">正在重试，请稍等片刻。</string>

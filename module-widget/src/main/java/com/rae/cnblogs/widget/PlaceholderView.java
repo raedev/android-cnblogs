@@ -265,6 +265,7 @@ public class PlaceholderView extends FrameLayout implements SkinCompatSupportabl
     }
 
     public void show() {
+        setVisibility(View.VISIBLE);
         mContentView.setVisibility(VISIBLE);
     }
 

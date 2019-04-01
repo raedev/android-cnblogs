@@ -191,7 +191,23 @@
                 android:textColor="@color/ph3"
                 android:textSize="16sp" />
         </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="@dimen/default_margin"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="@string/logout"
+            android:textColor="@color/ph1"
+            android:textSize="16sp" />
+
     </LinearLayout>
+
 
     <include layout="@layout/basic_toolbar" />
 </android.support.v7.widget.FitWindowsFrameLayout>

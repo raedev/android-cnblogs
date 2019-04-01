@@ -20,8 +20,10 @@ import com.rae.cnblogs.sdk.interceptor.RequestInterceptor;
 import com.squareup.okhttp3.OkHttpExtBuilder;
 
 import java.lang.ref.WeakReference;
+import java.net.CookieManager;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -34,10 +36,14 @@ public abstract class CnblogsApiProvider {
 
     private final Retrofit mRetrofit;
     private final WeakReference<Context> mContext; // application context
+    private final CnblogsCookieManager mCookieManager;
 
     CnblogsApiProvider(Context context) {
         mContext = new WeakReference<>(context.getApplicationContext());
-        OkHttpExtBuilder builder = new OkHttpExtBuilder();
+        OkHttpExtBuilder builder = new OkHttpExtBuilder().https();
+        CookieManager.setDefault(new CookieManager());
+        JavaNetCookieJar cookieJar = new JavaNetCookieJar(CookieManager.getDefault());
+        mCookieManager = new CnblogsCookieManager(context, cookieJar);
 
         // 调试模式启用接口日志打印
         if (BuildConfig.API_LOG_DEBUG) {
@@ -45,16 +51,15 @@ public abstract class CnblogsApiProvider {
         }
 
         OkHttpClient client = builder
-                .https()
-                .cookie()
                 .build()
+                .cookieJar(cookieJar)
                 //  连接超时
                 .connectTimeout(30, TimeUnit.SECONDS)
                 // 流读取超时
                 .readTimeout(120, TimeUnit.SECONDS)
                 // 流写入超时
                 .writeTimeout(120, TimeUnit.SECONDS)
-                .addInterceptor(RequestInterceptor.create(context))
+                .addInterceptor(RequestInterceptor.create(context, mCookieManager))
                 .build();
 
         mRetrofit = new Retrofit.Builder()
@@ -63,6 +68,7 @@ public abstract class CnblogsApiProvider {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ConverterFactory.create())
                 .build();
+
 
     }
 
@@ -147,4 +153,13 @@ public abstract class CnblogsApiProvider {
      * 获取接口下载地址
      */
     public abstract String getDownloadUrl();
+
+    /**
+     * 同步JAVA的cookie到网页的Cookie
+     */
+    public void javaCookie2WebCookie() {
+        mCookieManager.javaCookie2WebCookie();
+    }
+
+
 }

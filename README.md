@@ -6,14 +6,20 @@
 </p>
 <p align="center">
   <a href="https://sj.qq.com/myapp/detail.htm?apkName=com.rae.cnblogs">
-    <img src="https://img.shields.io/badge/download-v1.1.5-brightgreen.svg" alt="release">
+    <img src="https://img.shields.io/badge/download-v2.0.1-brightgreen.svg" alt="release">
   </a>
-  <a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
-    <img src="https://img.shields.io/hexpm/l/plug.svg" alt="license">
-  </a>
+<a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
+  <img src="https://img.shields.io/hexpm/l/plug.svg" alt="license">
+</a>
 </p>
 
-## 简介
+
+## 博客园介绍
+
+博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。
+
+
+## APP简介
 
 - 界面净白风格，专注阅读，给你极简体验
 - 夜间模式同样很出色
@@ -27,13 +33,19 @@
 - 时下热门IT新闻随时查看，还有知识库来补充
 - 闪存功能，园友的“段子”圈，个个都是人才，说话又好听
 - WIFI下自动缓存文章，离线也可阅读
-- 更多功能等你来发现
 
-## APP截图
-
-![](https://github.com/raee/android-cnblogs/blob/master/guide.jpg)
 
 ## 版本更新记录
+
+> v2.0.1
+
+- 发现页全新改版：
+- 推出专栏功能，助你系统学习新技术
+- 推出排行榜功能，技术热点时刻了解
+- 推出博问功能，解答技术疑惑
+- 优化文章查看速度
+- 其他细节调优以及线上BUG修复
+
 
 > v1.1.5
 
@@ -46,10 +58,10 @@
 - 调整UI卡片设计风格
 
 
-## 博客园介绍
 
-博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。
+## APP介绍图片
 
+![](https://github.com/raee/android-cnblogs/blob/master/guide.jpg)
 
 ## License
 

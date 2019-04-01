@@ -151,8 +151,8 @@ public class BlogDetailFragment extends BasicFragment implements ContentDetailCo
         // 知识库没有评论处理
         BlogType mBlogType = BlogType.typeOf(mContentEntity.getType());
         if (mBlogType == BlogType.KB) {
-            mPostCommentView.setVisibility(View.INVISIBLE);
-            mViewCommentView.setVisibility(View.INVISIBLE);
+            mPostCommentView.setVisibility(View.GONE);
+            mViewCommentView.setVisibility(View.GONE);
         }
     }
 

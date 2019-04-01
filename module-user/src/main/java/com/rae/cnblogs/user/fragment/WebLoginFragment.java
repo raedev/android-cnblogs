@@ -2,10 +2,10 @@ package com.rae.cnblogs.user.fragment;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,12 +75,12 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
         mPlaceholderView = new LoginPlaceholderView(view.getContext());
         mPlaceholderView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mPlaceholderView.dismiss();
+        mPlaceholderView.setBackgroundColor(ContextCompat.getColor(view.getContext(), R.color.white));
 
         // 重试按钮
         mPlaceholderView.setOnRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPlaceholderView.setBackgroundColor(Color.TRANSPARENT);
                 if (mPlaceholderView.isRouteLogin()) {
                     mPlaceholderView.dismiss();
                     // 重新加载登录页面
@@ -90,12 +90,11 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
                     CrashReport.postCatchedException(new CnblogsApiException("重试登录失败，当前路径：" + getUrl()));
                     return;
                 }
-
                 // 统计登录超时
                 AppMobclickAgent.onClickEvent(v.getContext(), "WEB_LOGIN_TIMEOUT");
                 mPlaceholderView.loadingWithTimer(v.getContext().getString(R.string.login_retry));
                 mPlaceholderView.dismissLoadingRetry();
-                reload();
+                loadUrl("https://home.cnblogs.com");
             }
         });
         parent.addView(mPlaceholderView);
@@ -125,6 +124,7 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
                     // 请求用户信息
                     mPlaceholderView.loadingWithTimer(getString(R.string.loading_blog_app));
                     mPresenter.loadUserInfo();
+                    view.stopLoading();
                 }
             }
 
@@ -177,6 +177,5 @@ public class WebLoginFragment extends WebViewFragment implements LoginContract.V
     public void onLoginFailed(String message) {
         mPlaceholderView.loadingWithTimer(message);
         mPlaceholderView.dismissLoadingRetry();
-        mPlaceholderView.setBackgroundColor(Color.TRANSPARENT);
     }
 }

@@ -1,18 +1,26 @@
 package com.rae.cnblogs.user.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.antcode.sdk.AntSessionManager;
 import com.rae.cnblogs.AppRoute;
 import com.rae.cnblogs.activity.SwipeBackBasicActivity;
 import com.rae.cnblogs.basic.AppImageLoader;
+import com.rae.cnblogs.basic.AppMobclickAgent;
+import com.rae.cnblogs.dialog.DefaultDialogFragment;
+import com.rae.cnblogs.sdk.UserProvider;
 import com.rae.cnblogs.sdk.bean.UserInfoBean;
+import com.rae.cnblogs.sdk.event.LoginInfoEvent;
 import com.rae.cnblogs.user.R;
 import com.rae.cnblogs.user.R2;
 import com.rae.cnblogs.user.personal.PersonalContract;
 import com.rae.cnblogs.user.personal.PersonalPresenterImpl;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,6 +89,31 @@ public class PersonalActivity extends SwipeBackBasicActivity implements Personal
     @OnClick(R2.id.ll_introduce)
     public void onIntroduceClick() {
         AppRoute.routeToPersonalIntroduce(this);
+    }
+
+    @OnClick(R2.id.btn_logout)
+    public void onLogoutClick() {
+        AppMobclickAgent.onClickEvent(getContext(), "Logout");
+        new DefaultDialogFragment
+                .Builder()
+                .cancelable(true)
+                .message(getString(R.string.tips_logout))
+                .confirmText("立即退出")
+                .confirm(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        performLogout();
+                    }
+                })
+                .show(getSupportFragmentManager(), "Logout");
+    }
+
+    private void performLogout() {
+        AppMobclickAgent.onProfileSignOff();
+        UserProvider.getInstance().logout();
+        AntSessionManager.getDefault().clear(); // 退出专栏
+        EventBus.getDefault().post(new LoginInfoEvent());
+        finish();
     }
 
     @Override
