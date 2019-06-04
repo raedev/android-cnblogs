@@ -6,10 +6,10 @@
 </p>
 <p align="center">
   <a href="https://sj.qq.com/myapp/detail.htm?apkName=com.rae.cnblogs">
-    <img src="https://img.shields.io/badge/download-v2.0.1-brightgreen.svg" alt="release">
+    <img src="https://img.shields.io/badge/download-v2.0.3-brightgreen.svg" alt="release">
   </a>
 <a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
-  <img src="https://img.shields.io/hexpm/l/plug.svg" alt="license">
+  <img src="https://img.shields.io/github/license/raedev/android-cnblogs.svg" alt="license">
 </a>
 </p>
 
@@ -36,6 +36,19 @@
 
 
 ## 版本更新记录
+
+> v2.0.3
+
+- 博主个人中心、搜索、博问、知识库、新闻UI换新
+- 增加个人博客分类查看、新闻分类查看、推荐排行榜功能
+- 首页博客排版微调
+
+> v2.0.2
+
+- 修复博文页面加载数据失败问题
+- 修复登录出现的未知错误问题
+- 优化博文加载速度，优先读取本地缓存
+- 修复点击排行榜崩溃问题
 
 > v2.0.1
 
