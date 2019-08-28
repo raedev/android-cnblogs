@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://github.com/raedev/android-cnblogs/blob/master/images/icon.png" />
+ <img width="120" height="120" src="https://github.com/raedev/android-cnblogs/blob/master/images/icon.png" />
 </p>
 <p align="center">
 博客园第三方Android客户端
@@ -33,7 +33,7 @@
 - 闪存功能，园友的“段子”圈，个个都是人才，说话又好听
 - WIFI下自动缓存文章，离线也可阅读
 
-![]("https://github.com/raedev/android-cnblogs/blob/master/images/guide.jpg")
+![](https://github.com/raedev/android-cnblogs/blob/master/images/guide.jpg)
 
 
 ## License
