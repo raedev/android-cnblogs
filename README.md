@@ -9,7 +9,10 @@
   <img src="https://img.shields.io/github/license/raedev/android-cnblogs" alt="license">
 </a>
  <a href="https://github.com/raedev/android-cnblogs/releases">
-  <img src="https://img.shields.io/github/v/tag/raedev/android-cnblogs?label=version" alt="license">
+  <img src="https://img.shields.io/github/v/tag/raedev/android-cnblogs?label=version" alt="tag">
+</a>
+  <a href="https://appstore.huawei.com/app/C100070271">
+  <img src="https://img.shields.io/badge/DownloadAPK-HuaWeiAppStore-brightgreen" alt="download">
 </a>
 </p>
 
