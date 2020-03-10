@@ -5,11 +5,11 @@
 博客园第三方Android客户端
 </p>
 <p align="center">
-  <a href="https://sj.qq.com/myapp/detail.htm?apkName=com.rae.cnblogs" target="_blank">
-    <img src="https://img.shields.io/badge/download-v2.0.4-brightgreen.svg" alt="release">
-  </a>
 <a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
-  <img src="https://img.shields.io/hexpm/l/plug.svg" alt="license">
+  <img src="https://img.shields.io/github/license/raedev/android-cnblogs" alt="license">
+</a>
+ <a href="https://github.com/raedev/android-cnblogs/releases">
+  <img src="https://img.shields.io/github/v/tag/raedev/android-cnblogs?label=version" alt="license">
 </a>
 </p>
 
@@ -33,6 +33,8 @@
 - 闪存功能，园友的“段子”圈，个个都是人才，说话又好听
 - WIFI下自动缓存文章，离线也可阅读
 
+## APP界面
+
 ![](https://github.com/raedev/android-cnblogs/blob/master/images/guide.jpg)
 
 
@@ -40,7 +42,7 @@
 
 MIT License
 
-Copyright (c) 2019 RAE
+Copyright (c) 2020 RAE
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
