@@ -38,8 +38,11 @@
 
 ## APP界面
 
-![](https://github.com/raedev/android-cnblogs/blob/master/images/guide.jpg)
-
+![首页](https://raeblog.com/wp-content/uploads/2020/08/2020081007415757.png)
+![动态](https://raeblog.com/wp-content/uploads/2020/08/2020081007420585.png)
+![发现](https://raeblog.com/wp-content/uploads/2020/08/2020081007420294.png)
+![专栏](https://raeblog.com/wp-content/uploads/2020/08/2020081007421093.png)
+![个人中心](https://raeblog.com/wp-content/uploads/2020/08/2020081007420824.jpg)
 
 ## License
 
