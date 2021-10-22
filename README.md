@@ -17,6 +17,9 @@
 </p>
 
 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fraedev%2Fandroid-cnblogs.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fraedev%2Fandroid-cnblogs?ref=badge_large)
+
 ## 博客园介绍
 
 博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。
@@ -43,6 +46,7 @@
 ![发现](https://raeblog.com/wp-content/uploads/2020/08/2020081007420294.png)
 ![专栏](https://raeblog.com/wp-content/uploads/2020/08/2020081007421093.png)
 ![个人中心](https://raeblog.com/wp-content/uploads/2020/08/2020081007420824.jpg)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fraedev%2Fandroid-cnblogs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fraedev%2Fandroid-cnblogs?ref=badge_shield)
 
 ## License
 
