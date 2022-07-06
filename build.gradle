@@ -6,7 +6,7 @@ apply from: 'properties.gradle'
 buildscript {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'http://raedev.io:8081/repository/maven-public/' }
+        maven { url 'https://maven.raeblog.com/repository/public/' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url "https://plugins.gradle.org/m2/" }
         google()
@@ -28,7 +28,7 @@ buildscript {
 allprojects {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
-        maven { url 'http://raedev.io:8081/repository/maven-public/' }
+        maven { url 'https://maven.raeblog.com/repository/public/' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
         maven { url "https://jitpack.io" }
