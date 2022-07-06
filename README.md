@@ -1,25 +1,23 @@
 <p align="center">
- <img width="120" height="120" src="https://github.com/raedev/android-cnblogs/blob/master/images/icon.png" />
+ <img width="120" height="120" src="./images/icon.png" />
 </p>
 <p align="center">
-博客园第三方Android客户端
+兼容metaweblog api 和 wordpress api 的第三方博客客户端。
 </p>
 <p align="center">
-<a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/raedev/android-cnblogs" alt="license">
+<a href="./LICENSE">
+  <img src="https://img.shields.io/github/license/terwer/android-metaweblog-client" alt="license" />
 </a>
- <a href="https://github.com/raedev/android-cnblogs/releases">
-  <img src="https://img.shields.io/github/v/tag/raedev/android-cnblogs?label=version" alt="tag">
-</a>
-  <a href="https://appstore.huawei.com/app/C100070271">
-  <img src="https://img.shields.io/badge/DownloadAPK-HuaWeiAppStore-brightgreen" alt="download">
+<a href="./releases">
+  <img src="https://img.shields.io/github/v/tag/terwer/android-metaweblog-client?label=version" alt="tag" />
 </a>
 </p>
 
+## 博客客户端介绍
 
-## 博客园介绍
+兼容 metaweblog api 和 wordpress api 的第三方博客客户端。
 
-博客园创立于2004年1月，是一个面向开发者的知识分享社区。自创建以来，博客园一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识，从而让更多开发者从中受益。博客园的使命是帮助开发者用代码改变世界。
+参考了开源代码：[https://github.com/raedev/android-cnblogs](https://github.com/raedev/android-cnblogs)
 
 ## APP简介
 
