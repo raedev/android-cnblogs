@@ -2,7 +2,7 @@
  <img width="120" height="120" src="./images/icon.png" />
 </p>
 <p align="center">
-兼容metaweblog api 和 wordpress api 的第三方博客客户端。
+兼容 metaweblog api 和 wordpress api 的第三方博客客户端。
 </p>
 <p align="center">
 <a href="./LICENSE">
