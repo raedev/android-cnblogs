@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">CnblogsSdk</string>
-    <string name="blog_service_desc">提供博客离线下载，节省流量，建议开启。</string>
-    <string name="blog_service_label">离线下载服务</string>
-</resources>
