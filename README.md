@@ -1,3 +1,4 @@
+**重要提示：该版本已经停止维护，请查看正在开发的[kotlin](https://github.com/raedev/android-cnblogs/tree/kotlin)分支版本。**
 <p align="center">
  <img width="120" height="120" src="https://github.com/raedev/android-cnblogs/blob/master/images/icon.png" />
 </p>
