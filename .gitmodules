@@ -1,0 +1,4 @@
+[submodule "android-cnblogs-sdk"]
+	path = android-cnblogs-sdk
+	url = https://github.com/raedev/android-cnblogs-sdk
+	branch = kotlin

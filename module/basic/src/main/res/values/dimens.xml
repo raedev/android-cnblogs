@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_navigation_height">68dp</dimen>
+    <dimen name="content_padding">18dp</dimen>
+    <!--Tab指示器高度-->
+    <dimen name="tab_indicator_width">24dp</dimen>
+</resources>

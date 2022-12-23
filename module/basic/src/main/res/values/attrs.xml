@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <attr name="textColor" format="color" />
+    <attr name="textColorHint" format="color" />
+    <attr name="textStyle">
+        <flag name="normal" value="0" />
+        <flag name="bold" value="1" />
+        <flag name="italic" value="2" />
+    </attr>
+    <attr name="gravity">
+        <flag name="top" value="0x30" />
+        <flag name="bottom" value="0x50" />
+        <flag name="left" value="0x03" />
+        <flag name="right" value="0x05" />
+        <flag name="center_vertical" value="0x10" />
+        <flag name="fill_vertical" value="0x70" />
+        <flag name="center_horizontal" value="0x01" />
+        <flag name="fill_horizontal" value="0x07" />
+        <flag name="center" value="0x11" />
+        <flag name="fill" value="0x77" />
+        <flag name="clip_vertical" value="0x80" />
+        <flag name="clip_horizontal" value="0x08" />
+        <flag name="start" value="0x00800003" />
+        <flag name="end" value="0x00800005" />
+    </attr>
+
+    <declare-styleable name="SearchBar">
+        <!-- 搜索字体颜色 -->
+        <attr name="textColor" />
+        <!-- 搜索提示字体颜色 -->
+        <attr name="textColorHint" />
+        <!-- 搜索字体样式 -->
+        <attr name="textStyle" />
+        <attr name="gravity" />
+        <!-- 只读 -->
+        <attr name="viewonly" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomNavigationBar" parent="TabLayout">
+        <attr name="menu" />
+    </declare-styleable>
+
+    <declare-styleable name="SlideTabLayout" parent="SmartTabLayout" />
+</resources>

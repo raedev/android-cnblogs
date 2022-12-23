@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/dividerColor" />
+        </shape>
+    </item>
+    <item>
+        <layer-list>
+            <item android:drawable="@color/dividerColor" />
+            <item android:bottom="0.5dp" android:drawable="@color/white" />
+        </layer-list>
+    </item>
+</selector>

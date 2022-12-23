@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Cnblogs"
+rootProject.name = "CnblogsApp"
 include ':app'
 include ':module:basic'
 include ':module:home'
@@ -23,13 +23,6 @@ include ':module:moment'
 include ':module:discover'
 include ':module:user'
 
-
 // 博客园接口：https://github.com/raedev/android-cnblogs-sdk
 include ':sdk'
-project(':sdk').projectDir = file('../android-cnblogs-sdk/sdk')
-
-
-include ':ui'
-project(':ui').projectDir = file('D:\\Project\\Github\\MagicalUI\\ui')
-
-
+project(':sdk').projectDir = file('./android-cnblogs-sdk/sdk')

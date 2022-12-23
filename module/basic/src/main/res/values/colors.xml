@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#2A9BFF</color>
+    <color name="colorPrimaryVariant">#0087FF</color>
+    <color name="colorOnPrimary">#0267C1</color>
+    <color name="colorSecondary">#3F51B5</color>
+    <color name="colorSecondaryVariant">#673AB7</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="windowBackground">#F0EFF6</color>
+    <color name="statusBarColor">#FFFFFF</color>
+    <color name="dividerPrimary">#b2b2b2</color>
+    <color name="dividerColor">#FFDDDDDD</color>
+    <color name="textPrimary">#FF333333</color>
+    <color name="hintPrimary">#FF7A7A7A</color>
+    <color name="blog_title_color">#FF333333</color>
+    <color name="blog_desc_color">#FF6B7283</color>
+    <color name="blog_hint_color">#FFA6ABB7</color>
+    <!-- TAB选项字体颜色 -->
+    <color name="tabTextColor">#FF666666</color>
+    <!-- TAB选项字体选中颜色 -->
+    <color name="tabTextSelectedColor">#4A90E2</color>
+    <!-- TAB指示器颜色 -->
+    <color name="tabIndicatorColor">#2c92ff</color>
+    <color name="card_ripple_Color">#EAEAEA</color>
+    <color name="bannerIndicatorNormalColor">#33FFFFFF</color>
+    <color name="bannerIndicatorSelectedColor">#80FFFFFF</color>
+    <color name="iconTitleColor">#FF333333</color>
+    <color name="linkColor">#0087FF</color>
+    <color name="topicColor">#FF6C6B6B</color>
+    <color name="titlePrimary">#333333</color>
+</resources>
