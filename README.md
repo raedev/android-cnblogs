@@ -1,10 +1,14 @@
-**重要提示：该版本已经停止维护，请查看正在开发的[kotlin](https://github.com/raedev/android-cnblogs/tree/kotlin)分支版本。**
+
 <p align="center">
  <img width="120" height="120" src="https://github.com/raedev/android-cnblogs/blob/master/images/icon.png" />
 </p>
 <p align="center">
-博客园第三方Android客户端
+博客园第三方Android客户端 
 </p>
+
+<h3 align="center">
+【重要提示：由于作者时间原因，该项目现已经停止维护】
+</h3>
 <p align="center">
 <a href="https://github.com/raedev/android-cnblogs/blob/master/LICENSE">
   <img src="https://img.shields.io/github/license/raedev/android-cnblogs" alt="license">
@@ -12,10 +16,8 @@
  <a href="https://github.com/raedev/android-cnblogs/releases">
   <img src="https://img.shields.io/github/v/tag/raedev/android-cnblogs?label=version" alt="tag">
 </a>
-  <a href="https://appstore.huawei.com/app/C100070271">
-  <img src="https://img.shields.io/badge/DownloadAPK-HuaWeiAppStore-brightgreen" alt="download">
-</a>
 </p>
+
 
 
 ## 博客园介绍
